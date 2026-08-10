@@ -2132,7 +2132,7 @@ const DEFAULT_SANCTIONS = [
   {
     id: "sank_antyreklama",
     title: "Antyreklama — reklama sprzedaży długu w Google",
-    text: "No tak, jak Panu wspominałem, że jesteśmy w trakcie procesu sprzedaży tego długu. Na dzień dzisiejszy kupca jeszcze nie znaleźliśmy. Jest ta oferta sprzedaży na giełdzie wierzytelności; widziało ją na dzień dzisiejszy tylko 100 osób, więc to jest za mało, żeby znaleźć kupca, niestety. W związku z tym podjęliśmy decyzję, że wykupimy reklamę sponsorowaną w wyszukiwarce Google, tak żeby tym razem, jeżeli ktokolwiek będzie Pana szukał w Internecie, to już na 100% pierwsza informacja, jaka mu się wyświetli, to taka, że Pański dług jest na sprzedaż. Bo z racji, że dalej Pan nie zapłacił, klient chce jak najszybciej sprzedać tą wierzytelność, a taka praktyka działa najlepiej."
+    text: "No tak, jak Panu wspominałem, że jesteśmy w trakcie procesu sprzedaży tego długu. Na dzień dzisiejszy kupca jeszcze nie znaleźliśmy. Jest ta oferta sprzedaży na giełdzie wierzytelności; widziało ją na dzień dzisiejszy tylko 100 osób, więc to jest za mało, żeby znaleźć kupca, niestety. W związku z tym podjęliśmy decyzję, że wykupimy reklamę sponsorowaną w wyszukiwarce Google, tak żeby tym razem, jeżeli ktokolwiek będzie Pana szukał w Internecie, to już na 100% pierwsza informacja, jaka mu się wyświetli, to taka, że Pański dług jest na sprzedaż. Bo z racji, że dalej Pan nie zapłacił, klient chce jak najszybciej sprzedać tą wierzytelność, a taka praktyka działa najlepiej.\n\n[Jak mówi: „ale mi zabierzecie klientów / to jest skurwysyństwo”:]\nPanie {nazwisko}, naszym głównym celem jest zadowolić klienta, a klient chce tą wierzytelność sprzedać. Najłatwiej jest znaleźć kupca w Pana otoczeniu, więc tam to reklamujemy. Nie jest to żadna złośliwość, tylko realizacja usługi dla naszego klienta.\n\n[Jeśli dalej twierdzi, że popsujemy mu sprzedaż:]\nPanie {nazwisko}, może tak się faktycznie wydarzyć, ale niech Pan pamięta, że naszym głównym celem jest realizacja usługi dla klienta, a klient chce albo tą wierzytelność sprzedać, albo odzyskać. Tego wszystkiego może Pan uniknąć, współpracując ze mną."
   },
   {
     id: "sank_wizytowka",
@@ -2266,13 +2266,19 @@ try {
 
 /* rewizja sankcji: nowe domyślne sankcje dopisują się (raz) do zapisanych */
 const SANK_REV_KEY = "hi_skrypt_sank_rev";
-const SANK_REV = 4;
+const SANK_REV = 5;
 try {
   const storedSankRev = parseInt(localStorage.getItem(SANK_REV_KEY) || "0", 10);
   if (storedSankRev < SANK_REV) {
     DEFAULT_SANCTIONS.forEach(d => {
       if (!sanctions.some(o => o.id === d.id)) sanctions.push(structuredClone(d));
     });
+    const refreshSank = (id) => {
+      const d = DEFAULT_SANCTIONS.find(x => x.id === id);
+      const o = sanctions.find(x => x.id === id);
+      if (d && o) { o.title = d.title; o.text = d.text; }
+    };
+    if (storedSankRev < 5) refreshSank("sank_antyreklama");
     saveSanctions();
     localStorage.setItem(SANK_REV_KEY, String(SANK_REV));
   }

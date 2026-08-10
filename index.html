@@ -1,0 +1,3022 @@
+<!doctype html>
+<html lang="pl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow"></head>
+<title>Skrypt rozmowy — Hadyński Inkaso</title>
+<style>
+  :root {
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --surface-2: #f5f5f7;
+    --btn-surface: #ffffff;
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #86868b;
+    --inverse-text: #ffffff;
+    --blue: #0071e3;
+    --blue-hover: #0077ed;
+    --blue-tint: #eaf3fe;
+    --var-hover: #d8e9fc;
+    --red: #ff3b30;
+    --red-tint: #fff0ef;
+    --orange: #ff9500;
+    --orange-text: #c77700;
+    --orange-tint: #fff6e8;
+    --green: #34c759;
+    --green-text: #1e9e4a;
+    --green-tint: #ecf9f0;
+    --violet: #af52de;
+    --violet-text: #8e2fc9;
+    --violet-tint: #f7effc;
+    --teal: #30b0c7;
+    --teal-text: #12798e;
+    --teal-tint: #e9f7fa;
+    --indigo: #5856d6;
+    --indigo-text: #4644c9;
+    --indigo-tint: #eeeefb;
+    --separator: rgba(0,0,0,0.08);
+    --separator-strong: rgba(0,0,0,0.16);
+    --input-bg: rgba(0,0,0,0.04);
+    --hover-bg: rgba(0,0,0,0.04);
+    --chip-bg: rgba(0,0,0,0.05);
+    --chip-bg-hover: rgba(0,0,0,0.09);
+    --dot-bg: rgba(0,0,0,0.15);
+    --header-bg: rgba(255,255,255,0.72);
+    --hoverA-bg: #fffafa;
+    --hoverB-bg: #fffdf8;
+    --hoverC-bg: #fafffb;
+    --hoverD-bg: #fdfaff;
+    --hoverE-bg: #fafdfe;
+    --hoverN-bg: #fafaff;
+    --radius-lg: 22px;
+    --radius-md: 16px;
+    --radius-sm: 10px;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06);
+    --shadow-btn: 0 1px 3px rgba(0,0,0,0.10);
+    --shadow-sheet: 0 24px 80px rgba(0,0,0,0.25);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-std: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111113;
+      --card: #1c1c1e;
+      --surface-2: #29292c;
+      --btn-surface: #29292c;
+      --text: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-tertiary: #8e8e93;
+      --inverse-text: #1d1d1f;
+      --blue: #0a84ff;
+      --blue-hover: #2492ff;
+      --blue-tint: rgba(10,132,255,0.16);
+      --var-hover: rgba(10,132,255,0.32);
+      --red: #ff453a;
+      --red-tint: rgba(255,69,58,0.14);
+      --orange: #ff9f0a;
+      --orange-text: #ff9f0a;
+      --orange-tint: rgba(255,159,10,0.14);
+      --green: #30d158;
+      --green-text: #30d158;
+      --green-tint: rgba(48,209,88,0.14);
+      --violet: #bf5af2;
+      --violet-text: #bf5af2;
+      --violet-tint: rgba(191,90,242,0.14);
+      --teal: #40c8e0;
+      --teal-text: #40c8e0;
+      --teal-tint: rgba(64,200,224,0.14);
+      --indigo: #5e5ce6;
+      --indigo-text: #7d7aff;
+      --indigo-tint: rgba(94,92,230,0.18);
+      --separator: rgba(255,255,255,0.12);
+      --separator-strong: rgba(255,255,255,0.22);
+      --input-bg: rgba(255,255,255,0.08);
+      --hover-bg: rgba(255,255,255,0.07);
+      --chip-bg: rgba(255,255,255,0.10);
+      --chip-bg-hover: rgba(255,255,255,0.16);
+      --dot-bg: rgba(255,255,255,0.25);
+      --header-bg: rgba(22,22,24,0.72);
+      --hoverA-bg: rgba(255,69,58,0.08);
+      --hoverB-bg: rgba(255,159,10,0.08);
+      --hoverC-bg: rgba(48,209,88,0.08);
+      --hoverD-bg: rgba(191,90,242,0.08);
+      --hoverE-bg: rgba(64,200,224,0.08);
+      --hoverN-bg: rgba(94,92,230,0.08);
+      --shadow-card: 0 2px 8px rgba(0,0,0,0.25), 0 12px 32px rgba(0,0,0,0.35);
+      --shadow-btn: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-sheet: 0 24px 80px rgba(0,0,0,0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #111113;
+    --card: #1c1c1e;
+    --surface-2: #29292c;
+    --btn-surface: #29292c;
+    --text: #f5f5f7;
+    --text-secondary: #a1a1a6;
+    --text-tertiary: #8e8e93;
+    --inverse-text: #1d1d1f;
+    --blue: #0a84ff;
+    --blue-hover: #2492ff;
+    --blue-tint: rgba(10,132,255,0.16);
+    --var-hover: rgba(10,132,255,0.32);
+    --red: #ff453a;
+    --red-tint: rgba(255,69,58,0.14);
+    --orange: #ff9f0a;
+    --orange-text: #ff9f0a;
+    --orange-tint: rgba(255,159,10,0.14);
+    --green: #30d158;
+    --green-text: #30d158;
+    --green-tint: rgba(48,209,88,0.14);
+    --violet: #bf5af2;
+    --violet-text: #bf5af2;
+    --violet-tint: rgba(191,90,242,0.14);
+    --teal: #40c8e0;
+    --teal-text: #40c8e0;
+    --teal-tint: rgba(64,200,224,0.14);
+    --indigo: #5e5ce6;
+    --indigo-text: #7d7aff;
+    --indigo-tint: rgba(94,92,230,0.18);
+    --separator: rgba(255,255,255,0.12);
+    --separator-strong: rgba(255,255,255,0.22);
+    --input-bg: rgba(255,255,255,0.08);
+    --hover-bg: rgba(255,255,255,0.07);
+    --chip-bg: rgba(255,255,255,0.10);
+    --chip-bg-hover: rgba(255,255,255,0.16);
+    --dot-bg: rgba(255,255,255,0.25);
+    --header-bg: rgba(22,22,24,0.72);
+    --hoverA-bg: rgba(255,69,58,0.08);
+    --hoverB-bg: rgba(255,159,10,0.08);
+    --hoverC-bg: rgba(48,209,88,0.08);
+    --hoverD-bg: rgba(191,90,242,0.08);
+    --hoverE-bg: rgba(64,200,224,0.08);
+    --hoverN-bg: rgba(94,92,230,0.08);
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.25), 0 12px 32px rgba(0,0,0,0.35);
+    --shadow-btn: 0 1px 3px rgba(0,0,0,0.4);
+    --shadow-sheet: 0 24px 80px rgba(0,0,0,0.6);
+  }
+
+  :root[data-theme="light"] {
+    --bg: #f5f5f7;
+    --card: #ffffff;
+    --surface-2: #f5f5f7;
+    --btn-surface: #ffffff;
+    --text: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #86868b;
+    --inverse-text: #ffffff;
+    --blue: #0071e3;
+    --blue-hover: #0077ed;
+    --blue-tint: #eaf3fe;
+    --var-hover: #d8e9fc;
+    --red: #ff3b30;
+    --red-tint: #fff0ef;
+    --orange: #ff9500;
+    --orange-text: #c77700;
+    --orange-tint: #fff6e8;
+    --green: #34c759;
+    --green-text: #1e9e4a;
+    --green-tint: #ecf9f0;
+    --violet: #af52de;
+    --violet-text: #8e2fc9;
+    --violet-tint: #f7effc;
+    --teal: #30b0c7;
+    --teal-text: #12798e;
+    --teal-tint: #e9f7fa;
+    --indigo: #5856d6;
+    --indigo-text: #4644c9;
+    --indigo-tint: #eeeefb;
+    --separator: rgba(0,0,0,0.08);
+    --separator-strong: rgba(0,0,0,0.16);
+    --input-bg: rgba(0,0,0,0.04);
+    --hover-bg: rgba(0,0,0,0.04);
+    --chip-bg: rgba(0,0,0,0.05);
+    --chip-bg-hover: rgba(0,0,0,0.09);
+    --dot-bg: rgba(0,0,0,0.15);
+    --header-bg: rgba(255,255,255,0.72);
+    --hoverA-bg: #fffafa;
+    --hoverB-bg: #fffdf8;
+    --hoverC-bg: #fafffb;
+    --hoverD-bg: #fdfaff;
+    --hoverE-bg: #fafdfe;
+    --hoverN-bg: #fafaff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06);
+    --shadow-btn: 0 1px 3px rgba(0,0,0,0.10);
+    --shadow-sheet: 0 24px 80px rgba(0,0,0,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  button { font-family: inherit; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  /* ───────── Header ───────── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--header-bg);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--separator);
+  }
+  .header-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    min-height: 56px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: linear-gradient(145deg, #1d1d1f, #48484a);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .header-spacer { flex: 1; }
+  @media (max-width: 560px) {
+    .header-inner { padding: 8px 14px 10px; }
+    .header-spacer { display: none; }
+    .brand { margin-right: auto; }
+    .tabs { order: 3; width: 100%; }
+    .tabs button { flex: 1; }
+  }
+
+  .tabs {
+    display: flex;
+    background: var(--chip-bg);
+    border-radius: 999px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .tabs button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 16px;
+    border-radius: 999px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s var(--ease-std), background 0.2s var(--ease-std);
+    min-height: 32px;
+  }
+  .tabs button:hover { color: var(--text); }
+  .tabs button.active {
+    background: var(--card);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  .btn-reset {
+    appearance: none;
+    border: none;
+    background: var(--chip-bg);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s var(--ease-std);
+  }
+  .btn-reset:hover { background: var(--chip-bg-hover); }
+  .btn-reset:active { transform: scale(0.97); }
+
+  /* ───────── Layout ───────── */
+  .layout {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 28px 20px 88px;
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  body[data-tab="drzewko"] .layout,
+  body[data-tab="zalozenia"] .layout,
+  body[data-tab="ustawienia"] .layout { grid-template-columns: 1fr; }
+  body[data-tab="drzewko"] aside,
+  body[data-tab="zalozenia"] aside,
+  body[data-tab="ustawienia"] aside { display: none; }
+
+  @media (max-width: 940px) {
+    .layout { grid-template-columns: 1fr; padding: 18px 14px 64px; gap: 18px; }
+    main { order: 1; }
+    aside { order: 2; }
+  }
+
+  aside {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .panel {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 18px;
+  }
+  .panel h3 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+  }
+
+  .seg-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin: 0 0 5px;
+  }
+
+  /* segmented (tryb rozmowy) */
+  .seg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--chip-bg);
+    border-radius: var(--radius-sm);
+    padding: 3px;
+    gap: 2px;
+    margin-bottom: 14px;
+  }
+  .seg button {
+    appearance: none;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 7px 6px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s var(--ease-std);
+    min-height: 32px;
+  }
+  .seg button.active {
+    background: var(--card);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  }
+
+  .field { margin-bottom: 11px; }
+  .field:last-child { margin-bottom: 0; }
+  .field[hidden] { display: none; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+  .field input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 9px 12px;
+    outline: none;
+    transition: background 0.2s var(--ease-std), border-color 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std);
+  }
+  .field input:focus {
+    background: var(--card);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3.5px rgba(0,113,227,0.18);
+    outline: none;
+  }
+  .field input::placeholder { color: var(--text-tertiary); }
+
+  /* ───────── Obiekcje (panel) ───────── */
+  .obj-hint {
+    font-size: 12.5px;
+    color: var(--text-tertiary);
+    line-height: 1.45;
+    margin-bottom: 10px;
+  }
+  .obj-btn {
+    appearance: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: var(--red-tint);
+    color: var(--text);
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 1.35;
+    padding: 11px 13px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: transform 0.2s var(--ease-std), filter 0.2s var(--ease-std);
+    min-height: 44px;
+  }
+  .obj-btn:last-child { margin-bottom: 0; }
+  .obj-btn:hover { filter: brightness(0.97); transform: translateY(-1px); }
+  .obj-btn:active { transform: scale(0.98); }
+  .obj-btn .obj-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+  .obj-btn .obj-dot.sank { background: var(--orange-text); }
+
+  /* ───────── Mapa skryptu ───────── */
+  .map-group { margin-bottom: 14px; }
+  .map-group:last-child { margin-bottom: 0; }
+  .map-group-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    padding: 0 4px 7px;
+  }
+  .map-group-label .g-dot { width: 7px; height: 7px; border-radius: 50%; }
+  .g-dot.neutral { background: var(--blue); }
+  .g-dot.A { background: var(--red); }
+  .g-dot.B { background: var(--orange); }
+  .g-dot.C { background: var(--green); }
+  .g-dot.D { background: var(--violet); }
+  .g-dot.E { background: var(--teal); }
+  .g-dot.N { background: var(--indigo); }
+
+  .map-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    line-height: 1.3;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.18s var(--ease-std), color 0.18s var(--ease-std);
+    min-height: 38px;
+  }
+  .map-item:hover { background: var(--hover-bg); }
+  .map-item .m-badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-tertiary);
+    border: 1.5px solid var(--separator-strong);
+    background: transparent;
+    transition: all 0.18s var(--ease-std);
+  }
+  .map-item.visited { color: var(--text); }
+  .map-item.visited .m-badge {
+    border-color: var(--green);
+    background: var(--green-tint);
+    color: var(--green-text);
+  }
+  .map-item.current { font-weight: 600; }
+  .map-item.current[data-tone="neutral"] { background: var(--blue-tint); color: var(--blue); }
+  .map-item.current[data-tone="neutral"] .m-badge { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .map-item.current[data-tone="A"] { background: var(--red-tint); color: var(--red); }
+  .map-item.current[data-tone="A"] .m-badge { background: var(--red); border-color: var(--red); color: #fff; }
+  .map-item.current[data-tone="B"] { background: var(--orange-tint); color: var(--orange-text); }
+  .map-item.current[data-tone="B"] .m-badge { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .map-item.current[data-tone="C"] { background: var(--green-tint); color: var(--green-text); }
+  .map-item.current[data-tone="C"] .m-badge { background: var(--green); border-color: var(--green); color: #fff; }
+  .map-item.current[data-tone="D"] { background: var(--violet-tint); color: var(--violet-text); }
+  .map-item.current[data-tone="D"] .m-badge { background: var(--violet); border-color: var(--violet); color: #fff; }
+  .map-item.current[data-tone="E"] { background: var(--teal-tint); color: var(--teal-text); }
+  .map-item.current[data-tone="E"] .m-badge { background: var(--teal); border-color: var(--teal); color: #fff; }
+  .map-item.current[data-tone="N"] { background: var(--indigo-tint); color: var(--indigo-text); }
+  .map-item.current[data-tone="N"] .m-badge { background: var(--indigo); border-color: var(--indigo); color: #fff; }
+
+  .principle {
+    background: linear-gradient(145deg, #1d1d1f, #3a3a3c);
+    color: rgba(255,255,255,0.92);
+    border-radius: var(--radius-lg);
+    padding: 18px;
+    font-size: 13px;
+    line-height: 1.55;
+    box-shadow: var(--shadow-card);
+  }
+  .principle strong { color: #fff; display: block; margin-bottom: 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ───────── Widok: Rozmowa ───────── */
+  main { min-width: 0; }
+  .view[hidden] { display: none; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    min-height: 24px;
+  }
+  .crumb {
+    background: var(--chip-bg);
+    padding: 3px 10px;
+    border-radius: 999px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .crumb.current { background: var(--text); color: var(--inverse-text); }
+  button.crumb {
+    appearance: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.18s var(--ease-std), color 0.18s var(--ease-std);
+  }
+  button.crumb:hover { background: var(--chip-bg-hover); color: var(--text); }
+  .crumb-sep { color: var(--dot-bg); }
+
+  .step-card {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 34px 38px 30px;
+    animation: cardIn 0.4s var(--ease-out) both;
+  }
+  @media (max-width: 640px) { .step-card { padding: 22px 18px; } }
+
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .step-eyebrow.neutral { background: var(--blue-tint); color: var(--blue); }
+  .step-eyebrow.A { background: var(--red-tint); color: var(--red); }
+  .step-eyebrow.B { background: var(--orange-tint); color: var(--orange-text); }
+  .step-eyebrow.C { background: var(--green-tint); color: var(--green-text); }
+  .step-eyebrow.D { background: var(--violet-tint); color: var(--violet-text); }
+  .step-eyebrow.E { background: var(--teal-tint); color: var(--teal-text); }
+  .step-eyebrow.N { background: var(--indigo-tint); color: var(--indigo-text); }
+
+  .step-title {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+  @media (max-width: 640px) { .step-title { font-size: 23px; } }
+
+  /* Cel etapu — notatka dla windykatora */
+  .goal-card {
+    background: var(--blue-tint);
+    border-radius: var(--radius-md);
+    padding: 15px 18px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .goal-card .goal-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--blue);
+    margin-bottom: 7px;
+  }
+  .goal-card .goal-line { display: block; margin-bottom: 3px; }
+  .goal-card .goal-line:last-child { margin-bottom: 0; }
+  .goal-card .goal-line b { font-weight: 650; }
+
+  /* Bloki mówione */
+  .speech {
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    font-size: 17px;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+  .speech.question { background: var(--green-tint); }
+  .speech-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    margin-bottom: 7px;
+  }
+  .speech-label::before {
+    content: "";
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--blue);
+  }
+  .speech.question .speech-label { color: var(--green-text); }
+  .speech.question .speech-label::before { background: var(--green); }
+
+  .note {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    padding: 4px 4px;
+    margin-bottom: 12px;
+  }
+  .note .note-icon {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    background: var(--chip-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  .q-block { margin: 4px 0 16px; }
+  .q-block-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--green-text);
+    padding: 0 2px 4px;
+  }
+  .q-list { list-style: none; }
+  .q-list li {
+    position: relative;
+    padding: 10px 12px 10px 40px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--separator);
+  }
+  .q-list li:last-child { border-bottom: none; }
+  .q-list li::before {
+    content: "?";
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: var(--green-tint);
+    color: var(--green-text);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* checklista windykatora */
+  .ck-list { display: flex; flex-direction: column; }
+  .ck-item {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    padding: 10px 12px 10px 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--separator);
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px;
+    transition: background 0.18s var(--ease-std);
+  }
+  .ck-item:last-child { border-bottom: none; }
+  .ck-item:hover { background: var(--hover-bg); border-radius: var(--radius-sm); }
+  .ck-item input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--green);
+    cursor: pointer;
+  }
+  .ck-item.done span { color: var(--text-tertiary); }
+
+  /* pytania z podpowiedziami (accordion) */
+  .qh-list { display: flex; flex-direction: column; }
+  .qh-item { border-bottom: 1px solid var(--separator); }
+  .qh-item:last-child { border-bottom: none; }
+  .qh-item.plain {
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    padding: 10px 12px 10px 8px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  details.qh-item summary {
+    list-style: none;
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+    padding: 10px 12px 10px 8px;
+    font-size: 16px;
+    line-height: 1.5;
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px;
+    border-radius: var(--radius-sm);
+    transition: background 0.18s var(--ease-std);
+  }
+  details.qh-item summary:hover { background: var(--hover-bg); }
+  details.qh-item summary::-webkit-details-marker { display: none; }
+  .qh-mark {
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: var(--green-tint);
+    color: var(--green-text);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .qh-chev {
+    margin-left: auto;
+    align-self: center;
+    color: var(--green-text);
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: transform 0.25s var(--ease-std);
+  }
+  details.qh-item[open] .qh-chev { transform: rotate(90deg); }
+  .qh-body {
+    padding: 2px 12px 14px 40px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .qh-pre { margin-bottom: 8px; }
+  details.qh-sub {
+    background: var(--surface-2);
+    border-radius: var(--radius-sm);
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+  details.qh-sub summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 13px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+    min-height: 40px;
+  }
+  details.qh-sub summary::-webkit-details-marker { display: none; }
+  .qh-sub-chev {
+    color: var(--text-tertiary);
+    font-size: 12px;
+    flex-shrink: 0;
+    transition: transform 0.25s var(--ease-std);
+  }
+  details.qh-sub[open] .qh-sub-chev { transform: rotate(90deg); }
+  .qh-sub-body { padding: 0 13px 12px; font-size: 15.5px; line-height: 1.6; }
+
+  /* wymówki + riposty (accordion) */
+  .qa-wrap { margin: 4px 0 16px; display: flex; flex-direction: column; gap: 8px; }
+  .qa-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--red);
+    padding: 0 2px 2px;
+  }
+  details.excuse {
+    background: var(--btn-surface);
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s var(--ease-std);
+  }
+  details.excuse:hover { border-color: rgba(255,59,48,0.35); }
+  details.excuse summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    user-select: none;
+    min-height: 44px;
+  }
+  details.excuse summary::-webkit-details-marker { display: none; }
+  details.excuse .ex-chev {
+    color: var(--red);
+    font-size: 13px;
+    flex-shrink: 0;
+    transition: transform 0.25s var(--ease-std);
+  }
+  details.excuse[open] .ex-chev { transform: rotate(90deg); }
+  .excuse-body {
+    padding: 2px 16px 15px 39px;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .placeholder-box {
+    border: 1.5px dashed var(--dot-bg);
+    border-radius: var(--radius-md);
+    padding: 26px 22px;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  /* Zmienne (tokeny) */
+  .var {
+    display: inline;
+    padding: 1px 7px;
+    border-radius: 6px;
+    background: var(--blue-tint);
+    color: var(--blue);
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.15s var(--ease-std);
+  }
+  .var:hover { background: var(--var-hover); }
+  .var.filled { background: transparent; color: inherit; font-weight: 650; padding: 0; border-bottom: 1.5px solid rgba(0,113,227,0.35); }
+  .var.static { cursor: default; background: var(--chip-bg); color: var(--text-secondary); }
+  .var.static:hover { background: var(--chip-bg); }
+
+  /* Akcje */
+  .actions {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--separator);
+  }
+  .actions-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+  }
+  .branch-grid { display: grid; gap: 10px; }
+  .branch-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .branch-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 720px) { .branch-grid.cols-3, .branch-grid.cols-2 { grid-template-columns: 1fr; } }
+
+  .branch-btn {
+    appearance: none;
+    text-align: left;
+    border: 1px solid var(--separator);
+    background: var(--btn-surface);
+    color: var(--text);
+    border-radius: var(--radius-md);
+    padding: 15px 17px;
+    cursor: pointer;
+    transition: transform 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std), border-color 0.2s var(--ease-std), background 0.2s var(--ease-std);
+    min-height: 44px;
+  }
+  .branch-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+  .branch-btn:active { transform: translateY(0) scale(0.985); }
+  .branch-btn { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; }
+  .branch-btn .b-main { min-width: 0; }
+  .branch-btn .b-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 3px; }
+  .branch-btn .b-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .branch-btn .b-chev {
+    flex-shrink: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    opacity: 0.55;
+    transition: transform 0.2s var(--ease-std), opacity 0.2s var(--ease-std);
+  }
+  .branch-btn:hover .b-chev { transform: translateX(3px); opacity: 1; }
+  .branch-btn .b-desc { display: block; font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+  .branch-btn.tone-A:hover { border-color: rgba(255,59,48,0.4); background: var(--hoverA-bg); }
+  .branch-btn.tone-B:hover { border-color: rgba(255,149,0,0.45); background: var(--hoverB-bg); }
+  .branch-btn.tone-C:hover { border-color: rgba(52,199,89,0.45); background: var(--hoverC-bg); }
+  .branch-btn.tone-D:hover { border-color: rgba(175,82,222,0.4); background: var(--hoverD-bg); }
+  .branch-btn.tone-E:hover { border-color: rgba(48,176,199,0.45); background: var(--hoverE-bg); }
+  .branch-btn.tone-N:hover { border-color: rgba(88,86,214,0.4); background: var(--hoverN-bg); }
+  .branch-btn.tone-A .b-dot { background: var(--red); }
+  .branch-btn.tone-B .b-dot { background: var(--orange-text); }
+  .branch-btn.tone-C .b-dot { background: var(--green-text); }
+  .branch-btn.tone-D .b-dot { background: var(--violet-text); }
+  .branch-btn.tone-E .b-dot { background: var(--teal-text); }
+  .branch-btn.tone-N .b-dot { background: var(--indigo-text); }
+
+  .btn-primary {
+    appearance: none;
+    border: none;
+    background: var(--blue);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding: 13px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: transform 0.2s var(--ease-std), background 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std);
+    min-height: 44px;
+  }
+  .btn-primary:hover { background: var(--blue-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,113,227,0.35); }
+  .btn-primary:active { transform: translateY(0); }
+
+  .btn-secondary {
+    appearance: none;
+    background: var(--chip-bg);
+    border: none;
+    color: var(--text);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s var(--ease-std), transform 0.2s var(--ease-std);
+    min-height: 44px;
+  }
+  .btn-secondary:hover { background: var(--chip-bg-hover); }
+  .note.note-card {
+    background: var(--chip-bg);
+    border-radius: 16px;
+    padding: 16px 18px;
+    gap: 12px;
+    color: var(--text);
+    font-size: 14.5px;
+  }
+  .note.note-card .note-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 9px;
+    font-size: 14px;
+    background: rgba(0,113,227,0.12);
+  }
+  .note-body { min-width: 0; }
+  .note-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+  }
+  .note-actions { margin-top: 12px; }
+  .note-actions .btn-primary { font-size: 14px; padding: 10px 20px; min-height: 0; }
+  .btn-secondary:active { transform: scale(0.97); }
+
+  .actions-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    min-height: 40px;
+  }
+  .btn-back {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s var(--ease-std);
+    min-height: 40px;
+  }
+  .btn-back:hover { background: var(--blue-tint); }
+  .btn-back:disabled { color: var(--text-tertiary); cursor: default; }
+  .btn-back:disabled:hover { background: transparent; }
+
+  .splata-chip {
+    appearance: none;
+    border: none;
+    background: var(--green-tint);
+    color: var(--green-text);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s var(--ease-std), filter 0.2s var(--ease-std);
+    min-height: 40px;
+  }
+  .splata-chip::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+  }
+  .splata-chip:hover { filter: brightness(0.96); transform: translateY(-1px); }
+  .splata-chip:active { transform: scale(0.97); }
+  .splata-chip[hidden] { display: none; }
+  .toolbar-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .splata-chip.brak-chip { background: var(--orange-tint); color: var(--orange-text); }
+  .splata-chip.brak-chip::before { background: var(--orange); }
+
+  /* ───────── Quickbar — stały pasek narzędzi rozmowy ───────── */
+  .quickbar {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 40;
+    background: color-mix(in srgb, var(--card) 84%, transparent);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid var(--separator);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  }
+  body:not([data-tab="rozmowa"]) .quickbar { display: none; }
+  .quickbar-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .qb-spacer { flex: 1; }
+  .qb-btn {
+    appearance: none;
+    border: none;
+    background: var(--chip-bg);
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    transition: transform 0.2s var(--ease-std), background 0.2s var(--ease-std);
+  }
+  .qb-btn:hover { background: var(--chip-bg-hover); transform: translateY(-1px); }
+  .qb-btn:active { transform: scale(0.97); }
+  .qb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .qb-dot.obj { background: var(--red); }
+  .qb-dot.sank { background: var(--orange-text); }
+  .qb-dot.info { background: var(--blue); }
+  body[data-tab="rozmowa"] .layout { padding-bottom: 140px; }
+  @media (max-width: 940px) { body[data-tab="rozmowa"] .layout { padding-bottom: 185px; } }
+  .sheet-list { display: flex; flex-direction: column; gap: 8px; }
+  .sheet-list .obj-btn { margin-bottom: 0; }
+  .obj-btn.sank-btn { background: var(--orange-tint); }
+  .actions-row + .actions-label { margin-top: 22px; }
+  button:focus-visible, [role="button"]:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  /* ───────── Widok: Drzewko ───────── */
+  .tree-wrap {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 30px 16px 26px;
+    overflow-x: auto;
+    animation: cardIn 0.4s var(--ease-out) both;
+  }
+  .tree-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 0 12px 4px;
+  }
+  .tree-sub {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    padding: 0 12px 22px;
+  }
+  .tree { display: flex; justify-content: center; min-width: 1440px; padding: 0 8px; }
+  .tree ul { display: flex; justify-content: center; padding-top: 26px; position: relative; list-style: none; }
+  .tree > ul { padding-top: 0; }
+  .tree li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 26px 8px 0;
+    list-style: none;
+  }
+  .tree > ul > li { padding-top: 0; }
+  .tree li::before, .tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: 50%;
+    height: 26px;
+    border-top: 1.5px solid var(--separator-strong);
+  }
+  .tree li::after { right: auto; left: 50%; border-left: 1.5px solid var(--separator-strong); }
+  .tree li:only-child::before, .tree li:only-child::after { display: none; }
+  .tree li:only-child { padding-top: 0; }
+  .tree > ul > li::before, .tree > ul > li::after { display: none; }
+  .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+  .tree li:last-child::before { border-right: 1.5px solid var(--separator-strong); border-radius: 0 8px 0 0; }
+  .tree li:first-child::after { border-radius: 8px 0 0 0; }
+  .tree ul ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 1.5px solid var(--separator-strong);
+    width: 0;
+    height: 26px;
+  }
+
+  .t-edge {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    background: var(--bg);
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+
+  .tnode {
+    position: relative;
+    background: var(--btn-surface);
+    border: 1px solid var(--separator);
+    border-radius: 14px;
+    padding: 11px 14px;
+    width: 168px;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn);
+    transition: transform 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std), border-color 0.2s var(--ease-std);
+  }
+  .tnode:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.10); }
+  .tnode .t-head { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+  .tnode .t-num {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
+  .t-num.neutral { background: var(--blue-tint); color: var(--blue); }
+  .t-num.A { background: var(--red-tint); color: var(--red); }
+  .t-num.B { background: var(--orange-tint); color: var(--orange-text); }
+  .t-num.C { background: var(--green-tint); color: var(--green-text); }
+  .t-num.D { background: var(--violet-tint); color: var(--violet-text); }
+  .t-num.E { background: var(--teal-tint); color: var(--teal-text); }
+  .t-num.N { background: var(--indigo-tint); color: var(--indigo-text); }
+  .tnode .t-title { font-size: 13px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+  .tnode .t-desc { font-size: 11.5px; color: var(--text-tertiary); line-height: 1.35; margin-top: 3px; }
+  .tnode.current { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,113,227,0.18); }
+  .tnode .t-edit {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-std), background 0.2s var(--ease-std);
+  }
+  .tnode:hover .t-edit { opacity: 1; }
+  .tnode .t-edit:hover { background: var(--chip-bg); color: var(--text); }
+  @media (hover: none) { .tnode .t-edit { opacity: 1; } }
+
+  .tree-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .tree-note {
+    flex: 1 1 260px;
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+  .tree-note h4 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    margin-bottom: 9px;
+  }
+  .tree-note .obj-btn { margin-top: 4px; }
+
+  /* ───────── Widok: Założenia ───────── */
+  .zal { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; animation: cardIn 0.4s var(--ease-out) both; }
+  .zal-hero {
+    background: linear-gradient(145deg, #1d1d1f, #3a3a3c);
+    color: rgba(255,255,255,0.92);
+    border-radius: var(--radius-lg);
+    padding: 34px 36px;
+    box-shadow: var(--shadow-card);
+  }
+  .zal-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+  .zal-hero h1 { font-size: 30px; font-weight: 700; letter-spacing: -0.022em; color: #fff; margin-bottom: 10px; text-wrap: balance; }
+  .zal-hero p { font-size: 16px; line-height: 1.6; }
+  .zal-hero b { color: #fff; }
+  .zal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .zal-grid { grid-template-columns: 1fr; } }
+  .zal-card { background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 20px; }
+  .zal-ico { font-size: 24px; margin-bottom: 10px; }
+  .zal-card h4 { font-size: 15px; font-weight: 650; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .zal-card p { font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; }
+  .zal-section { background: var(--card); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: 24px 26px; }
+  .zal-section h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.015em; margin-bottom: 12px; }
+  .zal-section h4 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); margin: 16px 0 6px; }
+  .zal-section p { font-size: 15px; line-height: 1.65; color: var(--text); }
+  .zal-section p + p { margin-top: 8px; }
+  .zal-red { background: var(--red-tint); }
+  .zal-indigo { background: var(--indigo-tint); }
+  .zal-orange { background: var(--orange-tint); }
+  .zal-list { list-style: none; counter-reset: zal; display: flex; flex-direction: column; gap: 9px; }
+  .zal-list li { counter-increment: zal; position: relative; padding-left: 38px; font-size: 15px; line-height: 1.55; }
+  .zal-list li::before {
+    content: counter(zal);
+    position: absolute; left: 0; top: 1px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green-tint); color: var(--green-text);
+    font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zal-x { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .zal-x li { position: relative; padding-left: 34px; font-size: 15px; line-height: 1.55; }
+  .zal-x li::before {
+    content: "✕";
+    position: absolute; left: 0; top: 1px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(255,59,48,0.14); color: var(--red);
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .zal-list-plain { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .zal-list-plain li { font-size: 15px; line-height: 1.6; padding-left: 16px; position: relative; }
+  .zal-list-plain li::before { content: "—"; position: absolute; left: 0; color: var(--orange-text); font-weight: 700; }
+  .zal-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .zal-two { grid-template-columns: 1fr; } }
+  .zal-finale {
+    background: linear-gradient(145deg, #1d1d1f, #3a3a3c);
+    color: rgba(255,255,255,0.92);
+    border-radius: var(--radius-lg);
+    padding: 30px 32px;
+    box-shadow: var(--shadow-card);
+    text-align: center;
+  }
+  .zal-finale h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .zal-finale > p { font-size: 14.5px; margin-bottom: 18px; }
+  .zal-rule { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 560px) { .zal-rule { grid-template-columns: 1fr; } }
+  .zal-rule > div { border-radius: 14px; padding: 18px 14px; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .zal-rule span { display: block; font-size: 13px; font-weight: 500; opacity: 0.85; margin-top: 4px; }
+  .zal-rule-a { background: rgba(48,209,88,0.18); color: #7ee8a2; }
+  .zal-rule-b { background: rgba(255,69,58,0.18); color: #ff9d96; }
+
+  /* ───────── Widok: Ustawienia ───────── */
+  .settings { max-width: 780px; margin: 0 auto; animation: cardIn 0.4s var(--ease-out) both; }
+  .s-help {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+  .s-help h4 { font-size: 15px; font-weight: 650; color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em; }
+  .s-help code {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    background: var(--chip-bg);
+    padding: 1px 6px;
+    border-radius: 5px;
+    color: var(--text);
+  }
+
+  details.s-section {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  details.s-section summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    user-select: none;
+    min-height: 44px;
+  }
+  details.s-section summary::-webkit-details-marker { display: none; }
+  details.s-section summary .s-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  details.s-section summary .s-eyebrow { font-size: 11px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-left: auto; padding-right: 6px; }
+  details.s-section summary .s-chev { color: var(--text-tertiary); font-size: 12px; transition: transform 0.25s var(--ease-std); }
+  details.s-section[open] summary .s-chev { transform: rotate(90deg); }
+  .s-body { padding: 4px 20px 20px; display: flex; flex-direction: column; gap: 13px; }
+  .s-field label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+  }
+  .s-field .s-variant {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    color: var(--text-tertiary);
+  }
+  .s-field .s-variant.firma { background: var(--blue-tint); color: var(--blue); }
+  .s-field .s-variant.osoba { background: var(--orange-tint); color: var(--orange-text); }
+  .s-field input[type="text"], .s-field textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    outline: none;
+    resize: vertical;
+    transition: background 0.2s var(--ease-std), border-color 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std);
+  }
+  .s-field input[type="text"]:focus, .s-field textarea:focus {
+    background: var(--card);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3.5px rgba(0,113,227,0.18);
+  }
+
+  .s-obj-item {
+    border: 1px solid var(--separator);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .s-obj-head { display: flex; align-items: center; gap: 8px; }
+  .s-obj-head .s-field { flex: 1; }
+  .btn-icon-danger {
+    appearance: none;
+    border: none;
+    background: var(--red-tint);
+    color: var(--red);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 13px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: filter 0.2s var(--ease-std);
+    min-height: 36px;
+    white-space: nowrap;
+  }
+  .btn-icon-danger:hover { filter: brightness(0.96); }
+
+  .s-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .btn-danger-ghost {
+    appearance: none;
+    border: 1px solid rgba(255,59,48,0.35);
+    background: transparent;
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 11px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s var(--ease-std);
+    min-height: 44px;
+  }
+  .btn-danger-ghost:hover { background: var(--red-tint); }
+
+  /* ───────── Sheet (obiekcje) ───────── */
+  .sheet-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    padding: 20px;
+    animation: fadeIn 0.25s var(--ease-std) both;
+  }
+  .sheet-backdrop[hidden] { display: none; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .sheet {
+    background: var(--card);
+    border-radius: 24px;
+    max-width: 580px;
+    width: 100%;
+    padding: 28px 30px 26px;
+    box-shadow: var(--shadow-sheet);
+    animation: sheetIn 0.3s var(--ease-out) both;
+    max-height: 82vh;
+    overflow-y: auto;
+  }
+  @keyframes sheetIn {
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @media (max-width: 640px) {
+    .sheet-backdrop { align-items: flex-end; padding: 0; }
+    .sheet {
+      border-radius: 24px 24px 0 0;
+      max-width: none;
+      padding: 24px 20px calc(24px + env(safe-area-inset-bottom));
+      animation: sheetUp 0.3s var(--ease-out) both;
+    }
+    @keyframes sheetUp {
+      from { transform: translateY(40%); opacity: 0; }
+      to   { transform: translateY(0); opacity: 1; }
+    }
+  }
+  .sheet .sheet-eyebrow {
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    background: var(--red-tint);
+    color: var(--red);
+    padding: 4px 11px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+  .sheet h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .sheet .sheet-text {
+    background: var(--surface-2);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .sheet .actions-row { justify-content: flex-end; }
+
+  .io-textarea {
+    width: 100%;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--input-bg);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 10px 12px;
+    resize: vertical;
+  }
+  .io-textarea:focus {
+    background: var(--card);
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3.5px rgba(0,113,227,0.18);
+    outline: none;
+  }
+  .sheet-eyebrow.blue { background: var(--blue-tint); color: var(--blue); }
+
+  /* toast */
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 26px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: var(--inverse-text);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 999px;
+    box-shadow: var(--shadow-sheet);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s var(--ease-std), transform 0.25s var(--ease-out);
+    z-index: 400;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .fade-up { animation: cardIn 0.45s var(--ease-out) both; }
+  .d1 { animation-delay: 0.04s; }
+  .d2 { animation-delay: 0.1s; }
+  .d3 { animation-delay: 0.16s; }
+  .d4 { animation-delay: 0.22s; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">HI</div>
+      <span class="brand-name">Skrypt rozmowy</span>
+    </div>
+    <div class="header-spacer"></div>
+    <nav class="tabs" id="tabs" aria-label="Widok">
+      <button data-tabbtn="rozmowa" class="active">Rozmowa</button>
+      <button data-tabbtn="drzewko">Drzewko</button>
+      <button data-tabbtn="zalozenia">Założenia</button>
+      <button data-tabbtn="ustawienia">Ustawienia</button>
+    </nav>
+    <div class="header-spacer"></div>
+    <button class="btn-reset" id="btn-new">Nowa rozmowa</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside id="aside">
+    <div class="panel fade-up d1">
+      <h3>Dane rozmowy</h3>
+      <div class="seg-label">Typ dłużnika</div>
+      <div class="seg" id="mode-seg" role="tablist" aria-label="Typ dłużnika">
+        <button data-mode="firma" class="active">Firma</button>
+        <button data-mode="osoba">Os. fizyczna</button>
+      </div>
+      <div class="seg-label">Zwrot do rozmówcy</div>
+      <div class="seg" id="gender-seg" role="tablist" aria-label="Forma zwrotu do rozmówcy">
+        <button data-gender="pan" class="active">Pan</button>
+        <button data-gender="pani">Pani</button>
+      </div>
+      <div class="field">
+        <label for="f-windykator">Imię windykatora</label>
+        <input id="f-windykator" data-key="windykator" placeholder="np. Michał" autocomplete="off">
+      </div>
+      <div class="field" data-mode-field="firma">
+        <label for="f-firma">Firma dłużnika</label>
+        <input id="f-firma" data-key="firma" placeholder="nazwa firmy" autocomplete="off">
+      </div>
+      <div class="field" data-mode-field="osoba" hidden>
+        <label for="f-osoba">Imię i nazwisko dłużnika</label>
+        <input id="f-osoba" data-key="osoba" placeholder="np. Jan Kowalski" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-nazwisko">Imię rozmówcy</label>
+        <input id="f-nazwisko" data-key="nazwisko" placeholder="np. Andrzej" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-wierzyciel">Wierzyciel (klient)</label>
+        <input id="f-wierzyciel" data-key="wierzyciel" placeholder="nazwa wierzyciela" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="f-kwota">Kwota należności</label>
+        <input id="f-kwota" data-key="kwota" placeholder="np. 32 822,63" inputmode="decimal" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="panel fade-up d2">
+      <h3>Obiekcje</h3>
+      <p class="obj-hint">Mogą paść w każdym momencie rozmowy. Kliknij, aby zobaczyć gotową odpowiedź.</p>
+      <div id="obj-list"></div>
+    </div>
+
+    <div class="panel fade-up d2">
+      <h3>Sankcje</h3>
+      <p class="obj-hint">Do zakomunikowania w każdym momencie rozmowy. Kliknij, aby zobaczyć, co powiedzieć.</p>
+      <div id="sank-list"></div>
+    </div>
+
+    <div class="panel fade-up d3">
+      <h3>Mapa skryptu</h3>
+      <div id="map"></div>
+    </div>
+
+    <div class="principle fade-up d4">
+      <strong>Zasada przewodnia</strong>
+      Aktywizuj dłużnika pytaniami. Krótkie zdanie + pytanie, które oddaje głos rozmówcy. Celem finalnym jest porozumienie, nie konfrontacja.
+    </div>
+  </aside>
+
+  <main>
+    <section class="view" id="view-rozmowa">
+      <div class="topbar">
+        <button class="btn-back" id="btn-back">‹ Wstecz</button>
+        <div class="breadcrumb" id="breadcrumb"></div>
+      </div>
+      <div id="stage"></div>
+    </section>
+
+    <section class="view" id="view-drzewko" hidden>
+      <div class="tree-wrap">
+        <div class="tree-title">Schemat skryptu</div>
+        <div class="tree-sub">Pełny przebieg rozmowy — kliknij etap, aby do niego przejść, albo ✎ aby edytować treść.</div>
+        <div class="tree" id="tree"></div>
+      </div>
+      <div class="tree-footer">
+        <div class="tree-note">
+          <h4>Obiekcje — w każdym momencie</h4>
+          Obiekcje nie są etapem — mogą paść w dowolnej chwili. Odpowiedź otwiera się w oknie, a rozmowa zostaje tam, gdzie była.
+          <div id="tree-obj"></div>
+        </div>
+        <div class="tree-note">
+          <h4>Sankcje — w każdym momencie</h4>
+          Sankcję komunikujesz, kiedy pasuje do przebiegu rozmowy — tekst otwiera się w oknie, a rozmowa zostaje tam, gdzie była.
+          <div id="tree-sank"></div>
+        </div>
+        <div class="tree-note">
+          <h4>Powroty i skróty</h4>
+          Z etapów końcowych gałęzi przy innej reakcji dłużnika wracasz do kroku 2 — Przedstawienia sprawy — i wybierasz gałąź od nowa. Przycisk „Wstecz” cofa o jeden etap. Deklaracja spłaty może paść w każdej chwili — zielony przycisk „Dłużnik deklaruje spłatę → Gałąź C” pod kartą przenosi tam z dowolnego etapu.
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-zalozenia" hidden>
+      <div class="zal">
+        <div class="zal-hero">
+          <span class="zal-eyebrow">Nowa windykacja — jak pracujemy</span>
+          <h1>Najpierw badamy sprawę</h1>
+          <p>Zanim naciśniemy, poznajemy <b>stanowisko dłużnika i wszystkie jego uwagi</b>. A wyciągniemy je tylko w jeden sposób — <b>pokazując, że chcemy mu w tym pomóc</b>.</p>
+        </div>
+        <div class="zal-grid">
+          <div class="zal-card"><div class="zal-ico">⏱️</div><h4>Dłuższe rozmowy</h4><p>Więcej danych do analizy.</p></div>
+          <div class="zal-card"><div class="zal-ico">🧩</div><h4>Więcej informacji do sprawy</h4><p>Mocniejsze argumenty.</p></div>
+          <div class="zal-card"><div class="zal-ico">🛡️</div><h4>Podkładka pod ostrą windykację</h4><p>W razie braku chęci współpracy.</p></div>
+        </div>
+        <div class="zal-section">
+          <h3>Jak to wykorzystać?</h3>
+          <ol class="zal-list">
+            <li>Możemy pokazać, że nawet gdybyśmy chcieli — prawo jest po stronie klienta, więc musimy działać. To bardziej logiczny argument niż samo straszenie.</li>
+            <li>Mamy podkładkę pod ostrzejsze działania, bo nie dostajemy od dłużnika argumentów, żeby je wstrzymać.</li>
+            <li>Więcej potencjalnych wpłat — przez niespalanie mostów do uregulowania części bezspornej.</li>
+            <li>Więcej potencjalnych zleceń od dłużników.</li>
+            <li>Więcej możliwości na ugodę.</li>
+          </ol>
+        </div>
+        <div class="zal-section zal-red">
+          <h3>Co stracimy, nie robiąc tego</h3>
+          <ul class="zal-x">
+            <li>Nie mamy danych do wniosków.</li>
+            <li>Nie mamy pełnego obrazu sprawy.</li>
+            <li>Narażamy się na konsekwencje prawne.</li>
+            <li>Narażamy się na negatywne opinie.</li>
+          </ul>
+        </div>
+        <div class="zal-two">
+          <div class="zal-section">
+            <h3>📋 Wspólna praca nad skryptem</h3>
+            <p>Dzięki niej wiesz, co na którym etapie chcemy uzyskać — więc trzymasz się założeń skryptu nawet wtedy, gdy nie mówisz go 1:1, bo dłużnik wybił Cię ze schematu.</p>
+          </div>
+          <div class="zal-section">
+            <h3>🤖 Wspólny trening na bocie</h3>
+            <p>Bot treningowy opiera się na skrypcie. Gdy wypracujemy jasny schemat rozmowy, bot będzie dokładnie symulować zachowania dłużnika i pomagać Wam trenować pozostawanie w schemacie — i będziemy go wspólnie udoskonalać.</p>
+          </div>
+        </div>
+        <div class="zal-section zal-indigo">
+          <h3>AI / QA — ocena rozmów</h3>
+          <p>Każda Wasza rozmowa z dłużnikiem jest i będzie oceniana przez pryzmat założeń, które mamy ustalone — więc od razu macie feedback, czy rozmowa była z nimi zgodna.</p>
+          <h4>Cel AI / QA</h4>
+          <p>Wszystkie rozmowy prowadzone według wytycznych — dzięki temu łatwo wspólnie mierzymy, co działa, a co nie. Gdy cały dział rozmawia w jeden sposób, możemy zmienić np. jeden element skryptu i sprawdzić, jak wpływa na wynik. Tak wspólnie znajdziemy najlepszy sposób na prowadzenie rozmów — co pozwoli Wam zarabiać więcej.</p>
+          <h4>Bonus</h4>
+          <p>Na jakość rozmów i to, jak mają wyglądać, od dziś macie pełen wpływ — więc to od Was zależy, czy będzie to realizowane zgodnie z założeniami. A z CEO łatwiej załatwić udogodnienia, jeśli po swojej stronie możemy powiedzieć: <b>„Mamy wszystko na zielono — wszystkie założenia firmy są realizowane”</b>.</p>
+        </div>
+        <div class="zal-section zal-orange">
+          <h3>Kiedy lecimy ostro z dłużnikiem</h3>
+          <ul class="zal-list-plain">
+            <li><b>Nie wysłał maila z wyjaśnieniem, a kwestionuje dług</b> — mamy podstawę: dawaliśmy wyjście z tej sytuacji.</li>
+            <li><b>Złamana deklaracja</b> — ustalenia nie zostały dotrzymane, więc realizujemy sankcje i możemy z nim ostrzej rozmawiać, bo nie wywiązał się z ustaleń.</li>
+          </ul>
+        </div>
+        <div class="zal-finale">
+          <h3>Najważniejsze w całej współpracy</h3>
+          <p>Komunikacja jest kluczowa, a zasada jest jedna:</p>
+          <div class="zal-rule">
+            <div class="zal-rule-a">Współpracujemy<span>rozumiemy</span></div>
+            <div class="zal-rule-b">Nie współpracujemy<span>rozliczamy się</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="view-ustawienia" hidden>
+      <div class="settings">
+        <div class="s-help">
+          <h4>Edycja treści skryptu</h4>
+          Zmiany zapisują się automatycznie w tej przeglądarce i od razu działają w zakładce Rozmowa.
+          W tekstach możesz używać pól, które podstawią dane rozmowy: <code>{windykator}</code> <code>{firma}</code> <code>{osoba}</code> <code>{nazwisko}</code> (imię rozmówcy; działa też <code>{imie}</code>) <code>{wierzyciel}</code> <code>{kwota}</code> <code>{polowa}</code> (automatyczne 50% kwoty).
+          Tekst w nawiasach kwadratowych, np. <code>[data]</code>, pokaże się jako szary znacznik do uzupełnienia głosem.
+          Teksty pisz w formie męskiej („Pan”) — przełącznik „Zwrot do rozmówcy” w Danych rozmowy sam odmieni je gramatycznie dla rozmówczyni (zwroty o decydencie, np. „do Pana [imię decydenta]”, zostają bez zmian).
+        </div>
+        <div id="s-sections"></div>
+        <div class="s-help" style="margin-top:16px;">
+          <h4>Obiekcje</h4>
+          Dodawaj i edytuj gotowe odpowiedzi na obiekcje — będą dostępne z panelu bocznego w każdym momencie rozmowy.
+        </div>
+        <div id="s-objections" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div class="s-help" style="margin-top:16px;">
+          <h4>Sankcje</h4>
+          Dodawaj i edytuj komunikaty sankcji — będą dostępne z panelu bocznego w każdym momencie rozmowy.
+        </div>
+        <div id="s-sanctions" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div class="s-actions">
+          <button class="btn-secondary" id="btn-add-obj">+ Dodaj obiekcję</button>
+          <button class="btn-secondary" id="btn-add-sank">+ Dodaj sankcję</button>
+          <button class="btn-secondary" id="btn-io">Eksport / import zmian</button>
+          <button class="btn-danger-ghost" id="btn-restore">Przywróć domyślny skrypt</button>
+        </div>
+        <div class="s-help" style="margin-top:16px;">
+          <h4>Jak udostępnić swoje zmiany innym?</h4>
+          Zmiany zapisują się tylko w Twojej przeglądarce. Żeby wszyscy użytkownicy linka widzieli Twoją wersję: kliknij <b>Eksport / import zmian</b>, skopiuj kod i wyślij go Claude'owi — wbuduje go jako domyślny skrypt i zaktualizuje ten sam link.
+        </div>
+      </div>
+    </section>
+  </main>
+
+</div>
+
+<div class="quickbar" id="quickbar">
+  <div class="quickbar-inner">
+    <button class="qb-btn" id="qb-obj"><span class="qb-dot obj"></span>Obiekcje</button>
+    <button class="qb-btn" id="qb-sank"><span class="qb-dot sank"></span>Sankcje</button>
+    <button class="qb-btn" id="qb-info"><span class="qb-dot info"></span>Informacja o sprzedaży</button>
+    <div class="qb-spacer"></div>
+    <button class="splata-chip brak-chip" id="btn-brak" data-go="b_1">„Nie mam pieniędzy” → Gałąź B</button>
+    <button class="splata-chip" id="btn-splata" data-go="c">Dłużnik deklaruje spłatę → Gałąź C</button>
+  </div>
+</div>
+
+<div class="sheet-backdrop" id="sheet-backdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <span class="sheet-eyebrow" id="sheet-eyebrow">Obiekcja dłużnika</span>
+    <h2 id="sheet-title"></h2>
+    <div class="sheet-text" id="sheet-text"></div>
+    <div class="actions-row">
+      <button class="btn-primary" id="sheet-close">Wróć do rozmowy</button>
+    </div>
+  </div>
+</div>
+
+<div class="sheet-backdrop" id="io-backdrop" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="io-title">
+    <span class="sheet-eyebrow blue">Eksport / import</span>
+    <h2 id="io-title">Twoja wersja skryptu</h2>
+    <p class="obj-hint" style="margin-bottom:10px;">Skopiuj kod i wyślij go Claude'owi, aby Twoje zmiany stały się domyślne dla wszystkich pod tym samym linkiem. Możesz też wkleić tu kod od kogoś innego i go wczytać.</p>
+    <textarea class="io-textarea" id="io-text" rows="9" spellcheck="false"></textarea>
+    <div class="actions-row" style="margin-top:14px; justify-content:flex-end;">
+      <button class="btn-secondary" id="io-load">Wczytaj z pola</button>
+      <button class="btn-primary" id="io-copy">Kopiuj do schowka</button>
+      <button class="btn-secondary" id="io-close">Zamknij</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Zapisano ✓</div>
+
+<script>
+/* ═════════════════ Dane domyślne ═════════════════ */
+const LS_CONTENT = "hi_skrypt_content_v2";
+const LS_OBJ = "hi_skrypt_obiekcje_v2";
+const LS_SANK = "hi_skrypt_sankcje_v1";
+const LS_PREFS = "hi_skrypt_prefs_v2";
+
+const SECTION_ORDER = ["start","przedstawienie","a_intro","a_prawnik","b_1","b_2","b_3","c","d_pomylka","e_niedecyzyjny","p_deklaracja","p_dokumenty"];
+
+const NODE_META = {
+  start:          { tone:"neutral", eyebrow:"Krok 1",                num:"1",  crumb:"Otwarcie" },
+  przedstawienie: { tone:"neutral", eyebrow:"Krok 2",                num:"2",  crumb:"Przedstawienie" },
+  a_intro:        { tone:"A",       eyebrow:"Gałąź A · Krok 1",      num:"3",  crumb:"A · Neguje" },
+  a_prawnik:      { tone:"A",       eyebrow:"Gałąź A · 3a",          num:"3a", crumb:"A · Prawnik" },
+  b_1:            { tone:"B",       eyebrow:"Gałąź B · Krok 1 (4a)", num:"4a", crumb:"B · Wola zapłaty" },
+  b_2:            { tone:"B",       eyebrow:"Gałąź B · Krok 2 (4b)", num:"4b", crumb:"B · Rozwiązania" },
+  b_3:            { tone:"B",       eyebrow:"Gałąź B · Krok 3 (4c)", num:"4c", crumb:"B · Domknięcie" },
+  c:              { tone:"C",       eyebrow:"Gałąź C",               num:"5",  crumb:"C · Zapłaci" },
+  d_pomylka:      { tone:"D",       eyebrow:"Gałąź D",               num:"6",  crumb:"D · „To nie ja”" },
+  e_niedecyzyjny: { tone:"E",       eyebrow:"Gałąź E",               num:"7",  crumb:"E · Niedecyzyjny" },
+  p_deklaracja:   { tone:"C",       eyebrow:"Powrót · Złamana deklaracja", num:"9",  crumb:"Powrót · Deklaracja" },
+  p_dokumenty:    { tone:"A",       eyebrow:"Powrót · Brak dokumentów",    num:"10", crumb:"Powrót · Dokumenty" },
+};
+
+const NODE_ACTIONS = {
+  start: {
+    label:"Rozmowa ponowna? Wybierz kontekst",
+    branchesLast: true,
+    buttons:[{kind:"primary", label:"Przejdź do przedstawienia sprawy ›", to:"przedstawienie"}],
+    branches:[
+      {to:"p_deklaracja", tone:"C", title:"Złamana deklaracja spłaty", desc:"Umówiona wpłata nie wpłynęła — dzwonisz po deklaracji"},
+      {to:"p_dokumenty", tone:"A", title:"Nie dosłał dokumentów po negowaniu", desc:"Minął termin na stanowisko i dokumenty mailem"}
+    ]
+  },
+  p_deklaracja: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  p_dokumenty:  { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  przedstawienie: {
+    label:"Jak reaguje dłużnik?",
+    branches:[
+      {to:"a_intro", tone:"A", tag:"Gałąź A", title:"Neguje należność", desc:"Nie zgadza się z długiem — w całości lub w części"},
+      {to:"b_1",     tone:"B", tag:"Gałąź B", title:"„Nie mam pieniędzy”", desc:"Nie kwestionuje długu, ale mówi, że nie ma środków"},
+      {to:"c",       tone:"C", tag:"Gałąź C", title:"Deklaruje zapłatę", desc:"Mówi, że zapłaci"},
+      {to:"d_pomylka", tone:"D", tag:"Gałąź D", title:"„Nie wiem, o co chodzi”", desc:"Twierdzi, że to pomyłka / nie zna sprawy"},
+      {to:"e_niedecyzyjny", tone:"E", tag:"Gałąź E", title:"Rozmówca niedecyzyjny", desc:"„Ja tu tylko pracuję / szefa nie ma” — sekretarka, pracownik, księgowa"}
+    ]
+  },
+  a_intro: {
+    label:"Co wynika z pytań pogłębiających?",
+    branches:[
+      {to:"a_prawnik",     tone:"A", tag:"3a", title:"Odsyła do prawnika", desc:"„Proszę rozmawiać z moim prawnikiem”"}
+    ]
+  },
+  a_prawnik: { buttons:[{kind:"secondary", label:"‹ Wróć do pytań pogłębiających", to:"a_intro"},{kind:"primary", label:"Inna reakcja dłużnika ›", to:"przedstawienie"}] },
+  b_1:       { buttons:[{kind:"primary", label:"Krok 2 — dwa rozwiązania ›", to:"b_2"}] },
+  b_2:       { buttons:[{kind:"primary", label:"Deklaruje spłatę → Gałąź C ›", to:"c"},{kind:"secondary", label:"Krok 3 — powiązanie wpłaty z zatrzymaniem ›", to:"b_3"}] },
+  b_3:       { buttons:[{kind:"primary", label:"Inna reakcja dłużnika ›", to:"przedstawienie"},{kind:"reset", label:"Zakończ rozmowę · nowa rozmowa"}] },
+  c:         { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  d_pomylka: { buttons:[{kind:"primary", label:"Przyznaje związek ze sprawą — wybierz gałąź ›", to:"przedstawienie"},{kind:"reset", label:"Wyśle maila / koniec rozmowy · nowa rozmowa"}] },
+  e_niedecyzyjny: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja / to jednak decydent", to:"przedstawienie"}] },
+};
+
+const DEFAULT_CONTENT = {
+  sections: {
+    start: {
+      title: "Otwarcie rozmowy",
+      goal: "Cel: potwierdzić, że rozmawiamy z właściwą osobą, i od razu ocieplić rozmowę.\nCo chcemy uzyskać: imię rozmówcy i pewność, że mówimy z firmą / osobą, o którą chodzi.\nJak: krótkie przedstawienie się + pytanie o imię, które buduje relację i angażuje.",
+      blocks: [
+        {type:"speech", mode:"firma", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy dodzwoniłem się do firmy {firma}?"},
+        {type:"speech", mode:"osoba", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy rozmawiam z Panem/Panią {osoba}?"},
+        {type:"question", label:"Pytanie aktywizujące — ustalenie rozmówcy", text:"Czy mógłbym prosić o Pana/Pani imię, żeby nam się lepiej rozmawiało?"}
+      ]
+    },
+    przedstawienie: {
+      title: "Przedstawienie sprawy",
+      goal: "Cel: zakomunikować sprawę krótko i oddać głos dłużnikowi.\nCo chcemy uzyskać: pierwszą reakcję dłużnika — to ona wybiera dalszą gałąź rozmowy.\nJak: konkret (wierzyciel, kwota) zakończony pytaniem, bez wykładu.",
+      blocks: [
+        {type:"speech", label:"Powiedz", text:"Dzwonię w sprawie nieopłaconej faktury/należności dla {wierzyciel}, naszego klienta. Chciałem podpytać, czy należność została uregulowana — chodzi o kwotę {kwota}, Panie {nazwisko}?"}
+      ]
+    },
+    a_intro: {
+      title: "Rozbrojenie + oddanie głosu",
+      goal: "Cel: gdy dłużnik neguje, kluczowe jest przedstawienie sprawy tak, że chcemy to wyjaśnić i wstrzymać działania, jeśli są niezasadne — nie chcemy być „tymi złymi”, którzy atakują dłużnika niezasadnie.\nCo chcemy uzyskać: mailowe stanowisko dłużnika do jego negowania. Jak będziemy mieć jego stanowisko, będziemy mieć cały kontekst sprawy i łatwiej nam będzie odnieść się do negowania — bez tego łatwo o błąd.\nJak: na moment telefonu prawo stoi po stronie klienta — dlatego kierujemy dłużnika na mail, żeby się odniósł. Po drodze checklista (czy / jak / kiedy zgłaszane) i pytanie kluczowe o formę pisemną lub mailową, potem odnoga TAK/NIE z gotową odpowiedzią.\nWskazówka: jeśli dłużnik nie wyśle maila i nie zakwestionuje tego pisemnie lub mailowo — mamy pełne prawo postawić sytuację tak, że jesteśmy zobowiązani do dalszych działań, bo dowody dalej wskazują na rację klienta..",
+      blocks: [
+        {type:"speech", label:"Powiedz", text:"Jak najbardziej rozumiem, że może Pan się z tą należnością nie zgadzać. My też nie jesteśmy tutaj tylko od bycia tymi złymi — bardziej patrzymy na naszą rolę jako mediatora, żeby to wyjaśnić. Więc czy mógłby Pan nakreślić trochę szerzej, dlaczego się Pan z tą należnością nie zgadza? A ja dopytam jeszcze o parę szczegółów, żeby lepiej poznać kontekst sprawy?"},
+        {type:"checklist", label:"Dowiedz się w rozmowie — odhaczaj", text:"Czy uwagi były zgłaszane klientowi?\nJak to było zgłaszane klientowi?\nKiedy to było zgłaszane klientowi?"},
+        {type:"question", label:"Pytanie kluczowe — forma zgłoszenia", text:"Czy zgłaszał Pan uwagi pisemnie lub mailowo?\n\n[Wejście, gdy mówił o telefonach:]\nOkej, jasne, rozumiem, że rozmawiał Pan z kimś — pytanie, czy zgłaszał Pan to pisemnie, mailowo, żeby był jakiś ślad po tym?"},
+        {type:"qhints", label:"Odpowiedź dłużnika — kliknij tę, która padła", text:"TAK — zgłaszał pisemnie lub mailowo\nJaka była reakcja klienta na zgłoszone nieprawidłowości?\n\n[Jeśli bez reakcji klienta:]\nOkej, rozumiem. To jeżeli klient się nie odniósł do tych nieprawidłowości, to tym bardziej będę Pana prosił o to, żeby Pan je przesłał do nas. A my skontaktujemy się z klientem, żeby wyjaśnić tę sprawę i żeby móc zatrzymać bieg tej sprawy — i żeby Pańska firma nie ponosiła konsekwencji. Zwłaszcza jeżeli jest szansa, że ten dług jest niezasadny. Czy wyśle mi Pan to dzisiaj?\n\n[Jeśli była reakcja klienta:]\nOkej, rozumiem. To jeżeli klient odniósł się do tych nieprawidłowości, to tym bardziej będę Pana prosił o to, żeby Pan przesłał do nas tę konwersację. A my skontaktujemy się z klientem, żeby wyjaśnić tę sprawę i żeby móc zatrzymać bieg tej sprawy — i żeby Pańska firma nie ponosiła konsekwencji. Zwłaszcza jeżeli jest szansa, że ten dług jest niezasadny. Czy wyśle mi Pan to dzisiaj?\n---\nNIE — nie zgłaszał pisemnie ani mailowo\nNo to wie Pan, jak to działa. Ja rozumiem, że Pan gdzieś tam to sobie zgłaszał telefonicznie i rozumiem, że jest to wygodne. Natomiast, niestety, jeżeli Pan się nie zgadza z roszczeniem, to tutaj należy dochować tej formy, czy to pisemnej, czy to mailowej, żeby gdzieś tam ten ślad potem został. Więc jeżeli Pan tego do tej pory nie zrobił, to niestety, ale prawo jest po stronie klienta, ponieważ on ma do Pana roszczenie, on wykonał pracę, a my nie mamy śladu po tym, że Pan się z tym nie zgodził.\nWięc jeżeli się Pan z tym nie zgadza, to mamy dwie opcje. Albo Pan nam wysyła maila, my to weryfikujemy z klientem, a ja do Pana wrócę. Bo jeżeli nie, to my będziemy musieli kontynuować działania windykacyjne, mimo że Pan się z tym nie zgadza.\nWięc pytanie, którą drogę Pan wybiera? Ja rekomenduję przesłanie po prostu tych zarzutów mailowo."},
+        {type:"question", label:"Pytanie o zakres sporu — przejście do całość / część", text:"Panie {nazwisko}, w sporach najczęściej chodzi o to, że strony nie zgadzają się co do części roszczenia. Więc pytanie, jak jest u Pana — z jaką częścią Pan się nie zgadza? Mam na myśli kwotę."},
+        {type:"qhints", label:"Całość czy część kwoty — reakcja po ustaleniu", text:"Nie zgadza się z CAŁOŚCIĄ kwoty\nRozumiem — czyli kwestionuje Pan całość tej należności. W takim razie ta sprawa wymaga wyjaśnienia z klientem i ja się tym zajmę dla Pana. Żebym mógł to zrobić, będę potrzebował od Pana wszystkiego, co Pan ma w tej sprawie: Pana stanowiska i ewentualnej korespondencji z klientem — mailem, na nasz adres.\nPanie {nazwisko}, to jest bardzo ważne, żeby Pan mi wysłał w takim razie tego maila jeszcze dzisiaj, ponieważ w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc tutaj czas ma dla nas naprawdę znaczenie. Czy wyśle mi Pan to dzisiaj?\n---\nNie zgadza się z CZĘŚCIĄ — wróć do części bezspornej\nNo dobrze. Wspomniał Pan o tym, że nie zgadza się Pan z częścią roszczeń, a część jest zasadna.\nTo teraz tak: ja w takim razie oczywiście wyjaśniam z klientem tę część sporną. A z Panem chciałbym w takim razie załatwić temat tej części, z którą Pan się zgadza, i umówić się na temat spłaty tej części.\nBo może Pan wie, a może Pan nie wie — natomiast zgodnie z przepisami, jeżeli faktura jest wystawiona na Pana i Pan się z częścią jej nie zgadza, to zgodnie z prawem jest Pan zobligowany do uregulowania tej części, z którą się Pan zgadza.\nA pozostała część pozostaje oczywiście nieopłacona do czasu wyjaśnienia. Jeżeli okaże się, że rzeczywiście należy tę część skorygować, ponieważ ustalimy, że to faktycznie jest niezasadne, to na pozostałą część otrzyma Pan po prostu korektę.\nWięc w tym momencie powinien Pan po prostu uregulować tę kwotę bezsporną. W tytule przelewu należy zaznaczyć informację, że z pozostałą kwotą się Pan nie zgadza. W ten sposób wstrzyma Pan działania windykacyjne na tej sprawie.\nPanie {nazwisko}, to jest bardzo ważne, żeby Pan mi wysłał w takim razie tego maila jeszcze dzisiaj, ponieważ w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc tutaj czas ma dla nas naprawdę znaczenie. Czy wyśle Pan ten przelew dzisiaj?\n\n[Jeśli dłużnik mówi, że zapłaci część bezsporną:]\nDobrze, to w takim razie ja przesyłam do Pana na adres mailowy szczegóły do wpłaty, podeślę je również SMS-owo. Bardzo ważna rzecz, Panie {nazwisko}: wpłaty musi Pan dokonać na rachunek, który Pan od nas otrzyma, a nie na rachunek z faktury — ponieważ o księgowaniu tej wpłaty dowiem się od razu, a w przypadku wpłaty na rachunek z faktury mogę takiej informacji nie otrzymać nawet przez kilka dni, co niepotrzebnie przedłuży załatwienie tej sprawy. Czy wszystko jest dla Pana jasne i zrozumiałe?\n\n[Obiekcja: „najpierw wyjaśnienie, potem zapłacę część bezsporną”:]\nJasne, rozumiem, że to się Panu nasuwa — że najpierw my wyjaśnimy, później Pan zapłaci. Natomiast, tak jak wspomniałem, przepisy prawa mówią coś innego, a nasze procedury w firmie działają zgodnie z prawem.\nA więc tak długo, jak Pan nie opłaci tej części bezspornej, która zgodnie z przepisami jest wymagalna — to jeżeli Pan jej nie opłaca, no to rzeczywiście, w myśl przepisów prawa, jest Pan w tym momencie dłużnikiem i my zgodnie z umową z klientem musimy podejmować czynności windykacyjne. A wolałbym tego uniknąć, skoro tę część może Pan po prostu zapłacić, a ja zajmę się wyjaśnieniem pozostałej kwoty spornej dla Pana."}
+      ]
+    },
+    a_prawnik: {
+      title: "Dłużnik odsyła do prawnika",
+      goal: "Cel: odwrócić ciężar — to prawnik dłużnika ma odpowiedzieć na nasze roszczenie.\nCo chcemy uzyskać: deklarację, że pismo od prawnika dotrze, zanim ruszy kolejny etap sprzedaży długu.\nJak: rola pełnomocnika + trwający proces sprzedaży długu (oferta publiczna, potem oferty do otoczenia) jako realne „okno” na zatrzymanie działań. Nie straszymy sankcjami — informujemy, że proces sprzedaży już ruszył. Na koniec domykamy temat prawnika terminem kontaktu i wracamy do rozbrojenia — po informacje o negowaniu i kwocie bezspornej.",
+      blocks: [
+        {type:"speech", label:"Powiedz", text:"Jasne, rozumiem to, Panie {nazwisko}. I bardzo często tak jest, że podczas windykacji jesteśmy odsyłani do prawnika. Prawnie wygląda to tak, że my — jako pełnomocnik klienta — występujemy do Państwa z roszczeniem. Więc jeżeli Państwo angażujecie bądź zaangażowaliście w to prawnika, to teraz ten prawnik powinien na nasze roszczenie odpowiedzieć."},
+        {type:"question", label:"Pytanie kluczowe", text:"Czy prawnik z Państwa strony już się z nami kontaktował?"},
+        {type:"speech", label:"Uzasadnienie kontynuacji działań", text:"Nie mam takiej informacji u siebie, a to dla nas bardzo ważne — bo póki takiego kontaktu nie mamy, jesteśmy zobligowani do kontynuowania działań i nakładania sankcji."},
+        {type:"question", label:"Wskazanie konkretu + „okno” na zatrzymanie", text:"Z tego, co widzę, w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca. Pytanie, czy do tego czasu otrzymamy pismo od prawnika, abyśmy mogli potencjalnie zastopować działania?"},
+        {type:"speech", label:"Domknięcie tematu prawnika + powrót do sprawy", text:"Okej, to w takim razie zostawmy temat prawnika. Jeżeli Pan mówi, że ma Pan prawnika, to, tak jak Panu powiedziałem, najlepiej, żeby prawnik skontaktował się z nami jak najszybciej. Ponieważ im szybciej się skontaktuje, tym szybciej będziemy mieli możliwość wstrzymania tych działań. Ja natomiast chciałbym wrócić w takim razie jeszcze tylko do kwestii…"},
+        {type:"note", icon:"🔁", go:"a_intro", goLabel:"‹ Wróć do rozbrojenia — negowanie i kwota bezsporna", text:"Wróć do poprzedniego kroku i pozyskaj informacje o negowaniu i kwocie bezspornej."}
+      ]
+    },
+    b_1: {
+      title: "Potwierdzenie woli zapłaty",
+      goal: "Cel: nie przyjąć „nie mam” jako końca rozmowy.\nCo chcemy uzyskać: deklarację „tak, chcę uregulować”.\nJak: najpierw pytanie potwierdzające wolę zapłaty, po „tak” reakcja empatyczna — dopiero potem szczegóły.",
+      blocks: [
+        {type:"question", label:"Pytanie potwierdzające wolę zapłaty", text:"Dobrze rozumiem, że chce Pan to uregulować, tylko nie ma Pan na ten moment środków?"},
+        {type:"note", icon:"⏸", text:"Czekamy na odpowiedź klienta. Po jego „tak” — reakcja empatyczna:"},
+        {type:"speech", label:"Reakcja empatyczna", text:"Rozumiem, i dziękuję, że mówi Pan wprost — łatwiej nam wtedy znaleźć wyjście. Dla nas to sygnał, że nie ucieka Pan od tematu, tylko szukamy realnego rozwiązania."}
+      ]
+    },
+    b_2: {
+      title: "Dwa rozwiązania + domknięcie na wpłatę dziś",
+      goal: "Cel: doprowadzić do wpłaty jeszcze dziś.\nCo chcemy uzyskać: konkretną kwotę — startujemy wysoko, granica dolna to 50% należności ({polowa}).\nJak: dwa rozwiązania (sankcje vs wpłata dobrej woli) + kwota postawiona na stole jako oczywistość — nigdy nie pytamy, czy dłużnik „da radę”, bo odpowie „nie”.\nWskazówka: klient już przy umowie zgodził się, że pierwsza wpłata może w ostateczności zejść do 50% — to granica dolna, nie „wystarczająca kwota”. Startuj wyżej i schodź do połowy dopiero na końcu negocjacji.",
+      blocks: [
+        {type:"speech", label:"Powiedz", text:"To ja Panu przedstawię, jakie mamy tutaj rozwiązania. Albo Pan dalej nie płaci — z tym, że to się Panu kompletnie nie opłaca, bo nasze działania od strony sankcji sprawią, że o nowe pieniądze w firmie będzie jeszcze ciężej. Oczywiście mogę Panu dokładnie wytłumaczyć każdą zaplanowaną sankcję i to, jak wpłynie na Pana firmę. Drugim rozwiązaniem jest załagodzenie sprawy wpłatą potwierdzającą Pana dobre intencje w tej sprawie."},
+        {type:"question", label:"Domknięcie na wpłatę dziś", text:"Więc jaką kwotę jest Pan w stanie wpłacić w dniu dzisiejszym?"},
+        {type:"speech", label:"Propozycja 50%", text:"Powiem Panu, jak to u nas wygląda. My już przy podpisywaniu umowy z klientem ustalamy, co zrobić w sytuacji, gdyby dłużnik nie miał na pełną spłatę. I klient dał nam zgodę, że ta pierwsza wpłata może w ostateczności zejść do połowy należności — czyli {polowa} — a co do reszty już się dogadamy. To jest kwota, na podstawie której mogę wystąpić o wstrzymanie działań. Umawiamy się w ten sposób?"},
+        {type:"qhints", label:"Reakcja dłużnika — kliknij tę, która padła", text:"Zgadza się na wpłatę połowy\nBardzo dobrze — to decyzja, która realnie zatrzymuje tę sprawę. Czyli umawiamy się: wpłaca Pan dziś {polowa}, a co do reszty już się dogadamy. Prześlę Panu na maila szczegóły do wpłaty, podeślę je również SMS-owo. Bardzo ważna rzecz, Panie {nazwisko}: wpłaty musi Pan dokonać na rachunek, który Pan od nas otrzyma, a nie na rachunek z faktury — o księgowaniu tej wpłaty dowiem się od razu, a przy wpłacie na rachunek z faktury mogę takiej informacji nie otrzymać nawet przez kilka dni. Potwierdzenie przelewu poproszę dziś do godziny 15:00 — na jego podstawie od razu występuję o wstrzymanie działań. Umawiamy się tak?\n---\nOdmawia — nie ma środków na połowę\nRozumiem brak środków — i właśnie dlatego dam Panu pełny obraz sprawy: co już ruszyło, co jest zaplanowane i co z tego realnie uderzy w finanse Pana firmy. Bo decyzję „płacę teraz czy czekam” warto podejmować, znając cenę czekania. Więc teraz bym prosił o maksymalną uwagę, bo to jest bardzo istotne.\nTo, co już zostało zrobione: ruszył proces sprzedaży długu. Dług jest publicznie dostępny — na ten moment 120 osób już się z nim zapoznało. Co oznacza, że każdy klient, dostawca czy ludzie z Pana otoczenia, po wpisaniu nazwy Pana firmy w przeglądarce, mogą trafić na ten wpis dotyczący długu.\nCzyli będzie musiał mieć Pan z tyłu głowy, że każdy potencjalny klient, dostawca czy znajomy, po wpisaniu nazwy Pana firmy w internecie, może zobaczyć, że prowadzone jest postępowanie windykacyjne wobec Pana. Na tym etapie mogą na to trafić — ale w ciągu tygodnia mamy zaplanowaną bezpośrednią wysyłkę propozycji odkupienia tego długu do Pana najbliższego otoczenia, bo najczęściej tam znajdują się kupcy.\nOczywiście nasz plan na tę windykację przewiduje też inne działania, jak wpis do rejestru długów, czyli blokadę leasingów i kredytów, windykację terenową i wiele więcej. Dlatego, wracając do tematu wpłaty: z mojej perspektywy zwlekanie z wpłatą połowy zadłużenia jest dla firmy po prostu nieopłacalne. Ale oczywiście decyzja należy do Pana.\nWięc pytanie: jak możemy to rozwiązać?\n[Dalej: wybierz reakcję — „Zgadza się na połowę” albo „Deklaruje niższą kwotę”]\n---\nDeklaruje niższą kwotę\nOkej, wie Pan co? Zróbmy może w ten sposób.\nJa Panu powiedziałem, że przy połowie kwoty jestem w stanie po prostu wstrzymać te działania. Jak się tutaj dogadamy, to mogę Panu nawet usunąć te wpisy. Natomiast jeżeli Pan mi deklaruje kwotę niższą, to nie mogę Panu zadeklarować, że te wpisy Panu pousuwam.\nKażdego kolejnego dnia kolejni potencjalni klienci będą trafiać na tę informację, co — jak już ustaliliśmy — dla Pana korzystne nie jest. Oczywiście, ja od Pana przyjmę tę wpłatę, bo i tak musi Pan spłacić ten dług. Natomiast w dalszym ciągu nasze działania będą prowadzone.\nJeżeli Pan chce realnie, żeby te działania były wstrzymane, to potrzebuję wyższej kwoty.\n\n[Zgadza się na połowę:]\nBardzo dobrze — to decyzja, która realnie zatrzymuje tę sprawę. Czyli umawiamy się: wpłaca Pan dziś {polowa}, a co do reszty już się dogadamy. Prześlę Panu na maila szczegóły do wpłaty, podeślę je również SMS-owo. Bardzo ważna rzecz, Panie {nazwisko}: wpłaty musi Pan dokonać na rachunek, który Pan od nas otrzyma, a nie na rachunek z faktury — o księgowaniu tej wpłaty dowiem się od razu, a przy wpłacie na rachunek z faktury mogę takiej informacji nie otrzymać nawet przez kilka dni. Potwierdzenie przelewu poproszę dziś do godziny 15:00 — na jego podstawie od razu występuję o wstrzymanie działań. Umawiamy się tak?\n\n[Dalej nie może wpłacić połowy:]\nDobrze, to zróbmy tak: niech Pan wpłaci dziś tę kwotę — [kwota deklarowana] — a ja postaram się załatwić z klientem, żeby to chwilowo wystarczyło do wstrzymania działań. Dzisiaj godzina 15:00 — do tej godziny potrzebuję otrzymać potwierdzenie płatności. Tak się umawiamy?\n\n[Klient zgadza się — szczegóły wpłaty:]\nDobrze, to w takim razie ja przesyłam do Pana na adres mailowy szczegóły do wpłaty, podeślę je również SMS-owo. Bardzo ważna rzecz, Panie {nazwisko}: wpłaty musi Pan dokonać na rachunek, który Pan od nas otrzyma, a nie na rachunek z faktury — ponieważ o księgowaniu tej wpłaty dowiem się od razu, a w przypadku wpłaty na rachunek z faktury mogę takiej informacji nie otrzymać nawet przez kilka dni, co niepotrzebnie przedłuży załatwienie tej sprawy. Czy wszystko jest dla Pana jasne i zrozumiałe?\n\n[Klient mówi, że wpłaci po 15:00:]\nTo zróbmy tak, Panie {nazwisko}: ja z klientem skontaktuję się dopiero po otrzymaniu tego potwierdzenia przelewu, więc im szybciej je otrzymam, tym szybciej będę mógł zadziałać, jeśli chodzi o wstrzymanie tych sankcji. Możemy się tak umówić?\n[Po potwierdzeniu → „szczegóły wpłaty” powyżej]\n\n[Domknięcie po potwierdzeniu:]\nTo w takim razie jesteśmy umówieni, a ja czekam na wpłatę [kwota] do [data]. W razie pytań jestem pod telefonem — dziękuję i pozdrawiam."}
+      ]
+    },
+    b_3: {
+      title: "Wpłata = zatrzymanie działań",
+      goal: "Cel: domknąć porozumienie na konkrecie, nie na deklaracji „zapłacę kiedyś”.\nCo chcemy uzyskać: ustaloną kwotę i datę wpłaty.\nJak: wpłata — nawet częściowa — to argument za wstrzymaniem sankcji; umawiamy się na kwotę do konkretnej daty i zapisujemy.",
+      blocks: [
+        {type:"speech", label:"Powiedz", text:"Zależy mi, żeby to Pana odciążyło, a nie dołożyło. Każda wpłata — nawet częściowa — to dla mnie argument, żeby zaproponować klientowi wstrzymanie sankcji, zamiast je eskalować."},
+        {type:"question", label:"Domknięcie — zawsze na konkrecie: kwota + data", text:"To umówmy się konkretnie: wpłaca Pan [kwota] do [data], zgadza się? Zapiszę to sobie i na tej podstawie wstrzymuję kolejne kroki."},
+        {type:"speech", label:"Potwierdzenie ustaleń SMS-em", text:"Wyślę Panu jeszcze SMS z podsumowaniem: kwota [kwota], termin [data] i dane do przelewu — wszystko w jednym miejscu. Po wpłacie proszę o potwierdzenie przelewu mailem, wtedy od razu wstrzymuję kolejne kroki."}
+      ]
+    },
+    c: {
+      title: "„Zapłacę” — kwota, przelew dziś i potwierdzenie",
+      goal: "Cel: zamienić deklarację „zapłacę” na kwotę, przelew dziś i wykonany pierwszy krok.\nCo chcemy uzyskać: potwierdzoną całą kwotę + przelew w dniu dzisiejszym na NASZ rachunek + potwierdzenie przelewu do 15:00.\nJak: doceń deklarację, dopnij konkret (kwota i przelew dziś), szczegóły wpłaty mailem i SMS-em z zasadą „rachunek od nas, nie z faktury”, potwierdzenie przelewu do 15:00 — działamy dopiero po jego otrzymaniu.\nWskazówka: „zapłacę w przyszłym tygodniu” bez kwoty i daty to nie deklaracja, tylko spławienie — nie kończ rozmowy, dopóki nie padnie konkret. Wpłata zawsze na rachunek podany przez nas — inaczej księgowania możemy nie zobaczyć nawet przez kilka dni.",
+      blocks: [
+        {type:"speech", label:"Docenienie + dopięcie konkretu", text:"Bardzo dobrze to słyszeć, Panie {nazwisko} — to najszybsza droga, żeby zamknąć temat i zatrzymać wszystkie działania. Doprecyzujmy tylko dwie rzeczy, żebym mógł to u siebie odnotować: mówimy o całej kwocie {kwota}, i dokonuje Pan przelewu w dniu dzisiejszym?"},
+        {type:"qhints", label:"Gdy pada „nie dziś” — rozwiń; przy „dziś” czytaj dalej niżej", text:"Deklaruje spłatę, ale nie dziś\nRozumiem. To doprecyzujmy, żebym mógł to u siebie konkretnie odnotować: którego dokładnie dnia robi Pan przelew i kiedy ta wpłata do nas wpłynie? Pytam o dokładną datę, bo bez niej nie mam podstaw, żeby cokolwiek w sprawie załatwić dla Pana.\n\n[Podaje konkretną, krótką datę — np. w przeciągu dwóch dni:]\nDobrze, zapisuję: {kwota}, przelew [data]. Skoro mówimy o tak krótkim terminie, to umówmy się w ten sposób: ja od razu po zaksięgowaniu tej wpłaty zrobię wszystko, żeby wszystkie działania zostały wstrzymane. Ale muszę uczciwie powiedzieć: do momentu wpłynięcia wpłaty działania w sprawie trwają — tego wymaga od nas umowa z klientem. Dlatego to jest naprawdę niesamowicie ważne, żeby ta wpłata wyszła jak najszybciej — im szybciej ją zobaczę, tym szybciej wszystko zatrzymuję. Czy możemy się tak umówić?\n\n[Jeśli data wypada po kolejnej sankcji:]\nPanie {nazwisko}, tu mamy jeden problem: na [data kolejnej sankcji] jest zaplanowana realizacja kolejnej sankcji, a Pana termin wypada później. Żebym mógł to wstrzymać, potrzebuję wpłaty — albo przynajmniej jej części — przed tym dniem. Co jesteśmy w stanie zrobić do [data kolejnej sankcji]?\n\n[Po ustaleniu — szczegóły i domknięcie:]\nDobrze, to w takim razie ja przesyłam do Pana na adres mailowy szczegóły do wpłaty, podeślę je również SMS-owo — i przypomnę: wpłata na rachunek, który Pan od nas otrzyma, nie z faktury, ponieważ o księgowaniu na naszym rachunku dowiem się od razu. W dniu wpłaty poproszę od razu o potwierdzenie przelewu — ja z klientem działam dopiero po jego otrzymaniu, a zależy nam przecież, żeby wszystko stanęło jak najszybciej. To w takim razie jesteśmy umówieni: {kwota} do [data]. W razie pytań jestem pod telefonem — dziękuję i pozdrawiam."},
+        {type:"speech", label:"Szczegóły wpłaty — rachunek od nas i dlaczego to ważne", text:"Dobrze, to w takim razie ja przesyłam do Pana na adres mailowy szczegóły do wpłaty, podeślę je również SMS-owo. Bardzo ważna rzecz, Panie {nazwisko}: wpłaty musi Pan dokonać na rachunek, który Pan od nas otrzyma, a nie na rachunek z faktury — ponieważ o księgowaniu tej wpłaty dowiem się od razu, a w przypadku wpłaty na rachunek z faktury mogę takiej informacji nie otrzymać nawet przez kilka dni, co niepotrzebnie przedłuży załatwienie tej sprawy. Czy wszystko jest dla Pana jasne i zrozumiałe?"},
+        {type:"question", label:"Potwierdzenie i wstrzymanie", text:"I ostatnia rzecz: po wpłacie proszę o przesłanie potwierdzenia przelewu, ponieważ ja z klientem działam dopiero po jego otrzymaniu — więc im szybciej je dostanę, tym szybciej wstrzymuję wszystkie działania. Dzisiaj do godziny 15:00 — damy radę?"},
+        {type:"speech", label:"Domknięcie — jesteśmy umówieni", text:"To w takim razie jesteśmy umówieni: czekam na wpłatę {kwota} dziś i potwierdzenie do 15:00. W razie pytań jestem pod telefonem — dziękuję i pozdrawiam."}
+      ]
+    },
+    e_niedecyzyjny: {
+      title: "Rozmówca niedecyzyjny — dojście do decydenta",
+      goal: "Cel: nie zostawić sprawy „w powietrzu” u osoby, która nie decyduje — wyjść z rozmowy z dojściem do decydenta.\nCo chcemy uzyskać: przede wszystkim BEZPOŚREDNI NUMER do decydenta; jeśli się nie da — przekazaną wiadomość z wagą + umówiony konkretny termin ponownego kontaktu.\nJak: ustal, kto decyduje, i od razu poproś o numer do tej osoby. Dopiero gdy numeru nie dostaniesz — wiadomość-posłaniec i umówiony termin. Nie omawiaj szczegółów sprawy (kwot, dokumentów) z osobą nieupoważnioną — nazwij tylko wagę i termin.\nWskazówka: sekretarka, która czuje się ważna, otwiera drzwi; naciskana — ich broni. Jeśli łączy z księgową — wykorzystaj: potwierdzenie, że faktura jest w systemie i bez reklamacji, podcina przyszłe wymówki z 3c. Zanotuj odpowiedź. Uwaga: jeśli na księgową spławia Cię sam DECYDENT — to obiekcja z panelu, nie ta gałąź.",
+      blocks: [
+        {type:"speech", label:"Ustalenie roli", text:"Rozumiem, nie będę zawracał Panu głowy niepotrzebnie — kto w firmie decyduje o płatnościach i sprawach tego typu?"},
+        {type:"question", label:"Pytanie główne — numer do decydenta", text:"Czy mogę prosić o bezpośredni numer do Pana [imię decydenta]? Załatwię temat bezpośrednio z nim i nie będę Pana więcej angażował."},
+        {type:"speech", label:"Jeśli numeru nie dostaniesz — wiadomość do przekazania, krótka, z wagą", text:"W takim razie będę miał do Pana prośbę, bo Pana pomoc jest tu naprawdę ważna. Proszę przekazać Panu [imię decydenta], że dzwonił {windykator} z Hadyński Inkaso — w sprawie windykacyjnej prowadzonej na firmę {firma}. W tej sprawie są zaplanowane kolejne działania i one mają swój termin — a ja mam jeszcze możliwość je zatrzymać, ale tylko jeśli porozmawiam z Panem [imię decydenta], zanim ten termin minie. To naprawdę w interesie firmy, żeby ta wiadomość dotarła do niego dzisiaj."},
+        {type:"question", label:"Pytanie aktywizujące — dostępność", text:"Kiedy najlepiej go zastanę pod tym numerem?"},
+        {type:"question", label:"Domknięcie na konkret", text:"To umówmy się tak: zadzwonię [dzień, godzina]. Proszę uprzedzić Pana [imię decydenta], że będę dzwonił i w jakiej sprawie — i bardzo proszę zapisać moje nazwisko: {windykator}, Hadyński Inkaso. Mogę na Pana liczyć?"},
+        {type:"speech", label:"Jeśli łączy z księgową — wykorzystaj", text:"Skoro mam już Pana na linii — dwie krótkie rzeczy, czysto techniczne. Czy faktura [nr faktury] jest u Państwa w systemie? I czy była do niej kiedykolwiek jakaś reklamacja albo korekta?"}
+      ]
+    },
+    d_pomylka: {
+      title: "„Nie wiem, o co chodzi / to nie ja”",
+      goal: "Cel: nie pozwolić na „to pomyłka” jako koniec rozmowy — każda droga ma prowadzić do zaangażowania.\nCo chcemy uzyskać: informację, co łączy rozmówcę z firmą (status świadka), pisemny mail (ślad kontaktu) albo zgodę na SMS z linkiem do oferty na giełdzie.\nJak: wyjaśniamy, skąd numer (umowa z klientem), pokazujemy, że dług jest już publicznie na sprzedaż na giełdzie — link wysyłamy SMS-em, potem dwie drogi: mail do działu weryfikacji albo rozmowa + zmiana statusu na świadka. Domykamy pytaniem „którą drogą?” — bez opcji „rozłączam się bez konsekwencji”.\nWskazówka: załóż, że rozmówca może być dłużnikiem, który ucieka od tematu. Nie oskarżaj — link z giełdy działa w obie strony: dla przypadkowej osoby to oferta zakupu, dla kłamiącego dłużnika informacja, że jego dług wisi publicznie i ktoś go kupi. Kto opowiada nam o firmie i pomaga dotrzeć do dłużnika, sam nim nie jest.",
+      blocks: [
+        {type:"speech", label:"Powiedz — spokojnie, rzeczowo", text:"Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy {firma}. Wiem, że taki telefon może być zaskoczeniem — ale skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem."},
+        {type:"speech", label:"Giełda + dwie drogi — jeden ciąg, do domknięcia pytaniem", text:"Powiem krótko, jak to wygląda. Dług firmy {firma} jest już oficjalnie na sprzedaż — oferta wisi publicznie na giełdzie długów. Mogę Panu podesłać link SMS-em — takie oferty najszybciej wyłapują ludzie z otoczenia firmy, bo wiedzą, co kupują. Zanim ktoś Pana uprzedzi, warto chociaż zerknąć, czy nawet inwestycyjnie zakupić — bo my ten dług prędzej czy później z tej firmy ściągniemy. Jeśli chodzi o Pana numer w sprawie, są dwa wyjścia. Albo mail z prośbą o usunięcie numeru — dział to rozpatrzy, ale do tego czasu dzwonimy. Albo daje nam Pan znać, co Pana łączy z tą firmą — i wpisuję Pana jako świadka. Do świadka nie dzwonimy w sprawie zapłaty. Którą drogą chciałby to Pan załatwić?"}
+      ]
+    }
+  }
+};
+
+
+DEFAULT_CONTENT.sections.p_deklaracja = {
+  title: "Złamana deklaracja spłaty",
+  goal: "Cel: nie pozwolić, żeby złamana deklaracja rozmyła się w kolejną obietnicę — odzyskać kontrolę i wpłatę dziś.\nCo chcemy uzyskać: wpłatę jeszcze dziś z potwierdzeniem do 15:00; przy braku środków — realną nową kwotę.\nJak: fakt (umówiliśmy się — wpłaty nie ma) → oddanie głosu „co się stało?” → reakcja: nowy konkret dziś / brak środków → Gałąź B / wymijanie → rama „plan rusza”.\nWskazówka: po złamanej deklaracji nie przyjmujemy drugiej gołej obietnicy — nowa umowa tylko z konkretem (kwota + dziś + potwierdzenie do 15:00). Złamana deklaracja to zielone światło do twardszego tonu (Założenia: „Kiedy lecimy ostro”) — ale dalej informujemy, nie straszymy.",
+  blocks: [
+    {type:"speech", label:"Nazwanie sytuacji — spokojnie, na faktach", text:"Panie {nazwisko}, dzwonię, bo umawialiśmy się, że do [data] wpłynie od Pana wpłata [umówiona kwota]. Sprawdziłem przed telefonem — tej wpłaty u nas nie ma. A ja na podstawie Pana deklaracji wstrzymałem działania i poręczyłem za tę umowę u siebie w firmie. Więc proszę mi powiedzieć — co się stało?"},
+    {type:"note", icon:"⏸", text:"Czekamy na odpowiedź. Nie przerywaj — im więcej powie, tym łatwiej dobrać reakcję."},
+    {type:"qhints", label:"Reakcja dłużnika — kliknij tę, która padła", text:"Przekłada termin — „zapłacę jutro / w tym tygodniu”\nPanie {nazwisko}, powiem wprost: poprzednia deklaracja się nie wykonała, więc kolejnej samej deklaracji nie mogę już w tej sprawie obronić. Ustalmy to tak, żeby temat zamknąć: robi Pan przelew jeszcze dzisiaj i przesyła mi potwierdzenie do godziny 15:00 — na rachunek, który Pan od nas otrzymał, bo o jego zaksięgowaniu dowiem się od razu. Dopiero to potwierdzenie daje mi podstawę, żeby dalej trzymać działania wstrzymane. Umawiamy się tak?\n\n[Jeśli mówi, że dziś się nie da:]\nRozumiem. Tylko proszę zrozumieć i mnie: raz już wstrzymałem sprawę na słowo i to się nie obroniło. Jeżeli całość dzisiaj nie wchodzi w grę, to niech Pan wpłaci dziś część — wpłata uwiarygadnia Pana deklarację i mam z czym pójść do klienta. Jaką kwotę jest Pan w stanie wpłacić w dniu dzisiejszym?\n---\nMówi, że nie ma pieniędzy\nRozumiem, że sytuacja się zmieniła. Natomiast po złamanej deklaracji sprawa nie może już stać w miejscu — musimy dzisiaj ustalić coś, co się realnie wykona. [Dalej: pomarańczowy skrót „Nie mam pieniędzy” → Gałąź B]\n---\nWymijająco — unika konkretu („nie wiem, zobaczę, oddzwonię”)\nPanie {nazwisko}, umowa między nami była prosta: wpłata do [data] w zamian za wstrzymanie działań. Wpłaty nie ma, więc dzisiaj muszę poprowadzić sprawę dalej — plan rusza zgodnie z umową z klientem, łącznie z procesem sprzedaży długu, o którym Panu mówiłem. Zatrzymać to może tylko jedno: wpłata dzisiaj z potwierdzeniem do 15:00. Więc pytanie brzmi: robi Pan dziś ten przelew?"},
+    {type:"question", label:"Domknięcie — nowa umowa tylko z konkretem", text:"Podsumujmy, Panie {nazwisko}: kwota [ustalona kwota], przelew dzisiaj, na rachunek od nas, potwierdzenie do 15:00 — i ja od razu po zaksięgowaniu wstrzymuję działania. Jesteśmy umówieni?"}
+  ]
+};
+
+DEFAULT_CONTENT.sections.p_dokumenty = {
+  title: "Złamany termin — dokumenty po negowaniu",
+  goal: "Cel: zamknąć furtkę „neguję, ale nic nie wysyłam” — dokumenty dziś albo negacja przestaje chronić przed działaniami.\nCo chcemy uzyskać: mail ze stanowiskiem i dokumentami jeszcze dziś — albo powrót do rozmowy o spłacie.\nJak: przypomnienie umowy (termin minął) → „co się stało?” → dwie furtki: mail dziś / brak maila = dowody dalej wskazują na rację klienta i działania wracają; przy wycofaniu z zarzutów — od razu rozmowa o spłacie.\nWskazówka: nie kłóć się o powody spóźnienia — liczy się tylko: mail dziś czy nie. Jeśli dłużnik wycofuje się z negowania, nie drąż — przejdź do rozmowy o spłacie (skróty pod kartą).",
+  blocks: [
+    {type:"speech", label:"Przypomnienie umowy — na faktach", text:"Panie {nazwisko}, dzwonię w sprawie, którą mieliśmy wyjaśnić. Umówiliśmy się, że do [data] prześle mi Pan mailem swoje stanowisko i dokumenty — po to, żebym mógł zatrzymać bieg sprawy i wyjaśnić to z klientem. Sprawdziłem przed telefonem: nic od Pana nie dotarło. A bez tego maila ja nie mam niczego, czym mógłbym Pana bronić — dowody dalej wskazują na rację klienta. Co się stało?"},
+    {type:"qhints", label:"Reakcja dłużnika — kliknij tę, która padła", text:"„Wyślę — nie zdążyłem / zapomniałem”\nDobrze, że rozmawiamy. Tylko teraz to już musi być dzisiaj, Panie {nazwisko} — sprawa stała przez ten czas w miejscu na moją odpowiedzialność, a plan działań nie czeka. Może być nawet skan czy zdjęcie, byle był ślad. Jeżeli do końca dnia maila nie będzie, będę musiał uznać, że zastrzeżeń nie ma — i sprawa wraca na normalny tor, łącznie z kolejnymi etapami, o których Panu mówiłem. Czy wyśle mi Pan to dzisiaj?\n---\nDalej neguje, ale nic nie wysyła („po co mam wysyłać, przecież mówiłem”)\nPanie {nazwisko}, wróćmy do tego, co już ustaliliśmy: jeżeli Pan się nie zgadza z roszczeniem, jedyne, co realnie zatrzymuje sprawę, to Pana stanowisko na piśmie — telefonicznie tego nie obronię. Skoro maila nie ma, to na ten moment prawo jest po stronie klienta: on wykonał pracę, ma roszczenie, a my nie mamy śladu, że Pan się z tym nie zgodził. Więc mamy dwie opcje: albo ten mail dzisiaj i ja to wyjaśniam z klientem, albo musimy kontynuować działania windykacyjne, mimo że Pan się z tym nie zgadza. Którą drogę Pan wybiera?\n---\nWycofuje się z zarzutów / schodzi z tematu negowania\nRozumiem — czyli temat zastrzeżeń możemy odłożyć. W takim razie wracamy do konkretu, Panie {nazwisko}: należność {kwota} jest wymagalna i musimy dzisiaj ustalić, jak ją zamykamy. [Deklaruje spłatę → zielony skrót „Gałąź C” · „nie mam pieniędzy” → pomarańczowy skrót „Gałąź B”]"},
+    {type:"question", label:"Domknięcie datą", text:"To umawiamy się tak: mail od Pana — dzisiaj. Jutro z samego rana sprawdzam skrzynkę i od razu daję znać klientowi. Jeżeli maila nie będzie, sprawa idzie dalej zgodnie z planem — a tego wolałbym uniknąć. Czy mogę na Pana liczyć?"}
+  ]
+};
+
+const DEFAULT_OBJECTIONS = [
+  {
+    id: "straszysz",
+    title: "„Ale czy Ty mnie straszysz?” (przy negowaniu długu)",
+    text: "Absolutnie nie i daleko mi od straszenia, bo nie o to w tym chodzi. My musimy kontynuować działania do momentu, kiedy wszystkie dowody prawne wskazują na rację klienta. W chwili, gdy tylko otrzymamy dokumentację potwierdzającą niezasadność roszczenia, zaopiniujemy klientowi dochodzenie sprawy na drodze sądowej — zamiast realizować sankcje, które mamy zaplanowane w Państwa sprawie."
+  },
+  {
+    id: "brak_czasu",
+    title: "„Nie mam czasu”",
+    text: "Okej, nie ma Pan czasu. Jasne, rozumiem. To powiem Panu w takim razie w jednym zdaniu coś bardzo ważnego. W Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc pytanie, czy nie znajdzie Pan chwili, żeby ten temat wyjaśnić?"
+  },
+  {
+    id: "skad_numer_obcy",
+    title: "„Skąd macie mój numer?” (osoba niezwiązana ze sprawą)",
+    text: "Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy {firma}. Skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem.\n\n[Jeśli mówi, że nie jest związany ze sprawą:]\nPowiem krótko, jak to wygląda. Dług firmy {firma} jest już oficjalnie na sprzedaż — oferta wisi publicznie na giełdzie długów. Mogę Panu podesłać link SMS-em — takie oferty najszybciej wyłapują ludzie z otoczenia firmy, bo wiedzą, co kupują. Zanim ktoś Pana uprzedzi, warto chociaż zerknąć, czy nawet inwestycyjnie zakupić — bo my ten dług prędzej czy później z tej firmy ściągniemy. Jeśli chodzi o Pana numer w sprawie, są dwa wyjścia. Albo mail z prośbą o usunięcie numeru — dział to rozpatrzy, ale do tego czasu dzwonimy. Albo daje nam Pan znać, co Pana łączy z tą firmą — i wpisuję Pana jako świadka. Do świadka nie dzwonimy w sprawie zapłaty. Którą drogą chciałby to Pan załatwić?"
+  },
+  {
+    id: "skad_numer_dluznik",
+    title: "„Skąd macie mój numer?” (mówi dłużnik)",
+    text: "Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy {firma}. Skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem."
+  },
+  {
+    id: "nic_nie_podpisywalem",
+    title: "„Nic nie podpisywałem”",
+    text: "Co Pan ma na myśli — nie doszło do współpracy między Państwem?\n\nZgodnie z informacjami, które my mamy, do współpracy doszło. Praca została wykonana i faktura wystawiona. Rozumiem, że się Pan z nią nie zgadza — dlatego też dzwonię, żeby tę sprawę wyjaśnić, ale do tego potrzebuję zadać parę pytań związanych ze sprawą. Z czym konkretnie się Pan nie zgadza?\n\n[Jeśli mówi, że nie ma umowy:]\nMa Pan na myśli pisemną umowę? No to oczywiście w tej sprawie nie ma pisemnej umowy — tak jak w przypadku większości faktur wystawianych między przedsiębiorcami — więc ja tej umowy Panu na pewno nie przedstawię. Natomiast prace zostały wykonane, więc faktura jest do zapłaty. Fakturę Pan otrzymał, wezwanie też do Pana zostało wysłane. Więc pytanie: czy zgłaszał Pan jakieś uwagi po otrzymaniu faktury lub wezwania?\n[Dalej: pytania pogłębiające — gałąź A, etap 3]"
+  },
+  {
+    id: "straszy_ogolnie",
+    title: "„Czy mnie Pan straszy?” (ogólnie, o sankcjach)",
+    text: "Absolutnie nie — straszenie nie jest moją rolą i nic by mi nie dało. Ja tylko informuję Pana o krokach, które w tej sprawie są zaplanowane, zanim one nastąpią. Wolałbym, żeby dowiedział się Pan o nich ode mnie teraz, niż odczuł je bez ostrzeżenia. To są standardowe działania windykacyjne — wynikają z planu sprawy i z umowy z klientem, nie z mojego nastawienia do Pana. I dokładnie dlatego rozmawiamy: bo każdą z tych rzeczy da się jeszcze zatrzymać. Wróćmy więc do tego, jak to zrobić — dobrze?"
+  },
+  {
+    id: "wysylalem_klientowi",
+    title: "„Wszystko klientowi już wysyłałem, nic wam nie będę wysyłał”",
+    text: "Rozumiem, że Pan to klientowi wysyłał — i bardzo dobrze. Tylko proszę zrozumieć jedno: my prowadzimy tę sprawę na zlecenie klienta i na ten moment wszystkie dowody, które mamy w sprawie, są po jego stronie — a prawo stoi za dokumentami. Dopóki tak jest, jesteśmy zobowiązani prowadzić działania.\nA ja naprawdę nie chcę ich prowadzić, jeżeli Pan się z czymkolwiek tutaj nie zgadza. Tylko żeby móc zatrzymać kolejne sankcje, muszę mieć ten dowód u siebie w sprawie — to, co Pan wysyłał klientowi, do mnie nie trafiło i ja formalnie tego nie widzę."
+  },
+  {
+    id: "cmr",
+    title: "„Klient nie dostarczył CMR / dokumentów przewozowych”",
+    text: "Rozumiem, że taki zapis w zleceniu jest. Tylko proszę zwrócić uwagę na jedną rzecz: przedmiotem umowy przewozu jest wykonanie transportu, a nie dostarczenie papierów. Towar dojechał, prawda? To znaczy, że usługa została wykonana i wynagrodzenie się należy.\n\n[Jeśli dalej się na to powołuje:]\nPanie {nazwisko}, rozumiem, że powołuje się Pan na to — natomiast takie zapisy w umowie, uzależniające zapłatę od dostarczenia tych dokumentów, są sprzeczne z przepisami konwencji CMR oraz kodeksu cywilnego, więc są nieważne. Zgodnie z przepisami wynagrodzenie należne jest za wykonaną usługę transportową, a ta została wykonana — więc chciałbym już ten wątek zamknąć."
+  }
+];
+
+/* Sankcje — komunikaty eskalacyjne, dostępne w każdym momencie rozmowy */
+const DEFAULT_SANCTIONS = [
+  {
+    id: "sank_antyreklama",
+    title: "Antyreklama — reklama sprzedaży długu w Google",
+    text: "No tak, jak Panu wspominałem, że jesteśmy w trakcie procesu sprzedaży tego długu. Na dzień dzisiejszy kupca jeszcze nie znaleźliśmy. Jest ta oferta sprzedaży na giełdzie wierzytelności; widziało ją na dzień dzisiejszy tylko 100 osób, więc to jest za mało, żeby znaleźć kupca, niestety. W związku z tym podjęliśmy decyzję, że wykupimy reklamę sponsorowaną w wyszukiwarce Google, tak żeby tym razem, jeżeli ktokolwiek będzie Pana szukał w Internecie, to już na 100% pierwsza informacja, jaka mu się wyświetli, to taka, że Pański dług jest na sprzedaż. Bo z racji, że dalej Pan nie zapłacił, klient chce jak najszybciej sprzedać tą wierzytelność, a taka praktyka działa najlepiej."
+  },
+  {
+    id: "sank_wizytowka",
+    title: "Prośba o kontakt — wizytówka Google / GoWork",
+    text: "Panie {nazwisko}, próbuję się z Panem skontaktować od [X czasu] — bezskutecznie, a to blokuje mi załatwienie tej sprawy. Może Pan zresztą sam zobaczyć na swojej wizytówce Google. Mamy taką procedurę: jeżeli nie możemy złapać kontaktu z dłużnikiem, zostawiamy prośbę o kontakt tam, gdzie na pewno ją zobaczy — w wizytówce Google, na GoWorku, na innych portalach. Wiem, że to nie wygląda najlepiej, i mówię wprost: nie zrobiliśmy tego złośliwie, tylko dlatego, że nie mieliśmy innego wyjścia. Wystarczy, że będziemy w kontakcie i tą sprawę załatwimy."
+  },
+  {
+    id: "sank_social",
+    title: "Zapowiedź — kontakt z otoczeniem w social mediach",
+    text: "Jeszcze jedna ważna rzecz, Panie {nazwisko}. Ja tego nie lubię robić i mówię o tym otwarcie — wolałbym, żebyśmy do tego nie doszli. Natomiast jeżeli dalej nie będę mógł się do Pana dodzwonić, kolejnym krokiem z naszego planu jest szukanie kontaktu do Pana przez Pańskie otoczenie — przez znajomych na Facebooku, Instagramie i innych portalach, z prośbą o pomoc w przekazaniu kontaktu. To działa, dlatego to robimy. Prośba, żeby Pan był osiągalny.\n\n[Jak mówi, że to bezprawne:]\nPanie {nazwisko}, my jesteśmy naprawdę dużą firmą i nasz dział prawny wszystko wcześniej przygotował, by nie narażać się na konsekwencje prawne. Robimy to tak, że nie ma się do nas o co doczepić. Dlatego proszę, by był Pan osiągalny — i żebyśmy mogli załatwić ten temat."
+  },
+  {
+    id: "sank_big",
+    title: "Wpis do BIG-u — odliczanie z SMS-ów",
+    text: "Chciałbym też potwierdzić, czy widział Pan SMS-y, które regularnie do Pana tutaj wychodzą — informacyjne, dotyczące tego, ile zostało do wpisu do BIG-u, czyli do utraty wszelkiej zdolności kredytowej i wypowiedzenia leasingów. Na ten moment zostało [ile dni], więc musimy zrobić wszystko, co możemy, żeby tą sprawę do tego czasu zakończyć."
+  },
+  {
+    id: "sank_us",
+    title: "Urząd skarbowy — weryfikacja zaksięgowania faktury",
+    text: "Panie {nazwisko}, oboje wiemy, że Pan tę fakturę zaksięgował. Tylko my potrzebujemy tutaj tego potwierdzenia przed pójściem z Panem na drogę sądową — dlatego zawiadomiliśmy urząd skarbowy o tym, żeby to u Pana sprawdził. Możemy też załatwić temat dzisiaj i poinformować urząd skarbowy, że jesteśmy rozliczeni — bo i tak jeszcze będą się do nas zgłaszać na dniach o szczegóły przed rozpoczęciem działań."
+  }
+];
+
+const MAP_GROUPS = [
+  {label:"Przebieg podstawowy", tone:"neutral", items:["start","przedstawienie"]},
+  {label:"Gałąź A — neguje dług", tone:"A", items:["a_intro","a_prawnik"]},
+  {label:"Gałąź B — brak środków", tone:"B", items:["b_1","b_2","b_3"]},
+  {label:"Gałąź C — deklaruje zapłatę", tone:"C", items:["c"]},
+  {label:"Gałąź D — „nie wiem, o co chodzi”", tone:"D", items:["d_pomylka"]},
+  {label:"Gałąź E — rozmówca niedecyzyjny", tone:"E", items:["e_niedecyzyjny"]},
+  {label:"Powroty — złamane ustalenia", tone:"neutral", items:["p_deklaracja","p_dokumenty"]}
+];
+
+const MAP_LABELS = {
+  start:"Otwarcie rozmowy", przedstawienie:"Przedstawienie sprawy",
+  a_intro:"Rozbrojenie + pytania", a_prawnik:"Odsyła do prawnika",
+  b_1:"Potwierdzenie woli zapłaty", b_2:"Dwa rozwiązania + 50%",
+  b_3:"Domknięcie: kwota + data", c:"Kwota + przelew dziś + potwierdzenie",
+  d_pomylka:"Wyjaśnienie + dwie drogi",
+  e_niedecyzyjny:"Dojście do decydenta",
+  p_deklaracja:"Wpłata nie wpłynęła — nowy konkret dziś",
+  p_dokumenty:"Dokumenty nie dotarły — mail dziś albo działania"
+};
+
+const TREE = {
+  id:"start", children:[
+    { id:"przedstawienie", children:[
+      { id:"a_intro", edge:"neguje dług", children:[
+        { id:"a_prawnik", edge:"ma prawnika" }
+      ]},
+      { id:"b_1", edge:"„nie mam pieniędzy”", children:[
+        { id:"b_2", children:[ { id:"b_3" } ] }
+      ]},
+      { id:"c", edge:"„zapłacę”" },
+      { id:"d_pomylka", edge:"„to nie ja”" },
+      { id:"e_niedecyzyjny", edge:"osoba niedecyzyjna" }
+    ]},
+    { id:"p_deklaracja", edge:"złamana deklaracja spłaty" },
+    { id:"p_dokumenty", edge:"nie dosłał dokumentów" }
+  ]
+};
+
+const TREE_DESC = {
+  start:"Kto mówi + prośba o imię", przedstawienie:"Kwota, wierzyciel → reakcja",
+  a_intro:"Mediator + pytania pogłębiające", a_prawnik:"Pismo prawnika + sprzedaż długu",
+  b_1:"„Chce Pan uregulować?” + empatia", b_2:"Sankcje vs wpłata, start wysoko",
+  b_3:"Kwota + data = stop sankcji", c:"Kwota dziś + rachunek od nas + 15:00",
+  d_pomylka:"Skąd numer + mail albo status świadka",
+  e_niedecyzyjny:"Posłaniec + termin kontaktu",
+  p_deklaracja:"Fakt → co się stało → konkret dziś do 15:00",
+  p_dokumenty:"Mail dziś albo sprawa wraca na tor"
+};
+
+/* ═════════════════ Stan ═════════════════ */
+let content = loadJSON(LS_CONTENT, null) || structuredClone(DEFAULT_CONTENT);
+let objections = loadJSON(LS_OBJ, null) || structuredClone(DEFAULT_OBJECTIONS);
+let sanctions = loadJSON(LS_SANK, null) || structuredClone(DEFAULT_SANCTIONS);
+
+/* migracja: zapisane wersje bez nowszych sekcji dostają je z domyślnych */
+SECTION_ORDER.forEach(id => {
+  if (!content.sections || !content.sections[id]) {
+    content.sections = content.sections || {};
+    content.sections[id] = structuredClone(DEFAULT_CONTENT.sections[id]);
+  }
+});
+
+/* rewizja treści: nowsza domyślna wersja sekcji nadpisuje tę zapisaną (tylko wskazane sekcje) */
+const CONTENT_REV = 45;
+const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"] };
+if ((content._rev || 1) < CONTENT_REV) {
+  for (let r = (content._rev || 1) + 1; r <= CONTENT_REV; r++) {
+    (REV_SECTIONS[r] || []).forEach(id => {
+      if (DEFAULT_CONTENT.sections[id]) content.sections[id] = structuredClone(DEFAULT_CONTENT.sections[id]);
+    });
+  }
+  content._rev = CONTENT_REV;
+  saveContent();
+}
+content._rev = CONTENT_REV;
+
+/* rewizja obiekcji: nowe domyślne obiekcje dopisują się (raz) do zapisanych; usunięte później nie wracają */
+const OBJ_REV_KEY = "hi_skrypt_obj_rev";
+const OBJ_REV = 10;
+try {
+  const storedRev = parseInt(localStorage.getItem(OBJ_REV_KEY) || "1", 10);
+  if (storedRev < OBJ_REV) {
+    if (storedRev < 10) {
+      ["ksiegowa","brak_czasu","brak_czasu_termin","skad_numer"].forEach(id => {
+        const i = objections.findIndex(o => o.id === id);
+        if (i >= 0) objections.splice(i, 1);
+      });
+    }
+    DEFAULT_OBJECTIONS.forEach(d => {
+      if (!objections.some(o => o.id === d.id)) objections.push(structuredClone(d));
+    });
+    const refresh = (id) => {
+      const d = DEFAULT_OBJECTIONS.find(x => x.id === id);
+      const o = objections.find(x => x.id === id);
+      if (d && o) { o.title = d.title; o.text = d.text; }
+    };
+    if (storedRev < 6) refresh("straszysz");
+    if (storedRev < 10) {
+      refresh("wysylalem_klientowi");
+      const ord = DEFAULT_OBJECTIONS.map(d => d.id);
+      objections.sort((a, b) => (ord.indexOf(a.id) + 1 || 999) - (ord.indexOf(b.id) + 1 || 999));
+    }
+    saveObjections();
+    localStorage.setItem(OBJ_REV_KEY, String(OBJ_REV));
+  }
+} catch {}
+
+/* rewizja sankcji: nowe domyślne sankcje dopisują się (raz) do zapisanych */
+const SANK_REV_KEY = "hi_skrypt_sank_rev";
+const SANK_REV = 4;
+try {
+  const storedSankRev = parseInt(localStorage.getItem(SANK_REV_KEY) || "0", 10);
+  if (storedSankRev < SANK_REV) {
+    DEFAULT_SANCTIONS.forEach(d => {
+      if (!sanctions.some(o => o.id === d.id)) sanctions.push(structuredClone(d));
+    });
+    saveSanctions();
+    localStorage.setItem(SANK_REV_KEY, String(SANK_REV));
+  }
+} catch {}
+const prefs = loadJSON(LS_PREFS, {}) || {};
+
+const state = {
+  tab: "rozmowa",
+  mode: prefs.mode === "osoba" ? "osoba" : "firma",
+  gender: prefs.gender === "pani" ? "pani" : "pan",
+  current: "start",
+  navHistory: [],
+  path: ["start"],
+  visited: new Set(["start"])
+};
+
+const vars = { windykator:"", firma:"", osoba:"", nazwisko:"", wierzyciel:"", kwota:"" };
+const checklistState = {};
+
+const varLabels = {
+  windykator:"imię windykatora", firma:"nazwa firmy", osoba:"imię i nazwisko",
+  nazwisko:"imię klienta", wierzyciel:"nazwa wierzyciela", kwota:"kwota", polowa:"połowa kwoty"
+};
+
+/* ═════════════════ Narzędzia ═════════════════ */
+function loadJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch { return fallback; }
+}
+function saveContent() { try { localStorage.setItem(LS_CONTENT, JSON.stringify(content)); } catch {} }
+function saveObjections() { try { localStorage.setItem(LS_OBJ, JSON.stringify(objections)); } catch {} }
+function saveSanctions() { try { localStorage.setItem(LS_SANK, JSON.stringify(sanctions)); } catch {} }
+function savePrefs() { try { localStorage.setItem(LS_PREFS, JSON.stringify({ mode: state.mode, gender: state.gender })); } catch {} }
+
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function parseKwota(str) {
+  if (!str) return null;
+  const n = parseFloat(str.replace(/\s/g,"").replace(",","."));
+  return isNaN(n) ? null : n;
+}
+function formatPL(n) {
+  return n.toLocaleString("pl-PL",{minimumFractionDigits:2, maximumFractionDigits:2}) + " zł";
+}
+function varValue(key) {
+  if (key === "kwota") {
+    const n = parseKwota(vars.kwota);
+    return n !== null ? formatPL(n) : (vars.kwota || "");
+  }
+  if (key === "polowa") {
+    const n = parseKwota(vars.kwota);
+    return n !== null ? formatPL(n/2) : "";
+  }
+  if (key === "nazwisko" && !vars.nazwisko && state.mode === "osoba" && vars.osoba) {
+    return vars.osoba.trim().split(/\s+/)[0];
+  }
+  return vars[key] || "";
+}
+function V(key) {
+  const val = varValue(key);
+  if (val) return `<span class="var filled" data-var="${key}" title="Kliknij, aby zmienić">${esc(val)}</span>`;
+  return `<span class="var" data-var="${key}" title="Uzupełnij w panelu Dane rozmowy">[${esc(varLabels[key]||key)}]</span>`;
+}
+function S(label) { return `<span class="var static">[${esc(label)}]</span>`; }
+
+/* ─── odmiana Pan/Pani ───
+   Teksty pisane są w formie kanonicznej „Pan”; przy zwrocie „Pani”
+   odmieniamy automatycznie. Zwroty o decydencie (Pan [imię decydenta])
+   są chronione i zostają w formie męskiej. */
+const PANI_RULES = [
+  [/(?<!\p{L})mógłby Pan(?!\p{L})/gu, "mogłaby Pani"],
+  [/Może Pan zresztą sam zobaczyć/gu, "Może Pani zresztą sama zobaczyć"],
+  [/Pan tę fakturę zaksięgował/gu, "Pani tę fakturę zaksięgowała"],
+  [/Pan od nas otrzymał/gu, "Pani od nas otrzymała"],
+  [/Pan się z tym nie zgodził(?!\p{L})/gu, "Pani się z tym nie zgodziła"],
+  [/nie zdążyłem \/ zapomniałem/gu, "nie zdążyłam / zapomniałam"],
+  [/przecież mówiłem/gu, "przecież mówiłam"],
+  [/żeby Pan był osiągalny/gu, "żeby Pani była osiągalna"],
+  [/by był Pan osiągalny/gu, "by była Pani osiągalna"],
+  [/(?<!\p{L})chciałby( to)? Pan(?!\p{L})/gu, "chciałaby$1 Pani"],
+  [/żeby Pan niczego nie musiał/gu, "żeby Pani niczego nie musiała"],
+  [/(?<!\p{L})(\p{L}+)ł Pan(?!\p{L})/gu, "$1ła Pani"],
+  [/(?<!\p{L})Pan (\p{L}+)ł(?!\p{L})/gu, "Pani $1ła"],
+  [/(?<!\p{L})Pan nie (\p{L}+)ł(?!\p{L})/gu, "Pani nie $1ła"],
+  [/jest Pan zobligowany/gu, "jest Pani zobligowana"],
+  [/jest Pan w tym momencie dłużnikiem/gu, "jest Pani w tym momencie dłużniczką"],
+  [/wystawiona na Pana/gu, "wystawiona na Panią"],
+  [/powinien Pan(?!\p{L})/gu, "powinna Pani"],
+  [/żeby Pan mi wysłał/gu, "żeby Pani mi wysłała"],
+  [/informuję Pana/gu, "informuję Panią"],
+  [/że Pan to klientowi wysyłał/gu, "że Pani to klientowi wysyłała"],
+  [/żeby Pana chronić/gu, "żeby Panią chronić"],
+  [/żeby dowiedział się Pan(?!\p{L})/gu, "żeby dowiedziała się Pani"],
+  [/niż odczuł je/gu, "niż odczuła je"],
+  [/będzie musiał mieć Pan(?!\p{L})/gu, "będzie musiała mieć Pani"],
+  [/(?<!\p{L})zgłaszał pisemnie/gu, "zgłaszała pisemnie"],
+  [/Dopytaj: kiedy zgłaszał\?/gu, "Dopytaj: kiedy zgłaszała?"],
+  [/Pan gdzieś tam to sobie zgłaszał/gu, "Pani gdzieś tam to sobie zgłaszała"],
+  [/że Pan się z tym nie zgodził/gu, "że Pani się z tym nie zgodziła"],
+  [/jeżeli Pan tego do tej pory nie zrobił/gu, "jeżeli Pani tego do tej pory nie zrobiła"],
+  [/żeby Pan również do mnie, na adres mailowy, podesłał/gu, "żeby Pani również do mnie, na adres mailowy, podesłała"],
+  [/żeby Pan to zgłaszał/gu, "żeby Pani to zgłaszała"],
+  [/żeby Pan je przesłał/gu, "żeby Pani je przesłała"],
+  [/Pana prosić/gu, "Panią prosić"],
+  [/Pana prosił/gu, "Panią prosił"],
+  [/(?<!\p{L})Pańsk\p{L}*(?!\p{L})/gu, "Pani"],
+  [/Pana uprzedzi/gu, "Panią uprzedzi"],
+  [/co Pana łączy/gu, "co Panią łączy"],
+  [/wpisuję Pana jako/gu, "wpisuję Panią jako"],
+  [/Pana odciążyło/gu, "Panią odciążyło"],
+  [/na Pana liczyć/gu, "na Panią liczyć"],
+  [/mam już Pana na linii/gu, "mam już Panią na linii"],
+  [/(?<!\p{L})Miałem(?!\p{L})/gu, "Miałam"],
+  [/(?<!\p{L})dostałem(?!\p{L})/gu, "dostałam"],
+  [/(?<!\p{L})zapłaciłem(?!\p{L})/gu, "zapłaciłam"],
+  [/(?<!\p{L})zamawiałem(?!\p{L})/gu, "zamawiałam"],
+  [/(?<!\p{L})Panem(?!\p{L})/gu, "Panią"],
+  [/(?<!\p{L})Panu(?!\p{L})/gu, "Pani"],
+  [/(?<!\p{L})Panie(?!\p{L})/gu, "Pani"],
+  [/(?<!\p{L})Pana(?!\p{L})/gu, "Pani"],
+  [/(?<!\p{L})Pan(?!\p{L})/gu, "Pani"]
+];
+
+function genderize(text) {
+  let t = String(text);
+  const g = state.gender;
+  t = t.replace(/Panem\/Panią/g, g === "pan" ? "Panem" : "Panią");
+  t = t.replace(/Pana\/Panią/g, g === "pan" ? "Pana" : "Panią");
+  t = t.replace(/Pana\/Pani(?!\p{L})/gu, g === "pan" ? "Pana" : "Pani");
+  t = t.replace(/Panu\/Pani(?!\p{L})/gu, g === "pan" ? "Panu" : "Pani");
+  t = t.replace(/Pan\/Pani(?!\p{L})/gu, g === "pan" ? "Pan" : "Pani");
+  if (g !== "pani") return t;
+  const guards = [];
+  t = t.replace(/Pan(?:a|u|em|ie)? \[imię decydenta\]/g, m => {
+    guards.push(m);
+    return "" + (guards.length - 1) + "";
+  });
+  for (const [re, rep] of PANI_RULES) t = t.replace(re, rep);
+  t = t.replace(/(\d+)/g, (m, i) => guards[+i]);
+  return t;
+}
+
+function renderText(text) {
+  let out = esc(genderize(text));
+  out = out.replace(/\[([^\[\]{}]+)\]/g, (m,l) => S(l));
+  out = out.replace(/\{(\w+)\}/g, (m,k) => { if (k === "imie") k = "nazwisko"; return (k in varLabels) ? V(k) : m; });
+  return out.replace(/\n/g,"<br>");
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 1400);
+}
+
+/* ═════════════════ Nawigacja ═════════════════ */
+function go(id) {
+  if (id === state.current) { switchTab("rozmowa"); return; }
+  const idx = state.path.indexOf(id);
+  if (idx !== -1) {
+    state.path = state.path.slice(0, idx + 1);
+    state.navHistory = state.path.slice(0, -1);
+  } else {
+    state.navHistory.push(state.current);
+    state.path.push(id);
+  }
+  state.current = id;
+  state.visited.add(id);
+  renderRozmowa();
+  renderMap();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function goBack() {
+  if (!state.navHistory.length) return;
+  state.current = state.navHistory.pop();
+  state.path.pop();
+  renderRozmowa();
+  renderMap();
+}
+
+function resetAll() {
+  state.current = "start";
+  state.navHistory = [];
+  state.path = ["start"];
+  state.visited = new Set(["start"]);
+  state.gender = "pan";
+  Object.keys(checklistState).forEach(k => delete checklistState[k]);
+  savePrefs();
+  document.querySelectorAll("#gender-seg button").forEach(x => x.classList.toggle("active", x.dataset.gender === "pan"));
+  Object.keys(vars).forEach(k => vars[k] = "");
+  document.querySelectorAll("input[data-key]").forEach(i => i.value = "");
+  switchTab("rozmowa");
+  renderRozmowa();
+  renderMap();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function switchTab(tab) {
+  state.tab = tab;
+  document.body.dataset.tab = tab;
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.tabbtn === tab));
+  document.getElementById("view-rozmowa").hidden = tab !== "rozmowa";
+  document.getElementById("view-drzewko").hidden = tab !== "drzewko";
+  document.getElementById("view-zalozenia").hidden = tab !== "zalozenia";
+  document.getElementById("view-ustawienia").hidden = tab !== "ustawienia";
+  if (tab === "rozmowa") { renderRozmowa(); renderMap(); }
+  if (tab === "drzewko") renderTree();
+  if (tab === "ustawienia") renderSettings();
+}
+
+/* ═════════════════ Render: karta rozmowy ═════════════════ */
+function renderGoal(goalText) {
+  if (!goalText || !goalText.trim()) return "";
+  const lines = goalText.split("\n").filter(l => l.trim()).map(line => {
+    const i = line.indexOf(":");
+    if (i > 0 && i < 40) {
+      return `<span class="goal-line"><b>${esc(line.slice(0,i))}:</b> ${renderText(line.slice(i+1).trim())}</span>`;
+    }
+    return `<span class="goal-line">${renderText(line)}</span>`;
+  }).join("");
+  return `<div class="goal-card"><span class="goal-label">Cel etapu — notatka dla windykatora</span>${lines}</div>`;
+}
+
+/* treść podpowiedzi: linie w formacie [Nagłówek:] otwierają zagnieżdżoną, rozwijaną pod-sekcję */
+function renderHintNested(hint) {
+  const lines = hint.split("\n");
+  const parts = [];
+  let cur = { marker: null, lines: [] };
+  for (const ln of lines) {
+    if (/^\[.+:\]\s*$/.test(ln.trim())) {
+      parts.push(cur);
+      cur = { marker: ln.trim(), lines: [] };
+    } else {
+      cur.lines.push(ln);
+    }
+  }
+  parts.push(cur);
+  return parts.map(p => {
+    const body = p.lines.join("\n").trim();
+    if (p.marker === null) return body ? `<div class="qh-pre">${renderText(body)}</div>` : "";
+    const label = p.marker.replace(/^\[/, "").replace(/:\]\s*$/, "");
+    return `<details class="qh-sub"><summary><span class="qh-sub-chev">›</span><span>${renderText(label)}</span></summary><div class="qh-sub-body">${renderText(body)}</div></details>`;
+  }).join("");
+}
+
+function renderBlock(b) {
+  if (b.mode && b.mode !== state.mode) return "";
+  if (b.type === "speech") {
+    return `<div class="speech"><span class="speech-label">${esc(b.label||"Powiedz")}</span>${renderText(b.text)}</div>`;
+  }
+  if (b.type === "question") {
+    return `<div class="speech question"><span class="speech-label">${esc(b.label||"Pytanie")}</span>${renderText(b.text)}</div>`;
+  }
+  if (b.type === "note") {
+    if (b.go) {
+      return `<div class="note note-card"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><div class="note-body"><div class="note-title">Wskazówka — co dalej</div><div>${renderText(b.text)}</div><div class="note-actions"><button class="btn-primary" data-go="${esc(b.go)}">${esc(b.goLabel||"Przejdź")}</button></div></div></div>`;
+    }
+    return `<div class="note"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><span>${renderText(b.text)}</span></div>`;
+  }
+  if (b.type === "qlist") {
+    const items = b.text.split("\n").filter(l => l.trim()).map(l => `<li>${renderText(l)}</li>`).join("");
+    return `<div class="q-block"><div class="q-block-label">${esc(b.label||"Pytania")}</div><ul class="q-list">${items}</ul></div>`;
+  }
+  if (b.type === "checklist") {
+    const items = b.text.split("\n").filter(l => l.trim());
+    const rows = items.map((l, i) => {
+      const key = state.current + ":" + i;
+      const on = !!checklistState[key];
+      return `<label class="ck-item${on ? " done" : ""}"><input type="checkbox" data-ck="${esc(key)}"${on ? " checked" : ""}><span>${renderText(l)}</span></label>`;
+    }).join("");
+    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Checklista")}</div><div class="ck-list">${rows}</div></div>`;
+  }
+  if (b.type === "qhints") {
+    const groups = b.text.split(/\n\s*---\s*\n/).map(g => g.trim()).filter(Boolean);
+    const items = groups.map(g => {
+      const lines = g.split("\n");
+      const q = lines.shift() || "";
+      const hint = lines.join("\n").trim();
+      if (!hint) return `<div class="qh-item plain"><span class="qh-mark">?</span><span>${renderText(q)}</span></div>`;
+      return `<details class="qh-item"><summary><span class="qh-mark">?</span><span>${renderText(q)}</span><span class="qh-chev">›</span></summary><div class="qh-body">${renderHintNested(hint)}</div></details>`;
+    }).join("");
+    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Pytania")}</div><div class="qh-list">${items}</div></div>`;
+  }
+  if (b.type === "qa") {
+    const pairs = b.text.split(/\n\s*---\s*\n/).map(p => p.trim()).filter(Boolean);
+    const items = pairs.map(p => {
+      const lines = p.split("\n");
+      const q = lines.shift() || "";
+      const a = lines.join("\n").trim();
+      return `<details class="excuse"><summary><span class="ex-chev">›</span><span>${renderText(q)}</span></summary><div class="excuse-body">${renderText(a)}</div></details>`;
+    }).join("");
+    return `<div class="qa-wrap"><div class="qa-label">${esc(b.label || "Wymówki")}</div>${items}</div>`;
+  }
+  if (b.type === "placeholder") {
+    return `<div class="placeholder-box">${renderText(b.text)}</div>`;
+  }
+  return "";
+}
+
+function renderActions(id) {
+  const a = NODE_ACTIONS[id];
+  if (!a) return "";
+  let branchesHTML = "";
+  if (a.branches) {
+    const cols = a.branches.length === 3 ? "cols-3" : "cols-2";
+    branchesHTML = `<div class="actions-label">${esc(a.label||"Wybierz")}</div><div class="branch-grid ${cols}">` +
+      a.branches.map(b => `
+        <button class="branch-btn tone-${b.tone}" data-go="${b.to}">
+          <span class="b-main">
+            <span class="b-title"><span class="b-dot"></span>${esc(b.title)}</span>
+            <span class="b-desc">${esc(b.desc)}</span>
+          </span>
+          <span class="b-chev">›</span>
+        </button>`).join("") + `</div>`;
+  }
+  let buttonsHTML = "";
+  if (a.buttons) {
+    buttonsHTML = `<div class="actions-row">` + a.buttons.map(b => {
+      if (b.kind === "reset") return `<button class="${b.primary ? "btn-primary" : "btn-secondary"}" data-action="reset">${esc(b.label)}</button>`;
+      const cls = b.kind === "primary" ? "btn-primary" : "btn-secondary";
+      return `<button class="${cls}" data-go="${b.to}">${esc(b.label)}</button>`;
+    }).join("") + `</div>`;
+  }
+  const inner = a.branchesLast ? buttonsHTML + branchesHTML : branchesHTML + buttonsHTML;
+  return `<div class="actions">${inner}</div>`;
+}
+
+function renderRozmowa() {
+  const id = state.current;
+  const meta = NODE_META[id];
+  const sec = content.sections[id] || DEFAULT_CONTENT.sections[id];
+
+  const stage = document.getElementById("stage");
+  stage.innerHTML = `
+    <div class="step-card">
+      <span class="step-eyebrow ${meta.tone}">${esc(meta.eyebrow)}</span>
+      <h1 class="step-title">${esc(sec.title)}</h1>
+      ${renderGoal(sec.goal)}
+      ${sec.blocks.map(renderBlock).join("")}
+      ${renderActions(id)}
+    </div>`;
+
+  document.getElementById("btn-back").disabled = state.navHistory.length === 0;
+  document.getElementById("btn-splata").hidden = state.current === "c";
+  document.getElementById("btn-brak").hidden = state.current === "b_1";
+
+  const bc = document.getElementById("breadcrumb");
+  bc.innerHTML = state.path.map((pid,i) => {
+    const isLast = i === state.path.length - 1;
+    const sep = i > 0 ? `<span class="crumb-sep">›</span>` : "";
+    if (isLast) return `${sep}<span class="crumb current">${esc(NODE_META[pid].crumb)}</span>`;
+    return `${sep}<button class="crumb" data-go="${pid}" title="Przejdź do tego etapu">${esc(NODE_META[pid].crumb)}</button>`;
+  }).join("");
+}
+
+/* ═════════════════ Render: mapa ═════════════════ */
+function renderMap() {
+  const map = document.getElementById("map");
+  map.innerHTML = MAP_GROUPS.map(g => {
+    const items = g.items.map(id => {
+      const cls = ["map-item", id === state.current ? "current" : "", state.visited.has(id) ? "visited" : ""].join(" ");
+      const badge = (state.visited.has(id) && id !== state.current) ? "✓" : NODE_META[id].num;
+      return `<div class="${cls}" data-tone="${NODE_META[id].tone}" data-go="${id}" role="button" tabindex="0">
+        <span class="m-badge">${badge}</span>${esc(MAP_LABELS[id])}</div>`;
+    }).join("");
+    return `<div class="map-group">
+      <div class="map-group-label"><span class="g-dot ${g.tone}"></span>${esc(g.label)}</div>${items}</div>`;
+  }).join("");
+}
+
+/* ═════════════════ Render: obiekcje ═════════════════ */
+function renderObjPanel() {
+  const list = document.getElementById("obj-list");
+  list.innerHTML = objections.map((o,i) =>
+    `<button class="obj-btn" data-obj="${i}"><span class="obj-dot"></span>${esc(o.title)}</button>`).join("")
+    || `<p class="obj-hint">Brak obiekcji — dodaj je w Ustawieniach.</p>`;
+  const treeObj = document.getElementById("tree-obj");
+  if (treeObj) treeObj.innerHTML = objections.map((o,i) =>
+    `<button class="obj-btn" data-obj="${i}"><span class="obj-dot"></span>${esc(o.title)}</button>`).join("");
+  const sankList = document.getElementById("sank-list");
+  if (sankList) sankList.innerHTML = sanctions.map((o,i) =>
+    `<button class="obj-btn sank-btn" data-sank="${i}"><span class="obj-dot sank"></span>${esc(o.title)}</button>`).join("")
+    || `<p class="obj-hint">Brak sankcji — dodaj je w Ustawieniach.</p>`;
+  const treeSank = document.getElementById("tree-sank");
+  if (treeSank) treeSank.innerHTML = sanctions.map((o,i) =>
+    `<button class="obj-btn sank-btn" data-sank="${i}"><span class="obj-dot sank"></span>${esc(o.title)}</button>`).join("");
+}
+
+function openObjection(i) {
+  const o = objections[i];
+  if (!o) return;
+  document.getElementById("sheet-eyebrow").textContent = "Obiekcja dłużnika";
+  document.getElementById("sheet-title").textContent = o.title;
+  document.getElementById("sheet-text").innerHTML = renderText(o.text);
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+function openSanction(i) {
+  const o = sanctions[i];
+  if (!o) return;
+  document.getElementById("sheet-eyebrow").textContent = "Sankcja — co powiedzieć";
+  document.getElementById("sheet-title").textContent = o.title;
+  document.getElementById("sheet-text").innerHTML = renderText(o.text);
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+const INFO_SPRZEDAZ_TEXT = "Panie {nazwisko}, to jest bardzo ważne, ponieważ w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc tutaj czas ma dla nas naprawdę znaczenie.";
+
+function openInfoSprzedaz() {
+  document.getElementById("sheet-eyebrow").textContent = "Informacja — proces sprzedaży długu";
+  document.getElementById("sheet-title").textContent = "Informacja o sprzedaży";
+  document.getElementById("sheet-text").innerHTML = renderText(INFO_SPRZEDAZ_TEXT);
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+
+function openQuickList(kind) {
+  const isObj = kind === "obj";
+  const items = isObj ? objections : sanctions;
+  document.getElementById("sheet-eyebrow").textContent = isObj ? "Obiekcje — mogą paść w każdym momencie" : "Sankcje — do zakomunikowania w każdym momencie";
+  document.getElementById("sheet-title").textContent = isObj ? "Wybierz obiekcję, która padła" : "Wybierz sankcję";
+  document.getElementById("sheet-text").innerHTML = `<div class="sheet-list">` + (items.map((o,i) =>
+    `<button class="obj-btn${isObj ? "" : " sank-btn"}" data-${isObj ? "obj" : "sank"}="${i}"><span class="obj-dot${isObj ? "" : " sank"}"></span>${esc(o.title)}</button>`).join("")
+    || `<p class="obj-hint">Brak pozycji — dodaj je w Ustawieniach.</p>`) + `</div>`;
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+function closeObjection() { document.getElementById("sheet-backdrop").hidden = true; }
+
+/* ═════════════════ Render: drzewko ═════════════════ */
+function treeNodeHTML(n) {
+  const meta = NODE_META[n.id];
+  const sec = content.sections[n.id];
+  const edge = n.edge ? `<span class="t-edge">${esc(n.edge)}</span>` : "";
+  const kids = n.children && n.children.length
+    ? `<ul>${n.children.map(c => `<li>${treeNodeHTML(c)}</li>`).join("")}</ul>` : "";
+  return `${edge}
+    <div class="tnode${n.id===state.current?" current":""}" data-go="${n.id}" role="button" tabindex="0">
+      <div class="t-head"><span class="t-num ${meta.tone}">${esc(meta.num)}</span></div>
+      <div class="t-title">${esc(sec.title)}</div>
+      <div class="t-desc">${esc(TREE_DESC[n.id]||"")}</div>
+      <button class="t-edit" data-edit="${n.id}" title="Edytuj treść etapu">✎</button>
+    </div>${kids}`;
+}
+function renderTree() {
+  document.getElementById("tree").innerHTML = `<ul><li>${treeNodeHTML(TREE)}</li></ul>`;
+  renderObjPanel();
+}
+
+/* ═════════════════ Render: ustawienia ═════════════════ */
+function renderSettings() {
+  const wrap = document.getElementById("s-sections");
+  wrap.innerHTML = SECTION_ORDER.map(id => {
+    const meta = NODE_META[id];
+    const sec = content.sections[id];
+    const blocks = sec.blocks.map((b,i) => {
+      const typeName = {speech:"Powiedz", question:"Pytanie", note:"Notatka", qlist:"Lista pytań (1 na linię)", checklist:"Checklista (1 punkt na linię)", qhints:"Pozycje rozwijane (1. linia = tytuł, niżej treść lub pusto; kolejne oddziel linią ---)", qa:"Wymówki + riposty (1. linia = wymówka, niżej odpowiedź; kolejne oddziel linią ---)", placeholder:"Placeholder"}[b.type] || b.type;
+      const variant = b.mode ? `<span class="s-variant ${b.mode}">${b.mode === "firma" ? "wariant: firma" : "wariant: os. fizyczna"}</span>` : "";
+      const label = (b.label && b.label !== typeName) ? ` — ${esc(b.label)}` : "";
+      const rows = (b.type === "qa" || b.type === "qhints") ? 18 : Math.min(9, Math.max(2, Math.ceil(b.text.length / 90) + (b.text.split("\n").length - 1)));
+      return `<div class="s-field">
+        <label>${esc(typeName)}${label} ${variant}</label>
+        <textarea rows="${rows}" data-sfield="block" data-section="${id}" data-index="${i}">${esc(b.text)}</textarea>
+      </div>`;
+    }).join("");
+    return `<details class="s-section" data-section="${id}">
+      <summary><span class="s-dot g-dot ${meta.tone}"></span>${esc(sec.title)}<span class="s-eyebrow">${esc(meta.eyebrow)}</span><span class="s-chev">›</span></summary>
+      <div class="s-body">
+        <div class="s-field"><label>Tytuł etapu</label>
+          <input type="text" data-sfield="title" data-section="${id}" value="${esc(sec.title)}"></div>
+        <div class="s-field"><label>Cel etapu — notatka dla windykatora (linie „Cel: / Co chcemy uzyskać: / Jak:”)</label>
+          <textarea rows="4" data-sfield="goal" data-section="${id}">${esc(sec.goal)}</textarea></div>
+        ${blocks}
+      </div>
+    </details>`;
+  }).join("");
+
+  const ow = document.getElementById("s-objections");
+  ow.innerHTML = objections.map((o,i) => `
+    <div class="s-obj-item">
+      <div class="s-obj-head">
+        <div class="s-field"><label>Obiekcja</label>
+          <input type="text" data-ofield="title" data-index="${i}" value="${esc(o.title)}"></div>
+        <button class="btn-icon-danger" data-del-obj="${i}">Usuń</button>
+      </div>
+      <div class="s-field"><label>Odpowiedź windykatora</label>
+        <textarea rows="4" data-ofield="text" data-index="${i}">${esc(o.text)}</textarea></div>
+    </div>`).join("") || `<p class="obj-hint" style="padding:0 4px;">Brak obiekcji — dodaj pierwszą poniżej.</p>`;
+
+  const sw = document.getElementById("s-sanctions");
+  sw.innerHTML = sanctions.map((o,i) => `
+    <div class="s-obj-item">
+      <div class="s-obj-head">
+        <div class="s-field"><label>Sankcja</label>
+          <input type="text" data-skfield="title" data-index="${i}" value="${esc(o.title)}"></div>
+        <button class="btn-icon-danger" data-del-sank="${i}">Usuń</button>
+      </div>
+      <div class="s-field"><label>Co powiedzieć</label>
+        <textarea rows="6" data-skfield="text" data-index="${i}">${esc(o.text)}</textarea></div>
+    </div>`).join("") || `<p class="obj-hint" style="padding:0 4px;">Brak sankcji — dodaj pierwszą poniżej.</p>`;
+}
+
+function openSettingsFor(id) {
+  switchTab("ustawienia");
+  const det = document.querySelector(`details[data-section="${id}"]`);
+  if (det) {
+    det.open = true;
+    det.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+/* ═════════════════ Zdarzenia ═════════════════ */
+document.getElementById("tabs").addEventListener("click", e => {
+  const b = e.target.closest("[data-tabbtn]");
+  if (b) switchTab(b.dataset.tabbtn);
+});
+document.getElementById("btn-new").addEventListener("click", resetAll);
+document.getElementById("btn-back").addEventListener("click", goBack);
+
+document.getElementById("mode-seg").addEventListener("click", e => {
+  const b = e.target.closest("[data-mode]");
+  if (!b) return;
+  state.mode = b.dataset.mode;
+  savePrefs();
+  document.querySelectorAll("#mode-seg button").forEach(x => x.classList.toggle("active", x.dataset.mode === state.mode));
+  document.querySelectorAll("[data-mode-field]").forEach(f => f.hidden = f.dataset.modeField !== state.mode);
+  renderRozmowa();
+});
+
+document.getElementById("gender-seg").addEventListener("click", e => {
+  const b = e.target.closest("[data-gender]");
+  if (!b) return;
+  state.gender = b.dataset.gender;
+  savePrefs();
+  document.querySelectorAll("#gender-seg button").forEach(x => x.classList.toggle("active", x.dataset.gender === state.gender));
+  renderRozmowa();
+});
+
+document.querySelectorAll("input[data-key]").forEach(input => {
+  input.addEventListener("input", () => {
+    vars[input.dataset.key] = input.value.trim();
+    const y = window.scrollY;
+    const card = document.querySelector("#stage .step-card");
+    if (card) {
+      const stage = document.getElementById("stage");
+      renderRozmowaNoAnim();
+    }
+    window.scrollTo(0, y);
+  });
+});
+function renderRozmowaNoAnim() {
+  renderRozmowa();
+  const card = document.querySelector("#stage .step-card");
+  if (card) card.style.animation = "none";
+}
+
+/* delegacja klików: nawigacja, tokeny, obiekcje, drzewko */
+document.addEventListener("click", e => {
+  const goEl = e.target.closest("[data-go]");
+  const editEl = e.target.closest("[data-edit]");
+  const objEl = e.target.closest("[data-obj]");
+  const sankEl = e.target.closest("[data-sank]");
+  const delSank = e.target.closest("[data-del-sank]");
+  const varEl = e.target.closest(".var[data-var]");
+  const resetEl = e.target.closest("[data-action='reset']");
+  const delObj = e.target.closest("[data-del-obj]");
+
+  if (editEl) { e.stopPropagation(); openSettingsFor(editEl.dataset.edit); return; }
+  if (goEl) { switchTab("rozmowa"); go(goEl.dataset.go); return; }
+  if (resetEl) { resetAll(); return; }
+  if (objEl) { openObjection(+objEl.dataset.obj); return; }
+  if (sankEl) { openSanction(+sankEl.dataset.sank); return; }
+  if (delSank) {
+    if (confirm("Usunąć tę sankcję?")) {
+      sanctions.splice(+delSank.dataset.delSank, 1);
+      saveSanctions();
+      renderSettings();
+      renderObjPanel();
+      toast("Usunięto");
+    }
+    return;
+  }
+  if (varEl) {
+    const key = varEl.dataset.var === "polowa" ? "kwota" : varEl.dataset.var;
+    const input = document.querySelector(`input[data-key="${key}"]`);
+    if (input && !input.closest(".field").hidden) {
+      input.focus();
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    return;
+  }
+  if (delObj) {
+    if (confirm("Usunąć tę obiekcję?")) {
+      objections.splice(+delObj.dataset.delObj, 1);
+      saveObjections();
+      renderSettings();
+      renderObjPanel();
+      toast("Usunięto");
+    }
+    return;
+  }
+});
+
+/* klawiatura: Enter/Space na elementach role=button, Esc dla sheet */
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") { closeObjection(); document.getElementById("io-backdrop").hidden = true; }
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches("[role='button'][data-go]")) {
+    e.preventDefault();
+    switchTab("rozmowa");
+    go(e.target.dataset.go);
+  }
+});
+
+document.getElementById("sheet-close").addEventListener("click", closeObjection);
+document.getElementById("sheet-backdrop").addEventListener("click", e => {
+  if (e.target === e.currentTarget) closeObjection();
+});
+
+/* checklista — odhaczanie bez pełnego re-renderu */
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.matches && t.matches("input[data-ck]")) {
+    checklistState[t.dataset.ck] = t.checked;
+    t.closest(".ck-item")?.classList.toggle("done", t.checked);
+  }
+});
+
+/* edycja treści — delegacja input */
+document.getElementById("view-ustawienia").addEventListener("input", e => {
+  const t = e.target;
+  if (t.dataset.sfield) {
+    const sec = content.sections[t.dataset.section];
+    if (t.dataset.sfield === "title") sec.title = t.value;
+    else if (t.dataset.sfield === "goal") sec.goal = t.value;
+    else if (t.dataset.sfield === "block") sec.blocks[+t.dataset.index].text = t.value;
+    saveContent();
+    toast("Zapisano ✓");
+  }
+  if (t.dataset.ofield) {
+    const o = objections[+t.dataset.index];
+    if (!o) return;
+    if (t.dataset.ofield === "title") o.title = t.value;
+    else o.text = t.value;
+    saveObjections();
+    renderObjPanel();
+    toast("Zapisano ✓");
+  }
+  if (t.dataset.skfield) {
+    const o = sanctions[+t.dataset.index];
+    if (!o) return;
+    if (t.dataset.skfield === "title") o.title = t.value;
+    else o.text = t.value;
+    saveSanctions();
+    renderObjPanel();
+    toast("Zapisano ✓");
+  }
+});
+
+document.getElementById("btn-add-obj").addEventListener("click", () => {
+  objections.push({ id: "obj_" + Date.now(), title: "Nowa obiekcja", text: "Odpowiedź windykatora…" });
+  saveObjections();
+  renderSettings();
+  renderObjPanel();
+  const items = document.querySelectorAll(".s-obj-item");
+  if (items.length) items[items.length-1].scrollIntoView({ behavior:"smooth", block:"center" });
+});
+
+document.getElementById("btn-add-sank").addEventListener("click", () => {
+  sanctions.push({ id: "sank_" + Date.now(), title: "Nowa sankcja", text: "Co powiedzieć…" });
+  saveSanctions();
+  renderSettings();
+  renderObjPanel();
+  const items = document.querySelectorAll("#s-sanctions .s-obj-item");
+  if (items.length) items[items.length-1].scrollIntoView({ behavior:"smooth", block:"center" });
+});
+
+document.getElementById("qb-obj").addEventListener("click", () => openQuickList("obj"));
+document.getElementById("qb-sank").addEventListener("click", () => openQuickList("sank"));
+document.getElementById("qb-info").addEventListener("click", openInfoSprzedaz);
+
+document.getElementById("btn-io").addEventListener("click", () => {
+  document.getElementById("io-text").value = JSON.stringify({ content, objections, sanctions }, null, 2);
+  document.getElementById("io-backdrop").hidden = false;
+});
+document.getElementById("io-close").addEventListener("click", () => {
+  document.getElementById("io-backdrop").hidden = true;
+});
+document.getElementById("io-backdrop").addEventListener("click", e => {
+  if (e.target === e.currentTarget) e.currentTarget.hidden = true;
+});
+document.getElementById("io-copy").addEventListener("click", async () => {
+  const ta = document.getElementById("io-text");
+  try {
+    await navigator.clipboard.writeText(ta.value);
+    toast("Skopiowano ✓ — wyślij ten kod Claude'owi");
+  } catch {
+    ta.select();
+    document.execCommand("copy");
+    toast("Skopiowano ✓ — wyślij ten kod Claude'owi");
+  }
+});
+document.getElementById("io-load").addEventListener("click", () => {
+  try {
+    const data = JSON.parse(document.getElementById("io-text").value);
+    if (!data.content || !data.content.sections) throw new Error("bad");
+    content = data.content;
+    if (Array.isArray(data.objections)) objections = data.objections;
+    if (Array.isArray(data.sanctions)) sanctions = data.sanctions;
+    saveContent();
+    saveObjections();
+    saveSanctions();
+    renderSettings();
+    renderObjPanel();
+    document.getElementById("io-backdrop").hidden = true;
+    toast("Wczytano ✓");
+  } catch {
+    toast("Nieprawidłowy kod — sprawdź, czy wklejono całość");
+  }
+});
+
+document.getElementById("btn-restore").addEventListener("click", () => {
+  if (!confirm("Przywrócić domyślny skrypt? Wszystkie Twoje zmiany treści i obiekcji zostaną nadpisane.")) return;
+  content = structuredClone(DEFAULT_CONTENT);
+  objections = structuredClone(DEFAULT_OBJECTIONS);
+  sanctions = structuredClone(DEFAULT_SANCTIONS);
+  saveContent();
+  saveObjections();
+  saveSanctions();
+  renderSettings();
+  renderObjPanel();
+  toast("Przywrócono domyślne");
+});
+
+/* ═════════════════ Start ═════════════════ */
+document.body.dataset.tab = "rozmowa";
+document.querySelectorAll("#mode-seg button").forEach(x => x.classList.toggle("active", x.dataset.mode === state.mode));
+document.querySelectorAll("#gender-seg button").forEach(x => x.classList.toggle("active", x.dataset.gender === state.gender));
+document.querySelectorAll("[data-mode-field]").forEach(f => f.hidden = f.dataset.modeField !== state.mode);
+renderRozmowa();
+renderMap();
+renderObjPanel();
+</script>
+
+</html>

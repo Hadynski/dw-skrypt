@@ -1875,6 +1875,7 @@
     <h2 id="sheet-title"></h2>
     <div class="sheet-text" id="sheet-text"></div>
     <div class="actions-row">
+      <button class="btn-secondary" id="sheet-back" hidden>‹ Wszystkie obiekcje</button>
       <button class="btn-primary" id="sheet-close">Wróć do rozmowy</button>
     </div>
   </div>
@@ -2668,9 +2669,17 @@ function renderObjPanel() {
     `<button class="obj-btn sank-btn" data-sank="${i}"><span class="obj-dot sank"></span>${esc(o.title)}</button>`).join("");
 }
 
+function setSheetBack(kind) {
+  const b = document.getElementById("sheet-back");
+  if (!kind) { b.hidden = true; return; }
+  b.hidden = false;
+  b.dataset.kind = kind;
+  b.textContent = kind === "obj" ? "‹ Wszystkie obiekcje" : "‹ Wszystkie sankcje";
+}
 function openObjection(i) {
   const o = objections[i];
   if (!o) return;
+  setSheetBack("obj");
   document.getElementById("sheet-eyebrow").textContent = "Obiekcja dłużnika";
   document.getElementById("sheet-title").textContent = o.title;
   document.getElementById("sheet-text").innerHTML = renderText(o.text);
@@ -2679,6 +2688,7 @@ function openObjection(i) {
 function openSanction(i) {
   const o = sanctions[i];
   if (!o) return;
+  setSheetBack("sank");
   document.getElementById("sheet-eyebrow").textContent = "Sankcja — co powiedzieć";
   document.getElementById("sheet-title").textContent = o.title;
   document.getElementById("sheet-text").innerHTML = renderText(o.text);
@@ -2687,6 +2697,7 @@ function openSanction(i) {
 const INFO_SPRZEDAZ_TEXT = "Panie {nazwisko}, to jest bardzo ważne, ponieważ w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc tutaj czas ma dla nas naprawdę znaczenie.";
 
 function openInfoSprzedaz() {
+  setSheetBack(null);
   document.getElementById("sheet-eyebrow").textContent = "Informacja — proces sprzedaży długu";
   document.getElementById("sheet-title").textContent = "Informacja o sprzedaży";
   document.getElementById("sheet-text").innerHTML = renderText(INFO_SPRZEDAZ_TEXT);
@@ -2694,6 +2705,7 @@ function openInfoSprzedaz() {
 }
 
 function openQuickList(kind) {
+  setSheetBack(null);
   const isObj = kind === "obj";
   const items = isObj ? objections : sanctions;
   document.getElementById("sheet-eyebrow").textContent = isObj ? "Obiekcje — mogą paść w każdym momencie" : "Sankcje — do zakomunikowania w każdym momencie";
@@ -2955,6 +2967,7 @@ document.getElementById("btn-add-sank").addEventListener("click", () => {
 document.getElementById("qb-obj").addEventListener("click", () => openQuickList("obj"));
 document.getElementById("qb-sank").addEventListener("click", () => openQuickList("sank"));
 document.getElementById("qb-info").addEventListener("click", openInfoSprzedaz);
+document.getElementById("sheet-back").addEventListener("click", e => openQuickList(e.currentTarget.dataset.kind));
 
 document.getElementById("btn-io").addEventListener("click", () => {
   document.getElementById("io-text").value = JSON.stringify({ content, objections, sanctions }, null, 2);

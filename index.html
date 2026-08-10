@@ -929,6 +929,12 @@
   .var.filled { background: transparent; color: inherit; font-weight: 650; padding: 0; border-bottom: 1.5px solid rgba(0,113,227,0.35); }
   .var.static { cursor: default; background: var(--chip-bg); color: var(--text-secondary); }
   .var.static:hover { background: var(--chip-bg); }
+  .var.static.sub-head {
+    display: block;
+    width: fit-content;
+    margin: 8px 0 2px;
+    font-weight: 600;
+  }
 
   /* Akcje */
   .actions {
@@ -1545,7 +1551,18 @@
     animation: sheetIn 0.3s var(--ease-out) both;
     max-height: 82vh;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128,128,128,0.5) transparent;
+    scrollbar-gutter: stable;
   }
+  .sheet::-webkit-scrollbar { width: 11px; }
+  .sheet::-webkit-scrollbar-track { background: transparent; }
+  .sheet::-webkit-scrollbar-thumb {
+    background: rgba(128,128,128,0.45);
+    border-radius: 999px;
+    border: 3px solid var(--card);
+  }
+  .sheet::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.7); }
   @keyframes sheetIn {
     from { opacity: 0; transform: scale(0.96) translateY(10px); }
     to   { opacity: 1; transform: scale(1) translateY(0); }
@@ -2346,7 +2363,10 @@ function V(key) {
   if (val) return `<span class="var filled" data-var="${key}" title="Kliknij, aby zmienić">${esc(val)}</span>`;
   return `<span class="var" data-var="${key}" title="Uzupełnij w panelu Dane rozmowy">[${esc(varLabels[key]||key)}]</span>`;
 }
-function S(label) { return `<span class="var static">[${esc(label)}]</span>`; }
+function S(label) {
+  const isHead = /:\s*$/.test(label);
+  return `<span class="var static${isHead ? " sub-head" : ""}">[${esc(label)}]</span>`;
+}
 
 /* ─── odmiana Pan/Pani ───
    Teksty pisane są w formie kanonicznej „Pan”; przy zwrocie „Pani”

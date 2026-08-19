@@ -953,6 +953,8 @@
   .branch-grid { display: grid; gap: 10px; }
   .branch-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
   .branch-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .branch-grid.cols-1 { grid-template-columns: 1fr; }
+  .branch-grid + .actions-label { margin-top: 22px; }
   @media (max-width: 720px) { .branch-grid.cols-3, .branch-grid.cols-2 { grid-template-columns: 1fr; } }
 
   .branch-btn {
@@ -995,6 +997,7 @@
   .branch-btn.tone-D .b-dot { background: var(--violet-text); }
   .branch-btn.tone-E .b-dot { background: var(--teal-text); }
   .branch-btn.tone-N .b-dot { background: var(--indigo-text); }
+  .branch-btn.tone-neutral .b-dot { background: var(--text-tertiary); }
 
   .btn-primary {
     appearance: none;
@@ -1989,7 +1992,7 @@ const LS_OBJ = "hi_skrypt_obiekcje_v2";
 const LS_SANK = "hi_skrypt_sankcje_v1";
 const LS_PREFS = "hi_skrypt_prefs_v2";
 
-const SECTION_ORDER = ["start","przedstawienie","a_intro","a_prawnik","b_1","b_2","b_3","c","d_pomylka","e_niedecyzyjny","p_deklaracja","p_dokumenty"];
+const SECTION_ORDER = ["start","przedstawienie","a_intro","a_prawnik","b_1","b_2","b_3","c","d_pomylka","e_niedecyzyjny","p_deklaracja","p_dokumenty","p_brak_srodkow","pre_termin"];
 
 const NODE_META = {
   start:          { tone:"neutral", eyebrow:"Krok 1",                num:"1",  crumb:"Otwarcie" },
@@ -2004,20 +2007,29 @@ const NODE_META = {
   e_niedecyzyjny: { tone:"E",       eyebrow:"Gałąź E",               num:"7",  crumb:"E · Niedecyzyjny" },
   p_deklaracja:   { tone:"C",       eyebrow:"Powrót · Złamana deklaracja", num:"9",  crumb:"Powrót · Deklaracja" },
   p_dokumenty:    { tone:"A",       eyebrow:"Powrót · Brak dokumentów",    num:"10", crumb:"Powrót · Dokumenty" },
+  p_brak_srodkow: { tone:"B",       eyebrow:"Powrót · Dalej brak środków",  num:"11", crumb:"Powrót · Brak środków" },
+  pre_termin:     { tone:"neutral", eyebrow:"Przed terminem · Monitoring",  num:"12", crumb:"Przed terminem" },
 };
 
 const NODE_ACTIONS = {
   start: {
-    label:"Rozmowa ponowna? Wybierz kontekst",
     branchesLast: true,
     buttons:[{kind:"primary", label:"Przejdź do przedstawienia sprawy ›", to:"przedstawienie"}],
-    branches:[
-      {to:"p_deklaracja", tone:"C", title:"Złamana deklaracja spłaty", desc:"Umówiona wpłata nie wpłynęła — dzwonisz po deklaracji"},
-      {to:"p_dokumenty", tone:"A", title:"Nie dosłał dokumentów po negowaniu", desc:"Minął termin na stanowisko i dokumenty mailem"}
+    branchGroups:[
+      {label:"Rozmowa ponowna? Wybierz kontekst", cols:2, branches:[
+        {to:"p_deklaracja", tone:"C", title:"Złamana deklaracja spłaty", desc:"Umówiona wpłata nie wpłynęła — dzwonisz po deklaracji"},
+        {to:"p_dokumenty", tone:"A", title:"Nie dosłał dokumentów po negowaniu", desc:"Minął termin na stanowisko i dokumenty mailem"},
+        {to:"p_brak_srodkow", tone:"B", title:"Dalej brak środków", desc:"Kolejna rozmowa — dłużnik nadal deklaruje, że nie ma z czego"}
+      ]},
+      {label:"Inny typ rozmowy", branches:[
+        {to:"pre_termin", tone:"neutral", title:"Faktura przed terminem płatności", desc:"Monitoring — dzwonisz, zanim powstanie zaległość"}
+      ]}
     ]
   },
   p_deklaracja: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
   p_dokumenty:  { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  p_brak_srodkow: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  pre_termin:   { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"Zastrzeżenia do faktury → rozbrojenie ›", to:"a_intro"}] },
   przedstawienie: {
     label:"Jak reaguje dłużnik?",
     branches:[
@@ -2126,11 +2138,12 @@ const DEFAULT_CONTENT = {
     },
     e_niedecyzyjny: {
       title: "Rozmówca niedecyzyjny — dojście do decydenta",
-      goal: "Cel: nie zostawić sprawy „w powietrzu” u osoby, która nie decyduje — wyjść z rozmowy z dojściem do decydenta.\nCo chcemy uzyskać: przede wszystkim BEZPOŚREDNI NUMER do decydenta; jeśli się nie da — przekazaną wiadomość z wagą + umówiony konkretny termin ponownego kontaktu.\nJak: ustal, kto decyduje, i od razu poproś o numer do tej osoby. Dopiero gdy numeru nie dostaniesz — wiadomość-posłaniec i umówiony termin. Nie omawiaj szczegółów sprawy (kwot, dokumentów) z osobą nieupoważnioną — nazwij tylko wagę i termin.\nWskazówka: sekretarka, która czuje się ważna, otwiera drzwi; naciskana — ich broni. Jeśli łączy z księgową — wykorzystaj: potwierdzenie, że faktura jest w systemie i bez reklamacji, podcina przyszłe wymówki z 3c. Zanotuj odpowiedź. Uwaga: jeśli na księgową spławia Cię sam DECYDENT — to obiekcja z panelu, nie ta gałąź.",
+      goal: "Cel: nie zostawić sprawy „w powietrzu” u osoby, która nie decyduje — wyjść z rozmowy z dojściem do decydenta.\nCo chcemy uzyskać: przede wszystkim BEZPOŚREDNI NUMER do decydenta; jeśli się nie da — przekazaną wiadomość z wagą + umówiony konkretny termin ponownego kontaktu.\nJak: ustal, kto decyduje, i od razu poproś o numer do tej osoby. Dopiero gdy numeru nie dostaniesz — wiadomość-posłaniec i umówiony termin. Nie omawiaj szczegółów sprawy (kwot, dokumentów) z osobą nieupoważnioną — nazwij tylko wagę i termin.\nWskazówka: samo „są zaplanowane kolejne działania” nie tworzy pilności — podaj KONKRETNĄ sankcję (już wdrożoną albo najbliższą), zobrazuj jej skutek dla firmy i dopiero wtedy poproś o pilne przekazanie. Sankcję i jej obrazowanie bierz z dolnego paska „Sankcje”. Sekretarka, która czuje się ważna, otwiera drzwi; naciskana — ich broni. Jeśli łączy z księgową — wykorzystaj: potwierdzenie, że faktura jest w systemie i bez reklamacji, podcina przyszłe wymówki z 3c. Zanotuj odpowiedź. Uwaga: jeśli na księgową spławia Cię sam DECYDENT — to obiekcja z panelu, nie ta gałąź.",
       blocks: [
         {type:"speech", label:"Ustalenie roli", text:"Rozumiem, nie będę zawracał Panu głowy niepotrzebnie — kto w firmie decyduje o płatnościach i sprawach tego typu?"},
         {type:"question", label:"Pytanie główne — numer do decydenta", text:"Czy mogę prosić o bezpośredni numer do Pana [imię decydenta]? Załatwię temat bezpośrednio z nim i nie będę Pana więcej angażował."},
         {type:"speech", label:"Jeśli numeru nie dostaniesz — wiadomość do przekazania, krótka, z wagą", text:"W takim razie będę miał do Pana prośbę, bo Pana pomoc jest tu naprawdę ważna. Proszę przekazać Panu [imię decydenta], że dzwonił {windykator} z Hadyński Inkaso — w sprawie windykacyjnej prowadzonej na firmę {firma}. W tej sprawie są zaplanowane kolejne działania i one mają swój termin — a ja mam jeszcze możliwość je zatrzymać, ale tylko jeśli porozmawiam z Panem [imię decydenta], zanim ten termin minie. To naprawdę w interesie firmy, żeby ta wiadomość dotarła do niego dzisiaj."},
+        {type:"speech", label:"Konkret sankcyjny — dlaczego to nie może czekać", text:"I powiem Panu wprost, o czym dokładnie ma Pan poinformować, bo to nie jest zwykły telefon z przypomnieniem. W tej sprawie została już wdrożona [sankcja]. Dla firmy oznacza to [skutek sankcji]. Kolejny krok jest zaplanowany na [data] i jeszcze da się go zatrzymać — ale tylko wtedy, kiedy porozmawiam z osobą, która o płatnościach decyduje. Dlatego bardzo proszę, żeby ta informacja trafiła do Pana [imię decydenta] jeszcze dzisiaj — z tym, że to jest pilne."},
         {type:"question", label:"Pytanie aktywizujące — dostępność", text:"Kiedy najlepiej go zastanę pod tym numerem?"},
         {type:"question", label:"Domknięcie na konkret", text:"To umówmy się tak: zadzwonię [dzień, godzina]. Proszę uprzedzić Pana [imię decydenta], że będę dzwonił i w jakiej sprawie — i bardzo proszę zapisać moje nazwisko: {windykator}, Hadyński Inkaso. Mogę na Pana liczyć?"},
         {type:"speech", label:"Jeśli łączy z księgową — wykorzystaj", text:"Skoro mam już Pana na linii — dwie krótkie rzeczy, czysto techniczne. Czy faktura [nr faktury] jest u Państwa w systemie? I czy była do niej kiedykolwiek jakaś reklamacja albo korekta?"}
@@ -2163,6 +2176,27 @@ DEFAULT_CONTENT.sections.p_dokumenty = {
   blocks: [
     {type:"speech", label:"Otwarcie", text:"Dzień dobry, {windykator}, Hadyński Inkaso kontaktuje się w sprawie należności dla {wierzyciel}. Umówiliśmy się, że do wczoraj wyśle mi Pan mailem, swoje stanowisko w tej sprawie. Przed rozmową jeszcze raz przeszukiwałem maila i nie znalazłem nic od Pana, wysyłał go Pan?"},
     {type:"qhints", label:"Reakcja dłużnika — kliknij tę, która padła", text:"Dłużnik mówi, że wysłał\nDobrze, to czy może Pan powiedzieć z jakiego maila to zostało wysłane i czy na pewno na ten adres, który Panu podsyłałem.\n\n[Dłużnik podaje te dane:]\nDobrze to ja już sprawdzam, czy takiego maila otrzymałem\n\n[Jeśli otrzymaliśmy:]\nFaktycznie mam tego maila, w takim razie już zabieram się do weryfikacji, zaraz potem do Pana zadzwonię, dziękuję i pozdrawiam\n\n[Jeśli nie otrzymaliśmy:]\nJa tutaj Panie {nazwisko} nie widzę takiego maila, prośba, żeby Pan sprawdził teraz czy ten mail faktycznie do nas wyszedł, bo tak jak mówiłem to bardzo ważne, bo bez tego nie mam możliwości wstrzymać działań.\n\n[Jak mówi, że nie może wysłać teraz:]\nJasne, Panie {nazwisko}. Tylko umawialiśmy się na to, że dostanę to do wczoraj, termin minął. Ja sobie też w międzyczasie zajrzałem tam na tę ofertę, na giełdzie wierzytelności, i od ostatniej naszej rozmowy przybyło tam pięćdziesiąt kolejnych wyświetleń. A jak już rozmawialiśmy, no to mogą być po prostu potencjalni klienci, kontrahenci, znajomi. Więc wydaje mi się, że warto byłoby, żeby Pan ten temat załatwił jak najszybciej. Więc pytanie: czy na pewno nie poświęci Pan minuty i nie sprawdzi tego maila teraz?\n---\nJak dalej mówi, że nie wyśle / jak mówił, że nie wysyłał\nPanie {nazwisko} ja powiem wprost, jak sam Pan widzi ja staram się tą sprawę wyjaśnić, żeby też pomóc Panu nie ponosić niepotrzebnie konsekwencji naszych działań windykacyjnych, natomiast do tanga trzeba dwojga Panie {nazwisko}. Na ten moment nie daje mi Pan, żadnych argumentów, żeby te działania wstrzymać, więc muszę je kontynuować. W takim razie ja odnotowuję, że nie dochował Pan terminu na dosłanie swojego stanowiska mailowo, tym samym informuję, że jesteśmy zmuszeni wdrażać kolejne działanie czyli [sankcja]\n\nPanie {nazwisko}, ja działam dalej w tej sprawie, przekazałem informacje na czym Pan stoi. Teraz czekamy na Pana ruch. Jak Pan wyśle co ma wysłać, to będziemy rozmawiać, na ten moment ja muszę tutaj zaznaczyć, że odmawia Pan współpracy, więc kontynuujemy windykację i muszę dać zielone światło na wdrażanie kolejnych sankcji. Jeśli będzie chciał Pan się dogadać to jestem pod telefonem."}
+  ]
+};
+
+DEFAULT_CONTENT.sections.p_brak_srodkow = {
+  title: "Dalej brak środków — kolejna rozmowa",
+  goal: "Cel: nie pozwolić, żeby „nie mam pieniędzy” po raz drugi zamknęło rozmowę — wyjść z konkretną kwotą i terminem.\nCo chcemy uzyskać: minimalną wpłatę do konkretnego dnia — albo świadomą decyzję dłużnika, że przyjmuje kolejną sankcję.\nJak: docenienie szczerości → fakt: brak środków nie wstrzymuje sprawy → minimalna kwota + termin + konkretna sankcja → obrazowanie, co ta sankcja realnie oznacza dla jego firmy → domknięcie na kwotę i datę.\nWskazówka: sankcję i jej obrazowanie bierz z dolnego paska „Sankcje” — komunikuj tę, która jest najbliżej w planie sprawy, i pokaż skutek JEDNEJ, zamiast wymieniać katalog. Deklarowany brak środków nie kończy rozmowy: zawsze wychodzimy z minimalną kwotą i datą. Jeśli dłużnik znajdzie jakiekolwiek środki — od razu schodzimy na ustalanie kwoty (zielony skrót pod kartą).",
+  blocks: [
+    {type:"speech", label:"Otwarcie — nawiązanie do poprzedniej rozmowy", text:"Panie {nazwisko}, dzwonię, bo rozmawialiśmy [data] i wtedy mówił Pan, że na ten moment nie ma Pan środków na uregulowanie tej należności. Dzwonię sprawdzić, czy coś się w tej sprawie po Pana stronie zmieniło?"},
+    {type:"qhints", label:"Reakcja dłużnika — kliknij tę, która padła", text:"Coś się zmieniło — może wpłacić choćby część\nTo bardzo dobra wiadomość, bo każda wpłata realnie zmienia obraz tej sprawy — mam wtedy z czym pójść do klienta i mam o co wnioskować. Więc jaką kwotę jest Pan w stanie wpłacić w dniu dzisiejszym? [Dalej: ustal kwotę i termin — zielony skrót pod kartą]\n---\nDalej deklaruje całkowity brak środków\nRozumiem i doceniam, że mówi Pan o tym wprost — to dla mnie ważne, bo z kimś, kto mówi wprost, da się szukać rozwiązania. Natomiast brak środków nie powoduje wstrzymania sprawy. Jeżeli do [data] nie wpłynie przynajmniej [minimalna kwota], kolejnym krokiem będzie [sankcja].\nPowiem Panu, co to realnie oznacza dla Pana firmy: [skutek sankcji]. Dlatego naprawdę wolałbym, żebyśmy do tego nie doszli — i dlatego szukam z Panem jakiegokolwiek rozwiązania, nawet częściowego.\n\n[Jeśli mówi, że i tak nic nie da rady:]\nPanie {nazwisko}, ja nie oczekuję od Pana rzeczy niemożliwych. Natomiast proszę zrozumieć też moją sytuację: jeżeli nie mam od Pana żadnej wpłaty ani żadnej deklaracji, to nie mam na czym oprzeć wniosku o wstrzymanie działań — i sprawa idzie dalej zgodnie z planem. Nawet niewielka kwota wpłacona do [data] daje mi podstawę, żeby o to wystąpić. Więc ile jest Pan w stanie zebrać do tego dnia?"},
+    {type:"question", label:"Domknięcie — minimalna kwota i termin", text:"To umówmy się konkretnie, Panie {nazwisko}: kwota [minimalna kwota], termin [data]. Zapisuję to w sprawie i na tej podstawie występuję o wstrzymanie kolejnego kroku. Umawiamy się tak?"}
+  ]
+};
+
+DEFAULT_CONTENT.sections.pre_termin = {
+  title: "Faktura przed terminem płatności",
+  goal: "Cel: zabezpieczyć płatność, zanim powstanie zaległość — i wcześnie wyłapać problem.\nCo chcemy uzyskać: potwierdzenie, że faktura jest zaksięgowana i bez zastrzeżeń, oraz konkretny dzień zlecenia przelewu.\nJak: miękkie, porządkowe otwarcie → checklista (odebrana / zastrzeżenia / zaplanowana / na kiedy przelew) → potwierdzenie terminu → przy sygnałach ostrzegawczych od razu właściwa odnoga.\nWskazówka: to nie jest windykacja — ton jak obsługa klienta, bez sankcji i bez presji. Ale rozmowa nie może skończyć się na „przypominam o fakturze”: wychodzimy z konkretnym dniem przelewu. Zastrzeżenia do faktury lub usługi → nie dyskutuj, kieruj na maila i prowadź jak negowanie (przycisk pod kartą). Sygnał o płynności złapany przed terminem jest wart więcej niż tydzień windykacji po terminie.",
+  blocks: [
+    {type:"speech", label:"Otwarcie — porządkowe, nie windykacyjne", text:"Dzień dobry, {windykator}, Hadyński Inkaso — dzwonię w imieniu {wierzyciel}, w sprawie faktury [nr faktury], której termin płatności przypada [data]. Dzwonię z wyprzedzeniem, czysto porządkowo: chcę się upewnić, że wszystko jest po Państwa stronie w porządku i że nic tej płatności nie blokuje."},
+    {type:"checklist", label:"Dowiedz się w rozmowie — odhaczaj", text:"Czy faktura dotarła i została zaksięgowana?\nCzy są jakiekolwiek zastrzeżenia do faktury lub wykonanej usługi?\nCzy płatność jest już zaplanowana i trafiła do realizacji?\nNa jaki dzień zaplanowany jest przelew?"},
+    {type:"question", label:"Potwierdzenie terminu", text:"To potwierdźmy, żebym mógł zapisać to w sprawie: przelew zostanie zlecony [data] i wpłynie do nas w terminie — dobrze rozumiem?"},
+    {type:"qhints", label:"Sygnały ostrzegawcze — kliknij ten, który padł", text:"Zgłasza zastrzeżenia do faktury lub usługi\nDobrze, że mówi Pan o tym teraz, a nie po terminie — mamy jeszcze czas to wyjaśnić, zanim cokolwiek się w tej sprawie wydarzy. Będę Pana prosił, żeby przesłał mi Pan te zastrzeżenia mailem — wtedy wyjaśniam to z klientem i wracam do Pana z odpowiedzią. Czy wyśle mi Pan to dzisiaj? [Dalej: rozbrojenie — przycisk pod kartą]\n---\nSygnalizuje problem z płynnością albo że termin się przesunie\nRozumiem i dziękuję za szczerość — właśnie dlatego dzwonię przed terminem, a nie po nim. Póki faktura nie jest przeterminowana, mamy najwięcej możliwości, żeby to spokojnie ułożyć, bez żadnych konsekwencji dla Pana firmy. Więc proszę mi powiedzieć wprost: jaką kwotę i na kiedy jest Pan w stanie realnie zaplanować?\n---\nUnika konkretu — nie chce podać dnia\nRozumiem, że nie chce Pan deklarować na sztywno. Natomiast ja muszę odnotować w sprawie coś konkretnego, bo po terminie sprawa idzie już swoim torem i wtedy rozmawiamy zupełnie inaczej. Więc chociaż orientacyjnie: przelew planujecie Państwo w tym tygodniu czy w przyszłym? Zapiszę to i potwierdzę z Panem [dzień przed terminem]."}
   ]
 };
 
@@ -2245,7 +2279,8 @@ const MAP_GROUPS = [
   {label:"Gałąź C — deklaruje zapłatę", tone:"C", items:["c"]},
   {label:"Gałąź D — „nie wiem, o co chodzi”", tone:"D", items:["d_pomylka"]},
   {label:"Gałąź E — rozmówca niedecyzyjny", tone:"E", items:["e_niedecyzyjny"]},
-  {label:"Powroty — złamane ustalenia", tone:"neutral", items:["p_deklaracja","p_dokumenty"]}
+  {label:"Powroty — złamane ustalenia", tone:"neutral", items:["p_deklaracja","p_dokumenty","p_brak_srodkow"]},
+  {label:"Przed terminem — monitoring", tone:"neutral", items:["pre_termin"]}
 ];
 
 const MAP_LABELS = {
@@ -2256,7 +2291,9 @@ const MAP_LABELS = {
   d_pomylka:"Wyjaśnienie + dwie drogi",
   e_niedecyzyjny:"Dojście do decydenta",
   p_deklaracja:"Wyciągi sprawdzone — wpłata dziś albo sankcja",
-  p_dokumenty:"Stanowisko nie dotarło — weryfikacja na żywo"
+  p_dokumenty:"Stanowisko nie dotarło — weryfikacja na żywo",
+  p_brak_srodkow:"Dalej brak środków — kwota i termin",
+  pre_termin:"Monitoring przed terminem płatności"
 };
 
 const TREE = {
@@ -2273,7 +2310,9 @@ const TREE = {
       { id:"e_niedecyzyjny", edge:"osoba niedecyzyjna" }
     ]},
     { id:"p_deklaracja", edge:"złamana deklaracja spłaty" },
-    { id:"p_dokumenty", edge:"nie dosłał dokumentów" }
+    { id:"p_dokumenty", edge:"nie dosłał dokumentów" },
+    { id:"p_brak_srodkow", edge:"dalej brak środków" },
+    { id:"pre_termin", edge:"przed terminem płatności" }
   ]
 };
 
@@ -2285,7 +2324,9 @@ const TREE_DESC = {
   d_pomylka:"Skąd numer + mail albo status świadka",
   e_niedecyzyjny:"Posłaniec + termin kontaktu",
   p_deklaracja:"Zapłacił? → potwierdzenie albo sankcja",
-  p_dokumenty:"Wysłał? → sprawdzam na żywo albo sankcja"
+  p_dokumenty:"Wysłał? → sprawdzam na żywo albo sankcja",
+  p_brak_srodkow:"Minimalna kwota + termin + sankcja",
+  pre_termin:"Zaksięgowana? bez uwag? kiedy przelew?"
 };
 
 /* ═════════════════ Stan ═════════════════ */
@@ -2302,8 +2343,8 @@ SECTION_ORDER.forEach(id => {
 });
 
 /* rewizja treści: nowsza domyślna wersja sekcji nadpisuje tę zapisaną (tylko wskazane sekcje) */
-const CONTENT_REV = 48;
-const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"] };
+const CONTENT_REV = 49;
+const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"], 49: ["e_niedecyzyjny"] };
 if ((content._rev || 1) < CONTENT_REV) {
   for (let r = (content._rev || 1) + 1; r <= CONTENT_REV; r++) {
     (REV_SECTIONS[r] || []).forEach(id => {
@@ -2442,6 +2483,8 @@ const PANI_RULES = [
   [/Może Pan zresztą sam zobaczyć/gu, "Może Pani zresztą sama zobaczyć"],
   [/Pan tę fakturę zaksięgował/gu, "Pani tę fakturę zaksięgowała"],
   [/jest Pan windykowany/gu, "jest Pani windykowana"],
+  [/(?<!\p{L})(\p{L}+)ł mi Pan(?!\p{L})/gu, "$1ła mi Pani"],
+  [/ma Pan poinformować/gu, "ma Pani poinformować"],
   [/Pan tego terminu nie dotrzymał/gu, "Pani tego terminu nie dotrzymała"],
   [/wysyłał go Pan/gu, "wysyłała go Pani"],
   [/Pan ten temat załatwił/gu, "Pani ten temat załatwiła"],
@@ -2678,11 +2721,11 @@ function renderBlock(b) {
 function renderActions(id) {
   const a = NODE_ACTIONS[id];
   if (!a) return "";
-  let branchesHTML = "";
-  if (a.branches) {
-    const cols = a.branches.length === 3 ? "cols-3" : "cols-2";
-    branchesHTML = `<div class="actions-label">${esc(a.label||"Wybierz")}</div><div class="branch-grid ${cols}">` +
-      a.branches.map(b => `
+  const groups = a.branchGroups || (a.branches ? [{ label: a.label, branches: a.branches }] : []);
+  const branchesHTML = groups.map(g => {
+    const cols = g.cols ? "cols-" + g.cols : (g.branches.length === 1 ? "cols-1" : (g.branches.length === 3 ? "cols-3" : "cols-2"));
+    return `<div class="actions-label">${esc(g.label||"Wybierz")}</div><div class="branch-grid ${cols}">` +
+      g.branches.map(b => `
         <button class="branch-btn tone-${b.tone}" data-go="${b.to}">
           <span class="b-main">
             <span class="b-title"><span class="b-dot"></span>${esc(b.title)}</span>
@@ -2690,7 +2733,7 @@ function renderActions(id) {
           </span>
           <span class="b-chev">›</span>
         </button>`).join("") + `</div>`;
-  }
+  }).join("");
   let buttonsHTML = "";
   if (a.buttons) {
     buttonsHTML = `<div class="actions-row">` + a.buttons.map(b => {
@@ -3125,6 +3168,14 @@ function lockHash(str) { let x = 5381; for (let i = 0; i < str.length; i++) { x 
 (function initLock() {
   let unlocked = false;
   try { unlocked = localStorage.getItem(LOCK_KEY) === LOCK_HASH; } catch {}
+  /* hasło może przyjść w adresie (link-klucz) — wtedy zero wpisywania */
+  if (!unlocked) {
+    const urlKey = decodeURIComponent(location.hash.replace("#", "")).trim();
+    if (urlKey && lockHash(urlKey) === LOCK_HASH) {
+      try { localStorage.setItem(LOCK_KEY, LOCK_HASH); } catch {}
+      unlocked = true;
+    }
+  }
   if (unlocked) return;
   const screen = document.getElementById("lock-screen");
   screen.hidden = false;

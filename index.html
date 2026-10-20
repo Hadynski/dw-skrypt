@@ -1223,6 +1223,16 @@
   .qb-dot.obj { background: var(--red); }
   .qb-dot.sank { background: var(--orange-text); }
   .qb-dot.info { background: var(--blue); }
+  .qb-icon { font-size: 15px; line-height: 1; color: var(--indigo-text); font-weight: 700; }
+  .uf-steps { margin: 0 0 14px; padding-left: 22px; }
+  .uf-steps li { margin-bottom: 6px; }
+  .uf-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); margin: 16px 0 6px; }
+  .uf-template { background: var(--indigo-tint); border-left: 3px solid var(--indigo); border-radius: 10px; padding: 12px 14px; }
+  .uf-template .var.static { background: var(--card); color: var(--indigo-text); }
+  .uf-ex { margin-bottom: 10px; }
+  .uf-ex-obj { font-weight: 650; }
+  .uf-next { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--separator); font-size: 15px; }
+  .uf-next .btn-secondary { margin-top: 8px; }
   body[data-tab="rozmowa"] .layout { padding-bottom: 140px; }
   @media (max-width: 940px) { body[data-tab="rozmowa"] .layout { padding-bottom: 185px; } }
   .sheet-list { display: flex; flex-direction: column; gap: 8px; }
@@ -1951,6 +1961,7 @@
     <button class="qb-btn" id="qb-obj"><span class="qb-dot obj"></span>Obiekcje</button>
     <button class="qb-btn" id="qb-sank"><span class="qb-dot sank"></span>Sankcje</button>
     <button class="qb-btn" id="qb-info"><span class="qb-dot info"></span>Informacja o sprzedaży</button>
+    <button class="qb-btn" id="qb-formula"><span class="qb-icon" aria-hidden="true">↺</span>Każda obiekcja</button>
     <div class="qb-spacer"></div>
     <button class="splata-chip brak-chip" id="btn-brak" data-go="b_1">„Nie mam pieniędzy” → Gałąź B</button>
     <button class="splata-chip" id="btn-splata" data-go="c">Dłużnik deklaruje spłatę → Gałąź C</button>
@@ -2508,6 +2519,7 @@ const PANI_RULES = [
   [/że Pan to klientowi wysyłał/gu, "że Pani to klientowi wysyłała"],
   [/żeby Pana chronić/gu, "żeby Panią chronić"],
   [/żeby dowiedział się Pan(?!\p{L})/gu, "żeby dowiedziała się Pani"],
+  [/Pan najpierw dowiedział/gu, "Pani najpierw dowiedziała"],
   [/niż odczuł je/gu, "niż odczuła je"],
   [/będzie musiał mieć Pan(?!\p{L})/gu, "będzie musiała mieć Pani"],
   [/(?<!\p{L})zgłaszał pisemnie/gu, "zgłaszała pisemnie"],
@@ -2842,6 +2854,32 @@ function openInfoSprzedaz() {
   document.getElementById("sheet-backdrop").hidden = false;
 }
 
+/* Uniwersalna formuła na każdą obiekcję (v12) */
+const UF_STEPS = [
+  "Powtórz obiekcję słowami dłużnika.",
+  "Potwierdź, że rozumiesz.",
+  "Zawróć ją w powód do rozmowy — stała formułka."
+];
+const UF_TEMPLATE = "„[obiekcja]. Rozumiem, że [obiekcja] — i właśnie dlatego ważne jest, żeby Pan dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej. Szczególnie jeśli [obiekcja], bo to na [to] wpłynie.”";
+const UF_EXAMPLES = [
+  { obj: "„Nie mam czasu”", text: "Nie ma Pan czasu, rozumiem, że nie ma Pan czasu i dlatego ważne jest, żeby Pan dowiedział się, co zostanie zrobione w Pana sprawie i co już zostało zrobione, szczególnie jeśli nie ma Pan obecnie czasu, bo to na ten czas wpłynie." },
+  { obj: "„Jestem w pracy / prowadzę”", text: "Jest Pan teraz w pracy, rozumiem. I właśnie dlatego ważne jest, żeby Pan dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej, szczególnie jeśli jest Pan w pracy, bo to na Pana pracę wpłynie." },
+  { obj: "„Proszę to wysłać mailem”", text: "Chce Pan to dostać mailem, rozumiem. I właśnie dlatego ważne jest, żeby Pan najpierw dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej, szczególnie jeśli chce Pan mieć to na piśmie, bo to na treść tego maila wpłynie." },
+  { obj: "„Nie zgadzam się z tym długiem”", text: "Nie zgadza się Pan z tym, rozumiem. I właśnie dlatego ważne jest, żeby Pan dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej, szczególnie jeśli się Pan nie zgadza, bo to na wynik tej sprawy wpłynie." }
+];
+function openFormula() {
+  setSheetBack(null);
+  document.getElementById("sheet-eyebrow").textContent = "Technika na każdą obiekcję";
+  document.getElementById("sheet-title").textContent = "Każda obiekcja — formuła";
+  document.getElementById("sheet-text").innerHTML =
+    `<ol class="uf-steps">${UF_STEPS.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` +
+    `<span class="uf-label">Szablon</span><div class="uf-template">${renderText(UF_TEMPLATE)}</div>` +
+    `<span class="uf-label">Przykłady</span>` +
+    UF_EXAMPLES.map(x => `<div class="uf-ex"><span class="uf-ex-obj">${esc(x.obj)}</span><br>${renderText(x.text)}</div>`).join("") +
+    `<div class="uf-next">Po formułce wróć do etapu rozmowy, na którym jesteś. Jeśli dłużnik dalej się opiera — sięgnij po gotową odpowiedź z listy „Obiekcje”.<br><button class="btn-secondary" id="uf-to-list">Gotowe odpowiedzi ›</button></div>`;
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+
 function openQuickList(kind) {
   setSheetBack(null);
   const isObj = kind === "obj";
@@ -3105,6 +3143,10 @@ document.getElementById("btn-add-sank").addEventListener("click", () => {
 document.getElementById("qb-obj").addEventListener("click", () => openQuickList("obj"));
 document.getElementById("qb-sank").addEventListener("click", () => openQuickList("sank"));
 document.getElementById("qb-info").addEventListener("click", openInfoSprzedaz);
+document.getElementById("qb-formula").addEventListener("click", openFormula);
+document.getElementById("sheet-text").addEventListener("click", e => {
+  if (e.target.closest("#uf-to-list")) openQuickList("obj");
+});
 document.getElementById("sheet-back").addEventListener("click", e => openQuickList(e.currentTarget.dataset.kind));
 
 document.getElementById("btn-io").addEventListener("click", () => {

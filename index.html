@@ -1240,7 +1240,46 @@
   .uf-ex-obj { display: block; font-weight: 700; margin-bottom: 3px; }
   .uf-next { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--text-secondary); }
   .uf-next .btn-secondary { flex-shrink: 0; }
+  /* Okienko „Intencja” */
+  .sheet.sheet-wide.sheet-intent { padding-top: 18px; padding-bottom: 16px; max-height: 97vh; }
+  .sheet.sheet-intent h2 { font-size: 19px; margin-bottom: 8px; }
+  .sheet.sheet-intent .sheet-text { padding: 10px 14px; margin-bottom: 10px; }
+  .sheet.sheet-intent .uf-label { margin: 8px 0 4px; }
+  .in-def { font-size: 14.5px; line-height: 1.45; margin: 0; }
+  .in-label-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .in-why-btn { appearance: none; border: none; background: var(--teal-tint); color: var(--teal-text); font: inherit; font-size: 12.5px; font-weight: 700; padding: 4px 12px; border-radius: 999px; cursor: pointer; margin-top: 4px; }
+  .in-why-btn:hover { filter: brightness(0.96); }
+  .rs-list { margin: 0; padding-left: 22px; }
+  .rs-list > li { margin-bottom: 12px; }
+  .rs-list > li:last-child { margin-bottom: 0; }
+  .rs-list ul { margin: 4px 0 4px; padding-left: 20px; list-style: circle; }
+  .rs-back { margin-top: 14px; }
+  .in-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .in-grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; counter-reset: in; }
+  .in-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .in-tile { background: var(--card); border-radius: 10px; padding: 7px 11px; font-size: 13.5px; line-height: 1.38; }
+  .in-tile b { display: block; margin-bottom: 2px; }
+  .in-step { counter-increment: in; }
+  .in-step b::before { content: counter(in); display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 7px; border-radius: 50%; background: var(--teal-text); color: #fff; font-size: 12px; vertical-align: 1px; }
+  .in-ex { border-left: 3px solid var(--teal-text); }
+  .in-list { margin: 0; padding: 7px 11px 7px 26px; background: var(--card); border-radius: 10px; font-size: 13.5px; line-height: 1.38; columns: 2; column-gap: 28px; }
+  .in-list li { break-inside: avoid; margin-bottom: 2px; }
+  .in-check { margin-top: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--teal-tint); border-radius: 10px; padding: 10px 14px; font-weight: 650; font-size: 15px; }
+  .in-check .btn-secondary { flex-shrink: 0; }
+  .intent-card { display: flex; gap: 12px; align-items: flex-start; background: var(--teal-tint); border-radius: 16px; padding: 16px 18px; margin-top: 14px; font-size: 15px; line-height: 1.5; }
+  .intent-card .ic-icon { font-size: 20px; color: var(--teal-text); font-weight: 700; line-height: 1.2; }
+  .intent-card .ic-title { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal-text); margin-bottom: 4px; }
+  .intent-card .btn-secondary { margin-top: 10px; }
+  .qb-icon.intent { color: var(--teal-text); }
+  @media (max-width: 760px) {
+    .in-grid3, .in-grid4, .in-grid2 { grid-template-columns: 1fr; }
+    .in-list { columns: 1; }
+    .in-check { flex-direction: column; align-items: flex-start; }
+  }
   @media (min-width: 761px) and (max-height: 780px) {
+    .in-tile, .in-list { font-size: 13.5px; padding: 7px 11px; }
+    .in-list { padding-left: 26px; }
+    .in-check { margin-top: 8px; padding: 8px 12px; }
     .sheet.sheet-wide { padding: 16px 22px 14px; max-height: 96vh; }
     .sheet.sheet-wide h2 { font-size: 19px; margin-bottom: 8px; }
     .sheet.sheet-wide .sheet-text { padding: 10px 14px; margin-bottom: 10px; }
@@ -1980,6 +2019,7 @@
     <button class="qb-btn" id="qb-obj"><span class="qb-dot obj"></span>Obiekcje</button>
     <button class="qb-btn" id="qb-sank"><span class="qb-dot sank"></span>Sankcje</button>
     <button class="qb-btn" id="qb-info"><span class="qb-dot info"></span>Informacja o sprzedaży</button>
+    <button class="qb-btn" id="qb-intent"><span class="qb-icon intent" aria-hidden="true">◎</span>Intencja</button>
     <button class="qb-btn" id="qb-formula"><span class="qb-icon" aria-hidden="true">↺</span>Każda obiekcja</button>
     <div class="qb-spacer"></div>
     <button class="splata-chip brak-chip" id="btn-brak" data-go="b_1">„Nie mam pieniędzy” → Gałąź B</button>
@@ -2093,7 +2133,8 @@ const DEFAULT_CONTENT = {
       blocks: [
         {type:"speech", mode:"firma", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy dodzwoniłem się do firmy {firma}?"},
         {type:"speech", mode:"osoba", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy rozmawiam z Panem/Panią {osoba}?"},
-        {type:"question", label:"Pytanie aktywizujące — ustalenie rozmówcy", text:"Czy mógłbym prosić o Pana/Pani imię, żeby nam się lepiej rozmawiało?"}
+        {type:"question", label:"Pytanie aktywizujące — ustalenie rozmówcy", text:"Czy mógłbym prosić o Pana/Pani imię, żeby nam się lepiej rozmawiało?"},
+        {type:"intent"}
       ]
     },
     przedstawienie: {
@@ -2373,8 +2414,8 @@ SECTION_ORDER.forEach(id => {
 });
 
 /* rewizja treści: nowsza domyślna wersja sekcji nadpisuje tę zapisaną (tylko wskazane sekcje) */
-const CONTENT_REV = 49;
-const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"], 49: ["e_niedecyzyjny"] };
+const CONTENT_REV = 50;
+const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"], 49: ["e_niedecyzyjny"], 50: ["start"] };
 if ((content._rev || 1) < CONTENT_REV) {
   for (let r = (content._rev || 1) + 1; r <= CONTENT_REV; r++) {
     (REV_SECTIONS[r] || []).forEach(id => {
@@ -2703,6 +2744,9 @@ function renderBlock(b) {
   if (b.type === "question") {
     return `<div class="speech question"><span class="speech-label">${esc(b.label||"Pytanie")}</span>${renderText(b.text)}</div>`;
   }
+  if (b.type === "intent") {
+    return `<div class="intent-card"><span class="ic-icon" aria-hidden="true">◎</span><div><div class="ic-title">Intencja — powiedz, po co dzwonisz</div>${renderText(IN_OPENING)}<br><button class="btn-secondary" data-action="intent">Jak to robić ›</button></div></div>`;
+  }
   if (b.type === "note") {
     if (b.go) {
       return `<div class="note note-card"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><div class="note-body"><div class="note-title">Wskazówka — co dalej</div><div>${renderText(b.text)}</div><div class="note-actions"><button class="btn-primary" data-go="${esc(b.go)}">${esc(b.goLabel||"Przejdź")}</button></div></div></div>`;
@@ -2839,7 +2883,7 @@ function renderObjPanel() {
 }
 
 function setSheetBack(kind) {
-  document.querySelector("#sheet-backdrop .sheet").classList.remove("sheet-wide");
+  document.querySelector("#sheet-backdrop .sheet").classList.remove("sheet-wide", "sheet-intent");
   const b = document.getElementById("sheet-back");
   if (!kind) { b.hidden = true; return; }
   b.hidden = false;
@@ -2898,6 +2942,65 @@ function openFormula() {
     `<span class="uf-label">Przykłady</span><div class="uf-examples">` +
     UF_EXAMPLES.map(x => `<div class="uf-ex"><span class="uf-ex-obj">${esc(x.obj)}</span>${renderText(x.text)}</div>`).join("") +
     `</div><div class="uf-next"><span>Po formułce wróć do etapu rozmowy, na którym jesteś. Jeśli dłużnik dalej się opiera — sięgnij po gotową odpowiedź z listy „Obiekcje”.</span><button class="btn-secondary" id="uf-to-list">Gotowe odpowiedzi ›</button></div>`;
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+
+/* Intencja w rozmowie (v13 — wzór do akceptu) */
+const IN_DEF = "Intencja to jasne pokazanie, po co dzwonisz, jaka jest Twoja rola i co chcesz osiągnąć w tej rozmowie. Nie chodzi o sztywną formułkę — ważne, żeby rozmówca rozumiał, dlaczego kontaktujesz się właśnie z nim i jaki jest plan.";
+const IN_WHY = [
+  ["Niepewność = obrona", "Rozmówca, który nie wie, po co dzwonisz, broni się. Gdy zna plan — słucha."],
+  ["Zrozumiały proces", "Ludzie łatwiej przyjmują nawet trudną informację, gdy rozumieją proces i mogą się wypowiedzieć."],
+  ["Powód wprost", "„Dlatego”, „bo” — podany powód wyraźnie zwiększa zgodę rozmówcy."]
+];
+const IN_STEPS = [
+  ["Kim jestem", "Imię, Hadyński Inkaso, w czyim imieniu dzwonisz."],
+  ["Po co dzwonię", "Z perspektywy rozmówcy: co powinien wiedzieć."],
+  ["Plan rozmowy", "Co przekażę, o co zapytam, do czego dojdziemy."],
+  ["Sprawdź zrozumienie", "„Czy to dla Pana jasne?” — bez pytania o zgodę."]
+];
+const IN_OPENING = "Dzwonię z Hadyński Inkaso w imieniu {wierzyciel}, w sprawie należności na {kwota}. Chcę krótko powiedzieć Panu, co już wydarzyło się w sprawie i co jest zaplanowane dalej, potem poznać Pana stanowisko i razem ustalić, jak tę sprawę zamknąć. Czy to dla Pana jasne?";
+const IN_OBJECTION = "Rozumiem, że nie ma Pan teraz czasu. Właśnie dlatego chcę krótko przedstawić, co już wydarzyło się w sprawie i jakie są kolejne kroki, żeby wiedział Pan, na czym stoi. Potem poznam Pana stanowisko i ustalimy, co dalej.";
+const IN_REMEMBER = [
+  "Rozmówca nie zna Ciebie ani powodu telefonu. Zanim zaczniesz zadawać pytania, wyjaśnij swoją rolę i cel.",
+  "Mów o sprawie z perspektywy rozmówcy: co powinien wiedzieć, co już się wydarzyło i co może się wydarzyć dalej.",
+  "Przedstaw krótko plan rozmowy: co przekażesz, o co zapytasz i do czego chcecie dojść.",
+  "Dopasuj moment do przebiegu rozmowy. Możesz przedstawić intencję na początku albo po pierwszej reakcji rozmówcy — nie pozwól jednak, by całkiem zniknęła.",
+  "Jeśli rozmówca zgłasza obiekcję, np. „nie mam czasu”, nie kłóć się z nią. Odnieś się do niej i pokaż, dlaczego rozmowa może być dla niego ważna."
+];
+/* Dlaczego intencja działa — research (tekst Mikołaja 1:1) */
+const IN_RESEARCH_HTML = `<ol class="rs-list">
+  <li><b>Niepewność odbierana jest jak zagrożenie.</b> Według modelu SCARF (David Rock) jedną z pięciu rzeczy, które mózg stale sprawdza, jest pewność, czyli czy wiem, co się zaraz stanie. Rozmówca, który nie wie, kto dzwoni i po co, przechodzi w tryb obrony. Wtedy gorzej słucha i trudniej mu podejmować decyzje. Jasna intencja zdejmuje to napięcie.</li>
+  <li><b>Zrozumiały proces to większa gotowość do zapłaty.</b> Badania nad sprawiedliwością proceduralną (Tom Tyler) pokazują, że ludzie łatwiej akceptują nawet niekorzystny dla siebie wynik, gdy:
+    <ul><li>rozumieją, jak przebiega proces,</li><li>mogą przedstawić swoje stanowisko,</li><li>są traktowani z szacunkiem.</li></ul>
+    W badaniach nad długami sądowymi przekładało się to na wyższe i częstsze spłaty.</li>
+  <li><b>„Dlatego” i „bo” zwiększają zgodę.</b> W klasycznym eksperymencie Ellen Langer prośbę bez uzasadnienia spełniło 60% osób, a z uzasadnieniem 94%. Intencja to właśnie powód rozmowy powiedziany wprost.</li>
+  <li><b>Ustalenie zasad na starcie.</b> W sprzedaży (metoda Sandlera) rozmowę zaczyna się od krótkiej umowy: po co rozmawiamy, co powiem, o co zapytam i do czego dojdziemy. Dzięki temu rozmowa się nie rozjeżdża, a kolejny krok jest jasny.</li>
+</ol>
+<button class="btn-secondary rs-back" id="rs-to-intent">‹ Wróć do intencji</button>`;
+function openResearch() {
+  setSheetBack(null);
+  document.querySelector("#sheet-backdrop .sheet").classList.add("sheet-wide");
+  document.getElementById("sheet-eyebrow").textContent = "Intencja — badania i liczby";
+  document.getElementById("sheet-title").textContent = "Dlaczego intencja działa";
+  document.getElementById("sheet-text").innerHTML = IN_RESEARCH_HTML;
+  document.getElementById("sheet-backdrop").hidden = false;
+}
+
+function openIntent() {
+  setSheetBack(null);
+  document.querySelector("#sheet-backdrop .sheet").classList.add("sheet-wide", "sheet-intent");
+  document.getElementById("sheet-eyebrow").textContent = "Intencja w rozmowie";
+  document.getElementById("sheet-title").textContent = "Po co dzwonisz i jaki jest plan";
+  const tiles = (arr, cls) => arr.map(([t, d]) => `<div class="in-tile ${cls}"><b>${esc(t)}</b>${renderText(d)}</div>`).join("");
+  document.getElementById("sheet-text").innerHTML =
+    `<p class="in-def">${esc(IN_DEF)}</p>` +
+    `<div class="in-label-row"><span class="uf-label">Dlaczego to działa</span><button class="in-why-btn" id="in-to-research">Badania i liczby ›</button></div><div class="in-grid3">${tiles(IN_WHY, "")}</div>` +
+    `<span class="uf-label">Jak to zrobić</span><div class="in-grid4">${tiles(IN_STEPS, "in-step")}</div>` +
+    `<span class="uf-label">Przykłady</span><div class="in-grid2">` +
+      `<div class="in-tile in-ex"><b>Na otwarcie</b>${renderText(IN_OPENING)}</div>` +
+      `<div class="in-tile in-ex"><b>Przy obiekcji „nie mam czasu”</b>${renderText(IN_OBJECTION)}</div></div>` +
+    `<span class="uf-label">O czym pamiętać</span><ul class="in-list">${IN_REMEMBER.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` +
+    `<div class="in-check"><span>Przed rozmową: czy rozmówca wie, po co dzwonię i jaki jest mój plan na tę rozmowę?</span><button class="btn-secondary" id="in-to-formula">Formuła na obiekcję ›</button></div>`;
   document.getElementById("sheet-backdrop").hidden = false;
 }
 
@@ -3165,8 +3268,13 @@ document.getElementById("qb-obj").addEventListener("click", () => openQuickList(
 document.getElementById("qb-sank").addEventListener("click", () => openQuickList("sank"));
 document.getElementById("qb-info").addEventListener("click", openInfoSprzedaz);
 document.getElementById("qb-formula").addEventListener("click", openFormula);
+document.getElementById("qb-intent").addEventListener("click", openIntent);
+document.getElementById("stage").addEventListener("click", e => { if (e.target.closest("[data-action='intent']")) openIntent(); });
 document.getElementById("sheet-text").addEventListener("click", e => {
   if (e.target.closest("#uf-to-list")) openQuickList("obj");
+  if (e.target.closest("#in-to-formula")) openFormula();
+  if (e.target.closest("#in-to-research")) openResearch();
+  if (e.target.closest("#rs-to-intent")) openIntent();
 });
 document.getElementById("sheet-back").addEventListener("click", e => openQuickList(e.currentTarget.dataset.kind));
 

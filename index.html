@@ -1224,15 +1224,34 @@
   .qb-dot.sank { background: var(--orange-text); }
   .qb-dot.info { background: var(--blue); }
   .qb-icon { font-size: 15px; line-height: 1; color: var(--indigo-text); font-weight: 700; }
-  .uf-steps { margin: 0 0 14px; padding-left: 22px; }
-  .uf-steps li { margin-bottom: 6px; }
-  .uf-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-tertiary); margin: 16px 0 6px; }
-  .uf-template { background: var(--indigo-tint); border-left: 3px solid var(--indigo); border-radius: 10px; padding: 12px 14px; }
+  /* Okienko „Każda obiekcja” — szerokie, cała treść bez przewijania */
+  .sheet.sheet-wide { max-width: 1120px; max-height: 94vh; padding: 22px 26px 20px; }
+  .sheet.sheet-wide .sheet-eyebrow { margin-bottom: 8px; }
+  .sheet.sheet-wide h2 { margin-bottom: 12px; }
+  .sheet.sheet-wide .sheet-text { font-size: 15px; line-height: 1.5; padding: 14px 16px; margin-bottom: 14px; }
+  .uf-steps { list-style: none; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; counter-reset: uf; }
+  .uf-steps li { counter-increment: uf; display: flex; align-items: center; gap: 10px; background: var(--card); border-radius: 10px; padding: 8px 12px; font-weight: 600; font-size: 14px; line-height: 1.35; }
+  .uf-steps li::before { content: counter(uf); flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; background: var(--indigo); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+  .uf-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin: 12px 0 6px; }
+  .uf-template { background: var(--indigo-tint); border-left: 3px solid var(--indigo); border-radius: 10px; padding: 10px 14px; font-size: 17px; line-height: 1.6; }
   .uf-template .var.static { background: var(--card); color: var(--indigo-text); }
-  .uf-ex { margin-bottom: 10px; }
-  .uf-ex-obj { font-weight: 650; }
-  .uf-next { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--separator); font-size: 15px; }
-  .uf-next .btn-secondary { margin-top: 8px; }
+  .uf-examples { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .uf-ex { background: var(--card); border-radius: 10px; padding: 10px 14px; font-size: 15px; line-height: 1.5; }
+  .uf-ex-obj { display: block; font-weight: 700; margin-bottom: 3px; }
+  .uf-next { margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--text-secondary); }
+  .uf-next .btn-secondary { flex-shrink: 0; }
+  @media (min-width: 761px) and (max-height: 780px) {
+    .sheet.sheet-wide { padding: 16px 22px 14px; max-height: 96vh; }
+    .sheet.sheet-wide h2 { font-size: 19px; margin-bottom: 8px; }
+    .sheet.sheet-wide .sheet-text { padding: 10px 14px; margin-bottom: 10px; }
+    .uf-template { font-size: 15px; line-height: 1.5; }
+    .uf-ex { font-size: 14px; line-height: 1.4; padding: 8px 12px; }
+    .uf-label { margin: 8px 0 4px; }
+  }
+  @media (max-width: 760px) {
+    .uf-steps, .uf-examples { grid-template-columns: 1fr; }
+    .uf-next { flex-direction: column; align-items: flex-start; }
+  }
   body[data-tab="rozmowa"] .layout { padding-bottom: 140px; }
   @media (max-width: 940px) { body[data-tab="rozmowa"] .layout { padding-bottom: 185px; } }
   .sheet-list { display: flex; flex-direction: column; gap: 8px; }
@@ -2820,6 +2839,7 @@ function renderObjPanel() {
 }
 
 function setSheetBack(kind) {
+  document.querySelector("#sheet-backdrop .sheet").classList.remove("sheet-wide");
   const b = document.getElementById("sheet-back");
   if (!kind) { b.hidden = true; return; }
   b.hidden = false;
@@ -2869,14 +2889,15 @@ const UF_EXAMPLES = [
 ];
 function openFormula() {
   setSheetBack(null);
+  document.querySelector("#sheet-backdrop .sheet").classList.add("sheet-wide");
   document.getElementById("sheet-eyebrow").textContent = "Technika na każdą obiekcję";
   document.getElementById("sheet-title").textContent = "Każda obiekcja — formuła";
   document.getElementById("sheet-text").innerHTML =
     `<ol class="uf-steps">${UF_STEPS.map(t => `<li>${esc(t)}</li>`).join("")}</ol>` +
     `<span class="uf-label">Szablon</span><div class="uf-template">${renderText(UF_TEMPLATE)}</div>` +
-    `<span class="uf-label">Przykłady</span>` +
-    UF_EXAMPLES.map(x => `<div class="uf-ex"><span class="uf-ex-obj">${esc(x.obj)}</span><br>${renderText(x.text)}</div>`).join("") +
-    `<div class="uf-next">Po formułce wróć do etapu rozmowy, na którym jesteś. Jeśli dłużnik dalej się opiera — sięgnij po gotową odpowiedź z listy „Obiekcje”.<br><button class="btn-secondary" id="uf-to-list">Gotowe odpowiedzi ›</button></div>`;
+    `<span class="uf-label">Przykłady</span><div class="uf-examples">` +
+    UF_EXAMPLES.map(x => `<div class="uf-ex"><span class="uf-ex-obj">${esc(x.obj)}</span>${renderText(x.text)}</div>`).join("") +
+    `</div><div class="uf-next"><span>Po formułce wróć do etapu rozmowy, na którym jesteś. Jeśli dłużnik dalej się opiera — sięgnij po gotową odpowiedź z listy „Obiekcje”.</span><button class="btn-secondary" id="uf-to-list">Gotowe odpowiedzi ›</button></div>`;
   document.getElementById("sheet-backdrop").hidden = false;
 }
 

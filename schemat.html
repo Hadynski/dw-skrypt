@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Schemat rozmowy">
+<title>Schemat rozmowy — Hadyński Inkaso</title>
+<style>
+  :root {
+    --bg: #f5f5f7; --card: #ffffff; --surface: #f5f5f7; --text: #1d1d1f; --text-2: #6e6e73; --text-3: #86868b;
+    --blue: #0071e3; --blue-tint: #eaf3fe;
+    --red: #e0362c; --red-tint: #fff0ef;
+    --orange: #ff9500; --orange-text: #b86e00; --orange-tint: #fff6e8;
+    --green: #34c759; --green-text: #1e9e4a; --green-tint: #ecf9f0;
+    --violet: #af52de; --violet-text: #8e2fc9; --violet-tint: #f7effc;
+    --line: rgba(0,0,0,0.08); --line-strong: rgba(0,0,0,0.18); --chip: rgba(0,0,0,0.05); --chip-hover: rgba(0,0,0,0.09);
+    --shadow: 0 2px 8px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.06); --shadow-btn: 0 1px 3px rgba(0,0,0,0.10);
+    --header: rgba(255,255,255,0.75);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #111113; --card: #1c1c1e; --surface: #29292c; --text: #f5f5f7; --text-2: #a1a1a6; --text-3: #8e8e93;
+      --blue: #0a84ff; --blue-tint: rgba(10,132,255,0.16);
+      --red: #ff453a; --red-tint: rgba(255,69,58,0.14);
+      --orange: #ff9f0a; --orange-text: #ff9f0a; --orange-tint: rgba(255,159,10,0.14);
+      --green: #30d158; --green-text: #30d158; --green-tint: rgba(48,209,88,0.14);
+      --violet: #bf5af2; --violet-text: #bf5af2; --violet-tint: rgba(191,90,242,0.14);
+      --line: rgba(255,255,255,0.12); --line-strong: rgba(255,255,255,0.24); --chip: rgba(255,255,255,0.10); --chip-hover: rgba(255,255,255,0.16);
+      --shadow: 0 2px 8px rgba(0,0,0,0.25), 0 12px 32px rgba(0,0,0,0.35); --shadow-btn: 0 1px 3px rgba(0,0,0,0.4);
+      --header: rgba(22,22,24,0.75);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; line-height: 1.5; }
+  button { font-family: inherit; }
+
+  /* ── Nagłówek ── */
+  header { position: sticky; top: 0; z-index: 30; background: var(--header); -webkit-backdrop-filter: blur(20px) saturate(180%); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid var(--line); }
+  .header-inner { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+  .brand { display: flex; align-items: center; gap: 9px; font-weight: 650; font-size: 15px; white-space: nowrap; }
+  .brand-mark { width: 28px; height: 28px; border-radius: 8px; background: var(--text); color: var(--bg); display: grid; place-items: center; font-size: 11px; font-weight: 800; }
+  .spacer { flex: 1; }
+  .tabs { display: flex; background: var(--chip); border-radius: 999px; padding: 3px; gap: 2px; }
+  .tabs button { border: none; background: transparent; color: var(--text-2); font-size: 13px; font-weight: 550; padding: 6px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .tabs button.active { background: var(--card); color: var(--text); box-shadow: var(--shadow-btn); }
+  .btn-chip { border: none; background: var(--chip); color: var(--text); font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+  .btn-chip:hover { background: var(--chip-hover); }
+  .tabs .short { display: none; }
+  @media (max-width: 640px) { .brand span:last-child { display: none; } .tabs button { padding: 6px 11px; } .tabs .long { display: none; } .tabs .short { display: inline; } .header-inner { gap: 8px; } }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 20px 16px 60px; }
+  .view[hidden] { display: none; }
+
+  /* ── Pasek postępu ── */
+  .progress { background: var(--card); border-radius: 16px; box-shadow: var(--shadow-btn); padding: 10px 12px; margin-bottom: 14px; }
+  .progress-head { display: flex; justify-content: space-between; align-items: center; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 7px; }
+  .progress-head button { border: none; background: none; color: var(--blue); font-size: 12px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: 0; }
+  .track { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 3px; }
+  @media (max-width: 720px) { .track { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .track::-webkit-scrollbar { display: none; } }
+  .step { border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: var(--text-3); background: var(--chip); border-radius: 999px; padding: 4px 9px 4px 4px; white-space: nowrap; }
+  .step .n { min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--line-strong); color: #fff; font-size: 10px; font-weight: 700; display: inline-grid; place-items: center; }
+  .step.done { color: var(--text-2); }
+  .step.done .n { background: var(--green); }
+  .step.current { color: #fff; font-weight: 650; background: var(--blue); }
+  .step.current .n { background: #fff; color: var(--blue); }
+  .step.current.C { background: var(--green-text); } .step.current.C .n { color: var(--green-text); }
+  .step.current.A { background: var(--red); } .step.current.A .n { color: var(--red); }
+  .step.current.B { background: var(--orange); } .step.current.B .n { color: var(--orange); }
+  .step:not(.current):hover { background: var(--chip-hover); color: var(--text); }
+  .sep { color: var(--line-strong); font-size: 12px; }
+  .or { color: var(--text-3); font-size: 11px; }
+  .hint { font-size: 12px; color: var(--text-3); font-style: italic; padding-left: 3px; white-space: nowrap; }
+  .lane-pill { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
+  .lane-pill.C { background: var(--green-tint); color: var(--green-text); }
+  .lane-pill.A { background: var(--red-tint); color: var(--red); }
+  .lane-pill.B { background: var(--orange-tint); color: var(--orange-text); }
+
+  /* ── Karta etapu ── */
+  .topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .btn-back { border: none; background: none; color: var(--blue); font-size: 15px; cursor: pointer; padding: 4px 2px; }
+  .btn-back:disabled { color: var(--text-3); cursor: default; }
+  .card { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 30px 34px 28px; max-width: 860px; animation: cardIn 0.35s cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 640px) { .card { padding: 22px 18px; } }
+  .eyebrow { display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; background: var(--blue-tint); color: var(--blue); margin-bottom: 10px; }
+  .eyebrow.C { background: var(--green-tint); color: var(--green-text); }
+  .eyebrow.A { background: var(--red-tint); color: var(--red); }
+  .eyebrow.B { background: var(--orange-tint); color: var(--orange-text); }
+  h1 { font-size: 30px; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+  @media (max-width: 640px) { h1 { font-size: 24px; } }
+  .goal { background: var(--blue-tint); border-radius: 14px; padding: 12px 16px; margin-bottom: 16px; font-size: 15px; }
+  .goal b { font-weight: 650; }
+  .label { display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+  .label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .say { background: var(--surface); border-radius: 16px; padding: 14px 18px; margin-bottom: 12px; font-size: 18px; line-height: 1.55; }
+  .say.ask { background: var(--green-tint); }
+  .say.ask .label::before { background: var(--green); }
+  .say.if { background: var(--card); border: 1px solid var(--line); font-size: 16.5px; }
+  .say.if .label::before { background: var(--violet); }
+  .list { background: var(--surface); border-radius: 16px; padding: 12px 18px; margin-bottom: 12px; }
+  .list ul { list-style: none; }
+  .list li { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; font-size: 16.5px; border-top: 1px solid var(--line); }
+  .list li:first-child { border-top: none; }
+  .list li::before { content: "?"; flex: 0 0 20px; height: 20px; border-radius: 50%; background: var(--blue-tint); color: var(--blue); font-size: 11px; font-weight: 800; display: grid; place-items: center; margin-top: 3px; }
+  .list.sank li::before { content: "!"; background: var(--orange-tint); color: var(--orange-text); }
+  .list li b { font-weight: 650; }
+  .ph { display: inline-block; background: var(--chip); color: var(--text-2); border-radius: 6px; padding: 0 6px; font-size: 0.9em; font-weight: 500; }
+  .tip { display: flex; gap: 10px; align-items: flex-start; background: var(--orange-tint); color: var(--text); border-radius: 14px; padding: 11px 15px; margin: 4px 0 18px; font-size: 14.5px; }
+  .tip b { color: var(--orange-text); font-weight: 700; white-space: nowrap; }
+  .actions { border-top: 1px solid var(--line); padding-top: 18px; }
+  .actions-label { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 9px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { border: none; cursor: pointer; font-size: 15.5px; font-weight: 600; border-radius: 999px; padding: 12px 22px; }
+  .btn.primary { background: var(--blue); color: #fff; }
+  .btn.primary:hover { filter: brightness(1.08); }
+  .btn.secondary { background: var(--chip); color: var(--text); }
+  .btn.secondary:hover { background: var(--chip-hover); }
+  .paths { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .paths.two { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 720px) { .paths, .paths.two { grid-template-columns: 1fr; } }
+  .path { text-align: left; cursor: pointer; border: 1.5px solid var(--line); background: var(--card); border-radius: 16px; padding: 13px 15px; box-shadow: var(--shadow-btn); }
+  .path:hover { transform: translateY(-1px); }
+  .path .t { display: flex; align-items: center; gap: 8px; font-size: 15.5px; font-weight: 650; }
+  .path .t::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--blue); }
+  .path .d { font-size: 13px; color: var(--text-2); margin-top: 3px; }
+  .path.C { border-color: color-mix(in srgb, var(--green) 45%, transparent); } .path.C .t::before { background: var(--green); }
+  .path.A { border-color: color-mix(in srgb, var(--red) 40%, transparent); } .path.A .t::before { background: var(--red); }
+  .path.B { border-color: color-mix(in srgb, var(--orange) 50%, transparent); } .path.B .t::before { background: var(--orange); }
+
+  /* ── Cały schemat ── */
+  .schema-card { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 26px 22px; overflow-x: auto; }
+  .schema-card h2 { font-size: 20px; letter-spacing: -0.02em; }
+  .schema-card .sub { font-size: 13.5px; color: var(--text-2); margin: 2px 0 18px; }
+  .schema { min-width: 1080px; }
+  .s-row { display: flex; align-items: stretch; }
+  .arrow { flex: 0 0 18px; display: flex; align-items: center; justify-content: center; color: var(--text-3); }
+  .node { flex: 0 0 140px; width: 140px; text-align: left; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; box-shadow: var(--shadow-btn); }
+  .node:hover { transform: translateY(-2px); }
+  .node .n { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; background: var(--blue-tint); color: var(--blue); margin-bottom: 4px; }
+  .node.C .n { background: var(--green-tint); color: var(--green-text); }
+  .node.A .n { background: var(--red-tint); color: var(--red); }
+  .node.B .n { background: var(--orange-tint); color: var(--orange-text); }
+  .node .t { font-size: 13px; font-weight: 650; line-height: 1.3; }
+  .node .d { font-size: 11.5px; color: var(--text-3); line-height: 1.35; margin-top: 3px; }
+  .node.current { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,113,227,0.2); }
+  .node.done { border-color: color-mix(in srgb, var(--green) 55%, transparent); }
+  .lanes { margin-top: 22px; padding-left: 18px; border-left: 1.5px solid var(--line-strong); display: flex; flex-direction: column; gap: 14px; }
+  .lanes-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); }
+  .lane { display: flex; align-items: center; position: relative; }
+  .lane::before { content: ""; position: absolute; left: -18px; top: 50%; width: 14px; border-top: 1.5px solid var(--line-strong); }
+  .lane .lane-pill { min-width: 112px; text-align: center; margin-right: 8px; }
+  .fork { display: flex; align-items: center; }
+  .fork::before { content: ""; width: 10px; align-self: stretch; margin: 18px 0; border: 1.5px solid var(--line-strong); border-right: 0; border-radius: 8px 0 0 8px; }
+  .fork.join::after { content: ""; width: 10px; align-self: stretch; margin: 18px 0; border: 1.5px solid var(--line-strong); border-left: 0; border-radius: 0 8px 8px 0; }
+  .fork-col { display: flex; flex-direction: column; gap: 10px; }
+
+  /* ── Blokada hasłem ── */
+  .lock { position: fixed; inset: 0; z-index: 100; background: var(--bg); display: grid; place-items: center; padding: 20px; }
+  .lock[hidden] { display: none; }
+  .lock-card { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 32px 28px; width: 100%; max-width: 360px; text-align: center; }
+  .lock-card h2 { font-size: 22px; margin: 12px 0 6px; }
+  .lock-card p { font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+  .lock-card input { width: 100%; font-size: 16px; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line-strong); background: var(--surface); color: var(--text); margin-bottom: 10px; }
+  .lock-card .btn { width: 100%; }
+  .lock-err { color: var(--red); font-size: 13.5px; margin-top: 10px; }
+  .lock .brand-mark { margin: 0 auto; width: 44px; height: 44px; border-radius: 12px; font-size: 15px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand"><span class="brand-mark">HI</span><span>Schemat rozmowy</span></div>
+    <div class="spacer"></div>
+    <nav class="tabs" id="tabs">
+      <button data-tab="rozmowa" class="active"><span class="long">Prowadź rozmowę</span><span class="short">Rozmowa</span></button>
+      <button data-tab="schemat"><span class="long">Cały schemat</span><span class="short">Schemat</span></button>
+    </nav>
+    <div class="spacer"></div>
+    <button class="btn-chip" id="btn-reset">Od nowa</button>
+  </div>
+</header>
+
+<main>
+  <section class="view" id="view-rozmowa">
+    <div class="progress" id="progress"></div>
+    <div class="topbar"><button class="btn-back" id="btn-back">‹ Wstecz</button></div>
+    <div id="stage"></div>
+  </section>
+  <section class="view" id="view-schemat" hidden>
+    <div class="schema-card">
+      <h2>Schemat rozmowy</h2>
+      <p class="sub">Linia główna od przywitania do stanowiska dłużnika, potem jedna z trzech ścieżek. Kliknij etap, żeby otworzyć jego kartę.</p>
+      <div class="schema" id="schema"></div>
+    </div>
+  </section>
+</main>
+
+<div class="lock" id="lock" hidden>
+  <div class="lock-card">
+    <div class="brand-mark">HI</div>
+    <h2>Schemat rozmowy</h2>
+    <p>Dostęp dla zespołu Hadyński Inkaso. Wpisz hasło.</p>
+    <form id="lock-form" autocomplete="off">
+      <input type="password" id="lock-input" placeholder="Hasło" aria-label="Hasło">
+      <button class="btn primary" type="submit">Odblokuj</button>
+    </form>
+    <p class="lock-err" id="lock-err" hidden>Nieprawidłowe hasło.</p>
+  </div>
+</div>
+
+<script>
+/* ═══ Etapy — wg schematu Mikołaja (Lucid). Teksty z rozpisu etapów w czacie. ═══
+   Bloki: say = Powiedz, ask = Dopytaj (lista), if = sytuacja warunkowa, sank = lista krótkich opisów sankcji.
+   [tekst] = do uzupełnienia przez windykatora. */
+const STAGES = {
+  s1: { lane:null, num:"1", title:"Przywitanie", short:"Przedstaw się krótko",
+    cel:"przedstawić się krótko, bez wstępów.",
+    blocks:[ {type:"say", text:"Dzień dobry, [imię], Hadyński Inkaso."} ],
+    tip:"jedno zdanie i od razu identyfikacja — nie tłumacz się, po co dzwonisz.",
+    next:["s2"] },
+  s2: { lane:null, num:"2", title:"Identyfikacja", short:"Właściwa osoba + jej imię",
+    cel:"upewnić się, że rozmawiasz z właściwą osobą, i poznać jej imię.",
+    blocks:[
+      {type:"say", text:"Czy rozmawiam z Panem [imię i nazwisko] / z firmą [nazwa]?"},
+      {type:"say", text:"Jak mogę się do Pana zwracać?"},
+      {type:"if", label:"Gdy odbiera ktoś inny", text:"Kto u Państwa decyduje o płatnościach? Poproszę o bezpośredni numer do tej osoby."},
+      {type:"if", label:"Gdy słyszysz „to nie ja”", text:"Ten numer jest podany w sprawie firmy [nazwa]. Co Pana łączy z tą firmą?"}
+    ],
+    tip:"bez pewności, że to właściwa osoba, nie mówisz o sprawie.",
+    next:["s3"] },
+  s3: { lane:null, num:"3", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
+    cel:"powiedzieć, o co chodzi — w jednym zdaniu.",
+    blocks:[ {type:"say", text:"Dzwonię w sprawie nieopłaconej należności dla [wierzyciel] na kwotę [kwota]."} ],
+    tip:"tylko fakty: wierzyciel, kwota, termin. Bez pytania o płatność na tym etapie.",
+    next:["s4"] },
+  s4: { lane:null, num:"4", title:"Plan rozmowy", short:"Co powiem, o co zapytam",
+    cel:"powiedzieć, jak będzie wyglądała rozmowa — żeby dłużnik słuchał, a nie się bronił.",
+    blocks:[ {type:"say", text:"Najpierw krótko powiem Panu, co już się wydarzyło w sprawie i co jest zaplanowane dalej. Potem chcę poznać Pana stanowisko i razem ustalić, jak to zamknąć. Czy to dla Pana jasne?"} ],
+    tip:"pytasz „czy jasne”, nie „czy mogę” — nie prosisz o zgodę na rozmowę.",
+    next:["s5"] },
+  s5: { lane:null, num:"5", title:"Sankcje zrealizowane", short:"Krótki opis wymagany",
+    cel:"pokazać, że sprawa już się toczy.",
+    blocks:[
+      {type:"say", label:"Powiedz — krótki opis (wymagany)", text:"W Pana sprawie już [sankcja zrealizowana] — co oznacza, że [skutek w jednym zdaniu]."},
+      {type:"sank", label:"Krótkie opisy do wyboru", items:[
+        ["Sprzedaż długu", "Dług jest wystawiony na sprzedaż na giełdzie — oferta jest publiczna."],
+        ["Wizytówka Google", "Zostawiliśmy prośbę o kontakt w Pana wizytówce Google."],
+        ["BIG", "Wychodzą SMS-y z odliczaniem do wpisu do BIG-u."],
+        ["Urząd skarbowy", "Zawiadomiliśmy urząd skarbowy o weryfikacji zaksięgowania faktury."]
+      ]},
+      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Gdy dłużnik dopytuje albo słucha — rozwiń, co ta sankcja oznacza dla jego firmy."}
+    ],
+    tip:"mów tylko o tym, co w tej sprawie faktycznie się wydarzyło.",
+    next:["s6"] },
+  s6: { lane:null, num:"6", title:"Sankcje zaplanowane", short:"Krótki opis wymagany + data",
+    cel:"pokazać, co się stanie, jeśli nic się nie zmieni — i kiedy.",
+    blocks:[
+      {type:"say", label:"Powiedz — krótki opis (wymagany)", text:"Kolejny krok to [sankcja zaplanowana] — [data]."},
+      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Dla Pana firmy oznacza to [skutek]."}
+    ],
+    tip:"jedna najbliższa sankcja z datą działa mocniej niż cała lista.",
+    next:["s7"] },
+  s7: { lane:null, num:"7", title:"Stanowisko dłużnika", short:"Oddaj głos — reakcja wybiera ścieżkę",
+    cel:"oddać głos dłużnikowi — jego odpowiedź wybiera dalszą ścieżkę.",
+    blocks:[ {type:"say", text:"Tak to wygląda z naszej strony. Jak Pan to widzi?"} ],
+    tip:"po pytaniu milczysz. Rozmówca wybiera ścieżkę: chce zapłacić, neguje albo nie ma środków.",
+    paths:{ label:"Co odpowiedział dłużnik?", items:[
+      {to:"c1", lane:"C", t:"Chce zapłacić", d:"Deklaracja chęci spłaty"},
+      {to:"a1", lane:"A", t:"Neguje", d:"Nie zgadza się z należnością"},
+      {to:"b1", lane:"B", t:"Nie ma środków", d:"„Nie mam pieniędzy”"}
+    ]} },
+
+  c1: { lane:"C", num:"C1", title:"Deklaracja chęci spłaty", short:"Całość? Dziś?",
+    cel:"zamienić „zapłacę” na konkret.",
+    blocks:[ {type:"say", text:"Dobrze to słyszeć. Doprecyzujmy: cała kwota [kwota] i przelew dzisiaj?"} ],
+    tip:"deklaracja bez kwoty i daty to nie deklaracja.",
+    paths:{ label:"Co odpowiedział?", two:true, items:[
+      {to:"c2a", lane:"C", t:"Tak — całość, dziś", d:"Deklaracja spłaty całości"},
+      {to:"c2b", lane:"C", t:"Nie dziś / nie całość", d:"Negocjacje"}
+    ]} },
+  c2a: { lane:"C", num:"C2", title:"Deklaracja spłaty całości", short:"Rachunek od nas, potwierdzenie do 15:00",
+    cel:"dopiąć szczegóły wpłaty.",
+    blocks:[ {type:"say", text:"Wyślę Panu mailem i SMS-em dane do przelewu. Proszę wpłacić na rachunek od nas, nie z faktury — wtedy od razu widzę wpłatę. Potwierdzenie przelewu poproszę dziś do 15:00."} ],
+    tip:"działasz dopiero po otrzymaniu potwierdzenia przelewu.",
+    next:["c3"] },
+  c2b: { lane:"C", num:"C2", title:"Negocjacje", short:"Dokładny dzień i kwota",
+    cel:"gdy nie płaci dziś albo nie całość — ustalić dokładny termin i kwotę.",
+    blocks:[
+      {type:"say", text:"Którego dokładnie dnia robi Pan przelew i na jaką kwotę?"},
+      {type:"if", label:"Gdy termin wypada po kolejnej sankcji", text:"Na [data] mamy zaplanowane [sankcja]. Żeby to wstrzymać, potrzebuję wpłaty — albo jej części — przed tym dniem. Ile jest Pan w stanie wpłacić do [data]?"}
+    ],
+    tip:"termin ustalasz zawsze przed najbliższą sankcją.",
+    next:["c3"] },
+  c3: { lane:"C", num:"C3", title:"Konkretna deklaracja", short:"Kwota + data powtórzone",
+    cel:"zamknąć rozmowę na powtórzonym konkrecie.",
+    blocks:[ {type:"say", text:"Czyli jesteśmy umówieni: [kwota] do [data], potwierdzenie przelewu mailem. Dziękuję."} ],
+    tip:"dłużnik ma usłyszeć kwotę i datę jeszcze raz — Twoimi słowami.",
+    end:true },
+
+  a1: { lane:"A", num:"A1", title:"Negacja", short:"Rozbrojenie — jesteś mediatorem",
+    cel:"rozbroić napięcie — jesteś mediatorem, nie przeciwnikiem.",
+    blocks:[
+      {type:"say", text:"Rozumiem, że może się Pan z tym nie zgadzać. Moją rolą jest to wyjaśnić — proszę mi powiedzieć szerzej, z czym się Pan nie zgadza."},
+      {type:"if", label:"Gdy odsyła do prawnika", text:"Rozumiem. W takim razie Pana prawnik powinien odnieść się do naszego roszczenia — czy już się z nami kontaktował?"}
+    ],
+    tip:"nie dyskutujesz z zarzutami — zbierasz je.",
+    next:["a2"] },
+  a2: { lane:"A", num:"A2", title:"Stanowisko dłużnika", short:"Czy, jak, kiedy zgłaszał; całość czy część",
+    cel:"poznać fakty.",
+    blocks:[ {type:"ask", label:"Dopytaj", items:[
+      "Czy zgłaszał uwagi klientowi?",
+      "Jak i kiedy to zgłaszał?",
+      "Czy na piśmie albo mailem?",
+      "Z całością czy z częścią kwoty się nie zgadza — z jaką kwotą?"
+    ]} ],
+    tip:"przy sporze o część — część bezsporna jest do zapłaty od razu.",
+    next:["a3"] },
+  a3: { lane:"A", num:"A3", title:"Pozyskanie stanowiska mailowo", short:"Mail jeszcze dziś",
+    cel:"dostać stanowisko na piśmie — jeszcze dziś.",
+    blocks:[
+      {type:"say", text:"Żebym mógł to wyjaśnić z klientem i wstrzymać działania, potrzebuję Pana stanowiska mailem — razem z korespondencją, jeśli była. Wyśle mi Pan to dzisiaj?"},
+      {type:"if", label:"Przy sporze o część kwoty", text:"Część, z którą się Pan zgadza — [kwota bezsporna] — proszę wpłacić od razu, a resztę wyjaśniam."}
+    ],
+    tip:"bez maila nie ma czego wyjaśniać — a działania trwają dalej.",
+    next:["a4"] },
+  a4: { lane:"A", num:"A4", title:"Wyjaśnienie z klientem", short:"Zarzuty do klienta punkt po punkcie",
+    cel:"przekazać zarzuty klientowi i wrócić z odpowiedzią.",
+    blocks:[ {type:"say", label:"Powiedz dłużnikowi", text:"Mam Pana stanowisko. Przekazuję je klientowi i wracam do Pana z odpowiedzią do [data]."} ],
+    tip:"klientowi przekazujesz zarzuty punkt po punkcie i prosisz o dokumenty.",
+    next:["a5"], nextLabel:"Odpowiedź klienta jest — dalej: Rozstrzygnięcie sporu ›", endToo:true },
+  a5: { lane:"A", num:"A5", title:"Rozstrzygnięcie sporu", short:"Odpowiedź klienta → kwota + data",
+    cel:"wrócić z odpowiedzią klienta i zamknąć konkretem.",
+    blocks:[
+      {type:"if", label:"Klient podtrzymuje roszczenie", text:"Klient odniósł się do Pana zarzutów i podtrzymuje roszczenie. Żeby zatrzymać działania, potrzebuję wpłaty [kwota] do [data]."},
+      {type:"if", label:"Klient przyznał rację w części", text:"Klient w części przyznał Panu rację — do zapłaty zostaje [kwota]. Do kiedy Pan to ureguluje?"}
+    ],
+    tip:"zawsze kończysz na kwocie i dacie.",
+    end:true },
+
+  b1: { lane:"B", num:"B1", title:"Brak hajsu", short:"Potwierdź wolę zapłaty",
+    cel:"nie przyjąć „nie mam” jako końca rozmowy.",
+    blocks:[
+      {type:"say", text:"Dobrze rozumiem, że chce Pan to uregulować, tylko na ten moment nie ma Pan środków?"},
+      {type:"if", label:"Po jego „tak”", text:"Dziękuję, że mówi Pan wprost — wtedy łatwiej znaleźć wyjście."}
+    ],
+    tip:"najpierw potwierdzenie woli zapłaty, potem szczegóły.",
+    next:["b2"] },
+  b2: { lane:"B", num:"B2", title:"Analiza finansowa", short:"Skąd brak, jakie wpływy, kiedy",
+    cel:"zrozumieć, z czego realnie może zapłacić.",
+    blocks:[ {type:"ask", label:"Dopytaj", items:[
+      "Co się stało, że brakuje środków?",
+      "Czy firma ma bieżące wpływy?",
+      "Kiedy spodziewa się Pan najbliższych pieniędzy — i ile?",
+      "Czy ma Pan inne zaległości?"
+    ]} ],
+    tip:"pytasz o fakty. Nigdy „czy da Pan radę coś wpłacić” — odpowie „nie”.",
+    next:["b3"] },
+  b3: { lane:"B", num:"B3", title:"Negocjacje", short:"Start wysoko, minimum połowa",
+    cel:"wpłata jeszcze dziś. Startujesz wysoko, minimum to połowa kwoty.",
+    blocks:[
+      {type:"say", text:"Są dwa rozwiązania. Albo sprawa idzie dalej i sankcje utrudnią Panu zdobycie pieniędzy, albo wpłata, która pokaże Pana dobre intencje. Jaką kwotę wpłaci Pan dzisiaj?"},
+      {type:"if", label:"Gdy podaje za mało", text:"Klient zgodził się, że pierwsza wpłata może w ostateczności wynieść połowę — [50% kwoty]. Na tej podstawie mogę wystąpić o wstrzymanie działań."}
+    ],
+    tip:"kwotę stawiasz na stole jako oczywistość — nie pytasz, czy da radę.",
+    paths:{ label:"Jak skończyły się negocjacje?", two:true, items:[
+      {to:"b4a", lane:"B", t:"Jest kwota i data", d:"Konkretna deklaracja"},
+      {to:"b4b", lane:"B", t:"Brak porozumienia", d:"Przypomnienie sankcji"}
+    ]} },
+  b4a: { lane:"B", num:"B4", title:"Konkretna deklaracja", short:"Kwota + data, SMS z podsumowaniem",
+    cel:"zamknąć ustalenia na kwocie i dacie.",
+    blocks:[ {type:"say", text:"Umawiamy się: [kwota] do [data]. Wyślę SMS z podsumowaniem i danymi do przelewu — po wpłacie proszę o potwierdzenie mailem."} ],
+    tip:"każda wpłata, nawet częściowa, to Twój argument za wstrzymaniem sankcji.",
+    end:true },
+  b4b: { lane:"B", num:"B4", title:"Przypomnienie sankcji zrealizowanych oraz zaplanowanych", short:"Co już było, co dalej, ostatnie pytanie o kwotę",
+    cel:"gdy nie ma porozumienia — dłużnik kończy rozmowę z jasnym obrazem sytuacji.",
+    blocks:[ {type:"say", text:"Brak środków nie wstrzymuje sprawy. Już [sankcja zrealizowana], a jeśli do [data] nie wpłynie choćby [minimalna kwota], kolejnym krokiem będzie [sankcja zaplanowana]. Nawet niewielka wpłata daje mi podstawę, żeby to zatrzymać. Ile jest Pan w stanie zebrać do tego dnia?"} ],
+    tip:"ostatnie pytanie zawsze o kwotę i termin.",
+    next:["b4a"], nextLabel:"Jednak podaje kwotę → Konkretna deklaracja ›", endToo:true }
+};
+const MAIN = ["s1","s2","s3","s4","s5","s6","s7"];
+const LANES = {
+  C: { label:"Chce zapłacić", steps:["c1", ["c2a","c2b"], "c3"] },
+  A: { label:"Negacja",       steps:["a1","a2","a3","a4","a5"] },
+  B: { label:"Brak środków",  steps:["b1","b2","b3", ["b4a","b4b"]] }
+};
+
+/* ═══ Stan ═══ */
+const state = { current:"s1", path:["s1"] };
+const $ = id => document.getElementById(id);
+function esc(s) { return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function txt(s) { return esc(s).replace(/\[([^\]]+)\]/g, '<span class="ph">[$1]</span>'); }
+function laneOf(id) { return STAGES[id] ? STAGES[id].lane : null; }
+
+function go(id) {
+  const i = state.path.indexOf(id);
+  if (i >= 0) state.path = state.path.slice(0, i + 1);
+  else state.path.push(id);
+  state.current = id;
+  showTab("rozmowa");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+function back() {
+  if (state.path.length < 2) return;
+  state.path.pop();
+  state.current = state.path[state.path.length - 1];
+  render();
+}
+function reset() { state.current = "s1"; state.path = ["s1"]; showTab("rozmowa"); }
+
+/* ═══ Render: pasek postępu ═══ */
+function renderProgress() {
+  const done = new Set(state.path.slice(0, -1));
+  const lane = laneOf(state.current);
+  const step = id => {
+    const s = STAGES[id];
+    const cls = id === state.current ? "current " + (s.lane || "") : (done.has(id) ? "done" : "");
+    return `<button class="step ${cls}" data-go="${id}" title="${esc(s.short)}"><span class="n">${s.num}</span>${esc(s.title)}</button>`;
+  };
+  const sep = '<span class="sep">›</span>';
+  let html = MAIN.map(step).join(sep);
+  if (lane) {
+    html += sep + `<span class="lane-pill ${lane}">${LANES[lane].label}</span>`;
+    LANES[lane].steps.forEach(st => {
+      html += sep + (Array.isArray(st) ? st.map(step).join('<span class="or">lub</span>') : step(st));
+    });
+  } else {
+    html += `<span class="hint">→ dalej ścieżka wg stanowiska dłużnika</span>`;
+  }
+  $("progress").innerHTML = `<div class="progress-head"><span>Gdzie jesteś w rozmowie</span><button data-tab="schemat">Cały schemat ›</button></div><div class="track">${html}</div>`;
+  const cur = $("progress").querySelector(".step.current"), track = $("progress").querySelector(".track");
+  if (cur && track.scrollWidth > track.clientWidth) track.scrollLeft = cur.offsetLeft - track.offsetLeft - 40;
+}
+
+/* ═══ Render: karta etapu ═══ */
+function renderBlock(b) {
+  if (b.type === "say") return `<div class="say"><div class="label">${esc(b.label || "Powiedz")}</div>${txt(b.text)}</div>`;
+  if (b.type === "if")  return `<div class="say if"><div class="label">${esc(b.label)}</div>${txt(b.text)}</div>`;
+  if (b.type === "ask") return `<div class="list"><div class="label">${esc(b.label)}</div><ul>${b.items.map(i => `<li><span>${txt(i)}</span></li>`).join("")}</ul></div>`;
+  if (b.type === "sank") return `<div class="list sank"><div class="label">${esc(b.label)}</div><ul>${b.items.map(([t, d]) => `<li><span><b>${esc(t)}:</b> ${txt(d)}</span></li>`).join("")}</ul></div>`;
+  return "";
+}
+function renderStage() {
+  const id = state.current, s = STAGES[id];
+  const eyebrow = s.lane ? `${LANES[s.lane].label} · ${s.num}` : `Etap ${s.num} z ${MAIN.length}`;
+  let actions = "";
+  if (s.paths) {
+    actions = `<div class="actions-label">${esc(s.paths.label)}</div><div class="paths${s.paths.two ? " two" : ""}">` +
+      s.paths.items.map(p => `<button class="path ${p.lane}" data-go="${p.to}"><span class="t">${esc(p.t)}</span><span class="d">${esc(p.d)}</span></button>`).join("") + `</div>`;
+  } else {
+    const btns = [];
+    if (s.next) btns.push(`<button class="btn primary" data-go="${s.next[0]}">${esc(s.nextLabel || "Dalej: " + STAGES[s.next[0]].title + " ›")}</button>`);
+    if (s.end || s.endToo) btns.push(`<button class="btn ${s.next ? "secondary" : "primary"}" data-action="reset">Zakończ rozmowę</button>`);
+    if (s.end && s.lane) btns.push(`<button class="btn secondary" data-go="s7">‹ Inna reakcja dłużnika</button>`);
+    actions = `<div class="row">${btns.join("")}</div>`;
+  }
+  $("stage").innerHTML = `<div class="card">
+    <span class="eyebrow ${s.lane || ""}">${esc(eyebrow)}</span>
+    <h1>${esc(s.title)}</h1>
+    <div class="goal"><b>Cel:</b> ${txt(s.cel)}</div>
+    ${s.blocks.map(renderBlock).join("")}
+    <div class="tip"><b>Wskazówka</b><span>${txt(s.tip)}</span></div>
+    <div class="actions">${actions}</div>
+  </div>`;
+  $("btn-back").disabled = state.path.length < 2;
+}
+
+/* ═══ Render: cały schemat ═══ */
+function renderSchema() {
+  const done = new Set(state.path.slice(0, -1));
+  const node = id => {
+    const s = STAGES[id];
+    const cls = ["node", s.lane || "", id === state.current ? "current" : "", done.has(id) ? "done" : ""].join(" ");
+    return `<button class="${cls}" data-go="${id}"><span class="n">${s.num}</span><div class="t">${esc(s.title)}</div><div class="d">${esc(s.short)}</div></button>`;
+  };
+  const arrow = '<div class="arrow">›</div>';
+  const lanes = ["C","A","B"].map(l => {
+    const steps = LANES[l].steps;
+    return `<div class="lane"><span class="lane-pill ${l}">${LANES[l].label}</span>` + steps.map((st, i) => Array.isArray(st)
+      ? `<div class="fork${i < steps.length - 1 ? " join" : ""}"><div class="fork-col">${st.map(node).join("")}</div></div>`
+      : node(st)).join(arrow) + `</div>`;
+  }).join("");
+  $("schema").innerHTML = `<div class="s-row">${MAIN.map(node).join(arrow)}</div>
+    <div class="lanes"><div class="lanes-label">Po „Stanowisku dłużnika” — ścieżka zależy od jego odpowiedzi</div>${lanes}</div>`;
+}
+
+function render() { renderProgress(); renderStage(); }
+function showTab(tab) {
+  document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
+  $("view-rozmowa").hidden = tab !== "rozmowa";
+  $("view-schemat").hidden = tab !== "schemat";
+  if (tab === "rozmowa") render(); else renderSchema();
+}
+
+/* ═══ Zdarzenia ═══ */
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-go]");
+  if (g) { go(g.dataset.go); return; }
+  const t = e.target.closest("[data-tab]");
+  if (t) { showTab(t.dataset.tab); window.scrollTo({ top: 0 }); return; }
+  if (e.target.closest("[data-action='reset']")) reset();
+});
+$("btn-back").addEventListener("click", back);
+$("btn-reset").addEventListener("click", reset);
+
+/* ═══ Blokada hasłem — ten sam klucz co skrypt główny ═══ */
+const LOCK_KEY = "hi_skrypt_lock_v1", LOCK_HASH = "1ngi4qo";
+function lockHash(str) { let x = 5381; for (let i = 0; i < str.length; i++) x = ((x * 33) ^ str.charCodeAt(i)) >>> 0; return x.toString(36); }
+(function initLock() {
+  let ok = false;
+  try { ok = localStorage.getItem(LOCK_KEY) === LOCK_HASH; } catch {}
+  const urlKey = decodeURIComponent(location.hash.replace("#", "")).trim();
+  if (!ok && urlKey && lockHash(urlKey) === LOCK_HASH) { try { localStorage.setItem(LOCK_KEY, LOCK_HASH); } catch {} ok = true; }
+  if (ok) return;
+  $("lock").hidden = false;
+  setTimeout(() => $("lock-input").focus(), 50);
+  $("lock-form").addEventListener("submit", e => {
+    e.preventDefault();
+    if (lockHash($("lock-input").value.trim()) === LOCK_HASH) {
+      try { localStorage.setItem(LOCK_KEY, LOCK_HASH); } catch {}
+      $("lock").hidden = true;
+    } else { $("lock-err").hidden = false; $("lock-input").select(); }
+  });
+})();
+
+render();
+</script>
+</body>
+</html>

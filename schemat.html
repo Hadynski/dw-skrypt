@@ -164,6 +164,34 @@
   .say.ask, .list.todo { background: var(--green-tint); }
   .list.todo li::before { content: "✓"; background: var(--card); color: var(--green-text); }
 
+  /* ── Reakcje „co może paść” ── */
+  .zasada { background: var(--red-tint); border-radius: 12px; padding: 9px 14px; font-size: 14.5px; margin-bottom: 16px; }
+  .zasada b { color: var(--red); }
+  .react { margin-bottom: 14px; }
+  .react-item { border: 1px solid var(--line); border-radius: 14px; margin-bottom: 8px; background: var(--card); scroll-margin-top: 80px; transition: box-shadow 0.3s; }
+  .react-item.flash { box-shadow: 0 0 0 3px var(--blue-tint), 0 0 0 5px var(--blue); }
+  .react-item[open] { border-color: var(--line-strong); }
+  .react-item summary { list-style: none; display: flex; align-items: center; gap: 10px; padding: 11px 14px; cursor: pointer; font-size: 15.5px; font-weight: 600; }
+  .react-item summary::-webkit-details-marker { display: none; }
+  .react-item .rk { flex: 0 0 auto; min-width: 30px; text-align: center; font-size: 11.5px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: var(--blue-tint); color: var(--blue); }
+  .react-item .rk.sub { background: var(--chip); color: var(--text-3); min-width: 22px; }
+  .react-item .rt { flex: 1; }
+  .react-item .chev { color: var(--text-3); transition: transform 0.2s; }
+  .react-item[open] > summary .chev { transform: rotate(90deg); }
+  .react-body { padding: 0 14px 12px; }
+  .react-body .say { font-size: 16.5px; }
+  .react-body .react .react-item { background: var(--surface); border-color: transparent; }
+  .react-body .react .react-item summary { font-size: 14.5px; padding: 9px 12px; }
+  .rgoal { background: var(--blue-tint); border-radius: 12px; padding: 9px 13px; font-size: 14.5px; margin-bottom: 10px; }
+  .rgoal b { color: var(--blue); }
+  .rnote { background: var(--orange-tint); border-radius: 12px; padding: 9px 13px; font-size: 14px; margin-top: 4px; }
+  .rnote b { color: var(--orange-text); }
+  .end { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; background: var(--green-tint); border-radius: 12px; padding: 9px 13px; font-size: 14.5px; margin: 4px 0 6px; }
+  .end b { color: var(--green-text); }
+  .end-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mini { border: none; cursor: pointer; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 6px 12px; background: var(--card); color: var(--text); box-shadow: var(--shadow-btn); }
+  .mini.primary { background: var(--blue); color: #fff; }
+
   /* ── Etapy robocze — po rozmowie ── */
   .robo-badge { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1.5px dashed var(--line-strong); color: var(--text-2); vertical-align: top; }
   .robo-note { background: var(--surface); border: 1.5px dashed var(--line-strong); border-radius: 14px; padding: 10px 14px; font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
@@ -263,21 +291,96 @@
    [tekst] = do uzupełnienia przez windykatora. */
 const STAGES = {
   s1: { lane:null, num:"1", title:"Przywitanie i identyfikacja", short:"Kim jesteś + właściwa osoba",
-    osiagnij:"Przedstawić się w jednym zdaniu i potwierdzić, że rozmawiasz z właściwą osobą — dłużnikiem albo osobą, która decyduje o płatnościach. Wychodzisz z tego etapu z imieniem rozmówcy.",
+    osiagnij:"Wiedzieć, z kim rozmawiasz, i mieć jego imię — albo wyjść z rozmowy z dojściem do właściwej osoby (numer do decydenta, umówiony termin, status świadka).",
     dlaczego:"O sprawie możesz rozmawiać tylko z właściwą osobą — rozmowa z kimś przypadkowym to stracony czas. Imię rozmówcy pozwala mówić do niego bezpośrednio, a to od pierwszej minuty buduje kontakt i obniża obronę.",
+    zasada:"Dopóki nie masz pewności, że to właściwa osoba — nie podajesz kwoty ani szczegółów sprawy.",
     blocks:[
-      {type:"say", text:"Dzień dobry, [imię], Hadyński Inkaso. Czy rozmawiam z Panem [imię i nazwisko] / z firmą [nazwa]?"},
-      {type:"say", label:"Powiedz — gdy potwierdzi", text:"Jak mogę się do Pana zwracać?"},
-      {type:"if", label:"Gdy odbiera ktoś inny", text:"Kto u Państwa decyduje o płatnościach? Poproszę o bezpośredni numer do tej osoby — załatwię to z nią i nie będę Pana więcej angażował."},
-      {type:"if", label:"Gdy słyszysz „to nie ja”", text:"Ten numer jest podany w sprawie firmy [nazwa]. Co Pana łączy z tą firmą?"}
+      {type:"say", label:"Otwarcie — firma", text:"Dzień dobry, [imię], Hadyński Inkaso — czy dodzwoniłem się do firmy [nazwa]?"},
+      {type:"say", label:"Otwarcie — osoba fizyczna", text:"Dzień dobry, [imię], Hadyński Inkaso — czy rozmawiam z Panem [imię i nazwisko]?"},
+      {type:"react", label:"Co może paść — kliknij to, co się dzieje", items:[
+        { key:"1A", title:"Potwierdza, że to on / że decyduje o płatnościach", body:[
+          {type:"say", text:"Czy mógłbym prosić o Pana imię, żeby nam się lepiej rozmawiało?"},
+          {type:"end", text:"masz imię → etap 2.", go:"s2"}
+        ]},
+        { key:"1B", title:"Potwierdza, ale nie chce podać imienia („A po co Panu?”)", body:[
+          {type:"say", text:"Żeby nie mówić do Pana bezosobowo — ale jeśli woli Pan nie podawać, nie ma problemu."},
+          {type:"end", text:"nie naciskasz → etap 2.", go:"s2"}
+        ]},
+        { key:"1C", title:"Pyta „Kto mówi? O co chodzi? Skąd Pan dzwoni?”, zanim potwierdzi", body:[
+          {type:"say", text:"[imię], Hadyński Inkaso — dzwonię w sprawie, którą mogę omówić tylko z Panem [imię i nazwisko] / z osobą decydującą o płatnościach w firmie [nazwa]. Czy to Pan?"},
+          {type:"end", text:"potwierdza → 1A · odbiera ktoś inny → 1E · „to nie ja” → 1F.", jumps:["1A","1E","1F"]}
+        ]},
+        { key:"1D", title:"„Skąd macie mój numer?” — mówi dłużnik", body:[
+          {type:"say", text:"Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy [nazwa]. Skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem."},
+          {type:"end", text:"wracasz do potwierdzenia i imienia → 1A.", jumps:["1A"]}
+        ]},
+        { key:"1E", title:"Odbiera ktoś inny — sekretarka, pracownik, księgowa", body:[
+          {type:"goal", text:"Bezpośredni numer do decydenta. Jeśli się nie da — przekazana wiadomość + umówiony termin kolejnego telefonu."},
+          {type:"say", label:"1. Ustal, kto decyduje", text:"Rozumiem, nie będę zawracał Panu głowy niepotrzebnie — kto w firmie decyduje o płatnościach i sprawach tego typu?"},
+          {type:"say", label:"2. Poproś o numer", text:"Czy mogę prosić o bezpośredni numer do Pana [imię decydenta]? Załatwię temat bezpośrednio z nim i nie będę Pana więcej angażował."},
+          {type:"react", label:"Co dalej?", items:[
+            { title:"Daje numer", body:[ {type:"end", text:"dzwonisz do decydenta — od etapu 1."} ]},
+            { title:"Przełącza do decydenta", body:[ {type:"end", text:"zaczynasz od otwarcia — z nowym rozmówcą."} ]},
+            { title:"„Szefa nie ma” / „nie podam numeru”", body:[
+              {type:"say", label:"Wiadomość z wagą", text:"W takim razie będę miał do Pana prośbę, bo Pana pomoc jest tu naprawdę ważna. Proszę przekazać Panu [imię decydenta], że dzwonił [imię] z Hadyński Inkaso — w sprawie windykacyjnej prowadzonej na firmę [nazwa]. W tej sprawie są zaplanowane kolejne działania i one mają swój termin — a ja mam jeszcze możliwość je zatrzymać, ale tylko jeśli porozmawiam z Panem [imię decydenta], zanim ten termin minie."},
+              {type:"if", label:"Gdy wiadomość nie robi wrażenia — konkret", text:"W tej sprawie została już wdrożona [sankcja]. Dla firmy oznacza to [skutek]. Kolejny krok jest zaplanowany na [data] i jeszcze da się go zatrzymać — ale tylko wtedy, kiedy porozmawiam z osobą, która o płatnościach decyduje."},
+              {type:"say", label:"Termin", text:"Kiedy najlepiej go zastanę? … To umówmy się tak: zadzwonię [dzień, godzina]. Proszę uprzedzić Pana [imię decydenta], że będę dzwonił — i zapisać moje nazwisko: [imię], Hadyński Inkaso. Mogę na Pana liczyć?"},
+              {type:"end", text:"wiadomość przekazana + umówiony termin telefonu."}
+            ]},
+            { title:"„Proszę wysłać maila”", body:[
+              {type:"say", text:"Mogę wysłać, ale ta sprawa ma swój termin — dlatego potrzebuję rozmowy z Panem [imię decydenta]. Na jaki adres wysłać i kiedy go zastanę?"},
+              {type:"end", text:"masz adres + termin telefonu."}
+            ]},
+            { title:"Łączy z księgową", body:[
+              {type:"say", text:"Skoro mam już Pana na linii — dwie krótkie rzeczy, czysto techniczne. Czy faktura [nr] jest u Państwa w systemie? I czy była do niej kiedykolwiek jakaś reklamacja albo korekta?"},
+              {type:"end", text:"zanotowane odpowiedzi → prośba o numer albo termin rozmowy z decydentem."}
+            ]}
+          ]},
+          {type:"note", text:"Sekretarka, która czuje się ważna, otwiera drzwi; naciskana — ich broni. Nie omawiasz z nią kwot ani dokumentów — tylko waga i termin."}
+        ]},
+        { key:"1F", title:"„To nie ja” / „pomyłka” / „nie znam tej firmy”", body:[
+          {type:"goal", text:"„Pomyłka” nie kończy rozmowy. Wychodzisz z jednym z trzech: rozmówca mówi, co go łączy z firmą (status świadka), obiecuje maila (ślad) albo zgadza się na SMS z linkiem do giełdy."},
+          {type:"say", label:"1. Wyjaśnij", text:"Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy [nazwa]. Wiem, że taki telefon może być zaskoczeniem — ale skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem."},
+          {type:"say", label:"2. Giełda + dwie drogi", text:"Dług firmy [nazwa] jest już oficjalnie na sprzedaż — oferta wisi publicznie na giełdzie długów. Mogę Panu podesłać link SMS-em — takie oferty najszybciej wyłapują ludzie z otoczenia firmy. Jeśli chodzi o Pana numer w sprawie, są dwa wyjścia. Albo mail z prośbą o usunięcie numeru — dział to rozpatrzy, ale do tego czasu dzwonimy. Albo daje nam Pan znać, co Pana łączy z tą firmą — i wpisuję Pana jako świadka. Do świadka nie dzwonimy w sprawie zapłaty. Którą drogą chciałby to Pan załatwić?"},
+          {type:"react", label:"Co dalej?", items:[
+            { title:"„Znam właściciela” / „pracowałem tam”", body:[
+              {type:"say", text:"Dziękuję, wpisuję Pana jako świadka. Ma Pan może aktualny kontakt do osoby, która prowadzi firmę?"},
+              {type:"end", text:"status świadka + (jeśli się uda) kontakt do dłużnika."}
+            ]},
+            { title:"„Nic mnie nie łączy”", body:[
+              {type:"say", text:"Rozumiem. W takim razie proszę o maila z prośbą o usunięcie numeru — wtedy dział to rozpatrzy. Podesłać Panu link do oferty SMS-em?"},
+              {type:"end", text:"obiecany mail + zgoda na SMS (albo odmowa — zapisz w sprawie)."}
+            ]},
+            { title:"W trakcie przyznaje, że to jednak on", body:[
+              {type:"end", text:"→ 1A, potem etap 2.", jumps:["1A"]}
+            ]}
+          ]},
+          {type:"note", text:"Załóż, że rozmówca może być dłużnikiem, który ucieka od tematu. Nie oskarżaj — link z giełdy działa w obie strony: dla przypadkowej osoby to oferta zakupu, dla dłużnika informacja, że jego dług wisi publicznie."}
+        ]},
+        { key:"1G", title:"„To nie ja, dziękuję, do widzenia” — chce się rozłączyć", body:[
+          {type:"say", label:"Od razu, jednym tchem", text:"Rozumiem — jedno zdanie, zanim Pan się rozłączy: ten numer jest w sprawie firmy [nazwa] i będziemy pod niego dzwonić, dopóki nie wyjaśnimy, co Pana z nią łączy. Minuta teraz oszczędzi Panu kolejnych telefonów."},
+          {type:"react", label:"Co dalej?", items:[
+            { title:"Zostaje na linii", body:[ {type:"end", text:"→ 1F, punkt 2 (giełda + dwie drogi).", jumps:["1F"]} ]},
+            { title:"Rozłączył się", body:[ {type:"end", text:"notatka w sprawie + kolejna próba wg standardowego harmonogramu dzwonienia."} ]}
+          ]}
+        ]},
+        { key:"1H", title:"„Nie mam czasu” / „jestem w pracy” / „prowadzę” — po potwierdzeniu, że to on", body:[
+          {type:"say", text:"Nie ma Pan czasu, rozumiem — i właśnie dlatego ważne jest, żeby Pan dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej, szczególnie jeśli nie ma Pan obecnie czasu, bo to na ten czas wpłynie."},
+          {type:"if", label:"Gdy dalej nie może", text:"Kiedy mogę oddzwonić — dziś o [godzina]?"},
+          {type:"end", text:"rozmowa idzie dalej → etap 2 — albo umówiony konkretny termin telefonu.", go:"s2"}
+        ]},
+        { key:"1I", title:"Osoba fizyczna — odbiera ktoś z rodziny", body:[
+          {type:"say", text:"Dzwonię w sprawie, którą mogę omówić tylko z Panem [imię]. Kiedy najlepiej go zastanę?"},
+          {type:"end", text:"umówiony termin telefonu. Żadnych szczegółów sprawy."}
+        ]}
+      ]}
     ],
     wskazowki:[
       "Przywitanie to jedno zdanie — bez „przepraszam, że przeszkadzam” i bez tłumaczenia, po co dzwonisz.",
-      "Dopóki nie masz pewności, że to właściwa osoba, nie podajesz kwoty ani wierzyciela.",
       "Imienia rozmówcy używaj w całej rozmowie — szczególnie przy pytaniach.",
-      "Odebrał ktoś, kto nie decyduje? Wychodzisz z numerem do decydenta albo z umówionym terminem kolejnego telefonu."
+      "Każda reakcja ma swój koniec — nie kończ rozmowy, zanim do niego dojdziesz."
     ],
-    dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię.",
+    dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię (1A / 1B).",
     next:["s2"] },
   s2: { lane:null, num:"2", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
     osiagnij:"Powiedzieć w jednym zdaniu, w czyim imieniu dzwonisz i jakiej należności dotyczy rozmowa: wierzyciel, kwota, czego dotyczy.",
@@ -624,6 +727,17 @@ function renderProgress() {
 
 /* ═══ Render: karta etapu ═══ */
 function renderBlock(b) {
+  if (b.type === "react") {
+    const items = b.items.map(it => `<details class="react-item"${it.key ? ` id="r-${it.key}"` : ""}><summary>${it.key ? `<span class="rk">${esc(it.key)}</span>` : '<span class="rk sub">›</span>'}<span class="rt">${txt(it.title)}</span><span class="chev">›</span></summary><div class="react-body">${it.body.map(renderBlock).join("")}</div></details>`).join("");
+    return `<div class="react"><div class="label">${esc(b.label)}</div>${items}</div>`;
+  }
+  if (b.type === "end") {
+    const btns = (b.go ? [`<button class="mini primary" data-go="${b.go}">Dalej: ${esc(STAGES[b.go].title)} ›</button>`] : [])
+      .concat((b.jumps || []).map(k => `<button class="mini" data-jump="${k}">Przejdź do ${k} ›</button>`));
+    return `<div class="end"><span><b>Koniec:</b> ${txt(b.text)}</span>${btns.length ? `<span class="end-btns">${btns.join("")}</span>` : ""}</div>`;
+  }
+  if (b.type === "goal") return `<div class="rgoal"><b>Cel tej sytuacji:</b> ${txt(b.text)}</div>`;
+  if (b.type === "note") return `<div class="rnote"><b>Wskazówka:</b> ${txt(b.text)}</div>`;
   if (b.type === "say") return `<div class="say"><div class="label">${esc(b.label || "Powiedz")}</div>${txt(b.text)}</div>`;
   if (b.type === "if")  return `<div class="say if"><div class="label">${esc(b.label)}</div>${txt(b.text)}</div>`;
   if (b.type === "ask") return `<div class="list"><div class="label">${esc(b.label)}</div><ul>${b.items.map(i => `<li><span>${txt(i)}</span></li>`).join("")}</ul></div>`;
@@ -654,6 +768,7 @@ function renderStage() {
       <div class="goal-box"><h3>Co masz osiągnąć</h3>${txt(s.osiagnij)}</div>
       <div class="why-box"><h3>Dlaczego to ważne</h3>${txt(s.dlaczego)}</div>
     </div>
+    ${s.zasada ? `<div class="zasada"><b>Zasada:</b> ${txt(s.zasada)}</div>` : ""}
     <div class="sec-title">Teksty pomocnicze</div>
     ${s.blocks.map(renderBlock).join("")}
     <div class="tips"><h3>Wskazówki</h3><ul>${s.wskazowki.map(w => `<li>${txt(w)}</li>`).join("")}</ul></div>
@@ -696,7 +811,12 @@ document.addEventListener("click", e => {
   if (g) { go(g.dataset.go); return; }
   const t = e.target.closest("[data-tab]");
   if (t) { showTab(t.dataset.tab); window.scrollTo({ top: 0 }); return; }
-  if (e.target.closest("[data-action='reset']")) reset();
+  if (e.target.closest("[data-action='reset']")) { reset(); return; }
+  const j = e.target.closest("[data-jump]");
+  if (j) {
+    const el = $("r-" + j.dataset.jump);
+    if (el) { el.open = true; el.scrollIntoView({ behavior: "smooth", block: "start" }); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 1200); }
+  }
 });
 $("btn-back").addEventListener("click", back);
 $("btn-reset").addEventListener("click", reset);

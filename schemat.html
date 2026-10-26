@@ -53,25 +53,39 @@
   main { max-width: 1180px; margin: 0 auto; padding: 20px 16px 60px; }
   .view[hidden] { display: none; }
 
-  /* ── Pasek postępu ── */
-  .progress { background: var(--card); border-radius: 16px; box-shadow: var(--shadow-btn); padding: 10px 12px; margin-bottom: 14px; }
-  .progress-head { display: flex; justify-content: space-between; align-items: center; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 7px; }
-  .progress-head button { border: none; background: none; color: var(--blue); font-size: 12px; font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: 0; }
-  .track { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 3px; }
-  @media (max-width: 720px) { .track { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .track::-webkit-scrollbar { display: none; } }
-  .step { border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: var(--text-3); background: var(--chip); border-radius: 999px; padding: 4px 9px 4px 4px; white-space: nowrap; }
-  .step .n { min-width: 18px; height: 18px; padding: 0 4px; border-radius: 999px; background: var(--line-strong); color: #fff; font-size: 10px; font-weight: 700; display: inline-grid; place-items: center; }
-  .step.done { color: var(--text-2); }
-  .step.done .n { background: var(--green); }
-  .step.current { color: #fff; font-weight: 650; background: var(--blue); }
-  .step.current .n { background: #fff; color: var(--blue); }
-  .step.current.C { background: var(--green-text); } .step.current.C .n { color: var(--green-text); }
-  .step.current.A { background: var(--red); } .step.current.A .n { color: var(--red); }
-  .step.current.B { background: var(--orange); } .step.current.B .n { color: var(--orange); }
-  .step:not(.current):hover { background: var(--chip-hover); color: var(--text); }
-  .sep { color: var(--line-strong); font-size: 12px; }
-  .or { color: var(--text-3); font-size: 11px; }
-  .hint { font-size: 12px; color: var(--text-3); font-style: italic; padding-left: 3px; white-space: nowrap; }
+  /* ── Pasek postępu — stepper ── */
+  .progress { background: var(--card); border-radius: 18px; box-shadow: var(--shadow-btn); padding: 14px 16px 12px; margin-bottom: 16px; }
+  .progress-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+  .progress-head .now { font-size: 13.5px; color: var(--text-2); }
+  .progress-head .now b { color: var(--text); font-weight: 650; }
+  .progress-head button { border: none; background: none; color: var(--blue); font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .stepper { display: flex; align-items: flex-start; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .stepper::-webkit-scrollbar { display: none; }
+  .st { position: relative; flex: 1 0 92px; min-width: 92px; display: flex; flex-direction: column; align-items: center; gap: 6px; border: none; background: none; cursor: pointer; padding: 0 4px; color: var(--text-3); }
+  .st::before { content: ""; position: absolute; top: 13px; right: 50%; width: 100%; height: 2px; background: var(--line-strong); z-index: 0; }
+  .st:first-child::before { display: none; }
+  .st.done::before, .st.current::before { background: var(--green); }
+  .st .dot { position: relative; z-index: 1; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 11.5px; font-weight: 700; background: var(--card); border: 2px solid var(--line-strong); color: var(--text-3); transition: transform 0.2s; }
+  .st .nm { font-size: 12px; line-height: 1.3; text-align: center; font-weight: 500; max-width: 110px; }
+  .st:hover .dot { transform: scale(1.08); }
+  .st.done .dot { background: var(--green); border-color: var(--green); color: #fff; }
+  .st.done .nm { color: var(--text-2); }
+  .st.current .dot { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 0 0 5px var(--blue-tint); }
+  .st.current .nm { color: var(--text); font-weight: 700; }
+  .st.C.current .dot { background: var(--green-text); border-color: var(--green-text); box-shadow: 0 0 0 5px var(--green-tint); }
+  .st.A.current .dot { background: var(--red); border-color: var(--red); box-shadow: 0 0 0 5px var(--red-tint); }
+  .st.B.current .dot { background: var(--orange); border-color: var(--orange); box-shadow: 0 0 0 5px var(--orange-tint); }
+  .st.C .dot { border-color: color-mix(in srgb, var(--green) 55%, transparent); }
+  .st.A .dot { border-color: color-mix(in srgb, var(--red) 45%, transparent); }
+  .st.B .dot { border-color: color-mix(in srgb, var(--orange) 55%, transparent); }
+  .st.fork { cursor: default; }
+  .st.fork .dot { border-style: dashed; }
+  .lane-split { position: relative; z-index: 2; box-shadow: 0 0 0 6px var(--card); flex: 0 0 auto; align-self: flex-start; margin: 4px 6px 0; font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 9px; border-radius: 999px; white-space: nowrap; }
+  .lane-split.C { background: var(--green-tint); color: var(--green-text); }
+  .lane-split.A { background: var(--red-tint); color: var(--red); }
+  .lane-split.B { background: var(--orange-tint); color: var(--orange-text); }
+  .lane-split.none { background: var(--surface); color: var(--text-3); }
+  .lane-split + .st::before { display: none; }
   .lane-pill { font-size: 10.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap; }
   .lane-pill.C { background: var(--green-tint); color: var(--green-text); }
   .lane-pill.A { background: var(--red-tint); color: var(--red); }
@@ -128,6 +142,37 @@
   .path.C { border-color: color-mix(in srgb, var(--green) 45%, transparent); } .path.C .t::before { background: var(--green); }
   .path.A { border-color: color-mix(in srgb, var(--red) 40%, transparent); } .path.A .t::before { background: var(--red); }
   .path.B { border-color: color-mix(in srgb, var(--orange) 50%, transparent); } .path.B .t::before { background: var(--orange); }
+
+  /* ── Sekcje karty: co osiągnąć / dlaczego / wskazówki / dalej ── */
+  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+  @media (max-width: 720px) { .why { grid-template-columns: 1fr; } }
+  .why > div { border-radius: 14px; padding: 13px 16px; font-size: 15px; line-height: 1.5; }
+  .why .goal-box { background: var(--blue-tint); }
+  .why .why-box { background: var(--violet-tint); }
+  .why h3, .tips h3, .sec-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
+  .why .goal-box h3 { color: var(--blue); }
+  .why .why-box h3 { color: var(--violet-text); }
+  .sec-title { color: var(--text-3); margin: 4px 0 8px; }
+  .tips { background: var(--orange-tint); border-radius: 14px; padding: 13px 16px 11px; margin: 6px 0 14px; }
+  .tips h3 { color: var(--orange-text); }
+  .tips ul { list-style: none; }
+  .tips li { position: relative; padding: 3px 0 3px 18px; font-size: 14.5px; }
+  .tips li::before { content: ""; position: absolute; left: 3px; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+  .ready { display: flex; gap: 9px; align-items: flex-start; font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+  .ready b { color: var(--green-text); white-space: nowrap; }
+  .ready::before { content: "✓"; flex: 0 0 20px; height: 20px; border-radius: 50%; background: var(--green-tint); color: var(--green-text); font-size: 11px; font-weight: 800; display: grid; place-items: center; margin-top: 1px; }
+  .say.ask, .list.todo { background: var(--green-tint); }
+  .list.todo li::before { content: "✓"; background: var(--card); color: var(--green-text); }
+
+  /* ── Etapy robocze — po rozmowie ── */
+  .robo-badge { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1.5px dashed var(--line-strong); color: var(--text-2); vertical-align: top; }
+  .robo-note { background: var(--surface); border: 1.5px dashed var(--line-strong); border-radius: 14px; padding: 10px 14px; font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
+  .card.robo { border: 1.5px dashed var(--line-strong); }
+  .node.robo { border: 1.5px dashed var(--line-strong); background: var(--surface); box-shadow: none; }
+  .node .robo-tag { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3); margin-bottom: 2px; }
+  .st.robo .dot { border-style: dashed; }
+  .st.robo::before { background: repeating-linear-gradient(90deg, var(--line-strong) 0 5px, transparent 5px 9px) !important; }
+  .st .nm em { display: block; font-style: normal; font-size: 10px; color: var(--text-3); font-weight: 600; }
 
   /* ── Cały schemat ── */
   .schema-card { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 26px 22px; overflow-x: auto; }
@@ -192,7 +237,7 @@
   <section class="view" id="view-schemat" hidden>
     <div class="schema-card">
       <h2>Schemat rozmowy</h2>
-      <p class="sub">Linia główna od przywitania do stanowiska dłużnika, potem jedna z trzech ścieżek. Kliknij etap, żeby otworzyć jego kartę.</p>
+      <p class="sub">Pierwsza rozmowa z dłużnikiem: linia główna od przywitania do stanowiska dłużnika, potem jedna z trzech ścieżek. Etapy z przerywaną ramką dzieją się po rozmowie (robocze). Kliknij etap, żeby otworzyć jego kartę.</p>
       <div class="schema" id="schema"></div>
     </div>
   </section>
@@ -212,37 +257,59 @@
 </div>
 
 <script>
-/* ═══ Etapy — wg schematu Mikołaja (Lucid). Teksty z rozpisu etapów w czacie. ═══
-   Bloki: say = Powiedz, ask = Dopytaj (lista), if = sytuacja warunkowa, sank = lista krótkich opisów sankcji.
+/* ═══ Etapy — wg schematu Mikołaja (Lucid). Teksty do akceptu. ═══
+   Każdy etap: osiagnij (co masz osiągnąć), dlaczego, bloki z tekstami, wskazowki, dalej (kiedy przejść dalej).
+   Bloki: say = Powiedz, if = sytuacja warunkowa, ask = Dopytaj (lista), todo = Do zrobienia (lista), sank = krótkie opisy sankcji.
    [tekst] = do uzupełnienia przez windykatora. */
 const STAGES = {
-  s1: { lane:null, num:"1", title:"Przywitanie", short:"Przedstaw się krótko",
-    cel:"przedstawić się krótko, bez wstępów.",
-    blocks:[ {type:"say", text:"Dzień dobry, [imię], Hadyński Inkaso."} ],
-    tip:"jedno zdanie i od razu identyfikacja — nie tłumacz się, po co dzwonisz.",
-    next:["s2"] },
-  s2: { lane:null, num:"2", title:"Identyfikacja", short:"Właściwa osoba + jej imię",
-    cel:"upewnić się, że rozmawiasz z właściwą osobą, i poznać jej imię.",
+  s1: { lane:null, num:"1", title:"Przywitanie i identyfikacja", short:"Kim jesteś + właściwa osoba",
+    osiagnij:"Przedstawić się w jednym zdaniu i potwierdzić, że rozmawiasz z właściwą osobą — dłużnikiem albo osobą, która decyduje o płatnościach. Wychodzisz z tego etapu z imieniem rozmówcy.",
+    dlaczego:"O sprawie możesz rozmawiać tylko z właściwą osobą — rozmowa z kimś przypadkowym to stracony czas. Imię rozmówcy pozwala mówić do niego bezpośrednio, a to od pierwszej minuty buduje kontakt i obniża obronę.",
     blocks:[
-      {type:"say", text:"Czy rozmawiam z Panem [imię i nazwisko] / z firmą [nazwa]?"},
-      {type:"say", text:"Jak mogę się do Pana zwracać?"},
-      {type:"if", label:"Gdy odbiera ktoś inny", text:"Kto u Państwa decyduje o płatnościach? Poproszę o bezpośredni numer do tej osoby."},
+      {type:"say", text:"Dzień dobry, [imię], Hadyński Inkaso. Czy rozmawiam z Panem [imię i nazwisko] / z firmą [nazwa]?"},
+      {type:"say", label:"Powiedz — gdy potwierdzi", text:"Jak mogę się do Pana zwracać?"},
+      {type:"if", label:"Gdy odbiera ktoś inny", text:"Kto u Państwa decyduje o płatnościach? Poproszę o bezpośredni numer do tej osoby — załatwię to z nią i nie będę Pana więcej angażował."},
       {type:"if", label:"Gdy słyszysz „to nie ja”", text:"Ten numer jest podany w sprawie firmy [nazwa]. Co Pana łączy z tą firmą?"}
     ],
-    tip:"bez pewności, że to właściwa osoba, nie mówisz o sprawie.",
-    next:["s3"] },
-  s3: { lane:null, num:"3", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
-    cel:"powiedzieć, o co chodzi — w jednym zdaniu.",
-    blocks:[ {type:"say", text:"Dzwonię w sprawie nieopłaconej należności dla [wierzyciel] na kwotę [kwota]."} ],
-    tip:"tylko fakty: wierzyciel, kwota, termin. Bez pytania o płatność na tym etapie.",
+    wskazowki:[
+      "Przywitanie to jedno zdanie — bez „przepraszam, że przeszkadzam” i bez tłumaczenia, po co dzwonisz.",
+      "Dopóki nie masz pewności, że to właściwa osoba, nie podajesz kwoty ani wierzyciela.",
+      "Imienia rozmówcy używaj w całej rozmowie — szczególnie przy pytaniach.",
+      "Odebrał ktoś, kto nie decyduje? Wychodzisz z numerem do decydenta albo z umówionym terminem kolejnego telefonu."
+    ],
+    dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię.",
+    next:["s2"] },
+  s2: { lane:null, num:"2", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
+    osiagnij:"Powiedzieć w jednym zdaniu, w czyim imieniu dzwonisz i jakiej należności dotyczy rozmowa: wierzyciel, kwota, czego dotyczy.",
+    dlaczego:"Rozmówca musi od razu wiedzieć, o czym rozmawiacie. Krótki, rzeczowy komunikat brzmi pewnie i nie otwiera dyskusji, zanim przedstawisz cały obraz sprawy.",
+    blocks:[
+      {type:"say", text:"Dzwonię w imieniu [wierzyciel] w sprawie nieopłaconej należności na kwotę [kwota] — chodzi o [fakturę nr / usługę]."}
+    ],
+    wskazowki:[
+      "Same fakty: wierzyciel, kwota, czego dotyczy. Bez ocen i bez „niestety”.",
+      "Nie pytasz jeszcze o płatność ani o zdanie dłużnika — na to jest etap 5.",
+      "Od razu deklaruje spłatę? Nie hamuj go — przejdź prosto do ścieżki „Chce zapłacić” (przycisk niżej).",
+      "Od razu się nie zgadza? „Rozumiem, zaraz do tego dojdziemy” — i prowadzisz plan rozmowy."
+    ],
+    dalej:"rozmówca wie, kto dzwoni, w czyim imieniu i o jaką kwotę chodzi.",
+    next:["s3"], extra:[{to:"c1", label:"Od razu deklaruje spłatę → Chce zapłacić ›"}] },
+  s3: { lane:null, num:"3", title:"Plan rozmowy", short:"Co powiem, o co zapytam",
+    osiagnij:"Zapowiedzieć przebieg rozmowy w trzech krokach: co już się wydarzyło w sprawie, co jest zaplanowane, a potem stanowisko dłużnika i wspólne ustalenie, jak to zamknąć.",
+    dlaczego:"Rozmówca, który nie wie, do czego zmierza rozmowa, broni się i przerywa. Gdy zna plan, słucha do końca — a Ty dostajesz przestrzeń, żeby najpierw mówić Ty, a potem on.",
+    blocks:[
+      {type:"say", text:"Najpierw krótko powiem Panu, co już się wydarzyło w sprawie i co jest zaplanowane dalej. Potem chcę poznać Pana stanowisko i razem ustalić, jak to zamknąć. Czy to dla Pana jasne?"},
+      {type:"if", label:"Gdy przerywa: „nie mam czasu”", text:"Rozumiem — właśnie dlatego powiem krótko, co już się wydarzyło i co jest zaplanowane, żeby wiedział Pan, na czym stoi."}
+    ],
+    wskazowki:[
+      "Pytasz „Czy to dla Pana jasne?”, a nie „Czy mogę?” — nie prosisz o zgodę na rozmowę.",
+      "Mów spokojnie — plan ma brzmieć jak standardowa procedura, nie jak groźba.",
+      "Trzymaj się zapowiedzianej kolejności: sankcje zrealizowane → zaplanowane → stanowisko."
+    ],
+    dalej:"rozmówca przyjął plan („tak”, „dobrze”) albo nie protestuje.",
     next:["s4"] },
-  s4: { lane:null, num:"4", title:"Plan rozmowy", short:"Co powiem, o co zapytam",
-    cel:"powiedzieć, jak będzie wyglądała rozmowa — żeby dłużnik słuchał, a nie się bronił.",
-    blocks:[ {type:"say", text:"Najpierw krótko powiem Panu, co już się wydarzyło w sprawie i co jest zaplanowane dalej. Potem chcę poznać Pana stanowisko i razem ustalić, jak to zamknąć. Czy to dla Pana jasne?"} ],
-    tip:"pytasz „czy jasne”, nie „czy mogę” — nie prosisz o zgodę na rozmowę.",
-    next:["s5"] },
-  s5: { lane:null, num:"5", title:"Sankcje zrealizowane", short:"Krótki opis wymagany",
-    cel:"pokazać, że sprawa już się toczy.",
+  s4: { lane:null, num:"4", title:"Sankcje zrealizowane", short:"Krótki opis wymagany",
+    osiagnij:"Krótko powiedzieć, co w sprawie już zostało zrobione — każda wdrożona sankcja w jednym zdaniu, z tym, co oznacza dla dłużnika.",
+    dlaczego:"Fakty pokazują, że sprawa realnie się toczy i to nie jest kolejne przypomnienie. To buduje powagę rozmowy bez straszenia — mówisz o tym, co już się stało.",
     blocks:[
       {type:"say", label:"Powiedz — krótki opis (wymagany)", text:"W Pana sprawie już [sankcja zrealizowana] — co oznacza, że [skutek w jednym zdaniu]."},
       {type:"sank", label:"Krótkie opisy do wyboru", items:[
@@ -251,22 +318,44 @@ const STAGES = {
         ["BIG", "Wychodzą SMS-y z odliczaniem do wpisu do BIG-u."],
         ["Urząd skarbowy", "Zawiadomiliśmy urząd skarbowy o weryfikacji zaksięgowania faktury."]
       ]},
-      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Gdy dłużnik dopytuje albo słucha — rozwiń, co ta sankcja oznacza dla jego firmy."}
+      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Gdy dłużnik dopytuje albo słucha — rozwiń, co ta sankcja oznacza dla jego firmy i kto ją widzi."}
     ],
-    tip:"mów tylko o tym, co w tej sprawie faktycznie się wydarzyło.",
-    next:["s6"] },
-  s6: { lane:null, num:"6", title:"Sankcje zaplanowane", short:"Krótki opis wymagany + data",
-    cel:"pokazać, co się stanie, jeśli nic się nie zmieni — i kiedy.",
+    wskazowki:[
+      "Krótki opis jest wymagany przy każdej wdrożonej sankcji — jedno zdanie: co + skutek.",
+      "Rozwinięcie tylko wtedy, gdy rozmowa pozwala: dłużnik dopytuje, słucha, nie przerywa.",
+      "Mów tylko o tym, co w tej sprawie faktycznie się wydarzyło — sprawdź to przed telefonem.",
+      "Ton informacyjny: „w sprawie już…”, a nie „zrobiliśmy Panu…”."
+    ],
+    dalej:"dłużnik usłyszał, co już zostało zrobione w sprawie.",
+    next:["s5"] },
+  s5: { lane:null, num:"5", title:"Sankcje zaplanowane", short:"Najbliższy krok + data",
+    osiagnij:"Powiedzieć, jaki jest następny krok w sprawie i kiedy nastąpi — zawsze z datą — i że można go jeszcze zatrzymać.",
+    dlaczego:"Konkretna data daje dłużnikowi powód, żeby działać teraz, a nie „kiedyś”. To też Twój punkt odniesienia w dalszej rozmowie: wpłata albo ustalenia muszą być przed tą datą.",
     blocks:[
       {type:"say", label:"Powiedz — krótki opis (wymagany)", text:"Kolejny krok to [sankcja zaplanowana] — [data]."},
-      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Dla Pana firmy oznacza to [skutek]."}
+      {type:"if", label:"Rozwinięcie — tylko jeśli rozmowa pozwoli", text:"Dla Pana firmy oznacza to [skutek]."},
+      {type:"say", label:"Przejście do stanowiska dłużnika", text:"Ten krok da się jeszcze zatrzymać — i dlatego chcę poznać Pana stanowisko."}
     ],
-    tip:"jedna najbliższa sankcja z datą działa mocniej niż cała lista.",
-    next:["s7"] },
-  s7: { lane:null, num:"7", title:"Stanowisko dłużnika", short:"Oddaj głos — reakcja wybiera ścieżkę",
-    cel:"oddać głos dłużnikowi — jego odpowiedź wybiera dalszą ścieżkę.",
-    blocks:[ {type:"say", text:"Tak to wygląda z naszej strony. Jak Pan to widzi?"} ],
-    tip:"po pytaniu milczysz. Rozmówca wybiera ścieżkę: chce zapłacić, neguje albo nie ma środków.",
+    wskazowki:[
+      "Jedna najbliższa sankcja z datą działa mocniej niż cała lista.",
+      "Zawsze z datą — „wkrótce” nic nie znaczy.",
+      "Kończysz informacją, że krok można zatrzymać — to naturalne przejście do stanowiska dłużnika."
+    ],
+    dalej:"dłużnik zna najbliższy krok i jego datę.",
+    next:["s6"] },
+  s6: { lane:null, num:"6", title:"Stanowisko dłużnika", short:"Oddaj głos — reakcja wybiera ścieżkę",
+    osiagnij:"Oddać głos dłużnikowi i usłyszeć jego stanowisko: chce zapłacić, nie zgadza się z należnością albo nie ma środków.",
+    dlaczego:"Dopiero jego odpowiedź mówi Ci, którą ścieżką prowadzić dalej. Bez wysłuchania go łatwo użyć złego argumentu — np. negocjować kwotę z kimś, kto kwestionuje dług.",
+    blocks:[
+      {type:"say", text:"Tak to wygląda z naszej strony. Jak Pan to widzi?"},
+      {type:"if", label:"Gdy odpowiedź jest niejasna", text:"Dobrze rozumiem, że zgadza się Pan z tą należnością i chce ją Pan uregulować?"}
+    ],
+    wskazowki:[
+      "Po pytaniu milczysz — pierwsza odpowiedź dłużnika jest najważniejsza.",
+      "Nie podpowiadasz odpowiedzi i nie przerywasz.",
+      "Niejasna odpowiedź? Dopytaj wprost, czy zgadza się z należnością."
+    ],
+    dalej:"wiesz, która z trzech sytuacji to jest — wybierz ścieżkę poniżej.",
     paths:{ label:"Co odpowiedział dłużnik?", items:[
       {to:"c1", lane:"C", t:"Chce zapłacić", d:"Deklaracja chęci spłaty"},
       {to:"a1", lane:"A", t:"Neguje", d:"Nie zgadza się z należnością"},
@@ -274,117 +363,211 @@ const STAGES = {
     ]} },
 
   c1: { lane:"C", num:"C1", title:"Deklaracja chęci spłaty", short:"Całość? Dziś?",
-    cel:"zamienić „zapłacę” na konkret.",
+    osiagnij:"Docenić deklarację i od razu ustalić dwie rzeczy: czy chodzi o całą kwotę i czy przelew będzie dzisiaj.",
+    dlaczego:"„Zapłacę” bez kwoty i daty to obietnica, a nie ustalenie — i najczęściej kończy się brakiem wpłaty. Dopięcie konkretu od razu zamienia dobrą wolę dłużnika w realną wpłatę.",
     blocks:[ {type:"say", text:"Dobrze to słyszeć. Doprecyzujmy: cała kwota [kwota] i przelew dzisiaj?"} ],
-    tip:"deklaracja bez kwoty i daty to nie deklaracja.",
+    wskazowki:[
+      "Najpierw docenienie („dobrze to słyszeć”), potem konkret.",
+      "Pytasz o całą kwotę i o dziś — jeśli jest inaczej, dłużnik sam to powie.",
+      "„Zapłacę w przyszłym tygodniu” to nie deklaracja — przejdź do negocjacji terminu."
+    ],
+    dalej:"wiesz, czy płaci całość dziś, czy trzeba ustalić termin.",
     paths:{ label:"Co odpowiedział?", two:true, items:[
       {to:"c2a", lane:"C", t:"Tak — całość, dziś", d:"Deklaracja spłaty całości"},
       {to:"c2b", lane:"C", t:"Nie dziś / nie całość", d:"Negocjacje"}
     ]} },
   c2a: { lane:"C", num:"C2", title:"Deklaracja spłaty całości", short:"Rachunek od nas, potwierdzenie do 15:00",
-    cel:"dopiąć szczegóły wpłaty.",
+    osiagnij:"Przekazać, jak i gdzie wpłacić, i umówić potwierdzenie przelewu dziś do 15:00.",
+    dlaczego:"Wpłata na rachunek z faktury może do nas nie dotrzeć nawet przez kilka dni — a przez ten czas działania w sprawie trwają. Rachunek od nas i potwierdzenie przelewu pozwalają wstrzymać działania od razu.",
     blocks:[ {type:"say", text:"Wyślę Panu mailem i SMS-em dane do przelewu. Proszę wpłacić na rachunek od nas, nie z faktury — wtedy od razu widzę wpłatę. Potwierdzenie przelewu poproszę dziś do 15:00."} ],
-    tip:"działasz dopiero po otrzymaniu potwierdzenia przelewu.",
+    wskazowki:[
+      "Zawsze rachunek od nas, nie z faktury — i powiedz, dlaczego.",
+      "Dane do przelewu wysyłasz mailem i SMS-em — dłużnik ma je w dwóch miejscach.",
+      "Działania wstrzymujesz dopiero po otrzymaniu potwierdzenia przelewu."
+    ],
+    dalej:"dłużnik potwierdził: kwota, przelew dziś, potwierdzenie do 15:00.",
     next:["c3"] },
   c2b: { lane:"C", num:"C2", title:"Negocjacje", short:"Dokładny dzień i kwota",
-    cel:"gdy nie płaci dziś albo nie całość — ustalić dokładny termin i kwotę.",
+    osiagnij:"Gdy nie płaci dziś albo nie całości — ustalić dokładny dzień wpłaty i kwotę, najlepiej przed najbliższą sankcją.",
+    dlaczego:"Termin bez daty to brak terminu. Data przed kolejną sankcją daje Ci podstawę, żeby wnioskować o jej wstrzymanie — a dłużnikowi realny powód, żeby się jej trzymać.",
     blocks:[
       {type:"say", text:"Którego dokładnie dnia robi Pan przelew i na jaką kwotę?"},
       {type:"if", label:"Gdy termin wypada po kolejnej sankcji", text:"Na [data] mamy zaplanowane [sankcja]. Żeby to wstrzymać, potrzebuję wpłaty — albo jej części — przed tym dniem. Ile jest Pan w stanie wpłacić do [data]?"}
     ],
-    tip:"termin ustalasz zawsze przed najbliższą sankcją.",
-    next:["c3"] },
+    wskazowki:[
+      "Pytasz o konkretny dzień, nie „kiedy Pan będzie mógł”.",
+      "Termin po sankcji? Wpłata albo jej część przed tym dniem.",
+      "Do czasu wpłaty działania trwają — powiedz to uczciwie.",
+      "Nie stać go na całość? Przejdź na ścieżkę „Brak środków” — negocjacje (przycisk niżej)."
+    ],
+    dalej:"masz kwotę i dokładną datę wpłaty.",
+    next:["c3"], extra:[{to:"b3", label:"Nie stać go na całość → Negocjacje (Brak środków) ›"}] },
   c3: { lane:"C", num:"C3", title:"Konkretna deklaracja", short:"Kwota + data powtórzone",
-    cel:"zamknąć rozmowę na powtórzonym konkrecie.",
-    blocks:[ {type:"say", text:"Czyli jesteśmy umówieni: [kwota] do [data], potwierdzenie przelewu mailem. Dziękuję."} ],
-    tip:"dłużnik ma usłyszeć kwotę i datę jeszcze raz — Twoimi słowami.",
+    osiagnij:"Powtórzyć ustalenia — kwota, data, potwierdzenie przelewu — i zakończyć rozmowę.",
+    dlaczego:"Powtórzone ustalenie zostaje w głowie dłużnika jako zobowiązanie, a nie luźna rozmowa. Jeśli wpłata nie wpłynie, masz jasny punkt odniesienia na kolejny telefon.",
+    blocks:[ {type:"say", text:"Czyli jesteśmy umówieni: [kwota] do [data], potwierdzenie przelewu mailem. W razie pytań jestem pod telefonem — dziękuję."} ],
+    wskazowki:[
+      "Powtórz kwotę i datę własnymi słowami — i poczekaj na „tak”.",
+      "Zapisz ustalenia w sprawie od razu po rozmowie."
+    ],
+    dalej:"dłużnik potwierdził ustalenia — możesz zakończyć rozmowę.",
     end:true },
 
   a1: { lane:"A", num:"A1", title:"Negacja", short:"Rozbrojenie — jesteś mediatorem",
-    cel:"rozbroić napięcie — jesteś mediatorem, nie przeciwnikiem.",
+    osiagnij:"Rozbroić napięcie i sprawić, żeby dłużnik zaczął opowiadać, z czym się nie zgadza — zamiast się bronić.",
+    dlaczego:"Kto czuje się atakowany, zamyka się i nic nie powie. Jako mediator, który chce sprawę wyjaśnić, dostajesz informacje — a bez nich nie da się ani wyjaśnić sporu, ani obronić roszczenia.",
     blocks:[
       {type:"say", text:"Rozumiem, że może się Pan z tym nie zgadzać. Moją rolą jest to wyjaśnić — proszę mi powiedzieć szerzej, z czym się Pan nie zgadza."},
       {type:"if", label:"Gdy odsyła do prawnika", text:"Rozumiem. W takim razie Pana prawnik powinien odnieść się do naszego roszczenia — czy już się z nami kontaktował?"}
     ],
-    tip:"nie dyskutujesz z zarzutami — zbierasz je.",
+    wskazowki:[
+      "Nie dyskutujesz z zarzutami i nie bronisz klienta — zbierasz informacje.",
+      "Twoje słowa-klucze: „rozumiem”, „wyjaśnić”, „proszę powiedzieć szerzej”.",
+      "Odsyła do prawnika? Prawnik ma odnieść się do roszczenia — dopóki tego nie zrobi, działania trwają."
+    ],
+    dalej:"dłużnik zaczął mówić, z czym się nie zgadza.",
     next:["a2"] },
   a2: { lane:"A", num:"A2", title:"Stanowisko dłużnika", short:"Czy, jak, kiedy zgłaszał; całość czy część",
-    cel:"poznać fakty.",
+    osiagnij:"Ustalić fakty: czy, jak i kiedy zgłaszał uwagi klientowi, czy na piśmie, i z jaką częścią kwoty się nie zgadza.",
+    dlaczego:"Bez faktów nie ocenisz, czy spór jest realny. Brak pisemnego zgłoszenia i spór tylko o część kwoty to dwie najczęstsze sytuacje — i obie dają Ci argument do dalszej rozmowy.",
     blocks:[ {type:"ask", label:"Dopytaj", items:[
       "Czy zgłaszał uwagi klientowi?",
       "Jak i kiedy to zgłaszał?",
       "Czy na piśmie albo mailem?",
       "Z całością czy z częścią kwoty się nie zgadza — z jaką kwotą?"
     ]} ],
-    tip:"przy sporze o część — część bezsporna jest do zapłaty od razu.",
+    wskazowki:[
+      "Przejdź przez wszystkie cztery pytania — nie poprzestawaj na pierwszej odpowiedzi.",
+      "Nie zgłaszał na piśmie? Bez śladu na piśmie prawo stoi po stronie klienta — powiedz to spokojnie.",
+      "Spór tylko o część kwoty — część bezsporna jest do zapłaty od razu."
+    ],
+    dalej:"znasz stanowisko dłużnika i kwotę sporną.",
     next:["a3"] },
   a3: { lane:"A", num:"A3", title:"Pozyskanie stanowiska mailowo", short:"Mail jeszcze dziś",
-    cel:"dostać stanowisko na piśmie — jeszcze dziś.",
+    osiagnij:"Umówić, że dłużnik dziś wyśle mailem swoje stanowisko i korespondencję z klientem; przy sporze o część — także wpłatę części bezspornej.",
+    dlaczego:"Tylko stanowisko na piśmie możemy przekazać klientowi i na jego podstawie wnioskować o wstrzymanie działań. Ustne „nie zgadzam się” nie zatrzymuje sprawy.",
     blocks:[
       {type:"say", text:"Żebym mógł to wyjaśnić z klientem i wstrzymać działania, potrzebuję Pana stanowiska mailem — razem z korespondencją, jeśli była. Wyśle mi Pan to dzisiaj?"},
       {type:"if", label:"Przy sporze o część kwoty", text:"Część, z którą się Pan zgadza — [kwota bezsporna] — proszę wpłacić od razu, a resztę wyjaśniam."}
     ],
-    tip:"bez maila nie ma czego wyjaśniać — a działania trwają dalej.",
-    next:["a4"] },
-  a4: { lane:"A", num:"A4", title:"Wyjaśnienie z klientem", short:"Zarzuty do klienta punkt po punkcie",
-    cel:"przekazać zarzuty klientowi i wrócić z odpowiedzią.",
-    blocks:[ {type:"say", label:"Powiedz dłużnikowi", text:"Mam Pana stanowisko. Przekazuję je klientowi i wracam do Pana z odpowiedzią do [data]."} ],
-    tip:"klientowi przekazujesz zarzuty punkt po punkcie i prosisz o dokumenty.",
-    next:["a5"], nextLabel:"Odpowiedź klienta jest — dalej: Rozstrzygnięcie sporu ›", endToo:true },
-  a5: { lane:"A", num:"A5", title:"Rozstrzygnięcie sporu", short:"Odpowiedź klienta → kwota + data",
-    cel:"wrócić z odpowiedzią klienta i zamknąć konkretem.",
+    wskazowki:[
+      "Zawsze z terminem: „dzisiaj”.",
+      "Podaj adres, na który ma wysłać, i upewnij się, że go zapisał.",
+      "Bez maila działania trwają dalej — powiedz to wprost, bez straszenia."
+    ],
+    dalej:"dłużnik zadeklarował maila dziś (i wpłatę części bezspornej, jeśli dotyczy) — to koniec pierwszej rozmowy na tej ścieżce.",
+    end:true, after:"a4" },
+  a4: { lane:"A", num:"A4", robocze:true, title:"Wyjaśnienie z klientem", short:"Zarzuty do klienta punkt po punkcie",
+    osiagnij:"Powiedzieć dłużnikowi, co dzieje się dalej i kiedy się odezwiesz. Po rozmowie przekazać klientowi zarzuty punkt po punkcie.",
+    dlaczego:"Dłużnik, który wie, co się dzieje z jego stanowiskiem, nie ucieka od kontaktu. Klient, który dostaje konkretne zarzuty, odpowiada szybciej i z dokumentami.",
+    blocks:[
+      {type:"say", label:"Powiedz dłużnikowi", text:"Mam Pana stanowisko. Przekazuję je klientowi i wracam do Pana z odpowiedzią do [data]."},
+      {type:"todo", label:"Do klienta — po rozmowie", items:[
+        "Zarzuty dłużnika punkt po punkcie",
+        "Dokumenty potwierdzające wykonanie usługi / dostawę",
+        "Czy klient uznaje którąś część zarzutów — i jaką kwotę",
+        "Termin odpowiedzi klienta"
+      ]}
+    ],
+    wskazowki:[
+      "Podaj dłużnikowi konkretny termin, kiedy wrócisz.",
+      "Nie oceniasz przy dłużniku, kto ma rację.",
+      "Mail nie dotarł w terminie? Dzwonisz z przypomnieniem, że bez niego działania trwają."
+    ],
+    dalej:"dłużnik zna termin Twojego powrotu, a klient dostał zarzuty.",
+    next:["a5"], nextLabel:"Odpowiedź klienta jest — dalej: Rozstrzygnięcie sporu ›" },
+  a5: { lane:"A", num:"A5", robocze:true, title:"Rozstrzygnięcie sporu — telefon zwrotny", short:"Odpowiedź klienta → kwota + data",
+    osiagnij:"Wrócić do dłużnika z odpowiedzią klienta i zamknąć sprawę kwotą i datą wpłaty.",
+    dlaczego:"Spór kończy się dopiero ustaleniem, ile i kiedy zostanie zapłacone. Odpowiedź klienta oparta na dokumentach to najmocniejszy argument w całej rozmowie.",
     blocks:[
       {type:"if", label:"Klient podtrzymuje roszczenie", text:"Klient odniósł się do Pana zarzutów i podtrzymuje roszczenie. Żeby zatrzymać działania, potrzebuję wpłaty [kwota] do [data]."},
       {type:"if", label:"Klient przyznał rację w części", text:"Klient w części przyznał Panu rację — do zapłaty zostaje [kwota]. Do kiedy Pan to ureguluje?"}
     ],
-    tip:"zawsze kończysz na kwocie i dacie.",
-    end:true },
+    wskazowki:[
+      "Zacznij od odpowiedzi klienta — konkretnie, na czym się opiera.",
+      "Zawsze kończysz na kwocie i dacie.",
+      "Deklaruje spłatę? Przejdź do ścieżki „Chce zapłacić” (przycisk niżej)."
+    ],
+    dalej:"masz kwotę i datę wpłaty albo spór jest zamknięty.",
+    end:true, extra:[{to:"c1", label:"Deklaruje spłatę → Chce zapłacić ›"}] },
 
   b1: { lane:"B", num:"B1", title:"Brak hajsu", short:"Potwierdź wolę zapłaty",
-    cel:"nie przyjąć „nie mam” jako końca rozmowy.",
+    osiagnij:"Potwierdzić, że dłużnik chce zapłacić, a problemem jest tylko brak środków teraz.",
+    dlaczego:"„Nie mam” to często sposób na zakończenie rozmowy. Potwierdzona wola zapłaty zmienia rozmowę z „czy zapłaci” na „jak i kiedy zapłaci” — i otwiera negocjacje.",
     blocks:[
       {type:"say", text:"Dobrze rozumiem, że chce Pan to uregulować, tylko na ten moment nie ma Pan środków?"},
       {type:"if", label:"Po jego „tak”", text:"Dziękuję, że mówi Pan wprost — wtedy łatwiej znaleźć wyjście."}
     ],
-    tip:"najpierw potwierdzenie woli zapłaty, potem szczegóły.",
+    wskazowki:[
+      "Najpierw pytanie o wolę zapłaty, potem empatia — dopiero potem szczegóły.",
+      "Doceń szczerość — to obniża obronę.",
+      "„Nie mam” nie kończy rozmowy."
+    ],
+    dalej:"dłużnik potwierdził, że chce zapłacić.",
     next:["b2"] },
   b2: { lane:"B", num:"B2", title:"Analiza finansowa", short:"Skąd brak, jakie wpływy, kiedy",
-    cel:"zrozumieć, z czego realnie może zapłacić.",
+    osiagnij:"Ustalić, skąd brak środków, czy firma ma wpływy, kiedy spodziewa się pieniędzy i czy ma inne zaległości.",
+    dlaczego:"Bez obrazu finansów negocjujesz na ślepo. Wiedząc, kiedy i skąd przyjdą pieniądze, proponujesz kwotę i termin, które dłużnik realnie może spełnić — i masz argumenty, gdy mówi „nie dam rady”.",
     blocks:[ {type:"ask", label:"Dopytaj", items:[
       "Co się stało, że brakuje środków?",
       "Czy firma ma bieżące wpływy?",
       "Kiedy spodziewa się Pan najbliższych pieniędzy — i ile?",
       "Czy ma Pan inne zaległości?"
     ]} ],
-    tip:"pytasz o fakty. Nigdy „czy da Pan radę coś wpłacić” — odpowie „nie”.",
+    wskazowki:[
+      "Pytania otwarte, bez oceniania.",
+      "Pytasz o fakty: wpływy, terminy, inne zobowiązania.",
+      "Nigdy „czy da Pan radę coś wpłacić?” — odpowie „nie”.",
+      "Zapamiętaj daty wpływów — wykorzystasz je w negocjacjach."
+    ],
+    dalej:"wiesz, kiedy i skąd dłużnik będzie miał pieniądze.",
     next:["b3"] },
   b3: { lane:"B", num:"B3", title:"Negocjacje", short:"Start wysoko, minimum połowa",
-    cel:"wpłata jeszcze dziś. Startujesz wysoko, minimum to połowa kwoty.",
+    osiagnij:"Doprowadzić do wpłaty jeszcze dziś. Startujesz wysoko — dolna granica to połowa kwoty.",
+    dlaczego:"Każda wpłata realnie zmienia sprawę i daje podstawę do wstrzymania działań. Kwota postawiona jako oczywistość działa lepiej niż pytanie, na które łatwo odpowiedzieć „nie”.",
     blocks:[
       {type:"say", text:"Są dwa rozwiązania. Albo sprawa idzie dalej i sankcje utrudnią Panu zdobycie pieniędzy, albo wpłata, która pokaże Pana dobre intencje. Jaką kwotę wpłaci Pan dzisiaj?"},
       {type:"if", label:"Gdy podaje za mało", text:"Klient zgodził się, że pierwsza wpłata może w ostateczności wynieść połowę — [50% kwoty]. Na tej podstawie mogę wystąpić o wstrzymanie działań."}
     ],
-    tip:"kwotę stawiasz na stole jako oczywistość — nie pytasz, czy da radę.",
+    wskazowki:[
+      "Przedstaw dwa rozwiązania: sprawa idzie dalej albo wpłata dobrej woli.",
+      "Kwotę stawiasz na stole — nie pytasz, czy da radę.",
+      "Połowa to granica dolna, nie propozycja na start.",
+      "Wykorzystaj daty wpływów z analizy finansowej."
+    ],
+    dalej:"jest kwota i data — albo dłużnik odmawia.",
     paths:{ label:"Jak skończyły się negocjacje?", two:true, items:[
       {to:"b4a", lane:"B", t:"Jest kwota i data", d:"Konkretna deklaracja"},
       {to:"b4b", lane:"B", t:"Brak porozumienia", d:"Przypomnienie sankcji"}
     ]} },
   b4a: { lane:"B", num:"B4", title:"Konkretna deklaracja", short:"Kwota + data, SMS z podsumowaniem",
-    cel:"zamknąć ustalenia na kwocie i dacie.",
+    osiagnij:"Zamknąć ustalenia na kwocie i dacie, wysłać SMS z podsumowaniem i umówić potwierdzenie wpłaty.",
+    dlaczego:"Ustalenie na piśmie (SMS) zostaje u dłużnika i przypomina o terminie. Każda wpłata, nawet częściowa, to Twój argument za wstrzymaniem sankcji.",
     blocks:[ {type:"say", text:"Umawiamy się: [kwota] do [data]. Wyślę SMS z podsumowaniem i danymi do przelewu — po wpłacie proszę o potwierdzenie mailem."} ],
-    tip:"każda wpłata, nawet częściowa, to Twój argument za wstrzymaniem sankcji.",
+    wskazowki:[
+      "Powtórz kwotę i datę — i poczekaj na „tak”.",
+      "Dane do przelewu: rachunek od nas, nie z faktury.",
+      "Zapisz ustalenia w sprawie od razu po rozmowie."
+    ],
+    dalej:"dłużnik potwierdził kwotę i datę — możesz zakończyć rozmowę.",
     end:true },
-  b4b: { lane:"B", num:"B4", title:"Przypomnienie sankcji zrealizowanych oraz zaplanowanych", short:"Co już było, co dalej, ostatnie pytanie o kwotę",
-    cel:"gdy nie ma porozumienia — dłużnik kończy rozmowę z jasnym obrazem sytuacji.",
+  b4b: { lane:"B", num:"B4", title:"Przypomnienie sankcji zrealizowanych oraz zaplanowanych", short:"Co już było, co dalej, pytanie o kwotę",
+    osiagnij:"Gdy nie ma porozumienia — zostawić dłużnika z jasnym obrazem: co już się wydarzyło, co i kiedy wydarzy się dalej, i że nawet mała wpłata może to zatrzymać.",
+    dlaczego:"Dłużnik musi wiedzieć, że brak środków nie wstrzymuje sprawy. Jasny obraz konsekwencji i otwarte drzwi często zmieniają decyzję — jeśli nie w tej rozmowie, to w następnej.",
     blocks:[ {type:"say", text:"Brak środków nie wstrzymuje sprawy. Już [sankcja zrealizowana], a jeśli do [data] nie wpłynie choćby [minimalna kwota], kolejnym krokiem będzie [sankcja zaplanowana]. Nawet niewielka wpłata daje mi podstawę, żeby to zatrzymać. Ile jest Pan w stanie zebrać do tego dnia?"} ],
-    tip:"ostatnie pytanie zawsze o kwotę i termin.",
+    wskazowki:[
+      "Pokaż skutek jednej, najbliższej sankcji — nie wymieniaj wszystkich.",
+      "Ostatnie pytanie zawsze o kwotę i termin.",
+      "Zostaw otwarte drzwi: „Jeśli coś się zmieni, jestem pod telefonem”."
+    ],
+    dalej:"dłużnik zna konsekwencje — albo jednak podaje kwotę.",
     next:["b4a"], nextLabel:"Jednak podaje kwotę → Konkretna deklaracja ›", endToo:true }
 };
-const MAIN = ["s1","s2","s3","s4","s5","s6","s7"];
+const MAIN = ["s1","s2","s3","s4","s5","s6"];
 const LANES = {
-  C: { label:"Chce zapłacić", steps:["c1", ["c2a","c2b"], "c3"] },
+  C: { label:"Chce zapłacić", steps:["c1", ["c2a","c2b"], "c3"], forkName:["Całość lub negocjacje"] },
   A: { label:"Negacja",       steps:["a1","a2","a3","a4","a5"] },
-  B: { label:"Brak środków",  steps:["b1","b2","b3", ["b4a","b4b"]] }
+  B: { label:"Brak środków",  steps:["b1","b2","b3", ["b4a","b4b"]], forkName:["Deklaracja lub przypomnienie"] }
 };
 
 /* ═══ Stan ═══ */
@@ -410,28 +593,33 @@ function back() {
 }
 function reset() { state.current = "s1"; state.path = ["s1"]; showTab("rozmowa"); }
 
-/* ═══ Render: pasek postępu ═══ */
+/* ═══ Render: pasek postępu (stepper) ═══ */
 function renderProgress() {
   const done = new Set(state.path.slice(0, -1));
-  const lane = laneOf(state.current);
-  const step = id => {
+  const cur = STAGES[state.current];
+  const lane = cur.lane;
+  const item = (id, extra) => {
     const s = STAGES[id];
-    const cls = id === state.current ? "current " + (s.lane || "") : (done.has(id) ? "done" : "");
-    return `<button class="step ${cls}" data-go="${id}" title="${esc(s.short)}"><span class="n">${s.num}</span>${esc(s.title)}</button>`;
+    const cls = ["st", s.lane || "", s.robocze ? "robo" : "", id === state.current ? "current" : (done.has(id) ? "done" : ""), extra || ""].join(" ");
+    const dot = done.has(id) && id !== state.current ? "✓" : esc(s.num);
+    return `<button class="${cls}" data-go="${id}" title="${esc(s.short)}"><span class="dot">${dot}</span><span class="nm">${esc(s.title)}${s.robocze ? '<em>po rozmowie · robocze</em>' : ""}</span></button>`;
   };
-  const sep = '<span class="sep">›</span>';
-  let html = MAIN.map(step).join(sep);
+  let html = MAIN.map(id => item(id)).join("");
   if (lane) {
-    html += sep + `<span class="lane-pill ${lane}">${LANES[lane].label}</span>`;
-    LANES[lane].steps.forEach(st => {
-      html += sep + (Array.isArray(st) ? st.map(step).join('<span class="or">lub</span>') : step(st));
+    html += `<span class="lane-split ${lane}">${LANES[lane].label}</span>`;
+    LANES[lane].steps.forEach((st, i) => {
+      if (!Array.isArray(st)) { html += item(st); return; }
+      const picked = st.find(k => k === state.current || done.has(k));
+      html += picked ? item(picked)
+        : `<span class="st fork ${lane}"><span class="dot">${esc(STAGES[st[0]].num)}</span><span class="nm">${esc(LANES[lane].forkName[0])}</span></span>`;
     });
   } else {
-    html += `<span class="hint">→ dalej ścieżka wg stanowiska dłużnika</span>`;
+    html += `<span class="lane-split none">→ potem jedna ze ścieżek: Chce zapłacić · Negacja · Brak środków</span>`;
   }
-  $("progress").innerHTML = `<div class="progress-head"><span>Gdzie jesteś w rozmowie</span><button data-tab="schemat">Cały schemat ›</button></div><div class="track">${html}</div>`;
-  const cur = $("progress").querySelector(".step.current"), track = $("progress").querySelector(".track");
-  if (cur && track.scrollWidth > track.clientWidth) track.scrollLeft = cur.offsetLeft - track.offsetLeft - 40;
+  const where = lane ? `${LANES[lane].label} · ${cur.num}` : `Etap ${cur.num} z ${MAIN.length}`;
+  $("progress").innerHTML = `<div class="progress-head"><span class="now">Jesteś tutaj: <b>${esc(cur.title)}</b> · ${esc(where)}</span><button data-tab="schemat">Cały schemat ›</button></div><div class="stepper">${html}</div>`;
+  const c = $("progress").querySelector(".st.current"), track = $("progress").querySelector(".stepper");
+  if (c && track.scrollWidth > track.clientWidth) track.scrollLeft = c.offsetLeft - track.offsetLeft - 60;
 }
 
 /* ═══ Render: karta etapu ═══ */
@@ -439,6 +627,7 @@ function renderBlock(b) {
   if (b.type === "say") return `<div class="say"><div class="label">${esc(b.label || "Powiedz")}</div>${txt(b.text)}</div>`;
   if (b.type === "if")  return `<div class="say if"><div class="label">${esc(b.label)}</div>${txt(b.text)}</div>`;
   if (b.type === "ask") return `<div class="list"><div class="label">${esc(b.label)}</div><ul>${b.items.map(i => `<li><span>${txt(i)}</span></li>`).join("")}</ul></div>`;
+  if (b.type === "todo") return `<div class="list todo"><div class="label">${esc(b.label)}</div><ul>${b.items.map(i => `<li><span>${txt(i)}</span></li>`).join("")}</ul></div>`;
   if (b.type === "sank") return `<div class="list sank"><div class="label">${esc(b.label)}</div><ul>${b.items.map(([t, d]) => `<li><span><b>${esc(t)}:</b> ${txt(d)}</span></li>`).join("")}</ul></div>`;
   return "";
 }
@@ -449,19 +638,26 @@ function renderStage() {
   if (s.paths) {
     actions = `<div class="actions-label">${esc(s.paths.label)}</div><div class="paths${s.paths.two ? " two" : ""}">` +
       s.paths.items.map(p => `<button class="path ${p.lane}" data-go="${p.to}"><span class="t">${esc(p.t)}</span><span class="d">${esc(p.d)}</span></button>`).join("") + `</div>`;
-  } else {
-    const btns = [];
-    if (s.next) btns.push(`<button class="btn primary" data-go="${s.next[0]}">${esc(s.nextLabel || "Dalej: " + STAGES[s.next[0]].title + " ›")}</button>`);
-    if (s.end || s.endToo) btns.push(`<button class="btn ${s.next ? "secondary" : "primary"}" data-action="reset">Zakończ rozmowę</button>`);
-    if (s.end && s.lane) btns.push(`<button class="btn secondary" data-go="s7">‹ Inna reakcja dłużnika</button>`);
-    actions = `<div class="row">${btns.join("")}</div>`;
   }
-  $("stage").innerHTML = `<div class="card">
-    <span class="eyebrow ${s.lane || ""}">${esc(eyebrow)}</span>
+  const btns = [];
+  if (s.next) btns.push(`<button class="btn primary" data-go="${s.next[0]}">${esc(s.nextLabel || "Dalej: " + STAGES[s.next[0]].title + " ›")}</button>`);
+  if (s.end || s.endToo) btns.push(`<button class="btn ${s.next ? "secondary" : "primary"}" data-action="reset">Zakończ rozmowę</button>`);
+  (s.extra || []).forEach(x => btns.push(`<button class="btn secondary" data-go="${x.to}">${esc(x.label)}</button>`));
+  if (s.after) btns.push(`<button class="btn secondary" data-go="${s.after}">Po rozmowie: ${esc(STAGES[s.after].title)} (robocze) ›</button>`);
+  if (s.end && s.lane && !s.robocze) btns.push(`<button class="btn secondary" data-go="s6">‹ Inna reakcja dłużnika</button>`);
+  if (btns.length) actions += `<div class="row"${s.paths ? ' style="margin-top:12px"' : ""}>${btns.join("")}</div>`;
+  $("stage").innerHTML = `<div class="card${s.robocze ? " robo" : ""}">
+    <span class="eyebrow ${s.lane || ""}">${esc(eyebrow)}</span>${s.robocze ? '<span class="robo-badge">Po rozmowie · robocze</span>' : ""}
     <h1>${esc(s.title)}</h1>
-    <div class="goal"><b>Cel:</b> ${txt(s.cel)}</div>
+    ${s.robocze ? '<div class="robo-note">Ten etap nie jest częścią pierwszej rozmowy z dłużnikiem — to praca po rozmowie. Wersja robocza, jeszcze do dopracowania.</div>' : ""}
+    <div class="why">
+      <div class="goal-box"><h3>Co masz osiągnąć</h3>${txt(s.osiagnij)}</div>
+      <div class="why-box"><h3>Dlaczego to ważne</h3>${txt(s.dlaczego)}</div>
+    </div>
+    <div class="sec-title">Teksty pomocnicze</div>
     ${s.blocks.map(renderBlock).join("")}
-    <div class="tip"><b>Wskazówka</b><span>${txt(s.tip)}</span></div>
+    <div class="tips"><h3>Wskazówki</h3><ul>${s.wskazowki.map(w => `<li>${txt(w)}</li>`).join("")}</ul></div>
+    <div class="ready"><span><b>Idziesz dalej, gdy:</b> ${txt(s.dalej)}</span></div>
     <div class="actions">${actions}</div>
   </div>`;
   $("btn-back").disabled = state.path.length < 2;
@@ -472,8 +668,8 @@ function renderSchema() {
   const done = new Set(state.path.slice(0, -1));
   const node = id => {
     const s = STAGES[id];
-    const cls = ["node", s.lane || "", id === state.current ? "current" : "", done.has(id) ? "done" : ""].join(" ");
-    return `<button class="${cls}" data-go="${id}"><span class="n">${s.num}</span><div class="t">${esc(s.title)}</div><div class="d">${esc(s.short)}</div></button>`;
+    const cls = ["node", s.lane || "", s.robocze ? "robo" : "", id === state.current ? "current" : "", done.has(id) ? "done" : ""].join(" ");
+    return `<button class="${cls}" data-go="${id}"><span class="n">${s.num}</span>${s.robocze ? '<span class="robo-tag">po rozmowie · robocze</span>' : ""}<div class="t">${esc(s.title)}</div><div class="d">${esc(s.short)}</div></button>`;
   };
   const arrow = '<div class="arrow">›</div>';
   const lanes = ["C","A","B"].map(l => {

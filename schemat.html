@@ -48,7 +48,7 @@
   .btn-chip { border: none; background: var(--chip); color: var(--text); font-size: 13px; font-weight: 500; padding: 7px 14px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
   .btn-chip:hover { background: var(--chip-hover); }
   .tabs .short { display: none; }
-  @media (max-width: 640px) { .brand span:last-child { display: none; } .tabs button { padding: 6px 11px; } .tabs .long { display: none; } .tabs .short { display: inline; } .header-inner { gap: 8px; } }
+  @media (max-width: 640px) { .brand span:last-child { display: none; } .tabs button { padding: 6px 11px; } .tabs .long { display: none; } .tabs .short { display: inline; } .header-inner { gap: 6px; padding: 10px 10px; } .tabs button { padding: 6px 9px; } .btn-chip { padding: 7px 10px; } }
 
   main { max-width: 1180px; margin: 0 auto; padding: 20px 16px 60px; }
   .view[hidden] { display: none; }
@@ -192,6 +192,30 @@
   .mini { border: none; cursor: pointer; font-size: 13px; font-weight: 600; border-radius: 999px; padding: 6px 12px; background: var(--card); color: var(--text); box-shadow: var(--shadow-btn); }
   .mini.primary { background: var(--blue); color: #fff; }
 
+  /* ── Czego nie robić + Zasady ── */
+  .dont { background: var(--red-tint); border-radius: 14px; padding: 13px 16px 11px; margin: -4px 0 14px; }
+  .dont h3 { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
+  .dont ul { list-style: none; }
+  .dont li { position: relative; padding: 3px 0 3px 20px; font-size: 14.5px; }
+  .dont li::before { content: "✕"; position: absolute; left: 2px; top: 3px; font-size: 12px; font-weight: 800; color: var(--red); }
+  .rule1 { display: inline-block; margin-left: 10px; font-size: 11px; font-weight: 700; color: var(--red); background: var(--red-tint); border-radius: 999px; padding: 2px 9px; }
+  @media (max-width: 720px) { .rule1 { display: block; width: fit-content; margin: 5px 0 0; } }
+  .rules { max-width: 900px; display: flex; flex-direction: column; gap: 14px; }
+  .rules-hero { background: var(--card); border-radius: 22px; box-shadow: var(--shadow); padding: 26px 28px; }
+  .rules-hero h1 { margin-bottom: 8px; }
+  .rules-hero p { font-size: 16px; color: var(--text-2); }
+  .rules-hero p b { color: var(--text); }
+  .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 720px) { .rule-grid { grid-template-columns: 1fr; } }
+  .rule-card { background: var(--card); border-radius: 18px; box-shadow: var(--shadow-btn); padding: 18px 20px; font-size: 15px; }
+  .rule-card h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin-bottom: 7px; }
+  .rule-card ul { padding-left: 18px; }
+  .rule-card li { margin: 3px 0; }
+  .rule-card.red { background: var(--red-tint); box-shadow: none; }
+  .rule-card.red h3 { color: var(--red); }
+  .rule-card.blue { background: var(--blue-tint); box-shadow: none; }
+  .rule-card.blue h3 { color: var(--blue); }
+
   /* ── Etapy robocze — po rozmowie ── */
   .robo-badge { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1.5px dashed var(--line-strong); color: var(--text-2); vertical-align: top; }
   .robo-note { background: var(--surface); border: 1.5px dashed var(--line-strong); border-radius: 14px; padding: 10px 14px; font-size: 14px; color: var(--text-2); margin-bottom: 16px; }
@@ -250,6 +274,7 @@
     <nav class="tabs" id="tabs">
       <button data-tab="rozmowa" class="active"><span class="long">Prowadź rozmowę</span><span class="short">Rozmowa</span></button>
       <button data-tab="schemat"><span class="long">Cały schemat</span><span class="short">Schemat</span></button>
+      <button data-tab="zasady"><span class="long">Zasady</span><span class="short">Zasady</span></button>
     </nav>
     <div class="spacer"></div>
     <button class="btn-chip" id="btn-reset">Od nowa</button>
@@ -267,6 +292,38 @@
       <h2>Schemat rozmowy</h2>
       <p class="sub">Pierwsza rozmowa z dłużnikiem: linia główna od przywitania do stanowiska dłużnika, potem jedna z trzech ścieżek. Etapy z przerywaną ramką dzieją się po rozmowie (robocze). Kliknij etap, żeby otworzyć jego kartę.</p>
       <div class="schema" id="schema"></div>
+    </div>
+  </section>
+  <section class="view" id="view-zasady" hidden>
+    <div class="rules">
+      <div class="rules-hero">
+        <span class="eyebrow">Pierwsza rozmowa z dłużnikiem</span>
+        <h1>Zasady schematu</h1>
+        <p>Cel pierwszej rozmowy: <b>dłużnik usłyszał, co już zostało zrobione w jego sprawie i co jest zaplanowane — a potem poznałeś jego stanowisko.</b> Każda rozmowa dociągnięta do tego punktu to oddany strzał.</p>
+      </div>
+      <div class="rule-card red">
+        <h3>Zasada nr 1 — kolejność</h3>
+        <p>Nie przechodzisz do kolejnego etapu bez zaliczenia poprzedniego. Przywitanie i identyfikacja → przedstawienie sprawy → plan rozmowy → sankcje zrealizowane → sankcje zaplanowane → stanowisko dłużnika. <b>Rozwidlenie jest dopiero na stanowisku dłużnika.</b> Cokolwiek dłużnik powie wcześniej — „nie zgadzam się”, „zapłacę”, „nie mam czasu” — nie przerzuca Cię po schemacie. Zaopiekujesz to i wracasz do kolejności.</p>
+      </div>
+      <div class="rule-grid">
+        <div class="rule-card"><h3>Dlaczego taka kolejność</h3>
+          <p>Klient nie zatrudnia nas do wyjaśniania sporu — to może zrobić sam. Zatrudnia nas do tego, czego sam nie może: do sankcji. Dłużnik, który wie, co się dzieje i co się wydarzy, podejmuje decyzje szybciej — jakby nad głową latały mu rakiety. Często spór sam znika, gdy dłużnik usłyszy konsekwencje. A uwaga dłużnika jest największa na początku rozmowy — dlatego najważniejsze mówisz wtedy.</p></div>
+        <div class="rule-card"><h3>Oddane strzały, nie tylko bramki</h3>
+          <p>Lewandowski nie miał celu „strzel 2 bramki”, tylko „oddaj 10 strzałów” — statystyka robi resztę. U nas strzał to rozmowa przeprowadzona przez cały schemat. Teza: jeśli sankcje usłyszy 60% dłużników zamiast 30%, będzie więcej wpłat. Nie zrażaj się, gdy ktoś się rozłączy mimo dobrej roboty — liczy się suma strzałów.</p></div>
+        <div class="rule-card"><h3>Jak mówić</h3>
+          <ul>
+            <li>Bez emocji, bez kłótni, bez ironii — podniesiony głos zamyka dłużnika.</li>
+            <li>„My / zróbmy” zamiast „ja chcę / chciałabym”.</li>
+            <li>Nic personalnego: działasz na zlecenie klienta i realizujesz plan sprawy. Mów to wprost — to prawda.</li>
+            <li>Obiekcję zawsze najpierw zaopiekuj, potem wróć do planu. Zignorowana wróci.</li>
+          </ul></div>
+        <div class="rule-card"><h3>Teksty to kierunek, nie formułka</h3>
+          <p>Teksty pomocnicze możesz ubrać w swoje słowa — byle zachować sens i kolejność. Celu etapu („Co masz osiągnąć”) trzymasz się zawsze.</p></div>
+      </div>
+      <div class="rule-card blue">
+        <h3>Wypadłeś ze schematu? Zgłoś to</h3>
+        <p>Jeśli w rozmowie nie powiedziałeś o sankcjach albo przeskoczyłeś etap — po rozmowie zgłoś na kanale: <b>na którym etapie, co powiedział dłużnik i co odpowiedziałeś.</b> Z tego łatamy luki i dopisujemy tu nowe podpowiedzi. AI/QA będzie sprawdzać, czy pierwsze rozmowy idą tym schematem.</p>
+      </div>
     </div>
   </section>
 </main>
@@ -382,33 +439,103 @@ const STAGES = {
     ],
     dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię — albo przynajmniej wiesz, że rozmawiasz z właściwą osobą.",
     next:["s2"] },
-  s2: { lane:null, num:"2", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
-    osiagnij:"Powiedzieć w jednym zdaniu, w czyim imieniu dzwonisz i jakiej należności dotyczy rozmowa: wierzyciel, kwota, czego dotyczy.",
-    dlaczego:"Rozmówca musi od razu wiedzieć, o czym rozmawiacie. Krótki, rzeczowy komunikat brzmi pewnie i nie otwiera dyskusji, zanim przedstawisz cały obraz sprawy.",
+  s2: { lane:null, num:"2", title:"Przedstawienie sprawy", short:"W czyim imieniu + jaka sprawa",
+    osiagnij:"Powiedzieć krótko, w czyim imieniu dzwonisz i w jakiej sprawie — tyle, żeby rozmówca wiedział, o czym rozmawiacie.",
+    dlaczego:"W większości spraw dzwonisz do małych firm, które doskonale wiedzą, o co chodzi. Numer faktury i szczegóły niczego w tej rozmowie nie zmieniają — od tego jest wezwanie i mail z listą roszczeń. Krótko i pewnie = od razu przechodzisz do planu rozmowy.",
     blocks:[
-      {type:"say", text:"Dzwonię w imieniu [wierzyciel] w sprawie nieopłaconej należności na kwotę [kwota] — chodzi o [fakturę nr / usługę]."}
+      {type:"say", text:"Dzwonię w imieniu [wierzyciel] w sprawie nieopłaconej należności."},
+      {type:"if", label:"Tylko gdy to większa firma albo rozmawiasz z księgową", text:"Chodzi o fakturę [nr] na kwotę [kwota] z [data] — za [czego dotyczy]."},
+      {type:"react", label:"Co może paść — kliknij to, co się dzieje", items:[
+        { key:"2A", title:"Od razu mówi swoje: „nie zapłacę”, „zepsuł mi robotę”", body:[
+          {type:"end", text:"To już jego stanowisko — nie dyskutujesz z nim na tym etapie i nie przeskakujesz do sporu. Przechodzisz do planu rozmowy i tam zaopiekujesz się tym, co powiedział (gotowy tekst czeka w Planie rozmowy).", go:"s3"}
+        ]},
+        { key:"2B", title:"„Wiem, zapłacę” / „zapłacę w piątek”", body:[
+          {type:"end", text:"Doceniasz, ale nie skaczesz do ustalania spłaty. Przechodzisz do planu rozmowy — tam masz tekst, który łączy jego deklarację z sankcjami.", go:"s3"}
+        ]},
+        { key:"2C", title:"„A ile tego jest? Jaka faktura?”", body:[
+          {type:"say", text:"[kwota] — faktura [nr] z [data]. Szczegóły prześlę też mailem."},
+          {type:"end", text:"Rozmówca wie, o jaką należność chodzi. Przechodzisz do planu rozmowy.", go:"s3"}
+        ]}
+      ]}
     ],
     wskazowki:[
-      "Same fakty: wierzyciel, kwota, czego dotyczy. Bez ocen i bez „niestety”.",
-      "Nie pytasz jeszcze o płatność ani o zdanie dłużnika — na to jest etap 5.",
-      "Od razu deklaruje spłatę? Nie hamuj go — przejdź prosto do ścieżki „Chce zapłacić” (przycisk niżej).",
-      "Od razu się nie zgadza? „Rozumiem, zaraz do tego dojdziemy” — i prowadzisz plan rozmowy."
+      "W 99% spraw wystarczy jedno zdanie: wierzyciel + nieopłacona należność.",
+      "Rozmówca wie, o co chodzi? Nie czytasz numerów faktur ani dat.",
+      "Cokolwiek powie — nie idziesz za jego tematem. Następny krok to zawsze plan rozmowy."
     ],
-    dalej:"rozmówca wie, kto dzwoni, w czyim imieniu i o jaką kwotę chodzi.",
-    next:["s3"], extra:[{to:"c1", label:"Od razu deklaruje spłatę → Chce zapłacić ›"}] },
-  s3: { lane:null, num:"3", title:"Plan rozmowy", short:"Co powiem, o co zapytam",
-    osiagnij:"Zapowiedzieć przebieg rozmowy w trzech krokach: co już się wydarzyło w sprawie, co jest zaplanowane, a potem stanowisko dłużnika i wspólne ustalenie, jak to zamknąć.",
-    dlaczego:"Rozmówca, który nie wie, do czego zmierza rozmowa, broni się i przerywa. Gdy zna plan, słucha do końca — a Ty dostajesz przestrzeń, żeby najpierw mówić Ty, a potem on.",
+    nieRobic:[
+      "Długie wyliczanie faktur, dat i kwot, gdy dłużnik zna sprawę.",
+      "Przeskakiwanie do sporu albo do ustalania spłaty, bo dłużnik od razu o tym mówi."
+    ],
+    dalej:"rozmówca wie, w czyim imieniu dzwonisz i o jaką sprawę chodzi.",
+    next:["s3"] },
+  s3: { lane:null, num:"3", title:"Plan rozmowy", short:"Kontrakt na rozmowę",
+    osiagnij:"Zawrzeć z dłużnikiem kontrakt na tę rozmowę: najpierw mówisz, co już się wydarzyło i co jest zaplanowane, potem on mówi swoje stanowisko i razem ustalacie, jak to zamknąć. Kończysz pytaniem „Czy to dla Pana jasne?” i dostajesz „tak”.",
+    dlaczego:"Plan to kontrakt — jak zasady na początku szkolenia: dłużnik wie, że przyjdzie jego kolej, więc spokojnie wysłucha sankcji. Bez części o jego stanowisku będzie wchodził w słowo. To najważniejszy etap: dobrze zrobiony plan sprawia, że sankcje powiesz bez przeszkód, a to sankcje usłyszane przez dłużnika robią wpłaty. Jak w sklepie z towarem na wagę — najpierw ważenie, potem płacenie; odwrotnie się nie da.",
+    zasada:"Plan ma trzy części: co się wydarzyło → co jest zaplanowane → Pana stanowisko i wspólne ustalenie. Bez trzeciej części dłużnik nie odda Ci głosu.",
     blocks:[
-      {type:"say", text:"Najpierw krótko powiem Panu, co już się wydarzyło w sprawie i co jest zaplanowane dalej. Potem chcę poznać Pana stanowisko i razem ustalić, jak to zamknąć. Czy to dla Pana jasne?"},
-      {type:"if", label:"Gdy przerywa: „nie mam czasu”", text:"Rozumiem — właśnie dlatego powiem krótko, co już się wydarzyło i co jest zaplanowane, żeby wiedział Pan, na czym stoi."}
+      {type:"say", label:"Powiedz — plan rozmowy", text:"Zróbmy tak: najpierw krótko powiem Panu, co już się wydarzyło w sprawie i co jest zaplanowane dalej — żeby miał Pan pełny obraz. Potem omówimy Pana stanowisko i razem ustalimy, jak to zamknąć. Czy to dla Pana jasne?"},
+      {type:"todo", label:"Język planu — pilnuj tego", items:[
+        "„My / zróbmy”, a nie „ja chcę / chciałabym” — Twoje chcenie nikogo nie interesuje.",
+        "Chcieć możesz tylko jednego: poznać jego stanowisko.",
+        "Bez „może”, „ewentualnie” — plan to konkret, nie propozycja.",
+        "Na koniec „Czy to dla Pana jasne?” — nie „czy możemy?” ani „czy się Pan zgadza?”.",
+        "Powód z korzyścią dla niego: „żeby miał Pan pełny obraz sprawy” — a nie „żeby się Pan nie zdziwił, jak dostanie maila”."
+      ]},
+      {type:"react", label:"Co może paść — kliknij to, co się dzieje", items:[
+        { key:"3A", title:"„Tak” / „dobra” / „no słucham”", body:[
+          {type:"end", text:"Kontrakt zawarty. Przechodzisz do sankcji zrealizowanych — dłużnik wie, że po nich przyjdzie jego kolej.", go:"s4"}
+        ]},
+        { key:"3B", title:"„Nie zgadzam się” / „zepsuł mi robotę” / „nic nie zapłacę”", body:[
+          {type:"goal", text:"Zaopiekować obiekcję — dłużnik ma poczuć, że został usłyszany i że jego stanowisko ma znaczenie — i wrócić do planu."},
+          {type:"say", label:"Zaopiekuj i zaproponuj kolejność", text:"Jak najbardziej rozumiem, że się Pan z tym nie zgadza — i dobrze, że Pan to mówi, bo właśnie po to dzwonię, żeby to wyjaśnić. Zróbmy tak: najpierw powiem Panu, co zostało już zrobione i co jest zaplanowane, żeby wiedział Pan, na czym stoi, a potem powie mi Pan, z czym konkretnie się nie zgadza, i to wyjaśnimy. Dobrze?"},
+          {type:"if", label:"Gdy dalej naciska — powiedz, jaka jest Twoja rola", text:"Moja rola jest taka: dostaję zlecenie od klienta i realizuję plan działań w sprawie. Jednym z tych działań jest ten telefon — żeby to wyjaśnić. Jeśli okaże się, że ma Pan rację, przestajemy działać. Jeśli nie — działania idą dalej. Dlatego Pana stanowisko jest ważne. Najpierw powiem, co już zrobiliśmy."},
+          {type:"note", text:"Ta sama obiekcja wraca drugi raz? To znak, że jej nie zaopiekowałeś. Nie powtarzaj „wrócimy do tego” — odpowiedz na nią: że rozumiesz, po co jest jego stanowisko i kiedy przyjdzie jego kolej."},
+          {type:"end", text:"Dłużnik wie, że jego zdanie ma znaczenie i kiedy będzie mógł je powiedzieć. Przechodzisz do sankcji zrealizowanych.", go:"s4"}
+        ]},
+        { key:"3C", title:"„Niech najpierw poprawi robotę, to wtedy pogadamy”", body:[
+          {type:"say", text:"Rozumiem. Nie mam informacji o tym, co Pan mówi o robocie — i dlatego chcę to od Pana usłyszeć. Tylko klient przekazał sprawę do windykacji i działania już trwają, więc najpierw powiem, co się już dzieje, a potem omówimy, co jest nie tak z robotą."},
+          {type:"end", text:"Dłużnik wie, że jego zarzut zostanie omówiony. Przechodzisz do sankcji zrealizowanych.", go:"s4"}
+        ]},
+        { key:"3D", title:"„Kim Pan jest? Po co Pan dzwoni?”", body:[
+          {type:"say", text:"Jestem pełnomocnikiem [wierzyciel] — prowadzę sprawę windykacyjną tej należności i realizuję plan działań, który jest dla niej założony. Dlatego najpierw powiem, co już się wydarzyło i co jest zaplanowane, a potem omówimy Pana stanowisko."},
+          {type:"end", text:"Dłużnik rozumie Twoją rolę — to nic personalnego, realizujesz umowę z klientem. Przechodzisz do sankcji zrealizowanych.", go:"s4"}
+        ]},
+        { key:"3E", title:"„Nie mam czasu” / „szybko, bo jestem zajęty”", body:[
+          {type:"say", text:"Tym bardziej warto, żeby wiedział Pan, co się dzieje w Pana sprawie — działania są podejmowane niezależnie od tego, czy ma Pan czas. Powiem krótko, co już się wydarzyło i co jest zaplanowane."},
+          {type:"if", label:"Gdy naprawdę nie może słuchać (jedzie taksówką, jest u lekarza)", text:"Rozumiem. Kiedy mogę oddzwonić — dziś o [godzina]? Wtedy przejdziemy przez całość."},
+          {type:"note", text:"Nie wciskaj sankcji „na szybko”, gdy dłużnik realnie nie może słuchać — powiedziane w złym momencie, nie zadziałają. Lepiej umówić konkretną godzinę."},
+          {type:"end", text:"Albo dłużnik słucha i przechodzisz do sankcji, albo masz umówiony konkretny dzień i godzinę rozmowy.", go:"s4"}
+        ]},
+        { key:"3F", title:"„Zapłacę” / „wiem, zapłacę w piątek” — deklaruje spłatę od razu", body:[
+          {type:"say", text:"Świetnie, to ustalimy za chwilę konkretnie. Najpierw krótko powiem, co już się wydarzyło i co jest zaplanowane — żeby wiedział Pan, co dokładnie zatrzyma ta wpłata."},
+          {type:"note", text:"Nie pomijasz sankcji, ale mówisz je krótko — jako to, co wpłata zatrzymuje, nie jako groźbę."},
+          {type:"end", text:"Dłużnik wie, że jego deklarację zaraz omówicie. Przechodzisz do sankcji w wersji krótkiej, a na etapie „Stanowisko dłużnika” wybierasz ścieżkę „Chce zapłacić”.", go:"s4"}
+        ]},
+        { key:"3G", title:"„Mam to gdzieś” / „róbcie, co chcecie”", body:[
+          {type:"say", text:"Rozumiem. Właśnie dlatego powiem Panu, co konkretnie się dzieje — te działania dotyczą Pana firmy, a część z nich da się jeszcze zatrzymać. Potem omówimy Pana stanowisko."},
+          {type:"end", text:"Dłużnik wie, że chodzi o konkretne skutki dla jego firmy. Przechodzisz do sankcji zrealizowanych.", go:"s4"}
+        ]},
+        { key:"3H", title:"„Proszę to wysłać mailem”", body:[
+          {type:"say", text:"Chce Pan to dostać mailem, rozumiem. I właśnie dlatego ważne jest, żeby Pan najpierw dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej — szczególnie jeśli chce Pan mieć to na piśmie, bo to na treść tego maila wpłynie."},
+          {type:"end", text:"Mail z podsumowaniem wyślesz po rozmowie — teraz przechodzisz do sankcji zrealizowanych.", go:"s4"}
+        ]}
+      ]}
     ],
     wskazowki:[
-      "Pytasz „Czy to dla Pana jasne?”, a nie „Czy mogę?” — nie prosisz o zgodę na rozmowę.",
-      "Mów spokojnie — plan ma brzmieć jak standardowa procedura, nie jak groźba.",
-      "Trzymaj się zapowiedzianej kolejności: sankcje zrealizowane → zaplanowane → stanowisko."
+      "Najtrudniejsze w całym schemacie jest utrzymanie kolejności. Plan rozmowy to narzędzie, które Ci ją ustawia.",
+      "Każdą obiekcję najpierw zaopiekuj („rozumiem”, „dobrze, że Pan to mówi”), potem przypomnij kontrakt: najpierw fakty, potem jego stanowisko.",
+      "Mów, gdzie jesteś i co robisz: działasz na zlecenie klienta, realizujesz plan sprawy — nic personalnego. To prawda, nie technika.",
+      "Bez emocji i bez ironii. Gdy dłużnik czuje, że jest traktowany fair, sam chce wysłuchać — a żeby Cię „dojechać”, musiałby wyjść na buraka."
     ],
-    dalej:"rozmówca przyjął plan („tak”, „dobrze”) albo nie protestuje.",
+    nieRobic:[
+      "„Chciałabym panu powiedzieć…”, „może bym przedstawił…” — zamiast tego „zróbmy tak”.",
+      "Plan tylko z Twoimi punktami (sankcje), bez jego stanowiska — wtedy będzie przerywał.",
+      "„Zaraz do tego wrócę” jak zdarta płyta, bez odpowiedzi na to, co powiedział.",
+      "Przeskok do stanowiska dłużnika z pominięciem sankcji, bo zaczął się kłócić.",
+      "Intencja „żeby się Pan nie zdziwił, jak dostanie maila”."
+    ],
+    dalej:"dłużnik przyjął plan („tak”, „dobra”, „słucham”) — wie, że najpierw usłyszy fakty, a potem przyjdzie jego kolej.",
     next:["s4"] },
   s4: { lane:null, num:"4", title:"Sankcje zrealizowane", short:"Krótki opis wymagany",
     osiagnij:"Krótko powiedzieć, co w sprawie już zostało zrobione — każda wdrożona sankcja w jednym zdaniu, z tym, co oznacza dla dłużnika.",
@@ -720,7 +847,7 @@ function renderProgress() {
     html += `<span class="lane-split none">→ potem jedna ze ścieżek: Chce zapłacić · Negacja · Brak środków</span>`;
   }
   const where = lane ? `${LANES[lane].label} · ${cur.num}` : `Etap ${cur.num} z ${MAIN.length}`;
-  $("progress").innerHTML = `<div class="progress-head"><span class="now">Jesteś tutaj: <b>${esc(cur.title)}</b> · ${esc(where)}</span><button data-tab="schemat">Cały schemat ›</button></div><div class="stepper">${html}</div>`;
+  $("progress").innerHTML = `<div class="progress-head"><span class="now">Jesteś tutaj: <b>${esc(cur.title)}</b> · ${esc(where)}<span class="rule1">Nie przechodzisz dalej bez zaliczenia etapu</span></span><button data-tab="schemat">Cały schemat ›</button></div><div class="stepper">${html}</div>`;
   const c = $("progress").querySelector(".st.current"), track = $("progress").querySelector(".stepper");
   if (c && track.scrollWidth > track.clientWidth) track.scrollLeft = c.offsetLeft - track.offsetLeft - 60;
 }
@@ -772,6 +899,7 @@ function renderStage() {
     <div class="sec-title">Teksty pomocnicze</div>
     ${s.blocks.map(renderBlock).join("")}
     <div class="tips"><h3>Wskazówki</h3><ul>${s.wskazowki.map(w => `<li>${txt(w)}</li>`).join("")}</ul></div>
+    ${s.nieRobic ? `<div class="dont"><h3>Czego nie robić</h3><ul>${s.nieRobic.map(w => `<li>${txt(w)}</li>`).join("")}</ul></div>` : ""}
     <div class="ready"><span><b>Idziesz dalej, gdy:</b> ${txt(s.dalej)}</span></div>
     <div class="actions">${actions}</div>
   </div>`;
@@ -802,7 +930,8 @@ function showTab(tab) {
   document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.tab === tab));
   $("view-rozmowa").hidden = tab !== "rozmowa";
   $("view-schemat").hidden = tab !== "schemat";
-  if (tab === "rozmowa") render(); else renderSchema();
+  $("view-zasady").hidden = tab !== "zasady";
+  if (tab === "rozmowa") render(); else if (tab === "schemat") renderSchema();
 }
 
 /* ═══ Zdarzenia ═══ */

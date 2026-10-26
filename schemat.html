@@ -173,7 +173,7 @@
   .react-item[open] { border-color: var(--line-strong); }
   .react-item summary { list-style: none; display: flex; align-items: center; gap: 10px; padding: 11px 14px; cursor: pointer; font-size: 15.5px; font-weight: 600; }
   .react-item summary::-webkit-details-marker { display: none; }
-  .react-item .rk { flex: 0 0 auto; min-width: 30px; text-align: center; font-size: 11.5px; font-weight: 800; padding: 3px 7px; border-radius: 999px; background: var(--blue-tint); color: var(--blue); }
+  .react-item .rk { flex: 0 0 auto; min-width: 26px; text-align: center; font-size: 10.5px; font-weight: 700; padding: 2px 6px; border-radius: 999px; background: var(--chip); color: var(--text-3); }
   .react-item .rk.sub { background: var(--chip); color: var(--text-3); min-width: 22px; }
   .react-item .rt { flex: 1; }
   .react-item .chev { color: var(--text-3); transition: transform 0.2s; }
@@ -300,40 +300,40 @@ const STAGES = {
       {type:"react", label:"Co może paść — kliknij to, co się dzieje", items:[
         { key:"1A", title:"Potwierdza, że to on / że decyduje o płatnościach", body:[
           {type:"say", text:"Czy mógłbym prosić o Pana imię, żeby nam się lepiej rozmawiało?"},
-          {type:"end", text:"masz imię → etap 2.", go:"s2"}
+          {type:"end", text:"Wiesz, z kim rozmawiasz, i masz jego imię. Od teraz zwracasz się do niego po imieniu i krótko przedstawiasz sprawę: w czyim imieniu dzwonisz i o jaką kwotę chodzi.", go:"s2"}
         ]},
         { key:"1B", title:"Potwierdza, ale nie chce podać imienia („A po co Panu?”)", body:[
           {type:"say", text:"Żeby nie mówić do Pana bezosobowo — ale jeśli woli Pan nie podawać, nie ma problemu."},
-          {type:"end", text:"nie naciskasz → etap 2.", go:"s2"}
+          {type:"end", text:"Nie naciskasz na imię — najważniejsze, że rozmawiasz z właściwą osobą. Przechodzisz do przedstawienia sprawy.", go:"s2"}
         ]},
         { key:"1C", title:"Pyta „Kto mówi? O co chodzi? Skąd Pan dzwoni?”, zanim potwierdzi", body:[
           {type:"say", text:"[imię], Hadyński Inkaso — dzwonię w sprawie, którą mogę omówić tylko z Panem [imię i nazwisko] / z osobą decydującą o płatnościach w firmie [nazwa]. Czy to Pan?"},
-          {type:"end", text:"potwierdza → 1A · odbiera ktoś inny → 1E · „to nie ja” → 1F.", jumps:["1A","1E","1F"]}
+          {type:"end", text:"Nie dajesz się wciągnąć w szczegóły, zanim wiesz, z kim mówisz. Gdy potwierdzi, że to on — prosisz o imię i idziesz dalej. Gdy to sekretarka albo pracownik — prowadzisz rozmowę tak, żeby dojść do decydenta. Gdy mówi, że to nie on — wyjaśniasz, skąd numer, i ustalasz, co go łączy z firmą.", jumps:[["1A","Potwierdza, że to on"],["1E","Odbiera ktoś inny"],["1F","Mówi „to nie ja”"]]}
         ]},
         { key:"1D", title:"„Skąd macie mój numer?” — mówi dłużnik", body:[
           {type:"say", text:"Już wyjaśniam. Ten numer został podany jako kontakt do dłużnika w sprawie firmy [nazwa]. Skoro numer jest w sprawie, musimy pod niego dzwonić. Tego od nas wymaga umowa z klientem."},
-          {type:"end", text:"wracasz do potwierdzenia i imienia → 1A.", jumps:["1A"]}
+          {type:"end", text:"Rozmówca wie, skąd mamy numer i że dzwonimy zgodnie z umową z klientem. Wracasz do potwierdzenia, że to on, i prosisz o imię.", jumps:[["1A","Tekst: prośba o imię"]]}
         ]},
         { key:"1E", title:"Odbiera ktoś inny — sekretarka, pracownik, księgowa", body:[
           {type:"goal", text:"Bezpośredni numer do decydenta. Jeśli się nie da — przekazana wiadomość + umówiony termin kolejnego telefonu."},
           {type:"say", label:"1. Ustal, kto decyduje", text:"Rozumiem, nie będę zawracał Panu głowy niepotrzebnie — kto w firmie decyduje o płatnościach i sprawach tego typu?"},
           {type:"say", label:"2. Poproś o numer", text:"Czy mogę prosić o bezpośredni numer do Pana [imię decydenta]? Załatwię temat bezpośrednio z nim i nie będę Pana więcej angażował."},
           {type:"react", label:"Co dalej?", items:[
-            { title:"Daje numer", body:[ {type:"end", text:"dzwonisz do decydenta — od etapu 1."} ]},
-            { title:"Przełącza do decydenta", body:[ {type:"end", text:"zaczynasz od otwarcia — z nowym rozmówcą."} ]},
+            { title:"Daje numer", body:[ {type:"end", text:"Masz bezpośredni numer do decydenta. Dzwonisz do niego i zaczynasz od przywitania — jak z nowym rozmówcą."} ]},
+            { title:"Przełącza do decydenta", body:[ {type:"end", text:"Rozmawiasz już z decydentem. Zaczynasz od przywitania i upewniasz się, że to on."} ]},
             { title:"„Szefa nie ma” / „nie podam numeru”", body:[
               {type:"say", label:"Wiadomość z wagą", text:"W takim razie będę miał do Pana prośbę, bo Pana pomoc jest tu naprawdę ważna. Proszę przekazać Panu [imię decydenta], że dzwonił [imię] z Hadyński Inkaso — w sprawie windykacyjnej prowadzonej na firmę [nazwa]. W tej sprawie są zaplanowane kolejne działania i one mają swój termin — a ja mam jeszcze możliwość je zatrzymać, ale tylko jeśli porozmawiam z Panem [imię decydenta], zanim ten termin minie."},
               {type:"if", label:"Gdy wiadomość nie robi wrażenia — konkret", text:"W tej sprawie została już wdrożona [sankcja]. Dla firmy oznacza to [skutek]. Kolejny krok jest zaplanowany na [data] i jeszcze da się go zatrzymać — ale tylko wtedy, kiedy porozmawiam z osobą, która o płatnościach decyduje."},
               {type:"say", label:"Termin", text:"Kiedy najlepiej go zastanę? … To umówmy się tak: zadzwonię [dzień, godzina]. Proszę uprzedzić Pana [imię decydenta], że będę dzwonił — i zapisać moje nazwisko: [imię], Hadyński Inkaso. Mogę na Pana liczyć?"},
-              {type:"end", text:"wiadomość przekazana + umówiony termin telefonu."}
+              {type:"end", text:"Wiadomość trafiła do firmy z wagą i terminem, a Ty masz umówiony dzień i godzinę kolejnego telefonu do decydenta."}
             ]},
             { title:"„Proszę wysłać maila”", body:[
               {type:"say", text:"Mogę wysłać, ale ta sprawa ma swój termin — dlatego potrzebuję rozmowy z Panem [imię decydenta]. Na jaki adres wysłać i kiedy go zastanę?"},
-              {type:"end", text:"masz adres + termin telefonu."}
+              {type:"end", text:"Masz adres mailowy i termin, kiedy zastaniesz decydenta. Mail jest dodatkiem — nie zastępuje rozmowy."}
             ]},
             { title:"Łączy z księgową", body:[
               {type:"say", text:"Skoro mam już Pana na linii — dwie krótkie rzeczy, czysto techniczne. Czy faktura [nr] jest u Państwa w systemie? I czy była do niej kiedykolwiek jakaś reklamacja albo korekta?"},
-              {type:"end", text:"zanotowane odpowiedzi → prośba o numer albo termin rozmowy z decydentem."}
+              {type:"end", text:"Wiesz, czy faktura jest w systemie i czy była reklamowana — to podcina późniejsze wymówki. Na koniec i tak prosisz o numer albo termin rozmowy z decydentem."}
             ]}
           ]},
           {type:"note", text:"Sekretarka, która czuje się ważna, otwiera drzwi; naciskana — ich broni. Nie omawiasz z nią kwot ani dokumentów — tylko waga i termin."}
@@ -345,14 +345,14 @@ const STAGES = {
           {type:"react", label:"Co dalej?", items:[
             { title:"„Znam właściciela” / „pracowałem tam”", body:[
               {type:"say", text:"Dziękuję, wpisuję Pana jako świadka. Ma Pan może aktualny kontakt do osoby, która prowadzi firmę?"},
-              {type:"end", text:"status świadka + (jeśli się uda) kontakt do dłużnika."}
+              {type:"end", text:"Rozmówca jest zapisany jako świadek — nie dzwonimy do niego w sprawie zapłaty. Jeśli podał kontakt do osoby prowadzącej firmę, masz nową drogę do dłużnika."}
             ]},
             { title:"„Nic mnie nie łączy”", body:[
               {type:"say", text:"Rozumiem. W takim razie proszę o maila z prośbą o usunięcie numeru — wtedy dział to rozpatrzy. Podesłać Panu link do oferty SMS-em?"},
-              {type:"end", text:"obiecany mail + zgoda na SMS (albo odmowa — zapisz w sprawie)."}
+              {type:"end", text:"Rozmówca wie, jak usunąć swój numer (mail do nas), i dostaje link do oferty SMS-em. Jeśli odmówił — zapisujesz to w sprawie."}
             ]},
             { title:"W trakcie przyznaje, że to jednak on", body:[
-              {type:"end", text:"→ 1A, potem etap 2.", jumps:["1A"]}
+              {type:"end", text:"Rozmawiasz z dłużnikiem. Prosisz o imię i przechodzisz do przedstawienia sprawy.", go:"s2"}
             ]}
           ]},
           {type:"note", text:"Załóż, że rozmówca może być dłużnikiem, który ucieka od tematu. Nie oskarżaj — link z giełdy działa w obie strony: dla przypadkowej osoby to oferta zakupu, dla dłużnika informacja, że jego dług wisi publicznie."}
@@ -360,18 +360,18 @@ const STAGES = {
         { key:"1G", title:"„To nie ja, dziękuję, do widzenia” — chce się rozłączyć", body:[
           {type:"say", label:"Od razu, jednym tchem", text:"Rozumiem — jedno zdanie, zanim Pan się rozłączy: ten numer jest w sprawie firmy [nazwa] i będziemy pod niego dzwonić, dopóki nie wyjaśnimy, co Pana z nią łączy. Minuta teraz oszczędzi Panu kolejnych telefonów."},
           {type:"react", label:"Co dalej?", items:[
-            { title:"Zostaje na linii", body:[ {type:"end", text:"→ 1F, punkt 2 (giełda + dwie drogi).", jumps:["1F"]} ]},
-            { title:"Rozłączył się", body:[ {type:"end", text:"notatka w sprawie + kolejna próba wg standardowego harmonogramu dzwonienia."} ]}
+            { title:"Zostaje na linii", body:[ {type:"end", text:"Rozmówca został na linii. Mówisz, że dług firmy jest na sprzedaż na giełdzie, i dajesz mu dwie drogi: mail z prośbą o usunięcie numeru albo powiedzenie, co go łączy z firmą (status świadka).", jumps:[["1F","Tekst: giełda i dwie drogi"]]} ]},
+            { title:"Rozłączył się", body:[ {type:"end", text:"Zapisujesz w sprawie, że rozmówca się rozłączył, i dzwonisz ponownie według standardowego harmonogramu."} ]}
           ]}
         ]},
         { key:"1H", title:"„Nie mam czasu” / „jestem w pracy” / „prowadzę” — po potwierdzeniu, że to on", body:[
           {type:"say", text:"Nie ma Pan czasu, rozumiem — i właśnie dlatego ważne jest, żeby Pan dowiedział się, co już zostało zrobione w Pana sprawie i co zostanie zrobione dalej, szczególnie jeśli nie ma Pan obecnie czasu, bo to na ten czas wpłynie."},
           {type:"if", label:"Gdy dalej nie może", text:"Kiedy mogę oddzwonić — dziś o [godzina]?"},
-          {type:"end", text:"rozmowa idzie dalej → etap 2 — albo umówiony konkretny termin telefonu.", go:"s2"}
+          {type:"end", text:"Albo rozmowa toczy się dalej i przedstawiasz sprawę, albo masz umówiony konkretny dzień i godzinę telefonu — nigdy samo „proszę zadzwonić później”.", go:"s2"}
         ]},
         { key:"1I", title:"Osoba fizyczna — odbiera ktoś z rodziny", body:[
           {type:"say", text:"Dzwonię w sprawie, którą mogę omówić tylko z Panem [imię]. Kiedy najlepiej go zastanę?"},
-          {type:"end", text:"umówiony termin telefonu. Żadnych szczegółów sprawy."}
+          {type:"end", text:"Masz umówiony termin, kiedy zastaniesz dłużnika. Rodzinie nie zostawiasz żadnych szczegółów sprawy."}
         ]}
       ]}
     ],
@@ -380,7 +380,7 @@ const STAGES = {
       "Imienia rozmówcy używaj w całej rozmowie — szczególnie przy pytaniach.",
       "Każda reakcja ma swój koniec — nie kończ rozmowy, zanim do niego dojdziesz."
     ],
-    dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię (1A / 1B).",
+    dalej:"rozmówca potwierdził, że to on (albo że decyduje o płatnościach), i znasz jego imię — albo przynajmniej wiesz, że rozmawiasz z właściwą osobą.",
     next:["s2"] },
   s2: { lane:null, num:"2", title:"Przedstawienie sprawy", short:"Wierzyciel, kwota — jedno zdanie",
     osiagnij:"Powiedzieć w jednym zdaniu, w czyim imieniu dzwonisz i jakiej należności dotyczy rozmowa: wierzyciel, kwota, czego dotyczy.",
@@ -733,8 +733,8 @@ function renderBlock(b) {
   }
   if (b.type === "end") {
     const btns = (b.go ? [`<button class="mini primary" data-go="${b.go}">Dalej: ${esc(STAGES[b.go].title)} ›</button>`] : [])
-      .concat((b.jumps || []).map(k => `<button class="mini" data-jump="${k}">Przejdź do ${k} ›</button>`));
-    return `<div class="end"><span><b>Koniec:</b> ${txt(b.text)}</span>${btns.length ? `<span class="end-btns">${btns.join("")}</span>` : ""}</div>`;
+      .concat((b.jumps || []).map(([k, l]) => `<button class="mini" data-jump="${k}">${esc(l)} ›</button>`));
+    return `<div class="end"><span><b>Jak to się kończy:</b> ${txt(b.text)}</span>${btns.length ? `<span class="end-btns">${btns.join("")}</span>` : ""}</div>`;
   }
   if (b.type === "goal") return `<div class="rgoal"><b>Cel tej sytuacji:</b> ${txt(b.text)}</div>`;
   if (b.type === "note") return `<div class="rnote"><b>Wskazówka:</b> ${txt(b.text)}</div>`;

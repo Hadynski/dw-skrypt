@@ -325,10 +325,10 @@
     gap: 24px;
     align-items: start;
   }
-  body[data-tab="schemat"] .layout,
+  body[data-tab="drzewko"] .layout,
   body[data-tab="zalozenia"] .layout,
   body[data-tab="ustawienia"] .layout { grid-template-columns: 1fr; }
-  body[data-tab="schemat"] aside,
+  body[data-tab="drzewko"] aside,
   body[data-tab="zalozenia"] aside,
   body[data-tab="ustawienia"] aside { display: none; }
 
@@ -1310,137 +1310,128 @@
     outline-offset: 2px;
   }
 
-  /* ───────── Widok: Schemat rozmowy ───────── */
+  /* ───────── Widok: Drzewko ───────── */
   .tree-wrap {
     background: var(--card);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
-    padding: 30px 22px 26px;
+    padding: 30px 16px 26px;
     overflow-x: auto;
     animation: cardIn 0.4s var(--ease-out) both;
   }
-  .tree-title { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; padding: 0 4px 4px; }
-  .tree-sub { font-size: 13.5px; color: var(--text-secondary); padding: 0 4px 18px; max-width: 760px; }
-  .sch-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; color: var(--text-tertiary); padding: 0 4px 18px; }
-  .sch-legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .sch-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
-  .sch-legend i.cur { background: var(--blue); }
-  .sch-legend i.done { background: var(--green); }
-  .sch-legend i.off { border: 1.5px dashed var(--violet); }
-  .sch-legend i.draft { background: var(--orange); }
-  .schema { min-width: 1090px; padding: 0 4px; }
-  .sch-lane-label { min-width: 104px; text-align: center; }
-  .sch-row { display: flex; align-items: stretch; gap: 0; }
-  .sch-entry { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; padding: 10px 12px; border: 1.5px dashed var(--separator-strong); border-radius: 14px; }
-  .sch-entry-label, .sch-lane-label { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin-right: 4px; }
-  .sch-col { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-  .sch-arrow { flex: 0 0 18px; display: flex; align-items: center; justify-content: center; color: var(--text-tertiary); font-size: 15px; }
-  .sch-fork { display: flex; flex-direction: column; justify-content: center; gap: 10px; }
-  .sch-fork-wrap { display: flex; align-items: center; }
-  .sch-fork-wrap::before { content: ""; width: 10px; align-self: stretch; margin: 18px 0; border: 1.5px solid var(--separator-strong); border-right: 0; border-radius: 8px 0 0 8px; }
-  .sch-join::after { content: ""; width: 10px; align-self: stretch; margin: 18px 0; border: 1.5px solid var(--separator-strong); border-left: 0; border-radius: 0 8px 8px 0; }
-  .sch-lanes { margin: 22px 0 0; position: relative; display: flex; flex-direction: column; gap: 14px; padding: 2px 0 4px 18px; border-left: 1.5px solid var(--separator-strong); }
-  .sch-lane { display: flex; align-items: center; gap: 0; position: relative; }
-  .sch-lane::before { content: ""; position: absolute; left: -18px; top: 50%; width: 14px; border-top: 1.5px solid var(--separator-strong); }
-  .sch-lane-label { flex: 0 0 auto; writing-mode: horizontal-tb; padding: 4px 9px; border-radius: 999px; margin-right: 8px; }
-  .sch-lane-label.A { background: var(--red-tint); color: var(--red); }
-  .sch-lane-label.B { background: var(--orange-tint); color: var(--orange-text); }
-  .sch-lane-label.C { background: var(--green-tint); color: var(--green-text); }
-  .snode {
+  .tree-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 0 12px 4px;
+  }
+  .tree-sub {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    padding: 0 12px 22px;
+  }
+  .tree { display: flex; justify-content: center; min-width: 1440px; padding: 0 8px; }
+  .tree ul { display: flex; justify-content: center; padding-top: 26px; position: relative; list-style: none; }
+  .tree > ul { padding-top: 0; }
+  .tree li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    flex: 0 0 140px;
-    width: 140px;
+    padding: 26px 8px 0;
+    list-style: none;
+  }
+  .tree > ul > li { padding-top: 0; }
+  .tree li::before, .tree li::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    width: 50%;
+    height: 26px;
+    border-top: 1.5px solid var(--separator-strong);
+  }
+  .tree li::after { right: auto; left: 50%; border-left: 1.5px solid var(--separator-strong); }
+  .tree li:only-child::before, .tree li:only-child::after { display: none; }
+  .tree li:only-child { padding-top: 0; }
+  .tree > ul > li::before, .tree > ul > li::after { display: none; }
+  .tree li:first-child::before, .tree li:last-child::after { border: 0 none; }
+  .tree li:last-child::before { border-right: 1.5px solid var(--separator-strong); border-radius: 0 8px 0 0; }
+  .tree li:first-child::after { border-radius: 8px 0 0 0; }
+  .tree ul ul::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    border-left: 1.5px solid var(--separator-strong);
+    width: 0;
+    height: 26px;
+  }
+
+  .t-edge {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    background: var(--bg);
+    padding: 2px 9px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+
+  .tnode {
+    position: relative;
     background: var(--btn-surface);
     border: 1px solid var(--separator);
     border-radius: 14px;
-    padding: 10px 12px 11px;
+    padding: 11px 14px;
+    width: 168px;
     text-align: left;
     cursor: pointer;
     box-shadow: var(--shadow-btn);
     transition: transform 0.2s var(--ease-std), box-shadow 0.2s var(--ease-std), border-color 0.2s var(--ease-std);
   }
-  .snode:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.10); }
-  .snode .t-num { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; display: inline-block; margin-bottom: 5px; }
+  .tnode:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.10); }
+  .tnode .t-head { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
+  .tnode .t-num {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 999px;
+  }
   .t-num.neutral { background: var(--blue-tint); color: var(--blue); }
   .t-num.A { background: var(--red-tint); color: var(--red); }
   .t-num.B { background: var(--orange-tint); color: var(--orange-text); }
   .t-num.C { background: var(--green-tint); color: var(--green-text); }
   .t-num.D { background: var(--violet-tint); color: var(--violet-text); }
   .t-num.E { background: var(--teal-tint); color: var(--teal-text); }
-  .snode .t-title { font-size: 13px; font-weight: 650; line-height: 1.3; letter-spacing: -0.01em; }
-  .snode .t-desc { font-size: 11.5px; color: var(--text-tertiary); line-height: 1.35; margin-top: 4px; }
-  .snode.done { border-color: color-mix(in srgb, var(--green) 55%, transparent); }
-  .snode.done .t-num::after { content: " ✓"; }
-  .snode.current { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,113,227,0.18); }
-  .snode.draft::after { content: ""; position: absolute; top: 9px; right: 34px; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
-  .snode .t-edit {
-    position: absolute; top: 6px; right: 6px; width: 24px; height: 24px;
-    border: none; border-radius: 7px; background: transparent; color: var(--text-tertiary);
-    font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.2s var(--ease-std), background 0.2s var(--ease-std);
+  .t-num.N { background: var(--indigo-tint); color: var(--indigo-text); }
+  .tnode .t-title { font-size: 13px; font-weight: 600; line-height: 1.3; letter-spacing: -0.01em; }
+  .tnode .t-desc { font-size: 11.5px; color: var(--text-tertiary); line-height: 1.35; margin-top: 3px; }
+  .tnode.current { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(0,113,227,0.18); }
+  .tnode .t-edit {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--text-tertiary);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-std), background 0.2s var(--ease-std);
   }
-  .snode:hover .t-edit { opacity: 1; }
-  .snode .t-edit:hover { background: var(--chip-bg); color: var(--text); }
-  @media (hover: none) { .snode .t-edit { opacity: 1; } }
-  .sch-off { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
-  .soff {
-    appearance: none; font-family: inherit; text-align: left; cursor: pointer;
-    font-size: 11.5px; line-height: 1.3; font-weight: 600; color: var(--violet-text);
-    background: var(--violet-tint); border: 1.5px dashed color-mix(in srgb, var(--violet) 55%, transparent);
-    border-radius: 10px; padding: 6px 9px;
-  }
-  .soff.E { color: var(--teal-text); background: var(--teal-tint); border-color: color-mix(in srgb, var(--teal) 55%, transparent); }
-  .soff.A { color: var(--red); background: var(--red-tint); border-color: color-mix(in srgb, var(--red) 45%, transparent); }
-  .soff.N { color: var(--text-secondary); background: var(--surface-2); border-color: var(--separator-strong); }
-  .soff.current { box-shadow: 0 0 0 3px rgba(0,113,227,0.25); }
-  .soff:hover { filter: brightness(0.97); }
-
-  /* Pasek etapów w zakładce Rozmowa */
-  .stagebar { background: var(--card); border-radius: var(--radius-md); box-shadow: var(--shadow-btn); padding: 10px 12px; margin-bottom: 14px; }
-  .sb-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-tertiary); margin-bottom: 7px; }
-  .sb-head button { appearance: none; border: none; background: none; font: inherit; color: var(--blue); cursor: pointer; text-transform: none; letter-spacing: 0; font-size: 12px; font-weight: 600; }
-  .sb-track { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 3px; }
-  .sb-step {
-    appearance: none; border: 1px solid transparent; font-family: inherit; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 12px; font-weight: 500; line-height: 1.2; color: var(--text-tertiary);
-    background: var(--chip-bg); border-radius: 999px; padding: 4px 9px 4px 4px; white-space: nowrap;
-  }
-  .sb-step .sb-n { width: 17px; height: 17px; border-radius: 50%; background: var(--dot-bg); color: #fff; font-size: 10px; font-weight: 700; display: inline-grid; place-items: center; }
-  .sb-step.done { color: var(--text-secondary); }
-  .sb-step.done .sb-n { background: var(--green); }
-  .sb-step.current { background: var(--blue); color: #fff; font-weight: 650; }
-  .sb-step.current .sb-n { background: #fff; color: var(--blue); }
-  .sb-step.current.A { background: var(--red); } .sb-step.current.A .sb-n { color: var(--red); }
-  .sb-step.current.B { background: var(--orange); } .sb-step.current.B .sb-n { color: var(--orange); }
-  .sb-step.current.C { background: var(--green-text); } .sb-step.current.C .sb-n { color: var(--green-text); }
-  .sb-step.off { border: 1.5px dashed var(--violet); background: var(--violet-tint); color: var(--violet-text); font-weight: 650; padding-left: 9px; }
-  .sb-step:not(.current):hover { background: var(--chip-bg-hover); color: var(--text); }
-  .sb-sep { color: var(--dot-bg); font-size: 12px; }
-  #tabs button { white-space: nowrap; }
-  @media (max-width: 640px) { .tab-long { display: none; } }
-  @media (max-width: 720px) {
-    .sb-track { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
-    .sb-track::-webkit-scrollbar { display: none; }
-  }
-  .sb-or { color: var(--text-tertiary); font-size: 11px; padding: 0 1px; }
-  .sb-hint { font-size: 12px; color: var(--text-tertiary); font-style: italic; padding-left: 2px; }
-  .sb-lane { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 999px; margin-left: 4px; }
-  .sb-lane.A { background: var(--red-tint); color: var(--red); }
-  .sb-lane.B { background: var(--orange-tint); color: var(--orange-text); }
-  .sb-lane.C { background: var(--green-tint); color: var(--green-text); }
-
-  /* Wersja wstępna — treści do akceptu */
-  .draft-badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--orange-text); background: var(--orange-tint); border: 1px solid color-mix(in srgb, var(--orange) 45%, transparent); border-radius: 999px; padding: 2px 8px; margin-left: 8px; vertical-align: 2px; }
-  .step-card .draft-note { font-size: 12.5px; color: var(--orange-text); background: var(--orange-tint); border-radius: 10px; padding: 8px 12px; margin: 0 0 14px; }
-
-  /* Lista sankcji z krótkim opisem */
-  .sk-list { display: flex; flex-direction: column; gap: 8px; }
-  .sk-item { display: flex; align-items: flex-start; gap: 12px; background: var(--orange-tint); border-radius: 12px; padding: 10px 12px; }
-  .sk-item .sk-body { flex: 1; min-width: 0; font-size: 14.5px; line-height: 1.5; }
-  .sk-item .sk-title { display: block; font-size: 12px; font-weight: 700; color: var(--orange-text); margin-bottom: 2px; }
-  .sk-item .btn-secondary { flex: 0 0 auto; font-size: 12.5px; padding: 6px 12px; min-height: 0; }
-  @media (max-width: 640px) { .sk-item { flex-direction: column; gap: 6px; } }
+  .tnode:hover .t-edit { opacity: 1; }
+  .tnode .t-edit:hover { background: var(--chip-bg); color: var(--text); }
+  @media (hover: none) { .tnode .t-edit { opacity: 1; } }
 
   .tree-footer {
     display: flex;
@@ -1809,7 +1800,7 @@
     <div class="header-spacer"></div>
     <nav class="tabs" id="tabs" aria-label="Widok">
       <button data-tabbtn="rozmowa" class="active">Rozmowa</button>
-      <button data-tabbtn="schemat">Schemat<span class="tab-long"> rozmowy</span></button>
+      <button data-tabbtn="drzewko">Drzewko</button>
       <button data-tabbtn="zalozenia">Założenia</button>
       <button data-tabbtn="ustawienia">Ustawienia</button>
     </nav>
@@ -1884,7 +1875,6 @@
 
   <main>
     <section class="view" id="view-rozmowa">
-      <div class="stagebar" id="stagebar"></div>
       <div class="topbar">
         <button class="btn-back" id="btn-back">‹ Wstecz</button>
         <div class="breadcrumb" id="breadcrumb"></div>
@@ -1892,17 +1882,11 @@
       <div id="stage"></div>
     </section>
 
-    <section class="view" id="view-schemat" hidden>
+    <section class="view" id="view-drzewko" hidden>
       <div class="tree-wrap">
-        <div class="tree-title">Schemat rozmowy</div>
-        <div class="tree-sub">Etapy rozmowy po kolei. Kliknij etap, żeby otworzyć jego kartę z celem, tekstami i wskazówkami. ✎ edytuje treść etapu.</div>
-        <div class="sch-legend">
-          <span><i class="cur"></i>Tu jesteś</span>
-          <span><i class="done"></i>Etap za Tobą</span>
-          <span><i class="off"></i>Poza główną ścieżką</span>
-          <span><i class="draft"></i>Teksty w wersji wstępnej — do akceptu</span>
-        </div>
-        <div class="schema" id="schema"></div>
+        <div class="tree-title">Schemat skryptu</div>
+        <div class="tree-sub">Pełny przebieg rozmowy — kliknij etap, aby do niego przejść, albo ✎ aby edytować treść.</div>
+        <div class="tree" id="tree"></div>
       </div>
       <div class="tree-footer">
         <div class="tree-note">
@@ -1917,7 +1901,7 @@
         </div>
         <div class="tree-note">
           <h4>Powroty i skróty</h4>
-          Z etapów końcowych ścieżki przy innej reakcji dłużnika wracasz do etapu „Stanowisko dłużnika” i wybierasz ścieżkę od nowa. Przycisk „Wstecz” cofa o jeden etap. Deklaracja spłaty może paść w każdej chwili — zielony przycisk „Dłużnik deklaruje spłatę → Gałąź C” pod kartą przenosi tam z dowolnego etapu.
+          Z etapów końcowych gałęzi przy innej reakcji dłużnika wracasz do kroku 2 — Przedstawienia sprawy — i wybierasz gałąź od nowa. Przycisk „Wstecz” cofa o jeden etap. Deklaracja spłaty może paść w każdej chwili — zielony przycisk „Dłużnik deklaruje spłatę → Gałąź C” pod kartą przenosi tam z dowolnego etapu.
         </div>
       </div>
     </section>
@@ -2086,93 +2070,67 @@ const LS_OBJ = "hi_skrypt_obiekcje_v2";
 const LS_SANK = "hi_skrypt_sankcje_v1";
 const LS_PREFS = "hi_skrypt_prefs_v2";
 
-const SECTION_ORDER = ["start","przedstawienie","plan","sank_zr","sank_zap","stanowisko","c","a_intro","a_prawnik","a_klient","a_rozstrzygniecie","b_1","b_analiza","b_2","b_3","b_sankcje","d_pomylka","e_niedecyzyjny","p_deklaracja","p_dokumenty","p_brak_srodkow","pre_termin"];
+const SECTION_ORDER = ["start","przedstawienie","a_intro","a_prawnik","b_1","b_2","b_3","c","d_pomylka","e_niedecyzyjny","p_deklaracja","p_dokumenty","p_brak_srodkow","pre_termin"];
 
 const NODE_META = {
-  start:          { tone:"neutral", eyebrow:"Etap 1–2 · Przywitanie i identyfikacja", num:"1",  crumb:"Przywitanie" },
-  przedstawienie: { tone:"neutral", eyebrow:"Etap 3 · Przedstawienie sprawy",         num:"2",  crumb:"Przedstawienie" },
-  plan:           { tone:"neutral", eyebrow:"Etap 4 · Plan rozmowy",                  num:"3",  crumb:"Plan rozmowy" },
-  sank_zr:        { tone:"neutral", eyebrow:"Etap 5 · Sankcje zrealizowane",          num:"4",  crumb:"Sankcje zrealizowane", draft:true },
-  sank_zap:       { tone:"neutral", eyebrow:"Etap 6 · Sankcje zaplanowane",           num:"5",  crumb:"Sankcje zaplanowane", draft:true },
-  stanowisko:     { tone:"neutral", eyebrow:"Etap 7 · Stanowisko dłużnika",           num:"6",  crumb:"Stanowisko", draft:true },
-  c:              { tone:"C",       eyebrow:"Ścieżka: chce zapłacić · Gałąź C",       num:"7",  crumb:"C · Zapłaci" },
-  a_intro:        { tone:"A",       eyebrow:"Ścieżka: negacja · Gałąź A",             num:"8",  crumb:"A · Neguje" },
-  a_prawnik:      { tone:"A",       eyebrow:"Negacja · poza ścieżką · prawnik",       num:"8a", crumb:"A · Prawnik" },
-  a_klient:       { tone:"A",       eyebrow:"Ścieżka: negacja · Wyjaśnienie z klientem", num:"9", crumb:"A · Wyjaśnienie z klientem", draft:true },
-  a_rozstrzygniecie: { tone:"A",    eyebrow:"Ścieżka: negacja · Rozstrzygnięcie sporu", num:"10", crumb:"A · Rozstrzygnięcie", draft:true },
-  b_1:            { tone:"B",       eyebrow:"Ścieżka: brak środków · Gałąź B",        num:"11", crumb:"B · Brak środków" },
-  b_analiza:      { tone:"B",       eyebrow:"Ścieżka: brak środków · Analiza finansowa", num:"12", crumb:"B · Analiza finansowa", draft:true },
-  b_2:            { tone:"B",       eyebrow:"Ścieżka: brak środków · Negocjacje",     num:"13", crumb:"B · Negocjacje" },
-  b_3:            { tone:"B",       eyebrow:"Ścieżka: brak środków · Konkretna deklaracja", num:"14", crumb:"B · Domknięcie" },
-  b_sankcje:      { tone:"B",       eyebrow:"Ścieżka: brak środków · Przypomnienie sankcji", num:"15", crumb:"B · Przypomnienie sankcji", draft:true },
-  d_pomylka:      { tone:"D",       eyebrow:"Poza ścieżką · Gałąź D",                 num:"16", crumb:"D · „To nie ja”" },
-  e_niedecyzyjny: { tone:"E",       eyebrow:"Poza ścieżką · Gałąź E",                 num:"17", crumb:"E · Niedecyzyjny" },
-  p_deklaracja:   { tone:"C",       eyebrow:"Powrót · Złamana deklaracja", num:"18", crumb:"Powrót · Deklaracja" },
-  p_dokumenty:    { tone:"A",       eyebrow:"Powrót · Brak dokumentów",    num:"19", crumb:"Powrót · Dokumenty" },
-  p_brak_srodkow: { tone:"B",       eyebrow:"Powrót · Dalej brak środków",  num:"20", crumb:"Powrót · Brak środków" },
-  pre_termin:     { tone:"neutral", eyebrow:"Przed terminem · Monitoring",  num:"21", crumb:"Przed terminem" },
+  start:          { tone:"neutral", eyebrow:"Krok 1",                num:"1",  crumb:"Otwarcie" },
+  przedstawienie: { tone:"neutral", eyebrow:"Krok 2",                num:"2",  crumb:"Przedstawienie" },
+  a_intro:        { tone:"A",       eyebrow:"Gałąź A · Krok 1",      num:"3",  crumb:"A · Neguje" },
+  a_prawnik:      { tone:"A",       eyebrow:"Gałąź A · 3a",          num:"3a", crumb:"A · Prawnik" },
+  b_1:            { tone:"B",       eyebrow:"Gałąź B · Krok 1 (4a)", num:"4a", crumb:"B · Wola zapłaty" },
+  b_2:            { tone:"B",       eyebrow:"Gałąź B · Krok 2 (4b)", num:"4b", crumb:"B · Rozwiązania" },
+  b_3:            { tone:"B",       eyebrow:"Gałąź B · Krok 3 (4c)", num:"4c", crumb:"B · Domknięcie" },
+  c:              { tone:"C",       eyebrow:"Gałąź C",               num:"5",  crumb:"C · Zapłaci" },
+  d_pomylka:      { tone:"D",       eyebrow:"Gałąź D",               num:"6",  crumb:"D · „To nie ja”" },
+  e_niedecyzyjny: { tone:"E",       eyebrow:"Gałąź E",               num:"7",  crumb:"E · Niedecyzyjny" },
+  p_deklaracja:   { tone:"C",       eyebrow:"Powrót · Złamana deklaracja", num:"9",  crumb:"Powrót · Deklaracja" },
+  p_dokumenty:    { tone:"A",       eyebrow:"Powrót · Brak dokumentów",    num:"10", crumb:"Powrót · Dokumenty" },
+  p_brak_srodkow: { tone:"B",       eyebrow:"Powrót · Dalej brak środków",  num:"11", crumb:"Powrót · Brak środków" },
+  pre_termin:     { tone:"neutral", eyebrow:"Przed terminem · Monitoring",  num:"12", crumb:"Przed terminem" },
 };
 
 const NODE_ACTIONS = {
   start: {
     branchesLast: true,
-    buttons:[{kind:"primary", label:"Właściwa osoba — przejdź do przedstawienia sprawy ›", to:"przedstawienie"}],
+    buttons:[{kind:"primary", label:"Przejdź do przedstawienia sprawy ›", to:"przedstawienie"}],
     branchGroups:[
-      {label:"Identyfikacja — odebrał ktoś inny?", cols:2, branches:[
-        {to:"d_pomylka", tone:"D", title:"„Nie wiem, o co chodzi / to nie ja”", desc:"Twierdzi, że to pomyłka / nie zna sprawy"},
-        {to:"e_niedecyzyjny", tone:"E", title:"Rozmówca niedecyzyjny", desc:"„Ja tu tylko pracuję / szefa nie ma” — sekretarka, pracownik, księgowa"}
-      ]},
       {label:"Rozmowa ponowna? Wybierz kontekst", cols:2, branches:[
         {to:"p_deklaracja", tone:"C", title:"Złamana deklaracja spłaty", desc:"Umówiona wpłata nie wpłynęła — dzwonisz po deklaracji"},
         {to:"p_dokumenty", tone:"A", title:"Nie dosłał dokumentów po negowaniu", desc:"Minął termin na stanowisko i dokumenty mailem"},
-        {to:"p_brak_srodkow", tone:"B", title:"Dalej brak środków", desc:"Kolejna rozmowa — dłużnik nadal deklaruje, że nie ma z czego"},
-        {to:"a_rozstrzygniecie", tone:"A", title:"Wracasz z odpowiedzią klienta", desc:"Spór wyjaśniony z klientem — rozstrzygnięcie"}
+        {to:"p_brak_srodkow", tone:"B", title:"Dalej brak środków", desc:"Kolejna rozmowa — dłużnik nadal deklaruje, że nie ma z czego"}
       ]},
       {label:"Inny typ rozmowy", branches:[
         {to:"pre_termin", tone:"neutral", title:"Faktura przed terminem płatności", desc:"Monitoring — dzwonisz, zanim powstanie zaległość"}
       ]}
     ]
   },
-  p_deklaracja: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"stanowisko"}] },
-  p_dokumenty:  { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"stanowisko"}] },
-  p_brak_srodkow: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"stanowisko"}] },
+  p_deklaracja: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  p_dokumenty:  { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  p_brak_srodkow: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
   pre_termin:   { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"Zastrzeżenia do faktury → rozbrojenie ›", to:"a_intro"}] },
-  przedstawienie: { buttons:[{kind:"primary", label:"Etap 4 — plan rozmowy ›", to:"plan"}] },
-  plan:      { buttons:[{kind:"primary", label:"Etap 5 — sankcje zrealizowane ›", to:"sank_zr"}] },
-  sank_zr:   { buttons:[{kind:"primary", label:"Etap 6 — sankcje zaplanowane ›", to:"sank_zap"}] },
-  sank_zap:  { buttons:[{kind:"primary", label:"Etap 7 — stanowisko dłużnika ›", to:"stanowisko"}] },
-  stanowisko: {
-    branchGroups:[
-      {label:"Jakie jest stanowisko dłużnika?", cols:3, branches:[
-        {to:"c",       tone:"C", title:"Chce zapłacić", desc:"Deklaracja chęci spłaty — całość albo negocjacje"},
-        {to:"a_intro", tone:"A", title:"Negacja", desc:"Nie zgadza się z należnością — w całości lub w części"},
-        {to:"b_1",     tone:"B", title:"Brak środków", desc:"Nie kwestionuje długu, ale mówi, że nie ma z czego"}
-      ]},
-      {label:"Poza główną ścieżką", cols:2, branches:[
-        {to:"d_pomylka", tone:"D", title:"„Nie wiem, o co chodzi”", desc:"Twierdzi, że to pomyłka / nie zna sprawy"},
-        {to:"e_niedecyzyjny", tone:"E", title:"Rozmówca niedecyzyjny", desc:"Nie decyduje o płatnościach — dojście do decydenta"}
-      ]}
+  przedstawienie: {
+    label:"Jak reaguje dłużnik?",
+    branches:[
+      {to:"a_intro", tone:"A", tag:"Gałąź A", title:"Neguje należność", desc:"Nie zgadza się z długiem — w całości lub w części"},
+      {to:"b_1",     tone:"B", tag:"Gałąź B", title:"„Nie mam pieniędzy”", desc:"Nie kwestionuje długu, ale mówi, że nie ma środków"},
+      {to:"c",       tone:"C", tag:"Gałąź C", title:"Deklaruje zapłatę", desc:"Mówi, że zapłaci"},
+      {to:"d_pomylka", tone:"D", tag:"Gałąź D", title:"„Nie wiem, o co chodzi”", desc:"Twierdzi, że to pomyłka / nie zna sprawy"},
+      {to:"e_niedecyzyjny", tone:"E", tag:"Gałąź E", title:"Rozmówca niedecyzyjny", desc:"„Ja tu tylko pracuję / szefa nie ma” — sekretarka, pracownik, księgowa"}
     ]
   },
   a_intro: {
-    buttons:[{kind:"primary", label:"Stanowisko mailowo ustalone → wyjaśnienie z klientem ›", to:"a_klient"}],
-    branchGroups:[
-      {label:"Co wynika z pytań pogłębiających?", branches:[
-        {to:"a_prawnik", tone:"A", title:"Odsyła do prawnika", desc:"„Proszę rozmawiać z moim prawnikiem”"}
-      ]}
+    label:"Co wynika z pytań pogłębiających?",
+    branches:[
+      {to:"a_prawnik",     tone:"A", tag:"3a", title:"Odsyła do prawnika", desc:"„Proszę rozmawiać z moim prawnikiem”"}
     ]
   },
-  a_prawnik: { buttons:[{kind:"secondary", label:"‹ Wróć do pytań pogłębiających", to:"a_intro"},{kind:"primary", label:"Inna reakcja dłużnika ›", to:"stanowisko"}] },
-  a_klient:  { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"Odpowiedź klienta jest → rozstrzygnięcie sporu ›", to:"a_rozstrzygniecie"}] },
-  a_rozstrzygniecie: { buttons:[{kind:"primary", label:"Deklaruje spłatę → Gałąź C ›", to:"c"},{kind:"reset", label:"Zakończ rozmowę · nowa rozmowa"}] },
-  b_1:       { buttons:[{kind:"primary", label:"Analiza finansowa ›", to:"b_analiza"}] },
-  b_analiza: { buttons:[{kind:"primary", label:"Negocjacje — dwa rozwiązania ›", to:"b_2"}] },
-  b_2:       { buttons:[{kind:"primary", label:"Deklaruje spłatę → Gałąź C ›", to:"c"},{kind:"secondary", label:"Konkretna deklaracja — kwota + data ›", to:"b_3"},{kind:"secondary", label:"Brak porozumienia → przypomnienie sankcji ›", to:"b_sankcje"}] },
-  b_3:       { buttons:[{kind:"primary", label:"Inna reakcja dłużnika ›", to:"stanowisko"},{kind:"reset", label:"Zakończ rozmowę · nowa rozmowa"}] },
-  b_sankcje: { buttons:[{kind:"primary", label:"Jednak deklaruje kwotę → domknięcie ›", to:"b_3"},{kind:"reset", label:"Zakończ rozmowę · nowa rozmowa"}] },
-  c:         { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"stanowisko"}] },
-  d_pomylka: { buttons:[{kind:"primary", label:"Przyznaje związek ze sprawą — przedstaw sprawę ›", to:"przedstawienie"},{kind:"reset", label:"Wyśle maila / koniec rozmowy · nowa rozmowa"}] },
-  e_niedecyzyjny: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"To jednak decydent → przedstaw sprawę ›", to:"przedstawienie"}] },
+  a_prawnik: { buttons:[{kind:"secondary", label:"‹ Wróć do pytań pogłębiających", to:"a_intro"},{kind:"primary", label:"Inna reakcja dłużnika ›", to:"przedstawienie"}] },
+  b_1:       { buttons:[{kind:"primary", label:"Krok 2 — dwa rozwiązania ›", to:"b_2"}] },
+  b_2:       { buttons:[{kind:"primary", label:"Deklaruje spłatę → Gałąź C ›", to:"c"},{kind:"secondary", label:"Krok 3 — powiązanie wpłaty z zatrzymaniem ›", to:"b_3"}] },
+  b_3:       { buttons:[{kind:"primary", label:"Inna reakcja dłużnika ›", to:"przedstawienie"},{kind:"reset", label:"Zakończ rozmowę · nowa rozmowa"}] },
+  c:         { buttons:[{kind:"reset", primary:true, label:"Ustalone — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja dłużnika", to:"przedstawienie"}] },
+  d_pomylka: { buttons:[{kind:"primary", label:"Przyznaje związek ze sprawą — wybierz gałąź ›", to:"przedstawienie"},{kind:"reset", label:"Wyśle maila / koniec rozmowy · nowa rozmowa"}] },
+  e_niedecyzyjny: { buttons:[{kind:"reset", primary:true, label:"Umówione — zakończ rozmowę"},{kind:"secondary", label:"‹ Inna reakcja / to jednak decydent", to:"przedstawienie"}] },
 };
 
 const DEFAULT_CONTENT = {
@@ -2183,7 +2141,8 @@ const DEFAULT_CONTENT = {
       blocks: [
         {type:"speech", mode:"firma", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy dodzwoniłem się do firmy {firma}?"},
         {type:"speech", mode:"osoba", label:"Powiedz", text:"Dzień dobry, {windykator}, Hadyński Inkaso — czy rozmawiam z Panem/Panią {osoba}?"},
-        {type:"question", label:"Pytanie aktywizujące — ustalenie rozmówcy", text:"Czy mógłbym prosić o Pana/Pani imię, żeby nam się lepiej rozmawiało?"}
+        {type:"question", label:"Pytanie aktywizujące — ustalenie rozmówcy", text:"Czy mógłbym prosić o Pana/Pani imię, żeby nam się lepiej rozmawiało?"},
+        {type:"intent"}
       ]
     },
     przedstawienie: {
@@ -2320,84 +2279,6 @@ DEFAULT_CONTENT.sections.pre_termin = {
   ]
 };
 
-/* ═══ v14: etapy ze schematu rozmowy (Lucid) — nowe karty; draft:true = tekst wstępny do akceptu ═══ */
-DEFAULT_CONTENT.sections.plan = {
-  title: "Plan rozmowy",
-  goal: "Cel: zanim zaczniesz pytać, powiedz rozmówcy, jak będzie wyglądała ta rozmowa.\nCo chcemy uzyskać: rozmówca wie, po co dzwonisz i co po kolei usłyszy — i słucha, zamiast się bronić.\nJak: jedno zdanie z planem — co już się wydarzyło w sprawie, co jest zaplanowane, potem jego stanowisko i wspólne ustalenie. Na koniec „Czy to dla Pana jasne?” — bez pytania o zgodę.\nWskazówka: plan zapowiada kolejne etapy — sankcje zrealizowane, sankcje zaplanowane, stanowisko dłużnika. Trzymaj się tej kolejności. Na „nie mam czasu” — przycisk „Intencja”, przykład przy obiekcji.",
-  blocks: [
-    {type:"intent", text:"Chcę krótko powiedzieć Panu, co już wydarzyło się w sprawie i co jest zaplanowane dalej, potem poznać Pana stanowisko i razem ustalić, jak tę sprawę zamknąć. Czy to dla Pana jasne?"}
-  ]
-};
-
-DEFAULT_CONTENT.sections.sank_zr = {
-  title: "Sankcje zrealizowane — co już się wydarzyło",
-  goal: "Cel: pokazać, że sprawa już się toczy — konkretnie, bez straszenia.\nCo chcemy uzyskać: rozmówca wie, co już zostało zrobione w jego sprawie.\nJak: krótki opis każdej wdrożonej sankcji — wymagany, jedno zdanie. Rozwinięcie tylko wtedy, gdy rozmowa pozwoli (dłużnik dopytuje, słucha).\nWskazówka: mów tylko o sankcjach, które w tej sprawie faktycznie zostały wdrożone — sprawdź to przed rozmową.",
-  blocks: [
-    {type:"speech", draft:true, label:"Powiedz — wprowadzenie", text:"Zacznę od tego, co w Pana sprawie już się wydarzyło."},
-    {type:"sankcje", label:"Krótki opis — powiedz o tych, które zostały wdrożone"},
-    {type:"note", icon:"💡", draft:true, text:"Rozwinięcie tylko, jeśli rozmowa pozwala — przycisk „Rozwinięcie” przy sankcji otwiera pełny tekst."}
-  ]
-};
-
-DEFAULT_CONTENT.sections.sank_zap = {
-  title: "Sankcje zaplanowane — co będzie dalej",
-  goal: "Cel: pokazać, co wydarzy się dalej, jeśli nic się nie zmieni — i że da się to jeszcze zatrzymać.\nCo chcemy uzyskać: rozmówca wie, jaki jest kolejny krok i kiedy.\nJak: krótki opis zaplanowanej sankcji + data — wymagany. Rozwinięcie tylko wtedy, gdy rozmowa pozwoli.\nWskazówka: jedna najbliższa sankcja z datą działa mocniej niż cały katalog. Kończ przejściem do stanowiska dłużnika.",
-  blocks: [
-    {type:"speech", draft:true, label:"Powiedz — wprowadzenie", text:"A teraz to, co w sprawie jest zaplanowane dalej — od [data]:"},
-    {type:"sankcje", label:"Krótki opis — powiedz o tych, które są zaplanowane"},
-    {type:"speech", draft:true, label:"Przejście do stanowiska dłużnika", text:"Każdą z tych rzeczy da się jeszcze zatrzymać — i dlatego zależy mi, żeby poznać Pana stanowisko."}
-  ]
-};
-
-DEFAULT_CONTENT.sections.stanowisko = {
-  title: "Stanowisko dłużnika",
-  goal: "Cel: oddać głos dłużnikowi i usłyszeć, jak on widzi tę sprawę.\nCo chcemy uzyskać: jasną reakcję — chce zapłacić, neguje albo nie ma środków. Ona wybiera dalszą ścieżkę rozmowy.\nJak: jedno otwarte pytanie i cisza — nie podpowiadaj odpowiedzi.\nWskazówka: gdy odpowiedź jest niejasna, dopytaj wprost, czy zgadza się z należnością. Deklaracja spłaty może paść w każdej chwili — zielony skrót pod kartą.",
-  blocks: [
-    {type:"question", draft:true, label:"Pytanie — oddaj głos", text:"Tak to wygląda z naszej strony. Teraz chciałbym poznać Pana stanowisko — jak Pan widzi tę sprawę?"},
-    {type:"question", draft:true, label:"Gdy odpowiedź jest niejasna", text:"Dobrze rozumiem, że zgadza się Pan z tą należnością — chodzi o kwotę {kwota}?"}
-  ]
-};
-
-DEFAULT_CONTENT.sections.a_klient = {
-  title: "Wyjaśnienie z klientem",
-  goal: "Cel: przełożyć stanowisko dłużnika na pytania do klienta i wrócić do dłużnika z odpowiedzią.\nCo chcemy uzyskać: odniesienie się klienta do każdego zarzutu dłużnika — z dokumentami.\nJak: dłużnikowi mówisz, co się teraz dzieje i kiedy się odezwiesz. Klientowi przekazujesz zarzuty punkt po punkcie i prosisz o dokumenty.\nWskazówka: nie oceniaj przy dłużniku, kto ma rację — jesteś mediatorem. Bez stanowiska mailowego nie ma czego wyjaśniać — wtedy wracasz do pozyskania stanowiska (Gałąź A).",
-  blocks: [
-    {type:"speech", draft:true, label:"Powiedz dłużnikowi — co dalej", text:"Dziękuję, mam Pana stanowisko. Teraz przekazuję je klientowi i proszę, żeby odniósł się do każdego punktu. Jak tylko dostanę odpowiedź, wracam do Pana — najpóźniej do [data]."},
-    {type:"checklist", draft:true, label:"Do klienta — odhaczaj", text:"Zarzuty dłużnika przekazane punkt po punkcie\nDokumenty potwierdzające wykonanie usługi / dostawę\nKorespondencja z dłużnikiem o reklamacji, jeśli była\nCzy klient uznaje którąś część zarzutów — i jaką kwotę\nTermin odpowiedzi klienta"}
-  ]
-};
-
-DEFAULT_CONTENT.sections.a_rozstrzygniecie = {
-  title: "Rozstrzygnięcie sporu",
-  goal: "Cel: wrócić do dłużnika z odpowiedzią klienta i zamknąć spór decyzją.\nCo chcemy uzyskać: wpłatę całości albo części bezspornej — albo jasną informację, co dzieje się dalej ze sprawą.\nJak: przedstaw odpowiedź klienta, potem konkret: kwota + termin.\nWskazówka: kończ zawsze na konkrecie — kwota i data. Gdy dłużnik deklaruje spłatę, przejdź do Gałęzi C.",
-  blocks: [
-    {type:"speech", draft:true, label:"Otwarcie", text:"Dzień dobry, {windykator}, Hadyński Inkaso. Panie {nazwisko}, dzwonię, bo mam odpowiedź od {wierzyciel} w sprawie Pana zastrzeżeń."},
-    {type:"qhints", draft:true, label:"Odpowiedź klienta — kliknij tę, która pasuje", text:"Klient podtrzymuje roszczenie w całości\nKlient odniósł się do Pana zastrzeżeń i podtrzymuje roszczenie w całości — [krótko: na podstawie jakich dokumentów]. Dlatego sprawa wraca do zaplanowanych działań. Możemy to zatrzymać, jeśli ureguluje Pan {kwota} do [data]. Jak Pan się do tego odniesie?\n---\nKlient przyznał rację w części\nKlient w części przyznał Panu rację — do zapłaty zostaje [kwota po korekcie]. Tę część możemy zamknąć od razu: wpłaca Pan [kwota po korekcie] do [data], zgadza się?\n---\nDokumenty dłużnika podważają roszczenie\nTak jak mówiłem przy pierwszej rozmowie: skoro Pana dokumentacja podważa zasadność roszczenia, zaopiniujemy klientowi dochodzenie sprawy na drodze sądowej — zamiast realizować sankcje, które mamy zaplanowane w Pana sprawie.\n---\nKlient przyznał rację w całości\nKlient przeanalizował Pana stanowisko i przyznał Panu rację. Dziękuję za współpracę przy wyjaśnieniu tej sprawy."},
-    {type:"question", draft:true, label:"Domknięcie — kwota + data", text:"To umówmy się konkretnie: kwota [kwota], termin [data]. Zapisuję to w sprawie — zgadza się?"}
-  ]
-};
-
-DEFAULT_CONTENT.sections.b_analiza = {
-  title: "Analiza finansowa",
-  goal: "Cel: zrozumieć, z czego dłużnik realnie może zapłacić — zanim zaczniesz negocjować.\nCo chcemy uzyskać: skąd brak środków, czy firma działa i ma wpływy, kiedy spodziewa się pieniędzy, jaką kwotę realnie może wpłacić.\nJak: krótkie pytania otwarte, bez oceniania. Odhaczaj, czego się dowiedziałeś — to argumenty do negocjacji.\nWskazówka: nie pytaj, czy dłużnik „da radę” coś wpłacić — odpowie „nie”. Pytaj o fakty: wpływy, terminy, inne zobowiązania.",
-  blocks: [
-    {type:"question", draft:true, label:"Pytanie otwierające", text:"Żebym mógł szukać z Panem realnego rozwiązania, muszę zrozumieć sytuację. Co się stało, że na ten moment brakuje środków?"},
-    {type:"checklist", draft:true, label:"Dowiedz się w rozmowie — odhaczaj", text:"Skąd brak środków — co się stało?\nCzy firma dalej działa i ma bieżące wpływy?\nKiedy spodziewa się najbliższych wpływów — od kogo i ile?\nCzy ma inne zaległości (ZUS, US, leasingi, kredyty)?\nKiedy może wpłacić pierwszą kwotę?"},
-    {type:"question", draft:true, label:"Pytanie o wpływy", text:"A kiedy spodziewa się Pan najbliższych wpływów — od kogo i w jakiej kwocie?"},
-    {type:"speech", draft:true, label:"Przejście do negocjacji", text:"Dziękuję, że mówi Pan otwarcie — to daje mi podstawę, żeby szukać rozwiązania, które Pan udźwignie."}
-  ]
-};
-
-DEFAULT_CONTENT.sections.b_sankcje = {
-  title: "Brak porozumienia — przypomnienie sankcji",
-  goal: "Cel: gdy nie ma deklaracji — zostawić dłużnika z jasnym obrazem: co już się wydarzyło i co wydarzy się dalej.\nCo chcemy uzyskać: dłużnik wie, jaki jest kolejny krok i kiedy — i że nawet częściowa wpłata daje podstawę do wstrzymania.\nJak: przypomnij sankcje zrealizowane i zaplanowane (krótkie opisy), pokaż skutek JEDNEJ, zostaw otwarte drzwi.\nWskazówka: rozmowa nie kończy się na „nie mam” — ostatnie pytanie zawsze o kwotę i termin.",
-  blocks: [
-    {type:"speech", label:"Powiedz", text:"Natomiast brak środków nie powoduje wstrzymania sprawy. Jeżeli do [data] nie wpłynie przynajmniej [minimalna kwota], kolejnym krokiem będzie [sankcja].\nPowiem Panu, co to realnie oznacza dla Pana firmy: [skutek sankcji]. Dlatego naprawdę wolałbym, żebyśmy do tego nie doszli — i dlatego szukam z Panem jakiegokolwiek rozwiązania, nawet częściowego."},
-    {type:"sankcje", label:"Przypomnienie — krótki opis zrealizowanych i zaplanowanych"},
-    {type:"question", label:"Domknięcie — kwota i termin", text:"Nawet niewielka kwota wpłacona do [data] daje mi podstawę, żeby o to wystąpić. Więc ile jest Pan w stanie zebrać do tego dnia?"}
-  ]
-};
-
 const DEFAULT_OBJECTIONS = [
   {
     id: "straszysz",
@@ -2445,55 +2326,47 @@ const DEFAULT_OBJECTIONS = [
 const DEFAULT_SANCTIONS = [
   {
     id: "sank_antyreklama",
-    short: "Wykupujemy reklamę w Google — kto wyszuka Pana firmę, jako pierwszą informację zobaczy, że Pana dług jest na sprzedaż.",
     title: "Antyreklama — reklama sprzedaży długu w Google",
     text: "No tak, jak Panu wspominałem, że jesteśmy w trakcie procesu sprzedaży tego długu. Na dzień dzisiejszy kupca jeszcze nie znaleźliśmy. Jest ta oferta sprzedaży na giełdzie wierzytelności; widziało ją na dzień dzisiejszy tylko 100 osób, więc to jest za mało, żeby znaleźć kupca, niestety. W związku z tym podjęliśmy decyzję, że wykupimy reklamę sponsorowaną w wyszukiwarce Google, tak żeby tym razem, jeżeli ktokolwiek będzie Pana szukał w Internecie, to już na 100% pierwsza informacja, jaka mu się wyświetli, to taka, że Pański dług jest na sprzedaż. Bo z racji, że dalej Pan nie zapłacił, klient chce jak najszybciej sprzedać tą wierzytelność, a taka praktyka działa najlepiej.\n\n[Jak mówi: „ale mi zabierzecie klientów / to jest skurwysyństwo”:]\nPanie {nazwisko}, naszym głównym celem jest zadowolić klienta, a klient chce tą wierzytelność sprzedać. Najłatwiej jest znaleźć kupca w Pana otoczeniu, więc tam to reklamujemy. Nie jest to żadna złośliwość, tylko realizacja usługi dla naszego klienta.\n\n[Jeśli dalej twierdzi, że popsujemy mu sprzedaż:]\nPanie {nazwisko}, może tak się faktycznie wydarzyć, ale niech Pan pamięta, że naszym głównym celem jest realizacja usługi dla klienta, a klient chce albo tą wierzytelność sprzedać, albo odzyskać. Tego wszystkiego może Pan uniknąć, współpracując ze mną."
   },
   {
     id: "sank_wizytowka",
-    short: "Nie mogliśmy się z Panem skontaktować, więc zostawiliśmy prośbę o kontakt w Pana wizytówce Google i na GoWorku.",
     title: "Prośba o kontakt — wizytówka Google / GoWork",
     text: "Panie {nazwisko}, próbuję się z Panem skontaktować od [X czasu] — bezskutecznie, a to blokuje mi załatwienie tej sprawy. Może Pan zresztą sam zobaczyć na swojej wizytówce Google. Mamy taką procedurę: jeżeli nie możemy złapać kontaktu z dłużnikiem, zostawiamy prośbę o kontakt tam, gdzie na pewno ją zobaczy — w wizytówce Google, na GoWorku, na innych portalach. Wiem, że to nie wygląda najlepiej, i mówię wprost: nie zrobiliśmy tego złośliwie, tylko dlatego, że nie mieliśmy innego wyjścia. Wystarczy, że będziemy w kontakcie i tą sprawę załatwimy."
   },
   {
     id: "sank_social",
-    short: "Jeżeli dalej nie będzie z Panem kontaktu, szukamy go przez Pana otoczenie — znajomych na Facebooku, Instagramie i innych portalach.",
     title: "Zapowiedź — kontakt z otoczeniem w social mediach",
     text: "Jeszcze jedna ważna rzecz, Panie {nazwisko}. Ja tego nie lubię robić i mówię o tym otwarcie — wolałbym, żebyśmy do tego nie doszli. Natomiast jeżeli dalej nie będę mógł się do Pana dodzwonić, kolejnym krokiem z naszego planu jest szukanie kontaktu do Pana przez Pańskie otoczenie — przez znajomych na Facebooku, Instagramie i innych portalach, z prośbą o pomoc w przekazaniu kontaktu. To działa, dlatego to robimy. Prośba, żeby Pan był osiągalny.\n\n[Jak mówi, że to bezprawne:]\nPanie {nazwisko}, my jesteśmy naprawdę dużą firmą i nasz dział prawny wszystko wcześniej przygotował, by nie narażać się na konsekwencje prawne. Robimy to tak, że nie ma się do nas o co doczepić. Dlatego proszę, by był Pan osiągalny — i żebyśmy mogli załatwić ten temat."
   },
   {
     id: "sank_big",
-    short: "Wychodzą do Pana SMS-y z odliczaniem do wpisu do BIG-u — zostało [ile dni] do utraty zdolności kredytowej i wypowiedzenia leasingów.",
     title: "Wpis do BIG-u — odliczanie z SMS-ów",
     text: "Chciałbym też potwierdzić, czy widział Pan SMS-y, które regularnie do Pana tutaj wychodzą — informacyjne, dotyczące tego, ile zostało do wpisu do BIG-u, czyli do utraty wszelkiej zdolności kredytowej i wypowiedzenia leasingów. Na ten moment zostało [ile dni], więc musimy zrobić wszystko, co możemy, żeby tą sprawę do tego czasu zakończyć."
   },
   {
     id: "sank_us",
-    short: "Zawiadomiliśmy urząd skarbowy, żeby sprawdził, czy zaksięgował Pan tę fakturę.",
     title: "Urząd skarbowy — weryfikacja zaksięgowania faktury",
     text: "Panie {nazwisko}, oboje wiemy, że Pan tę fakturę zaksięgował. Tylko my potrzebujemy tutaj tego potwierdzenia przed pójściem z Panem na drogę sądową — dlatego zawiadomiliśmy urząd skarbowy o tym, żeby to u Pana sprawdził. Możemy też załatwić temat dzisiaj i poinformować urząd skarbowy, że jesteśmy rozliczeni — bo i tak jeszcze będą się do nas zgłaszać na dniach o szczegóły przed rozpoczęciem działań."
   }
 ];
 
 const MAP_GROUPS = [
-  {label:"Linia główna", tone:"neutral", items:["start","przedstawienie","plan","sank_zr","sank_zap","stanowisko"]},
-  {label:"Chce zapłacić", tone:"C", items:["c"]},
-  {label:"Negacja", tone:"A", items:["a_intro","a_prawnik","a_klient","a_rozstrzygniecie"]},
-  {label:"Brak środków", tone:"B", items:["b_1","b_analiza","b_2","b_3","b_sankcje"]},
-  {label:"Poza ścieżką — „to nie ja”", tone:"D", items:["d_pomylka"]},
-  {label:"Poza ścieżką — rozmówca niedecyzyjny", tone:"E", items:["e_niedecyzyjny"]},
+  {label:"Przebieg podstawowy", tone:"neutral", items:["start","przedstawienie"]},
+  {label:"Gałąź A — neguje dług", tone:"A", items:["a_intro","a_prawnik"]},
+  {label:"Gałąź B — brak środków", tone:"B", items:["b_1","b_2","b_3"]},
+  {label:"Gałąź C — deklaruje zapłatę", tone:"C", items:["c"]},
+  {label:"Gałąź D — „nie wiem, o co chodzi”", tone:"D", items:["d_pomylka"]},
+  {label:"Gałąź E — rozmówca niedecyzyjny", tone:"E", items:["e_niedecyzyjny"]},
   {label:"Powroty — złamane ustalenia", tone:"neutral", items:["p_deklaracja","p_dokumenty","p_brak_srodkow"]},
   {label:"Przed terminem — monitoring", tone:"neutral", items:["pre_termin"]}
 ];
 
 const MAP_LABELS = {
-  start:"Przywitanie + identyfikacja", przedstawienie:"Przedstawienie sprawy", plan:"Plan rozmowy",
-  sank_zr:"Sankcje zrealizowane", sank_zap:"Sankcje zaplanowane", stanowisko:"Stanowisko dłużnika",
-  a_intro:"Negacja → stanowisko mailowo", a_prawnik:"Odsyła do prawnika",
-  a_klient:"Wyjaśnienie z klientem", a_rozstrzygniecie:"Rozstrzygnięcie sporu",
-  b_1:"Potwierdzenie woli zapłaty", b_analiza:"Analiza finansowa", b_2:"Negocjacje — dwa rozwiązania + 50%",
-  b_3:"Konkretna deklaracja: kwota + data", b_sankcje:"Przypomnienie sankcji",
-  c:"Kwota + przelew dziś + potwierdzenie",
+  start:"Otwarcie rozmowy", przedstawienie:"Przedstawienie sprawy",
+  a_intro:"Rozbrojenie + pytania", a_prawnik:"Odsyła do prawnika",
+  b_1:"Potwierdzenie woli zapłaty", b_2:"Dwa rozwiązania + 50%",
+  b_3:"Domknięcie: kwota + data", c:"Kwota + przelew dziś + potwierdzenie",
   d_pomylka:"Wyjaśnienie + dwie drogi",
   e_niedecyzyjny:"Dojście do decydenta",
   p_deklaracja:"Wyciągi sprawdzone — wpłata dziś albo sankcja",
@@ -2502,54 +2375,38 @@ const MAP_LABELS = {
   pre_termin:"Monitoring przed terminem płatności"
 };
 
-/* Schemat rozmowy (v14, wg schematu Mikołaja z Lucida) — etapy, ścieżki i karta Rozmowy dla każdego etapu */
-const STAGES = {
-  s_przywitanie:   { label:"Przywitanie",            desc:"Kim jestem, skąd dzwonię",                 node:"start" },
-  s_identyfikacja: { label:"Identyfikacja",          desc:"Czy to właściwa osoba + jej imię",         node:"start" },
-  s_przedstawienie:{ label:"Przedstawienie sprawy",  desc:"Wierzyciel, kwota — krótko",               node:"przedstawienie" },
-  s_plan:          { label:"Plan rozmowy",           desc:"Co powiem, o co zapytam, do czego dojdziemy", node:"plan" },
-  s_sank_zr:       { label:"Sankcje zrealizowane",   desc:"Krótki opis wymagany, rozwinięcie jeśli rozmowa pozwoli", node:"sank_zr" },
-  s_sank_zap:      { label:"Sankcje zaplanowane",    desc:"Krótki opis wymagany, rozwinięcie jeśli rozmowa pozwoli", node:"sank_zap" },
-  s_stanowisko:    { label:"Stanowisko dłużnika",    desc:"Oddaj głos — reakcja wybiera ścieżkę",     node:"stanowisko" },
-  s_chec:          { label:"Deklaracja chęci spłaty", desc:"Doceń i dopnij konkret",                  node:"c" },
-  s_calosc:        { label:"Deklaracja spłaty całości", desc:"Cała kwota, przelew dziś",              node:"c" },
-  s_negocjacje_c:  { label:"Negocjacje",             desc:"„Nie dziś” — dokładna data wpłaty",        node:"c" },
-  s_konkret_c:     { label:"Konkretna deklaracja",   desc:"Kwota + data + potwierdzenie do 15:00",    node:"c" },
-  s_negacja:       { label:"Negacja",                desc:"Rozbrojenie — jesteśmy mediatorem",        node:"a_intro" },
-  s_stanowisko_a:  { label:"Stanowisko dłużnika",    desc:"Pytania pogłębiające, całość czy część",   node:"a_intro" },
-  s_mail:          { label:"Pozyskanie stanowiska mailowo", desc:"Mail ze stanowiskiem i dokumentami", node:"a_intro" },
-  s_wyjasnienie:   { label:"Wyjaśnienie z klientem", desc:"Zarzuty do klienta punkt po punkcie",      node:"a_klient" },
-  s_rozstrzygniecie:{ label:"Rozstrzygnięcie sporu", desc:"Odpowiedź klienta → kwota + data",         node:"a_rozstrzygniecie" },
-  s_brak:          { label:"Brak hajsu",             desc:"Potwierdź wolę zapłaty + empatia",         node:"b_1" },
-  s_analiza:       { label:"Analiza finansowa",      desc:"Skąd brak, jakie wpływy, kiedy",           node:"b_analiza" },
-  s_negocjacje_b:  { label:"Negocjacje",             desc:"Dwa rozwiązania, start wysoko, min. 50%",  node:"b_2" },
-  s_konkret_b:     { label:"Konkretna deklaracja",   desc:"Kwota + data = stop sankcji",              node:"b_3" },
-  s_przypomnienie: { label:"Przypomnienie sankcji zrealizowanych oraz zaplanowanych", desc:"Brak porozumienia — kolejny krok i data", node:"b_sankcje" }
+const TREE = {
+  id:"start", children:[
+    { id:"przedstawienie", children:[
+      { id:"a_intro", edge:"neguje dług", children:[
+        { id:"a_prawnik", edge:"ma prawnika" }
+      ]},
+      { id:"b_1", edge:"„nie mam pieniędzy”", children:[
+        { id:"b_2", children:[ { id:"b_3" } ] }
+      ]},
+      { id:"c", edge:"„zapłacę”" },
+      { id:"d_pomylka", edge:"„to nie ja”" },
+      { id:"e_niedecyzyjny", edge:"osoba niedecyzyjna" }
+    ]},
+    { id:"p_deklaracja", edge:"złamana deklaracja spłaty" },
+    { id:"p_dokumenty", edge:"nie dosłał dokumentów" },
+    { id:"p_brak_srodkow", edge:"dalej brak środków" },
+    { id:"pre_termin", edge:"przed terminem płatności" }
+  ]
 };
-const MAIN_LINE = ["s_przywitanie","s_identyfikacja","s_przedstawienie","s_plan","s_sank_zr","s_sank_zap","s_stanowisko"];
-/* ścieżka: elementy po kolei; tablica = rozwidlenie (jedno albo drugie) */
-const LANES = {
-  C: { label:"Chce zapłacić", steps:["s_chec", ["s_calosc","s_negocjacje_c"], "s_konkret_c"] },
-  A: { label:"Negacja",       steps:["s_negacja","s_stanowisko_a","s_mail","s_wyjasnienie","s_rozstrzygniecie"] },
-  B: { label:"Brak środków",  steps:["s_brak","s_analiza","s_negocjacje_b", ["s_konkret_b","s_przypomnienie"]] }
+
+const TREE_DESC = {
+  start:"Kto mówi + prośba o imię", przedstawienie:"Kwota, wierzyciel → reakcja",
+  a_intro:"Mediator + pytania pogłębiające", a_prawnik:"Pismo prawnika + sprzedaż długu",
+  b_1:"„Chce Pan uregulować?” + empatia", b_2:"Sankcje vs wpłata, start wysoko",
+  b_3:"Kwota + data = stop sankcji", c:"Kwota dziś + rachunek od nas + 15:00",
+  d_pomylka:"Skąd numer + mail albo status świadka",
+  e_niedecyzyjny:"Posłaniec + termin kontaktu",
+  p_deklaracja:"Zapłacił? → potwierdzenie albo sankcja",
+  p_dokumenty:"Wysłał? → sprawdzam na żywo albo sankcja",
+  p_brak_srodkow:"Minimalna kwota + termin + sankcja",
+  pre_termin:"Zaksięgowana? bez uwag? kiedy przelew?"
 };
-const LANE_ORDER = ["C","A","B"];
-/* etapy poza główną ścieżką: przy którym etapie schematu się pojawiają */
-const OFF_PATH = {
-  d_pomylka:      { at:"s_identyfikacja", tone:"D", label:"„To nie ja / pomyłka”" },
-  e_niedecyzyjny: { at:"s_identyfikacja", tone:"E", label:"Rozmówca niedecyzyjny" },
-  a_prawnik:      { at:"s_negacja",       tone:"A", label:"Odsyła do prawnika", lane:"A" },
-  p_deklaracja:   { at:"entry", tone:"N", label:"Złamana deklaracja spłaty" },
-  p_dokumenty:    { at:"entry", tone:"N", label:"Nie dosłał stanowiska" },
-  p_brak_srodkow: { at:"entry", tone:"N", label:"Dalej brak środków" },
-  pre_termin:     { at:"entry", tone:"N", label:"Faktura przed terminem" }
-};
-function laneStages(lane) { return LANES[lane].steps.flat(); }
-function stagesOfNode(id) { return Object.keys(STAGES).filter(k => STAGES[k].node === id); }
-function laneOfNode(id) {
-  if (OFF_PATH[id]) return OFF_PATH[id].lane || null;
-  return LANE_ORDER.find(l => laneStages(l).some(k => STAGES[k].node === id)) || null;
-}
 
 /* ═════════════════ Stan ═════════════════ */
 let content = loadJSON(LS_CONTENT, null) || structuredClone(DEFAULT_CONTENT);
@@ -2565,8 +2422,8 @@ SECTION_ORDER.forEach(id => {
 });
 
 /* rewizja treści: nowsza domyślna wersja sekcji nadpisuje tę zapisaną (tylko wskazane sekcje) */
-const CONTENT_REV = 51;
-const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"], 49: ["e_niedecyzyjny"], 50: ["start"], 51: ["start"] };
+const CONTENT_REV = 50;
+const REV_SECTIONS = { 3: ["d_pomylka"], 4: ["a_prawnik"], 5: ["b_1"], 6: ["a_bez_2","a_niezasadnie"], 7: ["a_niezasadnie","d_pomylka","b_2"], 8: ["c","b_2","b_3","a_prawnik"], 9: ["e_niedecyzyjny"], 10: ["e_niedecyzyjny"], 11: ["d_pomylka"], 12: ["d_pomylka"], 13: ["e_niedecyzyjny"], 14: ["a_intro"], 15: ["a_intro"], 16: ["a_intro"], 17: ["a_intro"], 18: ["a_intro"], 19: ["a_intro"], 20: ["a_intro"], 21: ["a_intro"], 22: ["a_intro"], 23: ["negocjacje"], 24: ["b_1","b_2","negocjacje"], 25: ["b_2"], 26: ["b_2","negocjacje"], 27: ["b_2","negocjacje"], 28: ["a_intro"], 29: ["a_intro"], 30: ["a_intro"], 31: ["a_intro"], 32: ["a_intro"], 33: ["a_intro"], 34: ["a_intro"], 35: ["a_intro"], 36: ["a_intro"], 37: ["c"], 38: ["c"], 39: ["c","negocjacje"], 40: ["a_prawnik"], 41: ["a_prawnik"], 42: ["a_prawnik"], 43: ["a_prawnik"], 44: ["a_intro"], 45: ["b_1"], 46: ["p_deklaracja","p_dokumenty"], 47: ["p_deklaracja","p_dokumenty"], 48: ["p_deklaracja"], 49: ["e_niedecyzyjny"], 50: ["start"] };
 if ((content._rev || 1) < CONTENT_REV) {
   for (let r = (content._rev || 1) + 1; r <= CONTENT_REV; r++) {
     (REV_SECTIONS[r] || []).forEach(id => {
@@ -2611,7 +2468,7 @@ try {
 
 /* rewizja sankcji: nowe domyślne sankcje dopisują się (raz) do zapisanych */
 const SANK_REV_KEY = "hi_skrypt_sank_rev";
-const SANK_REV = 6;
+const SANK_REV = 5;
 try {
   const storedSankRev = parseInt(localStorage.getItem(SANK_REV_KEY) || "0", 10);
   if (storedSankRev < SANK_REV) {
@@ -2624,10 +2481,6 @@ try {
       if (d && o) { o.title = d.title; o.text = d.text; }
     };
     if (storedSankRev < 5) refreshSank("sank_antyreklama");
-    if (storedSankRev < 6) DEFAULT_SANCTIONS.forEach(d => {
-      const o = sanctions.find(x => x.id === d.id);
-      if (o && !o.short) o.short = d.short;
-    });
     saveSanctions();
     localStorage.setItem(SANK_REV_KEY, String(SANK_REV));
   }
@@ -2848,11 +2701,11 @@ function switchTab(tab) {
   document.body.dataset.tab = tab;
   document.querySelectorAll("#tabs button").forEach(b => b.classList.toggle("active", b.dataset.tabbtn === tab));
   document.getElementById("view-rozmowa").hidden = tab !== "rozmowa";
-  document.getElementById("view-schemat").hidden = tab !== "schemat";
+  document.getElementById("view-drzewko").hidden = tab !== "drzewko";
   document.getElementById("view-zalozenia").hidden = tab !== "zalozenia";
   document.getElementById("view-ustawienia").hidden = tab !== "ustawienia";
   if (tab === "rozmowa") { renderRozmowa(); renderMap(); }
-  if (tab === "schemat") renderSchema();
+  if (tab === "drzewko") renderTree();
   if (tab === "ustawienia") renderSettings();
 }
 
@@ -2891,29 +2744,22 @@ function renderHintNested(hint) {
   }).join("");
 }
 
-const DRAFT_BADGE = `<span class="draft-badge" title="Tekst wstępny — czeka na akcept Mikołaja">wstępne</span>`;
 function renderBlock(b) {
   if (b.mode && b.mode !== state.mode) return "";
-  const dr = b.draft ? DRAFT_BADGE : "";
   if (b.type === "speech") {
-    return `<div class="speech"><span class="speech-label">${esc(b.label||"Powiedz")}${dr}</span>${renderText(b.text)}</div>`;
+    return `<div class="speech"><span class="speech-label">${esc(b.label||"Powiedz")}</span>${renderText(b.text)}</div>`;
   }
   if (b.type === "question") {
-    return `<div class="speech question"><span class="speech-label">${esc(b.label||"Pytanie")}${dr}</span>${renderText(b.text)}</div>`;
+    return `<div class="speech question"><span class="speech-label">${esc(b.label||"Pytanie")}</span>${renderText(b.text)}</div>`;
   }
   if (b.type === "intent") {
-    return `<div class="intent-card"><span class="ic-icon" aria-hidden="true">◎</span><div><div class="ic-title">Intencja — powiedz, po co dzwonisz i jaki jest plan</div>${renderText(b.text || IN_OPENING)}<br><button class="btn-secondary" data-action="intent">Jak to robić ›</button></div></div>`;
-  }
-  if (b.type === "sankcje") {
-    const sprzedaz = `<div class="sk-item"><div class="sk-body"><span class="sk-title">Sprzedaż długu — giełda wierzytelności${DRAFT_BADGE}</span>${renderText(INFO_SPRZEDAZ_SHORT)}</div><button class="btn-secondary" data-action="info-sprzedaz">Rozwinięcie ›</button></div>`;
-    const rows = sanctions.map((o, i) => `<div class="sk-item"><div class="sk-body"><span class="sk-title">${esc(o.title)}${o.short ? DRAFT_BADGE : ""}</span>${o.short ? renderText(o.short) : `<i>Brak krótkiego opisu — uzupełnij w Ustawieniach.</i>`}</div><button class="btn-secondary" data-sank="${i}">Rozwinięcie ›</button></div>`).join("");
-    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Sankcje — krótki opis")}</div><div class="sk-list">${sprzedaz}${rows}</div></div>`;
+    return `<div class="intent-card"><span class="ic-icon" aria-hidden="true">◎</span><div><div class="ic-title">Intencja — powiedz, po co dzwonisz</div>${renderText(IN_OPENING)}<br><button class="btn-secondary" data-action="intent">Jak to robić ›</button></div></div>`;
   }
   if (b.type === "note") {
     if (b.go) {
       return `<div class="note note-card"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><div class="note-body"><div class="note-title">Wskazówka — co dalej</div><div>${renderText(b.text)}</div><div class="note-actions"><button class="btn-primary" data-go="${esc(b.go)}">${esc(b.goLabel||"Przejdź")}</button></div></div></div>`;
     }
-    return `<div class="note"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><span>${renderText(b.text)}${dr}</span></div>`;
+    return `<div class="note"><span class="note-icon">${esc(b.icon||"ℹ️")}</span><span>${renderText(b.text)}</span></div>`;
   }
   if (b.type === "qlist") {
     const items = b.text.split("\n").filter(l => l.trim()).map(l => `<li>${renderText(l)}</li>`).join("");
@@ -2926,7 +2772,7 @@ function renderBlock(b) {
       const on = !!checklistState[key];
       return `<label class="ck-item${on ? " done" : ""}"><input type="checkbox" data-ck="${esc(key)}"${on ? " checked" : ""}><span>${renderText(l)}</span></label>`;
     }).join("");
-    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Checklista")}${dr}</div><div class="ck-list">${rows}</div></div>`;
+    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Checklista")}</div><div class="ck-list">${rows}</div></div>`;
   }
   if (b.type === "qhints") {
     const groups = b.text.split(/\n\s*---\s*\n/).map(g => g.trim()).filter(Boolean);
@@ -2937,7 +2783,7 @@ function renderBlock(b) {
       if (!hint) return `<div class="qh-item plain"><span class="qh-mark">?</span><span>${renderText(q)}</span></div>`;
       return `<details class="qh-item"><summary><span class="qh-mark">?</span><span>${renderText(q)}</span><span class="qh-chev">›</span></summary><div class="qh-body">${renderHintNested(hint)}</div></details>`;
     }).join("");
-    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Pytania")}${dr}</div><div class="qh-list">${items}</div></div>`;
+    return `<div class="q-block"><div class="q-block-label">${esc(b.label || "Pytania")}</div><div class="qh-list">${items}</div></div>`;
   }
   if (b.type === "qa") {
     const pairs = b.text.split(/\n\s*---\s*\n/).map(p => p.trim()).filter(Boolean);
@@ -2993,13 +2839,11 @@ function renderRozmowa() {
     <div class="step-card">
       <span class="step-eyebrow ${meta.tone}">${esc(meta.eyebrow)}</span>
       <h1 class="step-title">${esc(sec.title)}</h1>
-      ${sec.blocks.some(b => b.draft) ? `<div class="draft-note">Etap ze schematu rozmowy — teksty oznaczone „wstępne” czekają na akcept. Możesz z nich korzystać, ale mogą się jeszcze zmienić.</div>` : ""}
       ${renderGoal(sec.goal)}
       ${sec.blocks.map(renderBlock).join("")}
       ${renderActions(id)}
     </div>`;
 
-  renderStagebar();
   document.getElementById("btn-back").disabled = state.navHistory.length === 0;
   document.getElementById("btn-splata").hidden = state.current === "c";
   document.getElementById("btn-brak").hidden = state.current === "b_1";
@@ -3073,9 +2917,6 @@ function openSanction(i) {
   document.getElementById("sheet-backdrop").hidden = false;
 }
 const INFO_SPRZEDAZ_TEXT = "Panie {nazwisko}, to jest bardzo ważne, ponieważ w Pańskiej sprawie już rozpoczęliśmy proces sprzedaży tego długu. Oferta sprzedaży jest już publiczna i widziało ją na ten moment 120 osób — prawdopodobnie potencjalni klienci, kontrahenci, nawet znajomi. Więc musimy jak najszybciej tę sprawę wyjaśnić, zwłaszcza jeżeli Pan się z tym nie zgadza. Proszę mieć też na uwadze, że pod koniec tygodnia, jako kolejny etap sprzedaży, będziemy kierować te oferty już bezpośrednio do Pańskiego otoczenia, czyli do Pana klientów oraz kontrahentów, ponieważ tam najłatwiej znaleźć kupca — więc tutaj czas ma dla nas naprawdę znaczenie.";
-
-/* krótki opis do etapów „Sankcje zrealizowane / zaplanowane” (v14, wstępne) */
-const INFO_SPRZEDAZ_SHORT = "Pana dług jest już wystawiony na sprzedaż — oferta na giełdzie wierzytelności jest publiczna i widziało ją już [liczba] osób: potencjalni klienci, kontrahenci, znajomi.";
 
 function openInfoSprzedaz() {
   setSheetBack(null);
@@ -3184,84 +3025,23 @@ function openQuickList(kind) {
 }
 function closeObjection() { document.getElementById("sheet-backdrop").hidden = true; }
 
-/* ═════════════════ Render: schemat rozmowy + pasek etapów ═════════════════ */
-function stageNum(k) {
-  const m = MAIN_LINE.indexOf(k);
-  if (m >= 0) return String(m + 1);
-  for (const l of LANE_ORDER) {
-    const i = LANES[l].steps.findIndex(x => Array.isArray(x) ? x.includes(k) : x === k);
-    if (i >= 0) return l + (i + 1);
-  }
-  return "";
+/* ═════════════════ Render: drzewko ═════════════════ */
+function treeNodeHTML(n) {
+  const meta = NODE_META[n.id];
+  const sec = content.sections[n.id];
+  const edge = n.edge ? `<span class="t-edge">${esc(n.edge)}</span>` : "";
+  const kids = n.children && n.children.length
+    ? `<ul>${n.children.map(c => `<li>${treeNodeHTML(c)}</li>`).join("")}</ul>` : "";
+  return `${edge}
+    <div class="tnode${n.id===state.current?" current":""}" data-go="${n.id}" role="button" tabindex="0">
+      <div class="t-head"><span class="t-num ${meta.tone}">${esc(meta.num)}</span></div>
+      <div class="t-title">${esc(sec.title)}</div>
+      <div class="t-desc">${esc(TREE_DESC[n.id]||"")}</div>
+      <button class="t-edit" data-edit="${n.id}" title="Edytuj treść etapu">✎</button>
+    </div>${kids}`;
 }
-function doneNodes() { return new Set(state.path.slice(0, -1)); }
-
-function renderStagebar() {
-  const bar = document.getElementById("stagebar");
-  if (!bar) return;
-  const id = state.current;
-  const done = doneNodes();
-  const off = OFF_PATH[id];
-  const lane = laneOfNode(id);
-  const chip = (k, tone) => {
-    const node = STAGES[k].node;
-    const cls = node === id ? "current " + (tone || "") : (done.has(node) ? "done" : "");
-    return `<button class="sb-step ${cls}" data-go="${node}" title="${esc(STAGES[k].desc)}"><span class="sb-n">${esc(stageNum(k))}</span>${esc(STAGES[k].label)}</button>`;
-  };
-  const offChip = off ? `<button class="sb-step off current" data-go="${id}">Poza ścieżką: ${esc(off.label)}</button>` : "";
-  const sep = `<span class="sb-sep">›</span>`;
-  let html = off && off.at === "entry" ? offChip + sep : "";
-  MAIN_LINE.forEach((k, i) => {
-    html += (i ? sep : "") + chip(k);
-    if (off && off.at === k) html += sep + offChip;
-  });
-  if (lane) {
-    html += sep + `<span class="sb-lane ${lane}">${esc(LANES[lane].label)}</span>`;
-    LANES[lane].steps.forEach(st => {
-      html += sep + (Array.isArray(st) ? st.map(k => chip(k, lane)).join(`<span class="sb-or">lub</span>`) : chip(st, lane));
-      if (off && !Array.isArray(st) && off.at === st) html += sep + offChip;
-    });
-  } else if (!off || off.at !== "entry") {
-    html += `<span class="sb-hint">→ dalej ścieżka zależna od stanowiska dłużnika</span>`;
-  }
-  bar.innerHTML = `<div class="sb-head"><span>Gdzie jesteś w rozmowie</span><button data-action="schemat">Pełny schemat ›</button></div><div class="sb-track">${html}</div>`;
-  const cur = bar.querySelector(".sb-step.current");
-  const track = bar.querySelector(".sb-track");
-  if (cur && track.scrollWidth > track.clientWidth) track.scrollLeft = cur.offsetLeft - track.offsetLeft - 40;
-}
-
-function schemaNode(k) {
-  const st = STAGES[k];
-  const node = st.node;
-  const meta = NODE_META[node];
-  const done = doneNodes();
-  const cls = ["snode", node === state.current ? "current" : "", done.has(node) ? "done" : "", meta.draft ? "draft" : ""].join(" ");
-  const offs = Object.keys(OFF_PATH).filter(o => OFF_PATH[o].at === k)
-    .map(o => `<button class="soff ${OFF_PATH[o].tone}${o === state.current ? " current" : ""}" data-go="${o}">${esc(OFF_PATH[o].label)}</button>`).join("");
-  return `<div class="sch-col">
-    <div class="${cls}" data-go="${node}" role="button" tabindex="0" title="${meta.draft ? "Teksty w wersji wstępnej — do akceptu" : ""}">
-      <span class="t-num ${laneOfNode(node) || "neutral"}">${esc(stageNum(k))}</span>
-      <div class="t-title">${esc(st.label)}</div>
-      <div class="t-desc">${esc(st.desc)}</div>
-      <button class="t-edit" data-edit="${node}" title="Edytuj treść etapu">✎</button>
-    </div>${offs ? `<div class="sch-off">${offs}</div>` : ""}</div>`;
-}
-function renderSchema() {
-  const arrow = `<div class="sch-arrow">›</div>`;
-  const entries = Object.keys(OFF_PATH).filter(o => OFF_PATH[o].at === "entry")
-    .map(o => `<button class="soff N${o === state.current ? " current" : ""}" data-go="${o}">${esc(OFF_PATH[o].label)}</button>`).join("");
-  const main = MAIN_LINE.map(schemaNode).join(arrow);
-  const lanes = LANE_ORDER.map(l => {
-    const steps = LANES[l].steps;
-    const parts = steps.map((st, i) => Array.isArray(st)
-      ? `<div class="sch-fork-wrap${i < steps.length - 1 ? " sch-join" : ""}"><div class="sch-fork">${st.map(schemaNode).join("")}</div></div>`
-      : schemaNode(st)).join(arrow);
-    return `<div class="sch-lane"><span class="sch-lane-label ${l}">${esc(LANES[l].label)}</span>${parts}</div>`;
-  }).join("");
-  document.getElementById("schema").innerHTML =
-    `<div class="sch-entry"><span class="sch-entry-label">Inne wejścia — zamiast przywitania</span>${entries}</div>` +
-    `<div class="sch-row">${main}</div>` +
-    `<div class="sch-lanes"><div class="sch-entry-label">Po „Stanowisku dłużnika” — ścieżka zależy od jego reakcji</div>${lanes}</div>`;
+function renderTree() {
+  document.getElementById("tree").innerHTML = `<ul><li>${treeNodeHTML(TREE)}</li></ul>`;
   renderObjPanel();
 }
 
@@ -3272,10 +3052,7 @@ function renderSettings() {
     const meta = NODE_META[id];
     const sec = content.sections[id];
     const blocks = sec.blocks.map((b,i) => {
-      if (typeof b.text !== "string") {
-        return `<div class="s-field"><label>Lista sankcji z krótkim opisem${b.label ? " — " + esc(b.label) : ""}</label><p class="obj-hint">Krótkie opisy sankcji edytujesz niżej, w sekcji „Sankcje”.</p></div>`;
-      }
-      const typeName = {intent:"Intencja — plan rozmowy", speech:"Powiedz", question:"Pytanie", note:"Notatka", qlist:"Lista pytań (1 na linię)", checklist:"Checklista (1 punkt na linię)", qhints:"Pozycje rozwijane (1. linia = tytuł, niżej treść lub pusto; kolejne oddziel linią ---)", qa:"Wymówki + riposty (1. linia = wymówka, niżej odpowiedź; kolejne oddziel linią ---)", placeholder:"Placeholder"}[b.type] || b.type;
+      const typeName = {speech:"Powiedz", question:"Pytanie", note:"Notatka", qlist:"Lista pytań (1 na linię)", checklist:"Checklista (1 punkt na linię)", qhints:"Pozycje rozwijane (1. linia = tytuł, niżej treść lub pusto; kolejne oddziel linią ---)", qa:"Wymówki + riposty (1. linia = wymówka, niżej odpowiedź; kolejne oddziel linią ---)", placeholder:"Placeholder"}[b.type] || b.type;
       const variant = b.mode ? `<span class="s-variant ${b.mode}">${b.mode === "firma" ? "wariant: firma" : "wariant: os. fizyczna"}</span>` : "";
       const label = (b.label && b.label !== typeName) ? ` — ${esc(b.label)}` : "";
       const rows = (b.type === "qa" || b.type === "qhints") ? 18 : Math.min(9, Math.max(2, Math.ceil(b.text.length / 90) + (b.text.split("\n").length - 1)));
@@ -3316,9 +3093,7 @@ function renderSettings() {
           <input type="text" data-skfield="title" data-index="${i}" value="${esc(o.title)}"></div>
         <button class="btn-icon-danger" data-del-sank="${i}">Usuń</button>
       </div>
-      <div class="s-field"><label>Krótki opis — do etapów „Sankcje zrealizowane / zaplanowane” (jedno zdanie)</label>
-        <textarea rows="2" data-skfield="short" data-index="${i}">${esc(o.short || "")}</textarea></div>
-      <div class="s-field"><label>Co powiedzieć — rozwinięcie</label>
+      <div class="s-field"><label>Co powiedzieć</label>
         <textarea rows="6" data-skfield="text" data-index="${i}">${esc(o.text)}</textarea></div>
     </div>`).join("") || `<p class="obj-hint" style="padding:0 4px;">Brak sankcji — dodaj pierwszą poniżej.</p>`;
 }
@@ -3472,7 +3247,6 @@ document.getElementById("view-ustawienia").addEventListener("input", e => {
     const o = sanctions[+t.dataset.index];
     if (!o) return;
     if (t.dataset.skfield === "title") o.title = t.value;
-    else if (t.dataset.skfield === "short") o.short = t.value;
     else o.text = t.value;
     saveSanctions();
     renderObjPanel();
@@ -3503,11 +3277,7 @@ document.getElementById("qb-sank").addEventListener("click", () => openQuickList
 document.getElementById("qb-info").addEventListener("click", openInfoSprzedaz);
 document.getElementById("qb-formula").addEventListener("click", openFormula);
 document.getElementById("qb-intent").addEventListener("click", openIntent);
-document.getElementById("stage").addEventListener("click", e => {
-  if (e.target.closest("[data-action='intent']")) openIntent();
-  if (e.target.closest("[data-action='info-sprzedaz']")) openInfoSprzedaz();
-});
-document.getElementById("stagebar").addEventListener("click", e => { if (e.target.closest("[data-action='schemat']")) switchTab("schemat"); });
+document.getElementById("stage").addEventListener("click", e => { if (e.target.closest("[data-action='intent']")) openIntent(); });
 document.getElementById("sheet-text").addEventListener("click", e => {
   if (e.target.closest("#uf-to-list")) openQuickList("obj");
   if (e.target.closest("#in-to-formula")) openFormula();
